@@ -1,0 +1,116 @@
+/* =====================================================
+   BFC — ANIMATIONS
+   ===================================================== */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUpWord {
+  from { opacity: 0; transform: translateY(30px); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+@keyframes lineReveal {
+  from { transform: translateY(110%); }
+  to   { transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.6); opacity: 0.25; }
+}
+@keyframes scrollHint {
+  0%       { transform: scaleY(0); transform-origin: top; }
+  50%      { transform: scaleY(1); transform-origin: top; }
+  50.01%   { transform: scaleY(1); transform-origin: bottom; }
+  100%     { transform: scaleY(0); transform-origin: bottom; }
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-2px); }
+  40%, 80% { transform: translateX(2px); }
+}
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+/* Marquee strip (brand band) */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  background: var(--bfc-red);
+  color: var(--bfc-bone);
+  border-block: var(--border-hair);
+  padding: 1rem 0;
+}
+.marquee-track {
+  display: flex; gap: 3rem;
+  width: max-content;
+  animation: marquee 45s linear infinite;
+  will-change: transform;
+}
+.marquee-item {
+  display: inline-flex; align-items: center; gap: 1.5rem;
+  font-family: var(--ff-display);
+  font-size: clamp(1.25rem, 2vw, 2rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bfc-bone);
+  white-space: nowrap;
+}
+.marquee-item svg {
+  width: 1em; height: 1em;
+  color: var(--bfc-bone);
+}
+.marquee-item .star {
+  width: 10px; height: 10px;
+  background: var(--bfc-bone);
+  transform: rotate(45deg);
+}
+
+/* Typewriter cursor */
+.typed::after {
+  content: '|';
+  display: inline-block;
+  margin-left: 0.1em;
+  color: var(--bfc-red);
+  animation: blink 1s steps(1) infinite;
+  font-weight: 300;
+}
+
+/* Glitch title */
+.glitch {
+  position: relative;
+  display: inline-block;
+  color: var(--bfc-bone);
+}
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute; left: 0; top: 0;
+  width: 100%; overflow: hidden;
+}
+.glitch::before {
+  color: var(--bfc-red);
+  transform: translate(-2px, 0);
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+.glitch::after {
+  color: var(--bfc-gold);
+  transform: translate(2px, 0);
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+  mix-blend-mode: screen;
+  opacity: 0.5;
+}
+
+/* Hero title kinetic */
+.kinetic-stack {
+  display: flex; flex-direction: column;
+  gap: 0.05em;
+}

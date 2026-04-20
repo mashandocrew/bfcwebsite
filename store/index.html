@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0A0A0A" />
+<title>Tienda · Bonati Fight Club</title>
+<meta name="description" content="Shorts, camisetas, abrigos y equipamiento oficial de Bonati Fight Club." />
+<link rel="icon" href="../assets/images/logo-original.jpg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css" />
+<link rel="stylesheet" href="../assets/css/animations.css" />
+<link rel="stylesheet" href="../assets/css/store.css" />
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+<body>
+
+<header class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">
+      <img src="../assets/images/logo-original.jpg" class="logo" alt="BFC" />
+      <span class="brand-text">BONATI <b>FC</b></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../#home"     data-i18n="nav.home">Inicio</a>
+      <a href="../#academy"  data-i18n="nav.academy">Academia</a>
+      <a href="../#schedule" data-i18n="nav.schedule">Horarios</a>
+      <a href="../#coaches"  data-i18n="nav.coaches">Profesores</a>
+      <a href="../tapa-team/" data-i18n="nav.tapa">Tapa Team</a>
+      <a href="." class="is-current" data-i18n="nav.store" style="color:var(--bfc-bone)">Tienda</a>
+      <a href="../#contact"  data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn is-active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="pt">PT</button>
+      </div>
+      <a href="https://wa.me/5492615710531" target="_blank" rel="noopener" class="btn nav-cta" data-i18n="nav.cta">Entrenar ahora</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="store-hero">
+  <div class="container">
+    <span class="kicker">Tienda oficial — BFC Merch</span>
+    <h1>El uniforme <b>del campeón.</b></h1>
+    <p>Shorts, camisetas, abrigos y equipamiento oficial. Hecho por luchadores, para luchadores. Hacé tap en un producto y te lo reservamos por WhatsApp.</p>
+  </div>
+</section>
+
+<div class="store-filters" id="storeFilters">
+  <div class="filter-inner" style="display:flex;flex-wrap:wrap;gap:0.5rem;">
+    <!-- filled by JS -->
+  </div>
+  <div class="filter-spacer"></div>
+  <div class="filter-count" id="storeCount">— productos</div>
+</div>
+
+<main class="store-grid" id="storeGrid"></main>
+
+<!-- Product detail modal -->
+<div class="pd-modal" id="pdModal" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="pd-box"></div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/images/logo-original.jpg" alt="BFC" class="logo" />
+        <p data-i18n="footer.tag">Desde 2010 formando atletas de élite en el corazón de Godoy Cruz, Mendoza.</p>
+      </div>
+      <div><h4 data-i18n="footer.h1">Academia</h4>
+        <ul>
+          <li><a href="../#academy"  data-i18n="nav.academy">Academia</a></li>
+          <li><a href="../#schedule" data-i18n="nav.schedule">Horarios</a></li>
+          <li><a href="../#coaches"  data-i18n="nav.coaches">Profesores</a></li>
+          <li><a href="../tapa-team/" data-i18n="nav.tapa">Tapa Team</a></li>
+        </ul>
+      </div>
+      <div><h4 data-i18n="footer.h2">Info</h4>
+        <ul>
+          <li><a href="../#contact" data-i18n="nav.contact">Contacto</a></li>
+          <li><a href="https://wa.me/5492615710531" target="_blank" rel="noopener">WhatsApp K1</a></li>
+          <li><a href="https://wa.me/5492614671743" target="_blank" rel="noopener">WhatsApp MMA</a></li>
+        </ul>
+      </div>
+      <div><h4 data-i18n="footer.h3">Síguenos</h4>
+        <div class="socials">
+          <a href="https://instagram.com/bonati_fightclub" target="_blank" rel="noopener"><i class="ph-fill ph-instagram-logo"></i></a>
+          <a href="https://wa.me/5492615710531" target="_blank" rel="noopener"><i class="ph-fill ph-whatsapp-logo"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div data-i18n="footer.copyright">© 2025 Bonati Fight Club</div>
+      <div class="hash" data-i18n-html="footer.hash">#Siempre<b>BFC</b></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/store.js"></script>
+</body>
+</html>

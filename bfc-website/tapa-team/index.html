@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0A0A0A" />
+<title>Tapa Team · MMA &amp; Wrestling — Bonati Fight Club</title>
+<meta name="description" content="Tapa Team. Equipo de MMA y Wrestling dentro de Bonati Fight Club en Godoy Cruz, Mendoza." />
+<link rel="icon" href="../assets/images/logo-original.jpg" type="image/svg+xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/main.css" />
+<link rel="stylesheet" href="../assets/css/animations.css" />
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+<style>
+  /* Page-scoped overrides: gold accents dominate Tapa Team */
+  .tt-hero {
+    position: relative;
+    min-height: 100vh;
+    min-height: 100svh;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex; align-items: flex-end;
+  }
+  .tt-hero-bg {
+    position: absolute; inset: 0; z-index: -2;
+    background-image: url('../assets/images/tapa-team.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(15%) contrast(1.15) brightness(0.55);
+    transform: scale(1.08);
+    transition: transform 6s var(--ease-out-expo);
+  }
+  .tt-hero.in-view .tt-hero-bg { transform: scale(1); }
+  .tt-hero::before {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg,
+      rgba(10,10,10,0.3) 0%,
+      rgba(10,10,10,0.6) 40%,
+      rgba(10,10,10,0.95) 100%);
+  }
+  .tt-hero::after {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.25), transparent 50%);
+  }
+  .tt-hero-content {
+    position: relative; z-index: 2;
+    width: 100%; max-width: var(--container-max);
+    margin: 0 auto;
+    padding: calc(var(--nav-h) + 4rem) var(--container-pad) clamp(3rem, 6vw, 5rem);
+  }
+  .tt-hero h1 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-hero);
+    color: var(--bfc-bone);
+    line-height: 0.82;
+    letter-spacing: 0.01em;
+    max-width: 12ch;
+  }
+  .tt-hero h1 b { color: var(--bfc-gold); }
+  .tt-hero .tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border: 1px solid rgba(212,160,23,0.5);
+    color: var(--bfc-gold);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+  .tt-hero .tag .dot {
+    width: 6px; height: 6px; background: var(--bfc-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--bfc-gold);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  .tt-hero .lead {
+    color: var(--bfc-bone-dim);
+    margin-top: 1.5rem;
+    max-width: 50ch;
+    font-size: var(--fs-md);
+  }
+  .tt-hero .ctas { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
+
+  /* Pillars */
+  .pillars {
+    background: var(--bfc-black-800);
+    padding: var(--section-pad-y) 0;
+  }
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: var(--border-hair);
+  }
+  .pillar {
+    padding: 2.5rem 2rem;
+    border-right: var(--border-hair);
+    min-height: 320px;
+    display: flex; flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+  .pillar:last-child { border-right: 0; }
+  .pillar::before {
+    content: ''; position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: var(--bfc-gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 900ms var(--ease-out-expo);
+  }
+  .pillar.in-view::before { transform: scaleX(1); }
+  .pillar-num {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.3em;
+    color: var(--bfc-gold);
+  }
+  .pillar h3 {
+    font-family: var(--ff-display);
+    font-size: var(--fs-xl);
+    color: var(--bfc-bone);
+    margin-top: 1rem;
+    letter-spacing: 0.02em;
+    line-height: 0.95;
+  }
+  .pillar p {
+    color: var(--bfc-bone-dim);
+    margin-top: 1rem;
+    line-height: 1.6;
+  }
+
+  .gold .btn.nav-cta { background: var(--bfc-gold); color: var(--bfc-black); border-color: var(--bfc-gold); }
+
+  @media (max-width: 900px) {
+    .pillars-grid { grid-template-columns: 1fr; }
+    .pillar { border-right: 0; border-bottom: var(--border-hair); }
+    .pillar:last-child { border-bottom: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav scrolled" id="nav">
+  <div class="nav-inner">
+    <a href="../" class="nav-brand">
+      <img src="../assets/images/logo-original.jpg" class="logo" alt="BFC" />
+      <span class="brand-text">BONATI <b style="color:var(--bfc-gold)">TAPA</b></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="../#home"     data-i18n="nav.home">Inicio</a>
+      <a href="../#academy"  data-i18n="nav.academy">Academia</a>
+      <a href="../#schedule" data-i18n="nav.schedule">Horarios</a>
+      <a href="../#coaches"  data-i18n="nav.coaches">Profesores</a>
+      <a href="." class="is-current" style="color:var(--bfc-gold)" data-i18n="nav.tapa">Tapa Team</a>
+      <a href="../store/"   data-i18n="nav.store">Tienda</a>
+      <a href="../#contact" data-i18n="nav.contact">Contacto</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch">
+        <button class="lang-btn is-active" data-lang="es">ES</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="pt">PT</button>
+      </div>
+      <a href="https://wa.me/5492614671743" target="_blank" rel="noopener" class="btn gold nav-cta">WhatsApp MMA</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="tt-hero" id="home">
+  <div class="tt-hero-bg"></div>
+  <div class="tt-hero-content">
+    <span class="tag"><span class="dot"></span> TAPA TEAM · GODOY CRUZ</span>
+    <h1>MMA. <br>Wrestling. <b>Sin filtros.</b></h1>
+    <p class="lead">El equipo de MMA y Wrestling que opera dentro de Bonati Fight Club. Fundado hace aproximadamente un año, ya compite en eventos locales y nacionales. El futuro de las artes marciales mixtas mendocinas.</p>
+    <div class="ctas">
+      <a href="https://wa.me/5492614671743" target="_blank" rel="noopener" class="btn gold">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+        <span>Sumate al equipo</span>
+      </a>
+      <a href="#pillars" class="btn ghost">
+        <span>Conocer más</span>
+        <i class="ph ph-arrow-down btn-arrow"></i>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="container">
+    <header class="section-head reveal gold">
+      <span class="eyebrow gold">Qué es Tapa Team</span>
+      <h2 class="hl">Tres pilares. <b style="color:var(--bfc-gold)">Un solo equipo.</b></h2>
+    </header>
+
+    <div class="pillars-grid reveal">
+      <article class="pillar">
+        <span class="pillar-num">01 / MMA</span>
+        <h3>Artes Marciales Mixtas</h3>
+        <p>Entrenamiento completo: striking, ground and pound, transiciones, jaula. Preparación real para competir en eventos amateurs y profesionales.</p>
+      </article>
+      <article class="pillar">
+        <span class="pillar-num">02 / WRESTLING</span>
+        <h3>Lucha olímpica &amp; grappling</h3>
+        <p>Derribos, control de suelo, defensa personal. La base que convierte a un peleador de pie en un peleador completo.</p>
+      </article>
+      <article class="pillar">
+        <span class="pillar-num">03 / COMPETENCIA</span>
+        <h3>Rumbo a los circuitos</h3>
+        <p>Desde locales hasta nacionales. Tapa Team prepara atletas que ya suben a octágonos en todo el país — y apuntamos a Sudamérica.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SPLIT MEDIA + COPY -->
+<section class="section" style="background:var(--bfc-black);">
+  <div class="container">
+    <div class="tapa-grid">
+      <div class="tapa-copy reveal">
+        <span class="eyebrow gold">Entrenamiento</span>
+        <h2 class="tt-title">Te recibimos el <b>primer día.</b></h2>
+        <p>Podés empezar sin experiencia previa. Tenemos clases escalonadas para iniciantes, intermedios y competidores. Lo único que pedimos es disciplina y compromiso.</p>
+
+        <div class="tapa-stats">
+          <div class="tt-stat"><span>Entrenamientos</span><span>Semanales</span></div>
+          <div class="tt-stat"><span>Clase de prueba</span><span>Gratis</span></div>
+          <div class="tt-stat"><span>+18</span><span>Edad mínima</span></div>
+        </div>
+
+        <div class="tapa-ctas">
+          <a href="https://wa.me/5492614671743?text=Hola%20Tapa%20Team%21%20Quiero%20mi%20clase%20de%20prueba%20de%20MMA."
+             target="_blank" rel="noopener" class="btn gold">
+            <i class="ph-fill ph-whatsapp-logo"></i>
+            <span>Reservar clase de prueba</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="tapa-media reveal-x">
+        <img src="../assets/images/gallery/torneo-1.jpg" alt="Tapa Team en competencia" loading="lazy" />
+        <div class="tapa-media-label">COMPETENCIA · 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY of tournaments -->
+<section class="section gallery">
+  <div class="container">
+    <header class="section-head reveal gold">
+      <span class="eyebrow gold">En el octágono</span>
+      <h2 class="hl">Resultados, no <b style="color:var(--bfc-gold)">promesas.</b></h2>
+    </header>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item gi-a"><img src="../assets/images/gallery/torneo-2.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item gi-b"><img src="../assets/images/gallery/torneo-3.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item gi-c"><img src="../assets/images/gallery/torneo-4.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item gi-d"><img src="../assets/images/gallery/victoria-fernando-lima.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item gi-e"><img src="../assets/images/tapa-team.jpg" alt="" loading="lazy" /></div>
+      <div class="gallery-item gi-f"><img src="../assets/images/gallery/torneo-1.jpg" alt="" loading="lazy" /></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="section" style="background:linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); border-top: var(--border-gold); border-bottom: var(--border-gold);">
+  <div class="container" style="text-align:center;max-width:800px;margin:0 auto;">
+    <h2 class="hl" style="font-family:var(--ff-display);font-size:var(--fs-2xl);color:var(--bfc-bone);letter-spacing:0.02em;line-height:1;">
+      Si buscás MMA serio, <br><b style="color:var(--bfc-gold)">lo encontraste.</b>
+    </h2>
+    <p style="color:var(--bfc-bone-dim);margin:1.5rem auto;max-width:50ch;">
+      Balcarce 230, Godoy Cruz. Mendoza, Argentina. Nos mandás un mensaje y arreglamos tu primera clase hoy mismo.
+    </p>
+    <div style="display:flex;justify-content:center;gap:0.8rem;flex-wrap:wrap;margin-top:2rem;">
+      <a href="https://wa.me/5492614671743" target="_blank" rel="noopener" class="btn gold">
+        <i class="ph-fill ph-whatsapp-logo"></i>
+        <span>+54 9 261 467-1743</span>
+      </a>
+      <a href="../" class="btn ghost">
+        <i class="ph ph-arrow-left btn-arrow"></i>
+        <span>Volver a BFC</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="../assets/images/logo-original.jpg" alt="BFC" class="logo" />
+        <p>Desde 2010 formando atletas de élite en el corazón de Godoy Cruz, Mendoza.</p>
+      </div>
+      <div><h4>Academia</h4>
+        <ul>
+          <li><a href="../#academy">Academia</a></li>
+          <li><a href="../#schedule">Horarios</a></li>
+          <li><a href="../#coaches">Profesores</a></li>
+          <li><a href=".">Tapa Team</a></li>
+        </ul>
+      </div>
+      <div><h4>Info</h4>
+        <ul>
+          <li><a href="../store/">Tienda</a></li>
+          <li><a href="../#contact">Contacto</a></li>
+          <li><a href="https://wa.me/5492614671743" target="_blank" rel="noopener">WhatsApp MMA</a></li>
+        </ul>
+      </div>
+      <div><h4>Síguenos</h4>
+        <div class="socials">
+          <a href="https://instagram.com/bonati_fightclub" target="_blank" rel="noopener"><i class="ph-fill ph-instagram-logo"></i></a>
+          <a href="https://wa.me/5492614671743" target="_blank" rel="noopener"><i class="ph-fill ph-whatsapp-logo"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2025 Bonati Fight Club · Tapa Team · Godoy Cruz, Mendoza</div>
+      <div class="hash">#Siempre<b style="color:var(--bfc-gold)">BFC</b></div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/js/i18n.js"></script>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+{
+  "currency": "ARS",
+  "whatsapp": "5492615710531",
+  "categories": [
+    { "id": "shorts",   "name": { "es": "Shorts de combate", "en": "Fight shorts",  "pt": "Shorts de luta" } },
+    { "id": "tees",     "name": { "es": "Camisetas",        "en": "T-shirts",      "pt": "Camisetas" } },
+    { "id": "tanks",    "name": { "es": "Musculosas",       "en": "Tank tops",     "pt": "Regatas" } },
+    { "id": "outer",    "name": { "es": "Abrigos",          "en": "Outerwear",     "pt": "Casacos" } },
+    { "id": "gear",     "name": { "es": "Guantes y protección", "en": "Gloves & gear", "pt": "Luvas e proteção" } },
+    { "id": "access",   "name": { "es": "Vendas y accesorios",  "en": "Wraps & accessories", "pt": "Bandagens e acessórios" } }
+  ],
+  "products": [
+    {
+      "id": "bfc-short-001",
+      "name": "Short BFC Competition",
+      "category": "shorts",
+      "price": 0,
+      "images": ["../assets/images/merch/short-001.jpg"],
+      "description": "Short de competencia BFC, corte holgado, bordado Bonati en pierna.",
+      "sizes": ["S", "M", "L", "XL", "XXL"],
+      "badge": "NUEVO",
+      "available": true
+    },
+    {
+      "id": "bfc-tee-001",
+      "name": "Tee BFC Classic",
+      "category": "tees",
+      "price": 0,
+      "images": ["../assets/images/merch/tee-001.jpg"],
+      "description": "Camiseta algodón 180g, logo BFC bordado en pecho.",
+      "sizes": ["S", "M", "L", "XL"],
+      "badge": "",
+      "available": true
+    },
+    {
+      "id": "bfc-tee-002",
+      "name": "Tee #SiempreBFC",
+      "category": "tees",
+      "price": 0,
+      "images": ["../assets/images/merch/tee-002.jpg"],
+      "description": "Camiseta con slogan #SiempreBFC estampado en rojo BFC.",
+      "sizes": ["S", "M", "L", "XL"],
+      "badge": "",
+      "available": true
+    },
+    {
+      "id": "bfc-tank-001",
+      "name": "Musculosa Training",
+      "category": "tanks",
+      "price": 0,
+      "images": ["../assets/images/merch/tank-001.jpg"],
+      "description": "Musculosa técnica, tela respirable, ideal para entrenamientos.",
+      "sizes": ["S", "M", "L", "XL"],
+      "badge": "",
+      "available": true
+    },
+    {
+      "id": "bfc-hoodie-001",
+      "name": "Hoodie BFC Godoy Cruz",
+      "category": "outer",
+      "price": 0,
+      "images": ["../assets/images/merch/hoodie-001.jpg"],
+      "description": "Buzo canguro premium, interior afelpado, bordado dorsal.",
+      "sizes": ["S", "M", "L", "XL", "XXL"],
+      "badge": "BEST SELLER",
+      "available": true
+    },
+    {
+      "id": "bfc-gloves-001",
+      "name": "Guantes BFC Pro 10oz",
+      "category": "gear",
+      "price": 0,
+      "images": ["../assets/images/merch/gloves-001.jpg"],
+      "description": "Guantes de boxeo profesionales 10oz, cuero sintético reforzado.",
+      "sizes": ["10oz", "12oz", "14oz"],
+      "badge": "",
+      "available": true
+    },
+    {
+      "id": "bfc-wraps-001",
+      "name": "Vendas elásticas 4.5m",
+      "category": "access",
+      "price": 0,
+      "images": ["../assets/images/merch/wraps-001.jpg"],
+      "description": "Vendas elásticas 4.5m con velcro. Pack x 2.",
+      "sizes": ["Único"],
+      "badge": "",
+      "available": true
+    },
+    {
+      "id": "bfc-bag-001",
+      "name": "Mochila BFC Fight",
+      "category": "access",
+      "price": 0,
+      "images": ["../assets/images/merch/bag-001.jpg"],
+      "description": "Mochila técnica con compartimiento para guantes, bolsillo para vendas.",
+      "sizes": ["Único"],
+      "badge": "",
+      "available": true
+    }
+  ]
+}

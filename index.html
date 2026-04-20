@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es" data-lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0A0A0A" />
+<title>Bonati Fight Club · K1 · Muay Thai · MMA · Mendoza</title>
+<meta name="description" content="Academia de kickboxing, Muay Thai, MMA y Wrestling en Godoy Cruz, Mendoza. Fundada por Walter Bonati. Casa del Campeón Sudamericano FFG 2025 Gastón 'Tonga' Silva." />
+<meta name="author" content="Bonati Fight Club" />
+<meta property="og:title" content="Bonati Fight Club — Donde se forjan campeones" />
+<meta property="og:description" content="Academia de kickboxing, Muay Thai y MMA en Mendoza. #SiempreBFC" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="es_AR" />
+
+<link rel="icon" href="assets/images/logo-original.jpg" type="image/jpeg" />
+<link rel="preload" as="video" href="assets/videos/video-Hero.mp4" type="video/mp4" fetchpriority="high" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="assets/css/main.css" />
+<link rel="stylesheet" href="assets/css/animations.css" />
+
+<!-- Phosphor icons via CDN -->
+<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+</head>
+<body>
+
+<!-- =========================
+     NAVBAR
+     ========================= -->
+<header class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="nav-brand" aria-label="Bonati Fight Club">
+      <img src="assets/images/logo-original.jpg" alt="Bonati Fight Club" class="logo" />
+      <span class="brand-text">Bonati Fight Club</span>
+    </a>
+
+    <nav class="nav-links" id="navLinks">
+      <a href="#home"      data-i18n="nav.home">Inicio</a>
+      <a href="#academy"   data-i18n="nav.academy">Academia</a>
+      <a href="#schedule"  data-i18n="nav.schedule">Horarios</a>
+      <a href="#coaches"   data-i18n="nav.coaches">Profesores</a>
+      <a href="#tapa"      data-i18n="nav.tapa">Tapa Team</a>
+      <a href="store/"     data-i18n="nav.store">Tienda</a>
+      <a href="#contact"   data-i18n="nav.contact">Contacto</a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="Idioma">
+        <button class="lang-btn is-active" data-lang="es" type="button">ES</button>
+        <button class="lang-btn"           data-lang="en" type="button">EN</button>
+        <button class="lang-btn"           data-lang="pt" type="button">PT</button>
+      </div>
+      <a href="https://wa.me/5492615710531" target="_blank" rel="noopener" class="btn nav-cta" data-i18n="nav.cta">
+        Entrenar ahora
+        <i class="ph ph-arrow-up-right btn-arrow" aria-hidden="true"></i>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menú" type="button"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- =========================
+     HERO
+     ========================= -->
+<section class="hero" id="home">
+  <div class="hero-video-wrap" aria-hidden="true">
+    <video class="hero-video"
+           autoplay muted loop playsinline preload="auto"
+           disablepictureinpicture disableremoteplayback>
+      <source src="assets/videos/video-Hero.mp4" type="video/mp4" />
+    </video>
+  </div>
+  <div class="hero-mask" aria-hidden="true"></div>
+
+  <div class="hero-content">
+    <div class="hero-copy">
+      <h1 class="hero-title">
+        <span class="line"><span data-i18n="hero.l1">Bonati</span></span>
+        <span class="line"><span data-i18n="hero.l2">Fight</span></span>
+        <span class="line"><span data-i18n="hero.l3">Club</span></span>
+      </h1>
+
+      <p class="hero-sub" data-i18n="hero.sub">Donde se forjan los campeones del kickboxing sudamericano.</p>
+
+      <div class="hero-ctas">
+        <a href="https://wa.me/5492615710531" target="_blank" rel="noopener" class="btn">
+          <span data-i18n="hero.cta1">Comenzar a entrenar</span>
+          <i class="ph ph-arrow-up-right btn-arrow" aria-hidden="true"></i>
+        </a>
+        <a href="#academy" class="btn ghost">
+          <span data-i18n="hero.cta2">Ver la academia</span>
+          <i class="ph ph-arrow-down btn-arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+
+    <aside class="hero-side">
+      <div class="hero-hashtag">#Siempre<b>BFC</b></div>
+    </aside>
+  </div>
+
+  <div class="hero-scroll" aria-hidden="true"><span data-i18n="hero.scroll">Desliza para descubrir</span></div>
+</section>
+
+<!-- =========================
+     COUNTERS
+     ========================= -->
+<section class="counters">
+  <div class="counters-inner">
+    <div class="counter">
+      <div class="counter-num"><span class="count" data-target="15">0</span><span class="plus">+</span></div>
+      <div class="counter-lbl" data-i18n="counters.years">Años formando atletas</div>
+    </div>
+    <div class="counter">
+      <div class="counter-num"><span class="count" data-target="500">0</span><span class="plus">+</span></div>
+      <div class="counter-lbl" data-i18n="counters.students">Alumnos activos</div>
+    </div>
+    <div class="counter">
+      <div class="counter-num"><span class="count" data-target="4">0</span><span class="plus">+</span></div>
+      <div class="counter-lbl" data-i18n="counters.champs">Campeones sudamericanos</div>
+    </div>
+  </div>
+  <div class="counters-meta">
+    <span class="meta-loc" data-i18n="hero.location">Godoy Cruz · Mendoza · Argentina</span>
+    <span class="meta-sep" aria-hidden="true"></span>
+    <span class="meta-tag"><span class="dot"></span><span data-i18n="hero.tag">K1 · Muay Thai · MMA · Wrestling</span></span>
+  </div>
+</section>
+
+<!-- =========================
+     MARQUEE BAND
+     ========================= -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track" data-i18n-list="marquee"></div>
+</div>
+
+<!-- =========================
+     DISCIPLINES
+     ========================= -->
+<section class="section disciplines" id="academy">
+  <div class="container">
+    <header class="section-head reveal">
+      <span class="eyebrow"><span data-i18n="disc.eyebrow">01 — Disciplinas</span></span>
+      <h2 class="hl" data-i18n-html="disc.title">Arte marcial. <b>Mentalidad de guerra.</b></h2>
+      <p data-i18n="disc.lead">Cuatro disciplinas, una sola filosofía: disciplina, respeto y voluntad para competir al más alto nivel.</p>
+    </header>
+
+    <div class="disc-grid reveal">
+      <a href="#schedule" class="disc-card">
+        <div class="disc-bg" style="background-image:url('assets/images/gimnasio-1.webp');"></div>
+        <div class="disc-num">/ 01</div>
+        <div>
+          <div class="eyebrow" data-i18n="disc.k1.kicker">Stand-up striking</div>
+          <h3 class="disc-title" data-i18n="disc.k1.name">K1 Kickboxing</h3>
+          <p class="disc-desc" data-i18n="disc.k1.desc">Técnica de golpeo japonés que combina boxeo con patadas. Ritmo, explosividad y precisión.</p>
+          <span class="disc-link"><span data-i18n="disc.k1.cta">Conocer la clase</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+        </div>
+      </a>
+
+      <a href="#schedule" class="disc-card">
+        <div class="disc-bg" style="background-image:url('assets/images/gimnasio-2.webp');"></div>
+        <div class="disc-num">/ 02</div>
+        <div>
+          <div class="eyebrow" data-i18n="disc.mt.kicker">The art of eight limbs</div>
+          <h3 class="disc-title" data-i18n="disc.mt.name">Muay Thai</h3>
+          <p class="disc-desc" data-i18n="disc.mt.desc">Boxeo tailandés: puños, codos, rodillas y patadas. La disciplina más completa de pie.</p>
+          <span class="disc-link"><span data-i18n="disc.mt.cta">Conocer la clase</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+        </div>
+      </a>
+
+      <a href="#tapa" class="disc-card gold">
+        <div class="disc-bg" style="background-image:url('assets/images/tapa-team.jpg');"></div>
+        <div class="disc-num">/ 03</div>
+        <div>
+          <div class="eyebrow gold" data-i18n="disc.mma.kicker">Tapa Team</div>
+          <h3 class="disc-title" data-i18n="disc.mma.name">MMA &amp; Wrestling</h3>
+          <p class="disc-desc" data-i18n="disc.mma.desc">Artes marciales mixtas y lucha. El futuro del combate completo en Mendoza.</p>
+          <span class="disc-link"><span data-i18n="disc.mma.cta">Ver Tapa Team</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     CHAMPIONS (TONGA)
+     ========================= -->
+<section class="champions" id="champions">
+  <div class="champions-bg"></div>
+  <div class="container">
+    <span class="eyebrow reveal"><span data-i18n="champions.eyebrow">02 — Campeones</span></span>
+
+    <h2 class="champions-quote" data-champions-quote>
+      <!-- filled by main.js with word-by-word spans -->
+    </h2>
+
+    <div class="champions-name">
+      <div class="role" data-i18n="champions.role">Nuestro atleta estrella</div>
+      <div class="nom">Gastón &ldquo;Tonga&rdquo; Silva</div>
+    </div>
+
+    <div class="titles" data-i18n-list="champions.titles"></div>
+  </div>
+</section>
+
+<!-- =========================
+     HISTORY / TIMELINE
+     ========================= -->
+<section class="section history" id="history">
+  <div class="container">
+    <div class="history-grid">
+      <div class="history-copy reveal">
+        <span class="eyebrow"><span data-i18n="history.eyebrow">03 — Historia</span></span>
+        <h2 class="hl" data-i18n-html="history.title" style="font-family:var(--ff-display);font-size:var(--fs-2xl);line-height:0.95;color:var(--bfc-bone);margin-top:1rem;letter-spacing:0.02em;">
+          Quince años <b>forjando leyendas</b> en Mendoza.
+        </h2>
+        <p class="para" data-i18n="history.p1">Walter Bonati fundó el club desde la pasión…</p>
+        <p class="para" data-i18n="history.p2">Durante la pandemia (2020–2021)…</p>
+
+        <blockquote class="quote-block">
+          <p data-i18n="history.quote">Aquí en Bonati prevalece la decisión de hacer las cosas.</p>
+          <cite data-i18n="history.quoteBy">Walter Bonati · Head Coach</cite>
+        </blockquote>
+
+        <div class="timeline" data-i18n-list="history.tl"></div>
+      </div>
+
+      <div class="history-media reveal-x">
+        <img src="assets/images/gaston-walter-titulo.webp" alt="Walter Bonati y Gastón Silva con título" loading="lazy" />
+        <div class="history-media-frame"></div>
+        <div class="history-media-caption">WALTER + GASTÓN · MENDOZA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     PROFESSORS
+     ========================= -->
+<section class="section professors" id="coaches">
+  <div class="container">
+    <header class="section-head reveal">
+      <span class="eyebrow"><span data-i18n="prof.eyebrow">04 — Profesores</span></span>
+      <h2 class="hl" data-i18n-html="prof.title">Head coach <b>y campeón.</b></h2>
+    </header>
+
+    <div class="prof-grid">
+      <article class="prof-card reveal">
+        <div class="prof-photo">
+          <img src="assets/images/walter-gaston.jpg" alt="Walter Bonati" loading="lazy" />
+          <div class="prof-name-overlay">
+            <div class="role" data-i18n="prof.walter.role">Fundador · Head Coach</div>
+            <h3>Walter Bonati</h3>
+          </div>
+        </div>
+        <div class="prof-body">
+          <p class="prof-quote" data-i18n="prof.walter.quote">Aquí en Bonati prevalece la decisión de hacer las cosas.</p>
+          <ul class="prof-list" data-i18n-list="prof.walter.bullets"></ul>
+          <div class="prof-social">
+            <a href="https://instagram.com/bonati_fightclub" target="_blank" rel="noopener">
+              <i class="ph-fill ph-instagram-logo" aria-hidden="true"></i>
+              <span data-i18n="prof.ig">Ver Instagram</span>
+              <span>@bonati_fightclub</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="prof-card reveal">
+        <div class="prof-photo">
+          <img src="assets/images/gaston-walter.jpg" alt="Gastón Tonga Silva" loading="lazy" />
+          <div class="prof-name-overlay">
+            <div class="role" data-i18n="prof.gaston.role">Atleta · Profesor</div>
+            <h3>Gastón &ldquo;Tonga&rdquo; Silva</h3>
+          </div>
+        </div>
+        <div class="prof-body">
+          <p class="prof-quote" data-i18n="prof.gaston.quote">Si entrás acá, entrás para dejar algo.</p>
+          <ul class="prof-list" data-i18n-list="prof.gaston.bullets"></ul>
+          <div class="prof-social">
+            <a href="https://instagram.com/tonga_silva" target="_blank" rel="noopener">
+              <i class="ph-fill ph-instagram-logo" aria-hidden="true"></i>
+              <span data-i18n="prof.ig">Ver Instagram</span>
+              <span>@tonga_silva</span>
+            </a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     SCHEDULE
+     ========================= -->
+<section class="section schedule" id="schedule">
+  <div class="container">
+    <header class="section-head reveal">
+      <span class="eyebrow"><span data-i18n="sch.eyebrow">05 — Horarios</span></span>
+      <h2 class="hl" data-i18n-html="sch.title">Elegí tu <b>round.</b></h2>
+      <p data-i18n="sch.lead">Clases de lunes a viernes para todos los niveles.</p>
+    </header>
+
+    <div class="schedule-grid reveal">
+      <article class="fight-card">
+        <header class="fight-card-head">
+          <div>
+            <div class="fc-coach" data-i18n="sch.walter.coach">Walter Bonati</div>
+          </div>
+          <div class="fc-days" data-i18n="sch.walter.days">Lun a Vie</div>
+        </header>
+        <div class="fc-slot"><span class="fc-time">08:30</span><span class="fc-dash"></span><span class="fc-disc" data-i18n="sch.disc1">K1 / Muay Thai</span></div>
+        <div class="fc-slot"><span class="fc-time">15:00</span><span class="fc-dash"></span><span class="fc-disc" data-i18n="sch.disc1">K1 / Muay Thai</span></div>
+        <div class="fc-slot"><span class="fc-time">17:30</span><span class="fc-dash"></span><span class="fc-disc" data-i18n="sch.disc1">K1 / Muay Thai</span></div>
+        <div class="fc-slot"><span class="fc-time">19:00</span><span class="fc-dash"></span><span class="fc-disc" data-i18n="sch.disc1">K1 / Muay Thai</span></div>
+        <div class="fc-slot"><span class="fc-time">20:30</span><span class="fc-dash"></span><span class="fc-disc" data-i18n="sch.disc1">K1 / Muay Thai</span></div>
+      </article>
+
+      <article class="fight-card">
+        <header class="fight-card-head">
+          <div>
+            <div class="fc-coach" data-i18n="sch.gaston.coach">Gastón Silva</div>
+          </div>
+          <div class="fc-days" data-i18n="sch.gaston.days">Lun · Mar · Jue</div>
+        </header>
+        <div class="fc-slot"><span class="fc-time">10:30</span><span class="fc-dash"></span><span class="fc-disc" data-i18n="sch.disc1">K1 / Muay Thai</span></div>
+        <div class="fc-slot"><span class="fc-time">16:30</span><span class="fc-dash"></span><span class="fc-disc" data-i18n="sch.disc1">K1 / Muay Thai</span></div>
+        <div class="fc-slot"><span class="fc-time">22:00</span><span class="fc-dash"></span><span class="fc-disc" data-i18n="sch.disc1">K1 / Muay Thai</span></div>
+      </article>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin-top:3rem;">
+      <a href="https://wa.me/5492615710531" target="_blank" rel="noopener" class="btn">
+        <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+        <span data-i18n="sch.cta">Consultar por clases</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     TAPA TEAM
+     ========================= -->
+<section class="section tapa" id="tapa">
+  <div class="container">
+    <div class="tapa-grid">
+      <div class="tapa-copy reveal">
+        <span class="eyebrow gold"><span data-i18n="tapa.eyebrow">06 — Tapa Team</span></span>
+        <h2 class="tt-title" data-i18n-html="tapa.title">Tapa Team. <b>MMA &amp; Wrestling.</b></h2>
+        <p data-i18n="tapa.lead">El equipo de MMA y Wrestling que opera dentro de BFC…</p>
+
+        <div class="tapa-stats">
+          <div class="tt-stat">
+            <span data-i18n="tapa.s1v">2024</span>
+            <span data-i18n="tapa.s1">Fundado</span>
+          </div>
+          <div class="tt-stat">
+            <span data-i18n="tapa.s2v">Locales y nacionales</span>
+            <span data-i18n="tapa.s2">Eventos</span>
+          </div>
+          <div class="tt-stat">
+            <span data-i18n="tapa.s3v">MMA · Wrestling · Submission</span>
+            <span data-i18n="tapa.s3">Disciplinas</span>
+          </div>
+        </div>
+
+        <div class="tapa-ctas">
+          <a href="https://wa.me/5492614671743" target="_blank" rel="noopener" class="btn gold">
+            <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+            <span data-i18n="tapa.cta1">WhatsApp MMA</span>
+          </a>
+          <a href="tapa-team/" class="btn ghost">
+            <span data-i18n="tapa.cta2">Ver página completa</span>
+            <i class="ph ph-arrow-up-right btn-arrow" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="tapa-media reveal-x">
+        <img src="assets/images/tapa-team.jpg" alt="Tapa Team MMA" loading="lazy" />
+        <div class="tapa-media-label">MMA · WRESTLING</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     GALLERY
+     ========================= -->
+<section class="section gallery" id="gallery">
+  <div class="container">
+    <header class="section-head reveal">
+      <span class="eyebrow"><span data-i18n="gal.eyebrow">07 — Galería</span></span>
+      <h2 class="hl" data-i18n-html="gal.title">Dentro del <b>ring.</b></h2>
+    </header>
+
+    <div class="gallery-grid reveal">
+      <div class="gallery-item gi-a"><img src="assets/images/gaston-hero.jpg" alt="" loading="lazy" /><span class="tag" data-gal-tag>Alumnos entrenando</span></div>
+      <div class="gallery-item gi-b"><img src="assets/images/gallery/torneo-1.jpg" alt="" loading="lazy" /><span class="tag" data-gal-tag>Torneo nacional</span></div>
+      <div class="gallery-item gi-c"><img src="assets/images/gallery/torneo-2.jpg" alt="" loading="lazy" /><span class="tag" data-gal-tag>Campeonato sudamericano</span></div>
+      <div class="gallery-item gi-d"><img src="assets/images/gimnasio-3.webp" alt="" loading="lazy" /><span class="tag" data-gal-tag>Gimnasio · Tatami principal</span></div>
+      <div class="gallery-item gi-e"><img src="assets/images/tapa-team.jpg" alt="" loading="lazy" /><span class="tag" data-gal-tag>Tapa Team MMA</span></div>
+      <div class="gallery-item gi-f"><img src="assets/images/gallery/victoria-fernando-lima.jpg" alt="" loading="lazy" /><span class="tag" data-gal-tag>Victoria en ring</span></div>
+      <div class="gallery-item gi-g"><img src="assets/images/gaston-pichon.webp" alt="" loading="lazy" /><span class="tag" data-gal-tag>Sparring técnico</span></div>
+      <div class="gallery-item gi-h"><img src="assets/images/gaston-alumnos.webp" alt="" loading="lazy" /><span class="tag" data-gal-tag>Equipo BFC</span></div>
+      <div class="gallery-item gi-i"><img src="assets/images/gallery/torneo-3.jpg" alt="" loading="lazy" /><span class="tag" data-gal-tag>Desde adentro</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     CONTACT
+     ========================= -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <header class="section-head reveal">
+      <span class="eyebrow"><span data-i18n="contact.eyebrow">08 — Contacto</span></span>
+      <h2 class="hl" data-i18n-html="contact.title">Entrená con <b>nosotros.</b></h2>
+      <p data-i18n="contact.lead">Estamos en el corazón de Godoy Cruz.</p>
+    </header>
+
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <div class="address" data-i18n="contact.addr">Balcarce 230</div>
+        <div class="city" data-i18n="contact.city">Godoy Cruz, Mendoza</div>
+
+        <div class="contact-channels">
+          <a class="channel" href="https://wa.me/5492615710531" target="_blank" rel="noopener">
+            <div>
+              <div class="ch-label" data-i18n="contact.walter">Walter · K1 / Muay Thai</div>
+              <div class="ch-val">+54 9 261 571-0531</div>
+            </div>
+            <span class="arrow"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i></span>
+          </a>
+          <a class="channel" href="https://wa.me/5492614671743" target="_blank" rel="noopener">
+            <div>
+              <div class="ch-label" data-i18n="contact.tapa">Tapa Team · MMA / Wrestling</div>
+              <div class="ch-val">+54 9 261 467-1743</div>
+            </div>
+            <span class="arrow"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i></span>
+          </a>
+          <a class="channel" href="https://instagram.com/bonati_fightclub" target="_blank" rel="noopener">
+            <div>
+              <div class="ch-label" data-i18n="contact.ig">Instagram oficial</div>
+              <div class="ch-val">@bonati_fightclub</div>
+            </div>
+            <span class="arrow"><i class="ph-fill ph-instagram-logo" aria-hidden="true"></i></span>
+          </a>
+        </div>
+
+        <form class="contact-form" id="contactForm" novalidate>
+          <div>
+            <label for="cfName" data-i18n="contact.formName">Tu nombre</label>
+            <input id="cfName" name="name" required data-i18n-placeholder="contact.formPlaceholderName" placeholder="Nombre y apellido" />
+          </div>
+          <div>
+            <label for="cfMsg" data-i18n="contact.formMsg">Tu mensaje</label>
+            <textarea id="cfMsg" name="msg" required data-i18n-placeholder="contact.formPlaceholderMsg" placeholder="Contame qué clase te interesa"></textarea>
+          </div>
+          <button class="btn" type="submit">
+            <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+            <span data-i18n="contact.formSend">Enviar por WhatsApp</span>
+          </button>
+        </form>
+      </div>
+
+      <div class="contact-map reveal-x">
+        <iframe
+          src="https://maps.google.com/maps?q=Balcarce+230,+Godoy+Cruz,+Mendoza,+Argentina&output=embed&z=16&hl=es"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          title="Bonati Fight Club · Godoy Cruz, Mendoza"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================
+     FOOTER
+     ========================= -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/images/logo-original.jpg" alt="Bonati Fight Club" class="logo" />
+        <p data-i18n="footer.tag">Desde 2010 formando atletas de élite en el corazón de Godoy Cruz, Mendoza.</p>
+      </div>
+
+      <div>
+        <h4 data-i18n="footer.h1">Academia</h4>
+        <ul>
+          <li><a href="#academy"   data-i18n="nav.academy">Academia</a></li>
+          <li><a href="#schedule"  data-i18n="nav.schedule">Horarios</a></li>
+          <li><a href="#coaches"   data-i18n="nav.coaches">Profesores</a></li>
+          <li><a href="tapa-team/" data-i18n="nav.tapa">Tapa Team</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-i18n="footer.h2">Info</h4>
+        <ul>
+          <li><a href="store/"   data-i18n="nav.store">Tienda</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>
+          <li><a href="https://wa.me/5492615710531" target="_blank" rel="noopener">WhatsApp K1</a></li>
+          <li><a href="https://wa.me/5492614671743" target="_blank" rel="noopener">WhatsApp MMA</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-i18n="footer.h3">Síguenos</h4>
+        <div class="socials">
+          <a href="https://instagram.com/bonati_fightclub" target="_blank" rel="noopener" aria-label="Instagram BFC"><i class="ph-fill ph-instagram-logo" aria-hidden="true"></i></a>
+          <a href="https://instagram.com/tonga_silva" target="_blank" rel="noopener" aria-label="Instagram Tonga"><i class="ph-fill ph-at" aria-hidden="true"></i></a>
+          <a href="https://wa.me/5492615710531" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i></a>
+          <a href="https://maps.google.com/?q=Balcarce+230+Godoy+Cruz+Mendoza" target="_blank" rel="noopener" aria-label="Google Maps"><i class="ph-fill ph-map-pin" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div data-i18n="footer.copyright">© 2025 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina</div>
+      <div class="hash" data-i18n-html="footer.hash">#Siempre<b>BFC</b></div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="assets/js/i18n.js"></script>
+<script src="assets/js/main.js"></script>
+</body>
+</html>
