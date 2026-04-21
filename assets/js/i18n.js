@@ -14,7 +14,8 @@ const BFC_I18N = {
       tapa: 'Tapa Team',
       store: 'Tienda',
       contact: 'Contacto',
-      cta: 'Entrenar ahora'
+      cta: 'Entrenar ahora',
+      reviews: 'Reseñas'
     },
     hero: {
       location: 'Godoy Cruz · Mendoza · Argentina',
@@ -156,7 +157,7 @@ const BFC_I18N = {
       cta: 'Conocer la academia'
     },
     contact: {
-      eyebrow: '08 — Contacto',
+      eyebrow: '09 — Contacto',
       title: 'Entrená con <b>nosotros.</b>',
       lead: 'Estamos en el corazón de Godoy Cruz. Reservá 2 clases de prueba gratuitas.',
       addr: 'Balcarce 230',
@@ -177,13 +178,34 @@ const BFC_I18N = {
       h3: 'Síguenos',
       copyright: '© 2025 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'
+    },
+    rev: {
+      eyebrow: '08 — Reseñas',
+      title: 'Lo que dicen <b>nuestros alumnos.</b>',
+      cta: 'DEJÁ TU RESEÑA',
+      modal: {
+        title: 'TU RESEÑA',
+        sub: 'Compartí tu experiencia en Bonati Fight Club',
+        name: 'Nombre completo',
+        namePh: 'Tu nombre y apellido',
+        disc: 'Disciplina',
+        discPh: 'Elegí una disciplina',
+        rating: 'Calificación',
+        text: 'Tu reseña',
+        textPh: 'Contá tu experiencia (mín. 20 caracteres)...',
+        send: 'ENVIAR RESEÑA',
+        successTitle: '¡GRACIAS!',
+        successSub: 'Tu reseña fue agregada. ¿Querés también publicarla en Google Maps?',
+        gmaps: 'DEJAR EN GOOGLE MAPS'
+      }
     }
   },
 
   en: {
     nav: {
       home: 'Home', academy: 'Academy', schedule: 'Schedule', coaches: 'Coaches',
-      tapa: 'Tapa Team', store: 'Store', contact: 'Contact', cta: 'Train now'
+      tapa: 'Tapa Team', store: 'Store', contact: 'Contact', cta: 'Train now',
+      reviews: 'Reviews'
     },
     hero: {
       location: 'Godoy Cruz · Mendoza · Argentina',
@@ -277,7 +299,7 @@ const BFC_I18N = {
       cta: 'Meet the academy'
     },
     contact: {
-      eyebrow: '08 — Contact',
+      eyebrow: '09 — Contact',
       title: 'Train with <b>us.</b>',
       lead: 'We are in the heart of Godoy Cruz. Book your 2 free trial classes.',
       addr: '230 Balcarce St.', city: 'Godoy Cruz, Mendoza',
@@ -290,13 +312,34 @@ const BFC_I18N = {
       h1: 'Academy', h2: 'Info', h3: 'Follow us',
       copyright: '© 2025 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'
+    },
+    rev: {
+      eyebrow: '08 — Reviews',
+      title: 'What our <b>students say.</b>',
+      cta: 'LEAVE YOUR REVIEW',
+      modal: {
+        title: 'YOUR REVIEW',
+        sub: 'Share your experience at Bonati Fight Club',
+        name: 'Full name',
+        namePh: 'Your name',
+        disc: 'Discipline',
+        discPh: 'Choose a discipline',
+        rating: 'Your rating',
+        text: 'Your review',
+        textPh: 'Tell us about your experience (min. 20 chars)...',
+        send: 'SUBMIT REVIEW',
+        successTitle: 'THANK YOU!',
+        successSub: 'Your review has been added. Would you like to post it on Google Maps too?',
+        gmaps: 'POST ON GOOGLE MAPS'
+      }
     }
   },
 
   pt: {
     nav: {
       home: 'Início', academy: 'Academia', schedule: 'Horários', coaches: 'Professores',
-      tapa: 'Tapa Team', store: 'Loja', contact: 'Contato', cta: 'Treinar agora'
+      tapa: 'Tapa Team', store: 'Loja', contact: 'Contato', cta: 'Treinar agora',
+      reviews: 'Avaliações'
     },
     hero: {
       location: 'Godoy Cruz · Mendoza · Argentina',
@@ -390,7 +433,7 @@ const BFC_I18N = {
       cta: 'Conhecer a academia'
     },
     contact: {
-      eyebrow: '08 — Contato',
+      eyebrow: '09 — Contato',
       title: 'Treine com a <b>gente.</b>',
       lead: 'Estamos no coração de Godoy Cruz. Marque suas 2 aulas experimentais gratuitas.',
       addr: 'Balcarce 230', city: 'Godoy Cruz, Mendoza',
@@ -403,6 +446,26 @@ const BFC_I18N = {
       h1: 'Academia', h2: 'Info', h3: 'Siga',
       copyright: '© 2025 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'
+    },
+    rev: {
+      eyebrow: '08 — Avaliações',
+      title: 'O que dizem <b>nossos alunos.</b>',
+      cta: 'DEIXE SUA AVALIAÇÃO',
+      modal: {
+        title: 'SUA AVALIAÇÃO',
+        sub: 'Compartilhe sua experiência no Bonati Fight Club',
+        name: 'Nome completo',
+        namePh: 'Seu nome e sobrenome',
+        disc: 'Modalidade',
+        discPh: 'Escolha uma modalidade',
+        rating: 'Classificação',
+        text: 'Sua avaliação',
+        textPh: 'Conte sua experiência (mín. 20 caracteres)...',
+        send: 'ENVIAR AVALIAÇÃO',
+        successTitle: 'OBRIGADO!',
+        successSub: 'Sua avaliação foi publicada. Quer também deixá-la no Google Maps?',
+        gmaps: 'DEIXAR NO GOOGLE MAPS'
+      }
     }
   }
 };

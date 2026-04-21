@@ -23,6 +23,245 @@
 
 <!-- Phosphor icons via CDN -->
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+
+<style>
+/* =====================================================
+   REVIEWS SECTION
+   ===================================================== */
+.reviews { background: #0A0A0A; position: relative; }
+
+.rev-deco {
+  display: block; width: 56px; height: 3px;
+  background: #C8102E; border-radius: 1px;
+  margin: 1rem 0 2rem;
+}
+
+.rev-slider-wrap {
+  display: flex; align-items: center; gap: 1rem;
+}
+
+.rev-slider { flex: 1; overflow: hidden; min-width: 0; }
+
+.rev-track {
+  display: flex;
+  transition: transform 0.52s cubic-bezier(.25,.46,.45,.94);
+  will-change: transform;
+}
+
+.rev-card { flex-shrink: 0; padding: 0 0.625rem; box-sizing: border-box; }
+
+.rev-card-inner {
+  background: #111;
+  border: 1px solid rgba(200,16,46,0.2);
+  border-radius: 4px;
+  padding: 1.75rem 2rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s, transform 0.3s;
+  display: flex; flex-direction: column;
+  height: 100%;
+}
+.rev-card-inner:hover {
+  border-color: rgba(200,16,46,0.55);
+  transform: translateY(-4px);
+}
+
+.rev-card-head { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
+
+.rev-avatar {
+  width: 52px; height: 52px; min-width: 52px; border-radius: 50%;
+  background: linear-gradient(135deg,#C8102E 0%,#7a0a1c 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.2rem;
+  color: #fff; letter-spacing: 0.05em;
+}
+
+.rev-meta { flex: 1; min-width: 0; }
+
+.rev-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.05rem;
+  letter-spacing: 0.06em; color: #f0ede8; line-height: 1.1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.rev-discipline {
+  display: inline-block;
+  font-family: 'Outfit', sans-serif; font-size: 0.62rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+  color: #C8102E; border: 1px solid rgba(200,16,46,0.4);
+  border-radius: 2px; padding: 0.12rem 0.45rem; margin-top: 0.3rem;
+}
+
+.rev-stars {
+  color: #C8102E; font-size: 1rem;
+  letter-spacing: 0.05em; margin-bottom: 0.875rem;
+}
+
+.rev-text {
+  font-family: 'Outfit', sans-serif; font-size: 0.875rem;
+  color: rgba(240,237,232,0.72); line-height: 1.7;
+  font-style: italic; flex: 1;
+}
+
+.rev-arrow {
+  background: transparent;
+  border: 1px solid rgba(200,16,46,0.35);
+  color: #C8102E; width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+}
+.rev-arrow:hover:not(:disabled) {
+  background: rgba(200,16,46,0.12); border-color: #C8102E;
+}
+.rev-arrow:disabled { opacity: 0.22; pointer-events: none; }
+
+.rev-dots {
+  display: flex; justify-content: center;
+  gap: 0.5rem; margin-top: 1.75rem; flex-wrap: wrap;
+}
+
+.rev-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(200,16,46,0.3); border: none; cursor: pointer;
+  transition: background 0.25s, transform 0.25s; padding: 0;
+}
+.rev-dot.is-active { background: #C8102E; transform: scale(1.4); }
+
+/* =====================================================
+   REVIEWS MODAL
+   ===================================================== */
+.rev-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  z-index: 9000; display: flex; align-items: center; justify-content: center;
+  padding: 1rem; opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.rev-modal-overlay.is-open { opacity: 1; pointer-events: all; }
+
+.rev-modal {
+  background: #111; border: 1px solid rgba(200,16,46,0.3);
+  border-radius: 4px; padding: 2.5rem 2.25rem;
+  width: 100%; max-width: 520px; position: relative;
+  transform: translateY(24px);
+  transition: transform 0.35s cubic-bezier(.25,.46,.45,.94);
+  max-height: 92vh; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: rgba(200,16,46,0.4) transparent;
+}
+.rev-modal-overlay.is-open .rev-modal { transform: translateY(0); }
+
+.rev-modal-close {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  background: transparent; border: none;
+  color: rgba(240,237,232,0.4); font-size: 1.25rem;
+  cursor: pointer; line-height: 1; padding: 0.25rem;
+  transition: color 0.2s; display: flex; align-items: center;
+}
+.rev-modal-close:hover { color: #f0ede8; }
+
+.rev-modal-title {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.2rem;
+  letter-spacing: 0.05em; color: #f0ede8; margin: 0 0 0.25rem; line-height: 1;
+}
+
+.rev-modal-sub {
+  font-family: 'Outfit', sans-serif; font-size: 0.82rem;
+  color: rgba(240,237,232,0.45); margin-bottom: 2rem;
+}
+
+.rev-form-group { margin-bottom: 1.25rem; }
+
+.rev-form-group label {
+  display: block; font-family: 'Outfit', sans-serif; font-size: 0.72rem;
+  font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+  color: rgba(240,237,232,0.55); margin-bottom: 0.4rem;
+}
+
+.rev-form-group input,
+.rev-form-group select,
+.rev-form-group textarea {
+  width: 100%; padding: 0.75rem 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 3px;
+  color: #f0ede8; font-family: 'Outfit', sans-serif; font-size: 0.9rem;
+  transition: border-color 0.2s, background 0.2s; box-sizing: border-box;
+}
+.rev-form-group input::placeholder,
+.rev-form-group textarea::placeholder { color: rgba(240,237,232,0.25); }
+.rev-form-group input:focus,
+.rev-form-group select:focus,
+.rev-form-group textarea:focus {
+  outline: none; border-color: rgba(200,16,46,0.65);
+  background: rgba(255,255,255,0.06);
+}
+
+.rev-form-group select {
+  -webkit-appearance: none; appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8102E' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 1rem center;
+  padding-right: 2.5rem;
+}
+.rev-form-group select option { background: #1a1a1a; color: #f0ede8; }
+.rev-form-group textarea { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+.rev-char-count {
+  font-family: 'Outfit', sans-serif; font-size: 0.68rem;
+  color: rgba(240,237,232,0.35); text-align: right;
+  margin-top: 0.3rem; transition: color 0.2s;
+}
+.rev-char-count.is-near { color: #C8102E; }
+
+.rev-form-group.has-error input,
+.rev-form-group.has-error select,
+.rev-form-group.has-error textarea { border-color: rgba(200,16,46,0.7); }
+.rev-form-group.has-error .rev-star-input {
+  border: 1px solid rgba(200,16,46,0.7); border-radius: 3px; padding: 0.3rem;
+}
+
+.rev-error-msg {
+  display: block; font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem; color: #C8102E; margin-top: 0.3rem;
+}
+
+.rev-star-input { display: flex; gap: 0.25rem; padding: 0.35rem 0; }
+
+.rev-star-btn {
+  background: transparent; border: none; font-size: 1.75rem;
+  cursor: pointer; color: rgba(240,237,232,0.18);
+  transition: color 0.12s, transform 0.12s;
+  padding: 0 0.1rem; line-height: 1;
+}
+.rev-star-btn.is-on { color: #C8102E; }
+.rev-star-btn:hover { transform: scale(1.2); }
+
+.rev-form-success { text-align: center; padding: 1rem 0 0.5rem; }
+
+.rev-success-icon {
+  font-size: 3.5rem; color: #C8102E;
+  display: block; margin-bottom: 1rem;
+}
+
+.rev-form-success h3 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem;
+  letter-spacing: 0.05em; color: #f0ede8; margin-bottom: 0.5rem;
+}
+
+.rev-form-success p {
+  font-family: 'Outfit', sans-serif; font-size: 0.875rem;
+  color: rgba(240,237,232,0.55); line-height: 1.6;
+}
+
+.rev-gmaps-btn {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  margin-top: 1.75rem; padding: 0.875rem 1.75rem;
+  background: #C8102E; color: #fff;
+  font-family: 'Bebas Neue', sans-serif; font-size: 1rem;
+  letter-spacing: 0.08em; border-radius: 3px;
+  text-decoration: none; transition: opacity 0.2s;
+}
+.rev-gmaps-btn:hover { opacity: 0.85; }
+</style>
 </head>
 <body>
 
@@ -43,6 +282,7 @@
       <a href="#coaches"   data-i18n="nav.coaches">Profesores</a>
       <a href="#tapa"      data-i18n="nav.tapa">Tapa Team</a>
       <a href="store/"     data-i18n="nav.store">Tienda</a>
+      <a href="#reviews"   data-i18n="nav.reviews">Reseñas</a>
       <a href="#contact"   data-i18n="nav.contact">Contacto</a>
     </nav>
 
@@ -411,12 +651,107 @@
 </section>
 
 <!-- =========================
+     REVIEWS
+     ========================= -->
+<section class="section reviews" id="reviews">
+  <div class="container">
+    <header class="section-head reveal">
+      <span class="eyebrow"><span data-i18n="rev.eyebrow">08 — Reseñas</span></span>
+      <h2 class="hl" data-i18n-html="rev.title">Lo que dicen <b>nuestros alumnos.</b></h2>
+      <div class="rev-deco" aria-hidden="true"></div>
+    </header>
+
+    <div class="rev-slider-wrap reveal">
+      <button class="rev-arrow rev-arrow--prev" id="revPrev" aria-label="Anterior" type="button">
+        <i class="ph ph-arrow-left" aria-hidden="true"></i>
+      </button>
+      <div class="rev-slider" id="revSlider">
+        <div class="rev-track" id="revTrack"></div>
+      </div>
+      <button class="rev-arrow rev-arrow--next" id="revNext" aria-label="Siguiente" type="button">
+        <i class="ph ph-arrow-right" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="rev-dots" id="revDots"></div>
+
+    <div style="display:flex;justify-content:center;margin-top:2.5rem;">
+      <button class="btn" id="revModalOpen" type="button">
+        <i class="ph ph-star" aria-hidden="true"></i>
+        <span data-i18n="rev.cta">DEJÁ TU RESEÑA</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS MODAL -->
+<div class="rev-modal-overlay" id="revModalOverlay" role="dialog" aria-modal="true" aria-labelledby="revModalHeading">
+  <div class="rev-modal">
+    <button class="rev-modal-close" id="revModalClose" type="button" aria-label="Cerrar">
+      <i class="ph ph-x" aria-hidden="true"></i>
+    </button>
+    <div class="rev-deco" style="margin:0 0 1.25rem" aria-hidden="true"></div>
+    <h2 class="rev-modal-title" id="revModalHeading" data-i18n="rev.modal.title">TU RESEÑA</h2>
+    <p class="rev-modal-sub" data-i18n="rev.modal.sub">Compartí tu experiencia en Bonati Fight Club</p>
+
+    <form id="revForm" novalidate>
+      <div class="rev-form-group">
+        <label for="revName" data-i18n="rev.modal.name">Nombre completo</label>
+        <input type="text" id="revName" name="name" maxlength="60" autocomplete="name"
+               data-i18n-placeholder="rev.modal.namePh" placeholder="Tu nombre y apellido" />
+      </div>
+      <div class="rev-form-group">
+        <label for="revDisc" data-i18n="rev.modal.disc">Disciplina</label>
+        <select id="revDisc" name="discipline">
+          <option value="" data-i18n="rev.modal.discPh">Elegí una disciplina</option>
+          <option value="K1 Kickboxing">K1 Kickboxing</option>
+          <option value="Muay Thai">Muay Thai</option>
+          <option value="MMA &amp; Wrestling">MMA &amp; Wrestling</option>
+        </select>
+      </div>
+      <div class="rev-form-group">
+        <label data-i18n="rev.modal.rating">Calificación</label>
+        <div class="rev-star-input" role="group" aria-label="Calificación">
+          <button type="button" class="rev-star-btn" data-star="1" aria-label="1 estrella">★</button>
+          <button type="button" class="rev-star-btn" data-star="2" aria-label="2 estrellas">★</button>
+          <button type="button" class="rev-star-btn" data-star="3" aria-label="3 estrellas">★</button>
+          <button type="button" class="rev-star-btn" data-star="4" aria-label="4 estrellas">★</button>
+          <button type="button" class="rev-star-btn" data-star="5" aria-label="5 estrellas">★</button>
+        </div>
+      </div>
+      <div class="rev-form-group">
+        <label for="revText" data-i18n="rev.modal.text">Tu reseña</label>
+        <textarea id="revText" name="text" maxlength="200" rows="4"
+                  data-i18n-placeholder="rev.modal.textPh"
+                  placeholder="Contá tu experiencia (mín. 20 caracteres)..."></textarea>
+        <div class="rev-char-count" id="revCharCount">0/200</div>
+      </div>
+      <button class="btn" type="submit" style="width:100%;justify-content:center;">
+        <span data-i18n="rev.modal.send">ENVIAR RESEÑA</span>
+        <i class="ph ph-paper-plane-right btn-arrow" aria-hidden="true"></i>
+      </button>
+    </form>
+
+    <div id="revSuccess" style="display:none;" class="rev-form-success">
+      <i class="ph ph-check-circle rev-success-icon" aria-hidden="true"></i>
+      <h3 data-i18n="rev.modal.successTitle">¡GRACIAS!</h3>
+      <p data-i18n="rev.modal.successSub">Tu reseña fue agregada. ¿Querés también publicarla en Google Maps?</p>
+      <a href="https://www.google.com/maps/search/Bonati+Fight+Club+Balcarce+230+Godoy+Cruz+Mendoza"
+         target="_blank" rel="noopener" class="rev-gmaps-btn">
+        <i class="ph-fill ph-map-pin" aria-hidden="true"></i>
+        <span data-i18n="rev.modal.gmaps">DEJAR EN GOOGLE MAPS</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- =========================
      CONTACT
      ========================= -->
 <section class="section contact" id="contact">
   <div class="container">
     <header class="section-head reveal">
-      <span class="eyebrow"><span data-i18n="contact.eyebrow">08 — Contacto</span></span>
+      <span class="eyebrow"><span data-i18n="contact.eyebrow">09 — Contacto</span></span>
       <h2 class="hl" data-i18n-html="contact.title">Entrená con <b>nosotros.</b></h2>
       <p data-i18n="contact.lead">Estamos en el corazón de Godoy Cruz.</p>
     </header>
@@ -529,5 +864,233 @@
 <!-- Scripts -->
 <script src="assets/js/i18n.js"></script>
 <script src="assets/js/main.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var GMAPS_URL = 'https://www.google.com/maps/search/Bonati+Fight+Club+Balcarce+230+Godoy+Cruz+Mendoza';
+  var STORAGE_KEY = 'bfc_reviews_v1';
+
+  var INITIAL = [
+    { name: 'Fernando Vater',     disc: 'K1 Kickboxing',  rating: 5, text: 'Excelente atención, totalmente limpio y con constantes innovaciones y mejoras, clases personalizadas de alto nivel, el profe Walter Bonati un apasionado y 100% dedicado a sus alumnos.' },
+    { name: 'Fernando Tabarelli', disc: 'Muay Thai',       rating: 5, text: 'Muy profesionales, se preocupan que cada alumno logre lo que se propuso al ingresar. Muy buen ambiente.' },
+    { name: 'Pablo Badui',        disc: 'MMA & Wrestling', rating: 5, text: 'Más que una academia una familia de luchadores, desde los nuevos hasta los profesionales entrenando a la par en el mismo tatami. El verdadero espíritu del guerrero.' },
+    { name: 'Francisco Farjo',    disc: 'K1 Kickboxing',  rating: 5, text: 'Excelente academia, muy buena ubicación y un espacio amplio como pocas academias, además de muy buena predisposición del profesor y un ambiente de compañerismo muy presente la verdad que 10/10.' }
+  ];
+
+  function getInitials(n) {
+    return n.trim().split(/\s+/).map(function (w) { return w[0] || ''; }).join('').slice(0, 2).toUpperCase();
+  }
+  function starsHTML(n) { return '★'.repeat(n) + '☆'.repeat(5 - n); }
+  function loadStored() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function saveReview(r) {
+    try { var l = loadStored(); l.push(r); localStorage.setItem(STORAGE_KEY, JSON.stringify(l)); } catch (e) {}
+  }
+  function allReviews() { return INITIAL.concat(loadStored()); }
+
+  function makeCard(r) {
+    var d = document.createElement('div');
+    d.className = 'rev-card';
+    d.innerHTML =
+      '<div class="rev-card-inner">' +
+        '<div class="rev-card-head">' +
+          '<div class="rev-avatar">' + getInitials(r.name) + '</div>' +
+          '<div class="rev-meta">' +
+            '<div class="rev-name">' + r.name + '</div>' +
+            '<span class="rev-discipline">' + r.disc + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="rev-stars">' + starsHTML(r.rating) + '</div>' +
+        '<p class="rev-text">“' + r.text + '”</p>' +
+      '</div>';
+    return d;
+  }
+
+  /* ---- SLIDER ---- */
+  var idx = 0;
+  var reviews = [];
+  var track, dotsEl, prevBtn, nextBtn, sliderEl;
+
+  function visCount() {
+    return window.innerWidth < 768 ? 1 : window.innerWidth < 1100 ? 2 : 3;
+  }
+  function totalPages() { return Math.max(1, reviews.length - visCount() + 1); }
+
+  function renderDots() {
+    if (!dotsEl) return;
+    dotsEl.innerHTML = '';
+    var pg = totalPages();
+    for (var i = 0; i < pg; i++) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'rev-dot' + (i === idx ? ' is-active' : '');
+      b.setAttribute('aria-label', 'Ir a reseña ' + (i + 1));
+      (function (n) { b.addEventListener('click', function () { go(n); }); })(i);
+      dotsEl.appendChild(b);
+    }
+  }
+
+  function applyTransform() {
+    if (!sliderEl || !track) return;
+    var vc = visCount();
+    var w = sliderEl.offsetWidth / vc;
+    track.querySelectorAll('.rev-card').forEach(function (c) { c.style.width = w + 'px'; });
+    track.style.transform = 'translateX(-' + (idx * w) + 'px)';
+    if (prevBtn) prevBtn.disabled = idx <= 0;
+    if (nextBtn) nextBtn.disabled = idx >= totalPages() - 1;
+    renderDots();
+  }
+
+  function go(n) {
+    idx = Math.max(0, Math.min(n, totalPages() - 1));
+    applyTransform();
+  }
+
+  function rebuildTrack() {
+    if (!track) return;
+    reviews = allReviews();
+    track.innerHTML = '';
+    reviews.forEach(function (r) { track.appendChild(makeCard(r)); });
+    idx = Math.min(idx, Math.max(0, totalPages() - 1));
+    applyTransform();
+  }
+
+  /* ---- SWIPE ---- */
+  function initSwipe() {
+    if (!sliderEl) return;
+    var sx = 0;
+    sliderEl.addEventListener('touchstart', function (e) { sx = e.touches[0].clientX; }, { passive: true });
+    sliderEl.addEventListener('touchend', function (e) {
+      var dx = sx - e.changedTouches[0].clientX;
+      if (Math.abs(dx) > 40) go(dx > 0 ? idx + 1 : idx - 1);
+    }, { passive: true });
+  }
+
+  /* ---- MODAL ---- */
+  var selRating = 0;
+
+  function initModal() {
+    var openBtn   = document.getElementById('revModalOpen');
+    var overlay   = document.getElementById('revModalOverlay');
+    var closeBtn  = document.getElementById('revModalClose');
+    var form      = document.getElementById('revForm');
+    var nameIn    = document.getElementById('revName');
+    var discIn    = document.getElementById('revDisc');
+    var textIn    = document.getElementById('revText');
+    var charCount = document.getElementById('revCharCount');
+    var success   = document.getElementById('revSuccess');
+    var starBtns  = document.querySelectorAll('.rev-star-btn');
+    var starWrap  = document.querySelector('.rev-star-input');
+
+    if (!openBtn || !overlay) return;
+
+    function openModal()  { overlay.classList.add('is-open');    document.body.style.overflow = 'hidden'; }
+    function closeModal() { overlay.classList.remove('is-open'); document.body.style.overflow = ''; }
+
+    openBtn.addEventListener('click', openModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+
+    /* Stars */
+    starBtns.forEach(function (btn, i) {
+      btn.addEventListener('click', function () {
+        selRating = i + 1;
+        starBtns.forEach(function (b, j) { b.classList.toggle('is-on', j < selRating); });
+      });
+      btn.addEventListener('mouseenter', function () {
+        starBtns.forEach(function (b, j) { b.classList.toggle('is-on', j <= i); });
+      });
+    });
+    if (starWrap) starWrap.addEventListener('mouseleave', function () {
+      starBtns.forEach(function (b, j) { b.classList.toggle('is-on', j < selRating); });
+    });
+
+    /* Char counter */
+    if (textIn && charCount) {
+      textIn.addEventListener('input', function () {
+        var l = textIn.value.length;
+        charCount.textContent = l + '/200';
+        charCount.classList.toggle('is-near', l > 180);
+      });
+    }
+
+    /* Submit */
+    if (form) form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      form.querySelectorAll('.rev-error-msg').forEach(function (el) { el.remove(); });
+      form.querySelectorAll('.has-error').forEach(function (el) { el.classList.remove('has-error'); });
+
+      var lang = (window.BFC && window.BFC.i18n) ? window.BFC.i18n.get() : 'es';
+      var ERRS = {
+        es: { name: 'Ingresá tu nombre.', disc: 'Elegí una disciplina.', rating: 'Seleccioná una calificación.', short: 'Mínimo 20 caracteres en la reseña.' },
+        en: { name: 'Enter your name.',   disc: 'Choose a discipline.',  rating: 'Select a rating.',              short: 'Minimum 20 characters required.' },
+        pt: { name: 'Digite seu nome.',   disc: 'Escolha uma modalidade.', rating: 'Selecione uma classificação.', short: 'Mínimo 20 caracteres na avaliação.' }
+      };
+      var m = ERRS[lang] || ERRS.es;
+      var ok = true;
+
+      function addErr(el, msg) {
+        var g = el ? el.closest('.rev-form-group') : null;
+        if (g) {
+          g.classList.add('has-error');
+          var sp = document.createElement('span');
+          sp.className = 'rev-error-msg'; sp.textContent = msg;
+          g.appendChild(sp);
+        }
+        ok = false;
+      }
+
+      if (!nameIn.value.trim())               addErr(nameIn, m.name);
+      if (!discIn.value)                      addErr(discIn, m.disc);
+      if (!selRating) {
+        var sg = starWrap ? starWrap.closest('.rev-form-group') : null;
+        if (sg) {
+          sg.classList.add('has-error');
+          var sp2 = document.createElement('span');
+          sp2.className = 'rev-error-msg'; sp2.textContent = m.rating;
+          sg.appendChild(sp2);
+        }
+        ok = false;
+      }
+      if (!textIn.value.trim() || textIn.value.trim().length < 20) addErr(textIn, m.short);
+
+      if (!ok) return;
+
+      saveReview({ name: nameIn.value.trim(), disc: discIn.value, rating: selRating, text: textIn.value.trim() });
+      rebuildTrack();
+      go(reviews.length - visCount());
+
+      form.style.display = 'none';
+      if (success) success.style.display = 'block';
+
+      /* Reset for next open */
+      selRating = 0; form.reset();
+      starBtns.forEach(function (b) { b.classList.remove('is-on'); });
+      if (charCount) charCount.textContent = '0/200';
+    });
+  }
+
+  /* ---- BOOT ---- */
+  document.addEventListener('DOMContentLoaded', function () {
+    track    = document.getElementById('revTrack');
+    dotsEl   = document.getElementById('revDots');
+    prevBtn  = document.getElementById('revPrev');
+    nextBtn  = document.getElementById('revNext');
+    sliderEl = document.getElementById('revSlider');
+
+    if (prevBtn) prevBtn.addEventListener('click', function () { go(idx - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function () { go(idx + 1); });
+
+    rebuildTrack();
+    initSwipe();
+    initModal();
+
+    window.addEventListener('resize', applyTransform);
+  });
+}());
+</script>
 </body>
 </html>
