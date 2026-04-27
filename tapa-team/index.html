@@ -6,7 +6,10 @@
 <meta name="theme-color" content="#0A0A0A" />
 <title>Tapa Team · MMA &amp; Wrestling — Bonati Fight Club</title>
 <meta name="description" content="Tapa Team. Equipo de MMA y Wrestling dentro de Bonati Fight Club en Godoy Cruz, Mendoza." />
-<link rel="icon" href="../assets/images/logo-original.jpg" type="image/svg+xml" />
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-tt-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-tt-16.png">
+<link rel="apple-touch-icon" href="../assets/images/favicon-tt-apple-touch.png">
+<link rel="icon" href="../assets/images/logo-tapa-team.png" type="image/png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -133,6 +136,105 @@
   }
 
   .gold .btn.nav-cta { background: var(--bfc-gold); color: var(--bfc-black); border-color: var(--bfc-gold); }
+  .navbar-tapa-logo { height: 36px; width: auto; object-fit: contain; }
+
+  /* Squad full-width section */
+  .tt-squad {
+    position: relative;
+    min-height: 70vh;
+    overflow: hidden;
+    isolation: isolate;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+  }
+  .tt-squad-bg {
+    position: absolute; inset: 0; z-index: -2;
+    background-image: url('../assets/images/tapa-team-squad.jpg');
+    background-size: cover;
+    background-position: center top;
+    filter: brightness(0.4) contrast(1.1);
+    transform: scale(1.06);
+    transition: transform 8s var(--ease-out-expo);
+  }
+  .tt-squad.in-view .tt-squad-bg { transform: scale(1); }
+  .tt-squad::before {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(180deg, rgba(10,10,10,0.35) 0%, rgba(10,10,10,0.65) 100%);
+  }
+  .tt-squad-inner { padding: clamp(4rem, 8vw, 8rem) var(--container-pad); }
+  .tt-squad-inner h2 {
+    font-family: var(--ff-display);
+    font-size: clamp(5rem, 14vw, 12rem);
+    color: var(--bfc-bone);
+    letter-spacing: 0.04em;
+    line-height: 0.88;
+  }
+  .tt-squad-inner h2 span { color: var(--bfc-gold); }
+  .tt-squad-sub {
+    font-family: var(--ff-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-top: 1.25rem;
+  }
+
+  /* New photo gallery */
+  .tt-gallery { background: var(--bfc-black); padding: var(--section-pad-y) 0; }
+  .tt-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+  .tt-gallery-item {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .tt-gallery-item.in-view { opacity: 1; transform: translateY(0); }
+  .tt-gallery-item:nth-child(2) { transition-delay: 0.1s; }
+  .tt-gallery-item:nth-child(3) { transition-delay: 0.2s; }
+  .tt-gallery-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+    display: block;
+  }
+  .tt-gallery-item:hover img { transform: scale(1.04); }
+  .tt-gi-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.88) 0%, transparent 55%);
+    opacity: 0; transition: opacity 0.35s ease;
+    display: flex; align-items: flex-end;
+    padding: 1.25rem;
+  }
+  .tt-gallery-item:hover .tt-gi-overlay { opacity: 1; }
+  .tt-gi-text { display: flex; flex-direction: column; gap: 0.3rem; }
+  .tt-gi-title {
+    font-family: var(--ff-display);
+    font-size: var(--fs-lg);
+    color: var(--bfc-bone);
+    letter-spacing: 0.06em;
+    line-height: 1;
+  }
+  .tt-badge {
+    display: inline-block;
+    padding: 0.2rem 0.55rem;
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .tt-badge.training  { background: rgba(255,255,255,0.18); color: #fff; }
+  .tt-badge.tournament{ background: rgba(200,16,46,0.9); color: #fff; }
+
+  @media (max-width: 768px) { .tt-gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 480px) { .tt-gallery-grid { grid-template-columns: 1fr; } }
 
   @media (max-width: 900px) {
     .pillars-grid { grid-template-columns: 1fr; }
@@ -147,7 +249,9 @@
   <div class="nav-inner">
     <a href="../" class="nav-brand">
       <img src="../assets/images/logo-original.jpg" class="logo" alt="BFC" />
-      <span class="brand-text">BONATI <b style="color:var(--bfc-gold)">TAPA</b></span>
+      <img src="../assets/images/logo-tapa-team.png" alt="Tapa Team" class="navbar-tapa-logo"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline'" />
+      <span class="brand-text" style="font-family:var(--ff-display);color:var(--bfc-gold);letter-spacing:0.12em;font-size:clamp(0.9rem,2vw,1.25rem);display:none">TAPA TEAM</span>
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="../#home"     data-i18n="nav.home">Inicio</a>
@@ -268,6 +372,54 @@
   </div>
 </section>
 
+<!-- SQUAD PHOTO FULLWIDTH -->
+<section class="tt-squad reveal" id="squad">
+  <div class="tt-squad-bg"></div>
+  <div class="tt-squad-inner">
+    <h2>TAPA <span>TEAM</span></h2>
+    <p class="tt-squad-sub">MMA &amp; Wrestling · Godoy Cruz, Mendoza</p>
+  </div>
+</section>
+
+<!-- GALLERY — nuevas fotos del equipo -->
+<section class="tt-gallery">
+  <div class="container">
+    <header class="section-head reveal gold">
+      <span class="eyebrow gold">El equipo en acción</span>
+      <h2 class="hl">Entrenamiento. <b style="color:var(--bfc-gold)">Competencia.</b></h2>
+    </header>
+    <div class="tt-gallery-grid" id="ttGalleryGrid">
+      <div class="tt-gallery-item">
+        <img src="../assets/images/tapa-entrenamiento-01.jpg" alt="Entrenamiento Tapa Team" loading="lazy" />
+        <div class="tt-gi-overlay">
+          <div class="tt-gi-text">
+            <span class="tt-gi-title">ENTRENAMIENTO</span>
+            <span class="tt-badge training">Entrenamiento</span>
+          </div>
+        </div>
+      </div>
+      <div class="tt-gallery-item">
+        <img src="../assets/images/tapa-entrenamiento-02.jpg" alt="Preparación Tapa Team" loading="lazy" />
+        <div class="tt-gi-overlay">
+          <div class="tt-gi-text">
+            <span class="tt-gi-title">PREPARACIÓN</span>
+            <span class="tt-badge training">Entrenamiento</span>
+          </div>
+        </div>
+      </div>
+      <div class="tt-gallery-item">
+        <img src="../assets/images/tapa-competencia-01.jpg" alt="Tapa Team en competencia" loading="lazy" />
+        <div class="tt-gi-overlay">
+          <div class="tt-gi-text">
+            <span class="tt-gi-title">EN COMPETENCIA</span>
+            <span class="tt-badge tournament">Torneo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- CTA STRIP -->
 <section class="section" style="background:linear-gradient(135deg, #0A0A0A 0%, #1A1A1A 100%); border-top: var(--border-gold); border-bottom: var(--border-gold);">
   <div class="container" style="text-align:center;max-width:800px;margin:0 auto;">
@@ -328,5 +480,15 @@
 
 <script src="../assets/js/i18n.js"></script>
 <script src="../assets/js/main.js"></script>
+<script>
+(function () {
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in-view'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.tt-gallery-item').forEach(function (el) { io.observe(el); });
+})();
+</script>
 </body>
 </html>
