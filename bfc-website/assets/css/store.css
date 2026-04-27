@@ -2,6 +2,13 @@
    BFC STORE — STYLES
    ===================================================== */
 
+/* MOD 4 — Nombre completo en todas las resoluciones */
+.store-brand-full {
+  font-size: clamp(0.6rem, 1.6vw, 1.25rem) !important;
+  display: block !important;
+  letter-spacing: 0.1em;
+}
+
 .store-hero {
   position: relative;
   padding: calc(var(--nav-h) + 6rem) var(--container-pad) 5rem;

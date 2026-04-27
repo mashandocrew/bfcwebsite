@@ -121,7 +121,7 @@ const BFC_I18N = {
       lead: 'Clases de lunes a viernes para todos los niveles. Sin horario? Escribinos y armamos uno.',
       cta: 'Consultar por clases',
       walter: { coach: 'Walter Bonati', days: 'Lun a Vie' },
-      gaston: { coach: 'Gastón Silva',  days: 'Lun · Mar · Jue' },
+      gaston: { coach: 'Gastón Silva', days1: 'LUN · MAR · MIÉ · JUE · VIE', days2: 'LUN · MAR · JUE' },
       disc1: 'K1 / Muay Thai',
       disc2: 'Técnica / Sparring'
     },
@@ -135,20 +135,33 @@ const BFC_I18N = {
       cta1: 'WhatsApp MMA',
       cta2: 'Ver página completa'
     },
-    gal: {
-      eyebrow: '07 — Galería',
-      title: 'Dentro del <b>ring.</b>',
-      items: [
-        'Alumnos entrenando',
-        'Torneo nacional',
-        'Campeonato sudamericano',
-        'Gimnasio · Tatami principal',
-        'Tapa Team MMA',
-        'Victoria en ring',
-        'Sparring técnico',
-        'Equipo BFC',
-        'Desde adentro'
-      ]
+    comm: {
+      eyebrow: '07 — Comunidad',
+      title: 'Comunidad <b>BFC.</b>',
+      lead: 'Las fotos de nuestra gente. El gimnasio visto desde adentro.',
+      filterAll:       'Todos',
+      filterTraining:  'Entrenamientos',
+      filterTournaments: 'Torneos',
+      filterTeam:      'Equipo',
+      empty:           'Sé el primero en subir una foto de la comunidad.',
+      uploadBtn:       'Subir mi foto',
+      modal: {
+        title:            'Subir mi foto',
+        drop:             'Arrastrá tu foto aquí o hacé clic para seleccionar',
+        authorPlaceholder:'Tu nombre (opcional)',
+        submit:           'Enviar foto',
+        note:             'Tu foto será revisada antes de publicarse.'
+      }
+    },
+    rev: {
+      eyebrow:    '08 — Reseñas',
+      title:      'Lo que dice <b>nuestra comunidad.</b>',
+      lead:       'Opiniones reales de nuestros alumnos.',
+      formTitle:  'Dejá tu reseña',
+      namePlaceholder: 'Tu nombre',
+      textPlaceholder: '¿Qué te pareció el gimnasio?',
+      submit:     'Enviar reseña',
+      googleBtn:  'Dejar reseña en Google →'
     },
     spot: {
       title: 'La academia. <b>Sin filtros.</b>',
@@ -156,7 +169,7 @@ const BFC_I18N = {
       cta: 'Conocer la academia'
     },
     contact: {
-      eyebrow: '08 — Contacto',
+      eyebrow: '09 — Contacto',
       title: 'Entrená con <b>nosotros.</b>',
       lead: 'Estamos en el corazón de Godoy Cruz. Reservá 2 clases de prueba gratuitas.',
       addr: 'Balcarce 230',
@@ -165,10 +178,16 @@ const BFC_I18N = {
       tapa: 'Tapa Team · MMA / Wrestling',
       ig: 'Instagram oficial',
       formName: 'Tu nombre',
-      formMsg: 'Tu mensaje',
-      formSend: 'Enviar por WhatsApp',
       formPlaceholderName: 'Nombre y apellido',
-      formPlaceholderMsg: 'Contame qué clase te interesa'
+      formAge: 'Tu edad',
+      formAgePlaceholder: 'Ej: 25',
+      formModality: 'Modalidad que te interesa',
+      modK1: 'K1 / Muay Thai',
+      modMMA: 'MMA / Wrestling',
+      formTime: 'Franja horaria',
+      timeMorning: 'Mañana',
+      timeAfternoon: 'Tarde',
+      formSend: 'Enviar por WhatsApp'
     },
     footer: {
       tag: 'Desde 2010 formando atletas de élite en el corazón de Godoy Cruz, Mendoza.',
@@ -254,7 +273,7 @@ const BFC_I18N = {
       lead: 'Classes Monday to Friday for all levels. No slot works? Write us and we build one.',
       cta: 'Ask about classes',
       walter: { coach: 'Walter Bonati', days: 'Mon to Fri' },
-      gaston: { coach: 'Gastón Silva',  days: 'Mon · Tue · Thu' },
+      gaston: { coach: 'Gastón Silva', days1: 'MON · TUE · WED · THU · FRI', days2: 'MON · TUE · THU' },
       disc1: 'K1 / Muay Thai', disc2: 'Technique / Sparring'
     },
     tapa: {
@@ -266,10 +285,33 @@ const BFC_I18N = {
       s3: 'Disciplines', s3v: 'MMA · Wrestling · Submission',
       cta1: 'WhatsApp MMA', cta2: 'Full page'
     },
-    gal: {
-      eyebrow: '07 — Gallery',
-      title: 'Inside the <b>ring.</b>',
-      items: ['Students training','National tournament','South American championship','Gym · Main mat','Tapa Team MMA','Ring victory','Technical sparring','BFC crew','From inside']
+    comm: {
+      eyebrow: '07 — Community',
+      title: 'BFC <b>Community.</b>',
+      lead: 'Photos from our people. The gym seen from the inside.',
+      filterAll:         'All',
+      filterTraining:    'Training',
+      filterTournaments: 'Tournaments',
+      filterTeam:        'Team',
+      empty:             'Be the first to upload a community photo.',
+      uploadBtn:         'Upload my photo',
+      modal: {
+        title:            'Upload my photo',
+        drop:             'Drag your photo here or click to select',
+        authorPlaceholder:'Your name (optional)',
+        submit:           'Send photo',
+        note:             'Your photo will be reviewed before publishing.'
+      }
+    },
+    rev: {
+      eyebrow:    '08 — Reviews',
+      title:      'What our <b>community says.</b>',
+      lead:       'Real opinions from our students.',
+      formTitle:  'Leave a review',
+      namePlaceholder: 'Your name',
+      textPlaceholder: 'What did you think of the gym?',
+      submit:     'Send review',
+      googleBtn:  'Leave a Google review →'
     },
     spot: {
       title: 'The academy. <b>No filters.</b>',
@@ -277,13 +319,18 @@ const BFC_I18N = {
       cta: 'Meet the academy'
     },
     contact: {
-      eyebrow: '08 — Contact',
+      eyebrow: '09 — Contact',
       title: 'Train with <b>us.</b>',
       lead: 'We are in the heart of Godoy Cruz. Book your 2 free trial classes.',
       addr: '230 Balcarce St.', city: 'Godoy Cruz, Mendoza',
       walter: 'Walter · K1 / Muay Thai', tapa: 'Tapa Team · MMA / Wrestling', ig: 'Official Instagram',
-      formName: 'Your name', formMsg: 'Your message', formSend: 'Send via WhatsApp',
-      formPlaceholderName: 'Full name', formPlaceholderMsg: 'Tell me which class you are interested in'
+      formName: 'Your name', formPlaceholderName: 'Full name',
+      formAge: 'Your age', formAgePlaceholder: 'E.g. 25',
+      formModality: 'Discipline you are interested in',
+      modK1: 'K1 / Muay Thai', modMMA: 'MMA / Wrestling',
+      formTime: 'Preferred time slot',
+      timeMorning: 'Morning', timeAfternoon: 'Afternoon',
+      formSend: 'Send via WhatsApp'
     },
     footer: {
       tag: 'Training elite athletes in the heart of Godoy Cruz, Mendoza since 2010.',
@@ -367,7 +414,7 @@ const BFC_I18N = {
       lead: 'Aulas de segunda a sexta para todos os níveis. Sem horário? Escreva e a gente monta.',
       cta: 'Consultar aulas',
       walter: { coach: 'Walter Bonati', days: 'Seg a Sex' },
-      gaston: { coach: 'Gastón Silva',  days: 'Seg · Ter · Qui' },
+      gaston: { coach: 'Gastón Silva', days1: 'SEG · TER · QUA · QUI · SEX', days2: 'SEG · TER · QUI' },
       disc1: 'K1 / Muay Thai', disc2: 'Técnica / Sparring'
     },
     tapa: {
@@ -379,10 +426,33 @@ const BFC_I18N = {
       s3: 'Modalidades', s3v: 'MMA · Wrestling · Submission',
       cta1: 'WhatsApp MMA', cta2: 'Página completa'
     },
-    gal: {
-      eyebrow: '07 — Galeria',
-      title: 'Dentro do <b>ringue.</b>',
-      items: ['Alunos treinando','Torneio nacional','Campeonato sul-americano','Academia · Tatame principal','Tapa Team MMA','Vitória no ringue','Sparring técnico','Equipe BFC','Por dentro']
+    comm: {
+      eyebrow: '07 — Comunidade',
+      title: 'Comunidade <b>BFC.</b>',
+      lead: 'Fotos da nossa turma. A academia vista por dentro.',
+      filterAll:         'Todos',
+      filterTraining:    'Treinos',
+      filterTournaments: 'Torneios',
+      filterTeam:        'Equipe',
+      empty:             'Seja o primeiro a enviar uma foto da comunidade.',
+      uploadBtn:         'Enviar minha foto',
+      modal: {
+        title:            'Enviar minha foto',
+        drop:             'Arraste sua foto aqui ou clique para selecionar',
+        authorPlaceholder:'Seu nome (opcional)',
+        submit:           'Enviar foto',
+        note:             'Sua foto será revisada antes de ser publicada.'
+      }
+    },
+    rev: {
+      eyebrow:    '08 — Avaliações',
+      title:      'O que diz <b>nossa comunidade.</b>',
+      lead:       'Opiniões reais dos nossos alunos.',
+      formTitle:  'Deixe sua avaliação',
+      namePlaceholder: 'Seu nome',
+      textPlaceholder: 'O que você achou da academia?',
+      submit:     'Enviar avaliação',
+      googleBtn:  'Avaliar no Google →'
     },
     spot: {
       title: 'A academia. <b>Sem filtros.</b>',
@@ -390,13 +460,18 @@ const BFC_I18N = {
       cta: 'Conhecer a academia'
     },
     contact: {
-      eyebrow: '08 — Contato',
+      eyebrow: '09 — Contato',
       title: 'Treine com a <b>gente.</b>',
       lead: 'Estamos no coração de Godoy Cruz. Marque suas 2 aulas experimentais gratuitas.',
       addr: 'Balcarce 230', city: 'Godoy Cruz, Mendoza',
       walter: 'Walter · K1 / Muay Thai', tapa: 'Tapa Team · MMA / Wrestling', ig: 'Instagram oficial',
-      formName: 'Seu nome', formMsg: 'Sua mensagem', formSend: 'Enviar via WhatsApp',
-      formPlaceholderName: 'Nome e sobrenome', formPlaceholderMsg: 'Conte qual aula você quer'
+      formName: 'Seu nome', formPlaceholderName: 'Nome e sobrenome',
+      formAge: 'Sua idade', formAgePlaceholder: 'Ex: 25',
+      formModality: 'Modalidade de interesse',
+      modK1: 'K1 / Muay Thai', modMMA: 'MMA / Wrestling',
+      formTime: 'Faixa de horário',
+      timeMorning: 'Manhã', timeAfternoon: 'Tarde',
+      formSend: 'Enviar pelo WhatsApp'
     },
     footer: {
       tag: 'Formando atletas de elite no coração de Godoy Cruz, Mendoza desde 2010.',
