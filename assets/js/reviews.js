@@ -49,6 +49,30 @@
   var sb            = null;
   var selectedRating = 0;
 
+  /* ─── SEED REVIEWS ─────────────────────────────────
+     Inserta las reseñas fundacionales si aún no existen. */
+  var SEED_REVIEWS = [
+    { author_name: 'Francisco Farjo',    discipline: 'General', rating: 5, review_text: 'Excelente academia, muy buena ubicación y un espacio amplio como pocas academias, además de muy buena predisposición del profesor y un ambiente de compañerismo muy presente la verdad que 10/10.', approved: true },
+    { author_name: 'Pablo Badui',        discipline: 'General', rating: 5, review_text: 'Más que una academia una familia de luchadores, desde los nuevos hasta los profesionales entrenando a la par en el mismo tatami. El verdadero espíritu del guerrero.',                         approved: true },
+    { author_name: 'Fernando Tabarelli', discipline: 'General', rating: 5, review_text: 'Muy profesionales, se preocupan que cada alumno logre lo que se propuso al ingresar. Muy buen ambiente.',                                                                                     approved: true },
+    { author_name: 'Fernando Vater',     discipline: 'General', rating: 5, review_text: 'Excelente atención, totalmente limpio y con constantes innovaciones y mejoras, clases personalizadas de alto nivel, el profe Walter Bonati un apasionado y 100% dedicado a sus alumnos.',     approved: true }
+  ];
+
+  async function seedInitialReviews() {
+    if (!sb) return;
+    for (var i = 0; i < SEED_REVIEWS.length; i++) {
+      var review = SEED_REVIEWS[i];
+      try {
+        var check = await sb.from('site_reviews').select('id').eq('author_name', review.author_name).limit(1);
+        if (!check.data || check.data.length === 0) {
+          await sb.from('site_reviews').insert(review);
+        }
+      } catch (e) {
+        console.warn('[BFC:reviews] seed error', e.message);
+      }
+    }
+  }
+
   /* ─── INIT ──────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', async function () {
     renderReviews(STATIC_REVIEWS);   /* visible de inmediato */
@@ -58,6 +82,8 @@
       sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
     }
     initForm();
+
+    await seedInitialReviews();
 
     /* Cargar fuentes dinámicas y actualizar la grilla */
     var reviews = await fetchAllReviews();
@@ -157,43 +183,39 @@
 
   /* ─── RENDER ────────────────────────────────────── */
   function renderReviews(reviews) {
-    var grid = document.getElementById('revGrid');
+    var grid = document.getElementById('reviews-grid');
     if (!grid) return;
     if (!reviews.length) {
-      grid.innerHTML = '<p class="rev-empty">Sé el primero en dejar una reseña.</p>';
+      grid.innerHTML = '<div class="rev-empty" style="grid-column:1/-1">Sé el primero en dejar una reseña.</div>';
       return;
     }
-    grid.innerHTML = reviews.map(function (r) {
-      var badge = r.source === 'google'
-        ? '<span class="rev-google-badge"><i class="ph-fill ph-google-logo"></i> Google</span>'
+    grid.innerHTML = reviews.map(function (r, idx) {
+      var initial  = r.nombre ? r.nombre.charAt(0).toUpperCase() : '?';
+      var googleBadge = r.source === 'google'
+        ? '<div class="review-source-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="none">' +
+          '<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>' +
+          '<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>' +
+          '<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>' +
+          '<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>' +
+          '</svg>Google</div>'
         : '';
-      var initial = r.nombre ? r.nombre.charAt(0).toUpperCase() : '?';
-      var avatar = r.photo
-        ? '<img class="rev-avatar" src="' + esc(r.photo) + '" alt="" loading="lazy" />'
-        : '<div class="rev-avatar-placeholder">' + initial + '</div>';
       var discipline = (r.disciplina && r.disciplina !== 'General')
-        ? '<span class="rev-discipline">' + esc(r.disciplina) + '</span>'
+        ? '<span class="review-author-discipline">' + esc(r.disciplina) + '</span>'
         : '';
-      return '<div class="rev-card reveal">' +
-        '<div class="rev-card-head">' + avatar +
-        '<div><div class="rev-stars-disp">' + starsHtml(r.rating || 5) + '</div>' + badge + '</div>' +
-        '</div>' +
-        '<p class="rev-body">&ldquo;' + esc(r.texto) + '&rdquo;</p>' +
-        '<div class="rev-footer">' +
-        '<div style="display:flex;flex-direction:column;gap:2px;">' +
-        '<span class="rev-author">' + esc(r.nombre) + '</span>' +
+      var stars = Array.from({length: r.rating || 5}, function () { return '<span>★</span>'; }).join('') +
+        Array.from({length: 5 - (r.rating || 5)}, function () { return '<span style="color:rgba(255,255,255,0.15)">★</span>'; }).join('');
+      return '<div class="review-card" style="animation:fadeInUp 0.5s ease both;animation-delay:' + (idx * 0.08) + 's">' +
+        '<div class="review-stars">' + stars + '</div>' +
+        '<p class="review-text">' + esc(r.texto) + '</p>' +
+        '<div class="review-footer">' +
+        '<div class="review-avatar">' + initial + '</div>' +
+        '<div class="review-author-info">' +
+        '<span class="review-author-name">' + esc(r.nombre) + '</span>' +
         discipline +
         '</div>' +
-        (r.created_at ? '<span class="rev-date">' + fmtDate(r.created_at) + '</span>' : '') +
+        googleBadge +
         '</div></div>';
     }).join('');
-
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) { entry.target.classList.add('in-view'); io.unobserve(entry.target); }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-    grid.querySelectorAll('.rev-card.reveal').forEach(function (el) { io.observe(el); });
   }
 
   function starsHtml(n) {

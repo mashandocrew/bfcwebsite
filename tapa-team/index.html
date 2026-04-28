@@ -136,7 +136,8 @@
   }
 
   .gold .btn.nav-cta { background: var(--bfc-gold); color: var(--bfc-black); border-color: var(--bfc-gold); }
-  .navbar-tapa-logo { height: 36px; width: auto; object-fit: contain; }
+  .navbar-tapa-logo { height: 52px; max-width: 180px; width: auto; object-fit: contain; display: block; }
+  @media (max-width: 768px) { .navbar-tapa-logo { height: 40px; max-width: 140px; } }
 
   /* Squad full-width section */
   .tt-squad {
@@ -247,11 +248,10 @@
 
 <header class="nav scrolled" id="nav">
   <div class="nav-inner">
-    <a href="../" class="nav-brand">
-      <img src="../assets/images/logo-original.png" class="logo" alt="BFC" />
-      <img src="../assets/images/logo-tapa-team.png" alt="Tapa Team" class="navbar-tapa-logo"
-           onerror="this.style.display='none';this.nextElementSibling.style.display='inline'" />
-      <span class="brand-text" style="font-family:var(--ff-display);color:var(--bfc-gold);letter-spacing:0.12em;font-size:clamp(0.9rem,2vw,1.25rem);display:none">TAPA TEAM</span>
+    <a href="../" class="nav-brand" aria-label="Tapa Team — Bonati Fight Club">
+      <img src="../assets/images/logo-tapa-team.png" alt="Tapa Team"
+           class="navbar-tapa-logo"
+           onerror="this.style.display='none'" />
     </a>
     <nav class="nav-links" id="navLinks">
       <a href="../#home"     data-i18n="nav.home">Inicio</a>
