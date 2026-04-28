@@ -674,7 +674,7 @@ async function loadPhotos() {
   try {
     const { data, error } = await sb
       .from('community_photos')
-      .select('id, photo_url, category, author, approved, created_at')
+      .select('id, photo_url, description, author_name, category, approved, created_at')
       .order('approved', { ascending: true })
       .order('created_at', { ascending: false })
     if (error) throw error
@@ -724,7 +724,7 @@ function renderPhotos() {
 function photoCard(photo, i, isPending) {
   const cat = photo.category || 'default'
   const catClass = ['entrenamientos','torneos','equipo'].includes(cat) ? `cat-${cat}` : 'cat-default'
-  const author = photo.author || 'Anónimo'
+  const author = photo.author_name || 'Anónimo'
   const date = fmtDate(photo.created_at)
   const actions = isPending
     ? `<button class="btn-approve" onclick="approvePhoto(${photo.id})">✓ APROBAR</button>
