@@ -608,6 +608,7 @@ let reviewFilter = 'all'
 let productsData = null
 let storeFilter = 'all'
 let editingProductId = null
+let productsModified = false
 
 /* ── AUTH ── */
 function checkAuth() {
@@ -669,10 +670,11 @@ function updateBadges() {
    FOTOS
 ══════════════════════════════════ */
 async function loadPhotos() {
+  document.getElementById('photosContent').innerHTML = '<div class="spinner-wrap"><div class="spinner"></div></div>'
   try {
     const { data, error } = await sb
       .from('community_photos')
-      .select('id, url, category, author, approved, created_at')
+      .select('id, photo_url, category, author, approved, created_at')
       .order('approved', { ascending: true })
       .order('created_at', { ascending: false })
     if (error) throw error
@@ -680,7 +682,13 @@ async function loadPhotos() {
     renderPhotos()
     updateBadges()
   } catch (e) {
-    document.getElementById('photosContent').innerHTML = errState(e.message)
+    document.getElementById('photosContent').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⚠️</div>
+        <p class="empty-title">Error al cargar fotos</p>
+        <p class="empty-sub" style="color:var(--red);font-size:.875rem;margin-bottom:1rem">${escHtml(e.message || String(e))}</p>
+        <button class="btn-primary" onclick="loadPhotos()">↺ Reintentar</button>
+      </div>`
   }
 }
 
@@ -720,12 +728,12 @@ function photoCard(photo, i, isPending) {
   const date = fmtDate(photo.created_at)
   const actions = isPending
     ? `<button class="btn-approve" onclick="approvePhoto(${photo.id})">✓ APROBAR</button>
-       <button class="btn-reject" onclick="rejectPhoto(${photo.id},'${escUrl(photo.url)}')">✗ RECHAZAR</button>`
-    : `<button class="btn-delete-photo" style="flex:1" onclick="deletePublishedPhoto(${photo.id},'${escUrl(photo.url)}')">🗑 ELIMINAR</button>`
+       <button class="btn-reject" onclick="rejectPhoto(${photo.id},'${escUrl(photo.photo_url)}')">✗ RECHAZAR</button>`
+    : `<button class="btn-delete-photo" style="flex:1" onclick="deletePublishedPhoto(${photo.id},'${escUrl(photo.photo_url)}')">🗑 ELIMINAR</button>`
 
   return `
     <div class="photo-card" id="pc-${photo.id}" style="--i:${i}">
-      <img class="photo-thumb" src="${photo.url}" alt="${escHtml(author)}" loading="lazy"
+      <img class="photo-thumb" src="${photo.photo_url}" alt="${escHtml(author)}" loading="lazy"
         onerror="this.style.background='var(--surface)'">
       <div class="photo-info">
         <span class="photo-cat ${catClass}">${cat}</span>
@@ -761,7 +769,7 @@ async function approveAllPhotos() {
 async function rejectPhoto(id, url) {
   if (!confirm('¿Rechazar y eliminar esta foto?')) return
   try {
-    const parts = url.split('/community-photos/')
+    const parts = String(url).split('/community-photos/')
     if (parts.length > 1) {
       const path = parts[1].split('?')[0]
       await sb.storage.from('community-photos').remove([path])
@@ -790,13 +798,16 @@ async function loadReviews() {
       .order('created_at', { ascending: false })
     if (error) throw error
     allReviews = data || []
-
-    const hasPending = allReviews.some(r => !r.approved)
-    document.getElementById('rlsNotice').style.display = hasPending ? 'none' : 'block'
-
+    document.getElementById('rlsNotice').style.display = 'none'
     renderReviews(); updateBadges()
   } catch (e) {
-    document.getElementById('reviewsContent').innerHTML = errState(e.message)
+    document.getElementById('reviewsContent').innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">⚠️</div>
+        <p class="empty-title">Error al cargar reseñas</p>
+        <p class="empty-sub" style="color:var(--red);font-size:.875rem;margin-bottom:1rem">${escHtml(e.message || String(e))}</p>
+        <button class="btn-primary" onclick="loadReviews()">↺ Reintentar</button>
+      </div>`
     document.getElementById('rlsNotice').style.display = 'block'
   }
 }
@@ -890,7 +901,7 @@ async function loadProducts() {
   badge.className = `badge${productsData.products.length === 0 ? ' zero' : ''}`
   renderCategoryPills()
   renderProducts()
-  document.getElementById('exportHint').style.display = 'block'
+  if (!productsModified) document.getElementById('exportHint').style.display = 'none'
 }
 
 function renderCategoryPills() {
@@ -1038,10 +1049,12 @@ async function saveProduct() {
   const badge = document.getElementById('badgeStore')
   badge.textContent = productsData.products.length
   badge.className = `badge${productsData.products.length === 0 ? ' zero' : ''}`
+  productsModified = true
+  document.getElementById('exportHint').style.display = 'block'
   renderCategoryPills()
   renderProducts()
   closeProductModal()
-  showToast('✓ Producto guardado — recordá exportar el JSON')
+  showToast('✓ Producto guardado — exportá el JSON para guardar los cambios')
 }
 
 async function deleteProduct(id) {
@@ -1050,9 +1063,11 @@ async function deleteProduct(id) {
   const badge = document.getElementById('badgeStore')
   badge.textContent = productsData.products.length
   badge.className = `badge${productsData.products.length === 0 ? ' zero' : ''}`
+  productsModified = true
+  document.getElementById('exportHint').style.display = 'block'
   renderCategoryPills()
   renderProducts()
-  showToast('✓ Producto eliminado — recordá exportar el JSON')
+  showToast('✓ Producto eliminado — exportá el JSON para guardar los cambios')
 }
 
 function exportJSON() {
