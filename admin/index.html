@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin — Bonati Fight Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+/* ── VARIABLES ── */
+:root {
+  --bg: #0A0A0A;
+  --surface: #111111;
+  --card: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --red: #C8102E;
+  --gold: #D4A017;
+  --text: #F5F0E8;
+  --dim: rgba(245,240,232,0.5);
+  --green: #22c55e;
+  --yellow: #eab308;
+  --hh: 56px;
+  --th: 52px;
+}
+
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif}
+body{overflow-x:hidden}
+button{cursor:pointer;border:none;background:none;font-family:inherit;color:inherit}
+input,textarea,select{font-family:inherit;color:var(--text);background:transparent;border:none;outline:none}
+img{max-width:100%;display:block}
+
+/* ── ANIMATIONS ── */
+@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes slideInRight{from{transform:translateX(120%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes slideOutRight{from{transform:translateX(0);opacity:1}to{transform:translateX(120%);opacity:0}}
+
+/* ── LOGIN ── */
+#loginScreen{
+  position:fixed;inset:0;z-index:1000;
+  background:var(--bg);
+  display:flex;align-items:center;justify-content:center;
+  transition:opacity 0.4s ease;
+}
+#loginScreen.fade-out{opacity:0;pointer-events:none}
+
+.login-box{width:100%;max-width:380px;padding:2.5rem 2rem;text-align:center}
+
+.login-logo{width:80px;height:80px;object-fit:contain;margin:0 auto 1.5rem}
+.login-logo-fallback{
+  width:80px;height:80px;display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.5rem;
+  font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--red);display:none
+}
+.login-title{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.05em;line-height:1;margin-bottom:.25rem}
+.login-sub{font-size:.875rem;color:rgba(200,16,46,.7);margin-bottom:2rem}
+
+.pass-wrap{position:relative;margin-bottom:1rem}
+.pass-wrap input{
+  width:100%;padding:.875rem 3rem .875rem 1rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:8px;font-size:1rem;color:var(--text);
+  transition:border-color .2s;
+}
+.pass-wrap input:focus{border-color:var(--red)}
+.pass-wrap input::placeholder{color:var(--dim)}
+.eye-btn{position:absolute;right:.875rem;top:50%;transform:translateY(-50%);color:var(--dim);font-size:1.1rem;transition:color .2s;line-height:1}
+.eye-btn:hover{color:var(--text)}
+
+.login-btn{
+  width:100%;padding:.875rem;
+  background:var(--red);color:white;
+  font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.1em;
+  border-radius:8px;
+  transition:transform .15s,box-shadow .2s;
+}
+.login-btn:hover{transform:scale(1.02);box-shadow:0 4px 20px rgba(200,16,46,.4)}
+.login-btn:active{transform:scale(.97)}
+
+.login-error{margin-top:.75rem;min-height:1.25rem;font-size:.875rem;color:#ff4d4f;opacity:0;transition:opacity .2s}
+.login-error.show{opacity:1}
+.login-box.shake{animation:shake .4s ease}
+
+/* ── DASHBOARD ── */
+#dashboard{display:none;animation:fadeIn .4s ease}
+#dashboard.visible{display:block}
+
+/* Header */
+.admin-header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  height:var(--hh);
+  background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.25rem;
+}
+.header-left{display:flex;align-items:center;gap:.75rem}
+.header-logo{width:32px;height:32px;object-fit:contain}
+.header-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.1em}
+.logout-btn{
+  padding:.4rem .875rem;border:1px solid var(--border);
+  border-radius:6px;font-size:.8rem;color:var(--dim);
+  transition:border-color .2s,color .2s;
+}
+.logout-btn:hover{border-color:var(--text);color:var(--text)}
+
+/* Tabs */
+.tabs-nav{
+  position:fixed;top:var(--hh);left:0;right:0;z-index:90;
+  height:var(--th);
+  background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;overflow-x:auto;scrollbar-width:none;
+}
+.tabs-nav::-webkit-scrollbar{display:none}
+.tab-btn{
+  flex:1;min-width:90px;
+  display:flex;align-items:center;justify-content:center;gap:.35rem;
+  padding:0 .75rem;
+  font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:.05em;
+  color:var(--dim);border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s,background .2s;
+  white-space:nowrap;
+}
+.tab-btn.active{color:var(--text);border-bottom-color:var(--red);background:rgba(200,16,46,.08)}
+.tab-btn:hover:not(.active){color:var(--text);background:var(--card)}
+
+.badge{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-width:18px;height:18px;padding:0 5px;
+  background:var(--red);color:white;
+  border-radius:9px;font-size:.7rem;
+  font-family:'Outfit',sans-serif;font-weight:700;line-height:1;
+}
+.badge.zero{background:rgba(255,255,255,.15)}
+
+/* Content */
+.content-area{padding-top:calc(var(--hh) + var(--th));min-height:100vh}
+.tab-pane{display:none;padding:1.5rem 1.25rem}
+.tab-pane.active{display:block;animation:fadeIn .3s ease}
+
+/* Section header */
+.section-header{
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem;
+}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:.05em;
+  display:flex;align-items:center;gap:.5rem;
+}
+
+/* Buttons */
+.btn-green{
+  padding:.5rem 1rem;
+  background:rgba(34,197,94,.15);color:var(--green);
+  border:1px solid rgba(34,197,94,.3);
+  border-radius:6px;font-size:.85rem;font-weight:600;
+  transition:background .2s,transform .15s;
+  display:inline-flex;align-items:center;gap:.35rem;
+}
+.btn-green:hover{background:rgba(34,197,94,.25);transform:scale(1.02)}
+.btn-green:active{transform:scale(.97)}
+
+.btn-red{
+  padding:.5rem 1rem;
+  background:rgba(200,16,46,.15);color:var(--red);
+  border:1px solid rgba(200,16,46,.3);
+  border-radius:6px;font-size:.85rem;font-weight:600;
+  transition:background .2s,transform .15s;
+}
+.btn-red:hover{background:rgba(200,16,46,.25);transform:scale(1.02)}
+.btn-red:active{transform:scale(.97)}
+
+.btn-primary{
+  padding:.5rem 1rem;
+  background:var(--red);color:white;
+  border-radius:6px;font-size:.875rem;font-weight:600;
+  transition:opacity .2s,transform .15s;
+  display:inline-flex;align-items:center;gap:.35rem;
+}
+.btn-primary:hover{opacity:.9;transform:scale(1.02)}
+.btn-primary:active{transform:scale(.97)}
+
+.btn-ghost{
+  padding:.5rem 1rem;
+  border:1px solid var(--border);color:var(--dim);
+  border-radius:6px;font-size:.875rem;
+  transition:border-color .2s,color .2s;
+}
+.btn-ghost:hover{border-color:var(--text);color:var(--text)}
+
+/* Spinner */
+.spinner-wrap{display:flex;align-items:center;justify-content:center;padding:3rem}
+.spinner{width:40px;height:40px;border:3px solid rgba(200,16,46,.2);border-top-color:var(--red);border-radius:50%;animation:spin .8s linear infinite}
+
+/* Empty state */
+.empty-state{text-align:center;padding:3rem 1rem}
+.empty-icon{font-size:3rem;margin-bottom:1rem}
+.empty-title{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.05em;color:var(--dim);margin-bottom:.5rem}
+.empty-sub{font-size:.875rem;color:rgba(245,240,232,.35)}
+
+/* ── TAB FOTOS ── */
+.photos-section-label{
+  font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.1em;
+  color:var(--dim);margin-bottom:1rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.photos-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1rem;margin-bottom:2rem;
+}
+.photo-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:10px;overflow:hidden;
+  animation:fadeInUp .4s ease both;
+  transition:transform .2s;
+}
+.photo-card:hover{transform:translateY(-2px)}
+.photo-thumb{width:100%;aspect-ratio:1/1;object-fit:cover;background:var(--surface)}
+.photo-info{padding:.75rem}
+.photo-cat{
+  display:inline-block;padding:2px 8px;border-radius:4px;
+  font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;
+  margin-bottom:.4rem;
+}
+.cat-entrenamientos{background:rgba(212,160,23,.2);color:var(--gold)}
+.cat-torneos{background:rgba(200,16,46,.2);color:var(--red)}
+.cat-equipo{background:rgba(34,197,94,.15);color:var(--green)}
+.cat-default{background:var(--card);color:var(--dim)}
+.photo-author{font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.05em;margin-bottom:.25rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.photo-date{font-size:.7rem;color:rgba(245,240,232,.35);margin-bottom:.75rem}
+.photo-actions{display:flex;gap:.5rem}
+.photo-actions button{flex:1;padding:.4rem .25rem;border-radius:5px;font-size:.75rem;font-weight:600;transition:all .15s}
+.btn-approve{background:rgba(34,197,94,.15);color:var(--green);border:1px solid rgba(34,197,94,.3)}
+.btn-approve:hover{background:rgba(34,197,94,.25)}
+.btn-reject,.btn-delete-photo{background:rgba(200,16,46,.15);color:var(--red);border:1px solid rgba(200,16,46,.3)}
+.btn-reject:hover,.btn-delete-photo:hover{background:rgba(200,16,46,.25)}
+.btn-approve:active,.btn-reject:active,.btn-delete-photo:active{transform:scale(.95)}
+
+/* ── TAB RESEÑAS ── */
+.filter-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.pill{
+  padding:.35rem .875rem;border:1px solid var(--border);
+  border-radius:20px;font-size:.825rem;color:var(--dim);
+  transition:all .2s;cursor:pointer;
+}
+.pill.active{background:var(--red);border-color:var(--red);color:white}
+.pill:hover:not(.active){border-color:var(--text);color:var(--text)}
+
+.rls-notice{
+  padding:.875rem 1rem;margin-bottom:1.5rem;
+  background:rgba(234,179,8,.08);border:1px solid rgba(234,179,8,.2);
+  border-radius:8px;font-size:.8rem;color:rgba(234,179,8,.9);line-height:1.5;
+}
+.rls-notice strong{display:block;margin-bottom:.25rem}
+.rls-notice code{
+  display:block;margin-top:.5rem;padding:.5rem;
+  background:rgba(0,0,0,.3);border-radius:4px;
+  font-family:monospace;font-size:.75rem;white-space:pre;overflow-x:auto;
+  color:rgba(245,240,232,.7);
+}
+
+.review-list{display:flex;flex-direction:column;gap:.875rem}
+.review-card{
+  background:var(--card);border:1px solid var(--border);
+  border-left:3px solid transparent;
+  border-radius:8px;padding:1rem;
+  animation:fadeInUp .4s ease both;
+}
+.review-card.approved{border-left-color:var(--green)}
+.review-card.pending{border-left-color:var(--yellow)}
+.review-stars{color:var(--red);margin-bottom:.5rem;font-size:1rem}
+.review-text{font-style:italic;color:var(--dim);margin-bottom:.75rem;font-size:.9rem;line-height:1.5}
+.review-meta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:.75rem}
+.review-author{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em}
+.review-discipline{font-size:.75rem;color:var(--red);text-transform:uppercase;letter-spacing:.05em}
+.review-date{font-size:.75rem;color:rgba(245,240,232,.35)}
+.review-status{display:inline-flex;align-items:center;gap:.3rem;font-size:.75rem;font-weight:600;padding:.2rem .6rem;border-radius:4px}
+.status-approved{background:rgba(34,197,94,.15);color:var(--green)}
+.status-pending{background:rgba(234,179,8,.15);color:var(--yellow)}
+.review-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+.review-actions button{padding:.4rem .875rem;border-radius:5px;font-size:.8rem;font-weight:600}
+
+/* ── TAB TIENDA ── */
+.category-pills{
+  display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.5rem;
+  scrollbar-width:none;margin-bottom:1.5rem;
+}
+.category-pills::-webkit-scrollbar{display:none}
+
+.product-list{display:flex;flex-direction:column;gap:.75rem}
+.product-row{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:8px;padding:.875rem 1rem;
+  display:flex;align-items:center;gap:.875rem;
+  animation:fadeInUp .4s ease both;
+}
+.product-thumb-wrap{width:48px;height:48px;flex-shrink:0;border-radius:6px;overflow:hidden;background:var(--surface)}
+.product-thumb{width:100%;height:100%;object-fit:cover}
+.product-thumb-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.25rem}
+.product-info{flex:1;min-width:0}
+.product-name{font-weight:600;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.product-cat{font-size:.75rem;color:var(--dim)}
+.product-price{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.05em;color:var(--gold);white-space:nowrap}
+.product-avail{display:inline-flex;align-items:center;gap:.25rem;font-size:.75rem;font-weight:600;padding:.15rem .5rem;border-radius:4px;white-space:nowrap}
+.avail-yes{background:rgba(34,197,94,.15);color:var(--green)}
+.avail-no{background:rgba(255,255,255,.06);color:var(--dim)}
+.prod-actions{display:flex;gap:.5rem;flex-shrink:0}
+.prod-actions button{padding:.4rem .65rem;border-radius:5px;font-size:.8rem}
+
+.export-hint{
+  margin-top:1.5rem;padding:1rem;
+  background:rgba(212,160,23,.08);border:1px solid rgba(212,160,23,.2);
+  border-radius:8px;font-size:.825rem;color:rgba(212,160,23,.9);line-height:1.5;
+}
+.export-hint strong{display:block;margin-bottom:.25rem}
+
+/* ── MODAL ── */
+.modal-overlay{
+  position:fixed;inset:0;z-index:200;
+  background:rgba(0,0,0,.75);
+  display:none;align-items:center;justify-content:center;
+  padding:1rem;
+}
+.modal-overlay.open{display:flex;animation:fadeIn .2s ease}
+.modal-box{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;width:100%;max-width:500px;
+  max-height:90vh;overflow-y:auto;padding:1.5rem;
+}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.modal-title{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.05em}
+.modal-close-btn{
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  border-radius:6px;color:var(--dim);font-size:1.1rem;
+  transition:background .2s,color .2s;
+}
+.modal-close-btn:hover{background:var(--card);color:var(--text)}
+
+.form-group{margin-bottom:1rem}
+.form-label{display:block;font-size:.78rem;color:var(--dim);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em}
+.form-input,.form-select,.form-textarea{
+  width:100%;padding:.75rem;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  border-radius:6px;font-size:1rem;color:var(--text);
+  transition:border-color .2s;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--red);outline:none}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--dim)}
+.form-select{
+  appearance:none;cursor:pointer;padding-right:2rem;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='rgba(245,240,232,0.4)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .75rem center;
+}
+.form-select option{background:var(--surface)}
+.form-textarea{resize:vertical;min-height:80px}
+
+.sizes-grid{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.4rem}
+.size-check{display:none}
+.size-label{
+  padding:.3rem .75rem;border:1px solid var(--border);
+  border-radius:5px;font-size:.8rem;cursor:pointer;
+  transition:all .15s;user-select:none;
+}
+.size-check:checked+.size-label{background:var(--red);border-color:var(--red);color:white}
+
+.toggle-wrap{display:flex;align-items:center;gap:.75rem}
+.toggle{position:relative;width:44px;height:24px}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{
+  position:absolute;inset:0;cursor:pointer;
+  background:rgba(255,255,255,.1);border-radius:24px;
+  transition:background .2s;
+}
+.toggle-slider::before{
+  content:'';position:absolute;
+  width:18px;height:18px;border-radius:50%;
+  left:3px;top:3px;background:white;
+  transition:transform .2s;
+}
+.toggle input:checked+.toggle-slider{background:var(--red)}
+.toggle input:checked+.toggle-slider::before{transform:translateX(20px)}
+
+.img-preview{width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:.5rem;display:none}
+.img-preview.show{display:block}
+
+.modal-footer{
+  display:flex;gap:.75rem;justify-content:flex-end;
+  margin-top:1.5rem;padding-top:1rem;
+  border-top:1px solid var(--border);
+}
+
+/* ── TOAST ── */
+#toastContainer{
+  position:fixed;bottom:1.5rem;right:1.5rem;z-index:9999;
+  display:flex;flex-direction:column;gap:.5rem;
+  pointer-events:none;max-width:calc(100vw - 3rem);
+}
+.toast{
+  padding:.75rem 1rem;border-radius:8px;
+  font-size:.875rem;font-weight:500;
+  animation:slideInRight .3s ease;
+  pointer-events:auto;max-width:320px;
+}
+.toast-success{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.3);color:var(--green)}
+.toast-error{background:rgba(200,16,46,.15);border:1px solid rgba(200,16,46,.3);color:#ff6b6b}
+.toast.removing{animation:slideOutRight .3s ease forwards}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .photos-grid{grid-template-columns:repeat(2,1fr)}
+  .tab-btn{font-size:.78rem;min-width:80px}
+  .modal-overlay{padding:0;align-items:flex-end}
+  .modal-box{border-radius:16px 16px 0 0;max-height:95vh}
+  .product-price{display:none}
+  .section-header{flex-direction:column;align-items:flex-start}
+}
+@media(min-width:769px) and (max-width:1024px){
+  .photos-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:480px){
+  .tab-pane{padding:1rem .875rem}
+  #toastContainer{right:1rem;bottom:1rem}
+  .product-row{flex-wrap:wrap}
+  .prod-actions{width:100%;justify-content:flex-end}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════ LOGIN ═══════ -->
+<div id="loginScreen">
+  <div class="login-box" id="loginBox">
+    <img src="../assets/images/logo-original.png" alt="BFC" class="login-logo" id="loginLogo"
+      onerror="this.style.display='none';document.getElementById('logoFallback').style.display='flex'">
+    <div class="login-logo-fallback" id="logoFallback">BFC</div>
+    <h1 class="login-title">PANEL DE ADMINISTRACIÓN</h1>
+    <p class="login-sub">Bonati Fight Club</p>
+    <div class="pass-wrap">
+      <input type="password" id="passInput" placeholder="Contraseña" autocomplete="current-password">
+      <button class="eye-btn" id="eyeBtn" type="button" aria-label="Ver contraseña">👁</button>
+    </div>
+    <button class="login-btn" id="loginBtn">INGRESAR</button>
+    <p class="login-error" id="loginError">Contraseña incorrecta</p>
+  </div>
+</div>
+
+<!-- ═══════ DASHBOARD ═══════ -->
+<div id="dashboard">
+
+  <header class="admin-header">
+    <div class="header-left">
+      <img src="../assets/images/logo-original.png" alt="BFC" class="header-logo"
+        onerror="this.style.display='none'">
+      <span class="header-title">ADMIN PANEL</span>
+    </div>
+    <button class="logout-btn" id="logoutBtn">CERRAR SESIÓN</button>
+  </header>
+
+  <nav class="tabs-nav">
+    <button class="tab-btn active" data-tab="photos">
+      📸 FOTOS <span class="badge zero" id="badgePhotos">0</span>
+    </button>
+    <button class="tab-btn" data-tab="reviews">
+      ⭐ RESEÑAS <span class="badge zero" id="badgeReviews">0</span>
+    </button>
+    <button class="tab-btn" data-tab="store">
+      🛍️ TIENDA <span class="badge zero" id="badgeStore">0</span>
+    </button>
+  </nav>
+
+  <main class="content-area">
+
+    <!-- FOTOS -->
+    <section class="tab-pane active" id="tabPhotos">
+      <div class="section-header">
+        <h2 class="section-title">FOTOS PENDIENTES <span class="badge zero" id="pendingPhotosCount">0</span></h2>
+        <button class="btn-green" id="approveAllBtn" style="display:none" onclick="approveAllPhotos()">✓ APROBAR TODAS</button>
+      </div>
+      <div id="photosContent"><div class="spinner-wrap"><div class="spinner"></div></div></div>
+    </section>
+
+    <!-- RESEÑAS -->
+    <section class="tab-pane" id="tabReviews">
+      <div class="section-header">
+        <h2 class="section-title">GESTIÓN DE RESEÑAS <span class="badge zero" id="pendingReviewsCount">0</span></h2>
+      </div>
+      <div class="rls-notice" id="rlsNotice" style="display:none">
+        <strong>⚠️ Configuración de Supabase necesaria</strong>
+        Para que el panel pueda ver y moderar reseñas pendientes, ejecutá este SQL en Supabase → SQL Editor:
+        <code>-- Permitir leer todas las reseñas (incluyendo pendientes)
+drop policy if exists "read_reviews" on public.site_reviews;
+create policy "read_reviews" on public.site_reviews for select using (true);
+
+-- Permitir aprobar y eliminar reseñas
+create policy if not exists "update_reviews" on public.site_reviews
+  for update using (true) with check (true);
+create policy if not exists "delete_reviews" on public.site_reviews
+  for delete using (true);</code>
+      </div>
+      <div class="filter-pills">
+        <button class="pill active" data-filter="all" onclick="setReviewFilter('all',this)">TODAS</button>
+        <button class="pill" data-filter="pending" onclick="setReviewFilter('pending',this)">PENDIENTES</button>
+        <button class="pill" data-filter="approved" onclick="setReviewFilter('approved',this)">PUBLICADAS</button>
+      </div>
+      <div id="reviewsContent"><div class="spinner-wrap"><div class="spinner"></div></div></div>
+    </section>
+
+    <!-- TIENDA -->
+    <section class="tab-pane" id="tabStore">
+      <div class="section-header">
+        <h2 class="section-title">GESTIÓN DE TIENDA</h2>
+        <button class="btn-primary" onclick="openProductModal()">+ AGREGAR PRODUCTO</button>
+      </div>
+      <div class="category-pills" id="categoryPills"></div>
+      <div id="storeContent"><div class="spinner-wrap"><div class="spinner"></div></div></div>
+      <div class="export-hint" id="exportHint" style="display:none">
+        <strong>⚠️ Sitio estático en GitHub Pages</strong>
+        Los cambios no se guardan automáticamente. Descargá el JSON y subilo a <code>admin/products.json</code> en GitHub.<br><br>
+        <button class="btn-primary" onclick="exportJSON()" style="margin-top:.25rem">⬇ EXPORTAR products.json</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<!-- ═══════ MODAL PRODUCTO ═══════ -->
+<div class="modal-overlay" id="productModal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h3 class="modal-title" id="modalTitle">AGREGAR PRODUCTO</h3>
+      <button class="modal-close-btn" onclick="closeProductModal()">✕</button>
+    </div>
+    <form id="productForm" onsubmit="return false">
+      <div class="form-group">
+        <label class="form-label">Nombre *</label>
+        <input type="text" class="form-input" id="fName" placeholder="Ej: Short BFC Competition" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Categoría *</label>
+        <select class="form-select" id="fCat"></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Precio en ARS *</label>
+        <input type="number" class="form-input" id="fPrice" placeholder="15000" min="0" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descripción</label>
+        <textarea class="form-textarea" id="fDesc" placeholder="Descripción del producto..."></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Talles disponibles</label>
+        <div class="sizes-grid">
+          <input type="checkbox" class="size-check" id="sXS" value="XS"><label class="size-label" for="sXS">XS</label>
+          <input type="checkbox" class="size-check" id="sS"  value="S" ><label class="size-label" for="sS">S</label>
+          <input type="checkbox" class="size-check" id="sM"  value="M" ><label class="size-label" for="sM">M</label>
+          <input type="checkbox" class="size-check" id="sL"  value="L" ><label class="size-label" for="sL">L</label>
+          <input type="checkbox" class="size-check" id="sXL" value="XL"><label class="size-label" for="sXL">XL</label>
+          <input type="checkbox" class="size-check" id="sXXL" value="XXL"><label class="size-label" for="sXXL">XXL</label>
+        </div>
+        <input type="text" class="form-input" id="fSizesCustom" placeholder="Talles extra: 10oz, 12oz, Único…" style="margin-top:.5rem;font-size:.875rem">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Disponible</label>
+        <div class="toggle-wrap">
+          <label class="toggle">
+            <input type="checkbox" id="fAvailable" checked>
+            <span class="toggle-slider"></span>
+          </label>
+          <span id="availLabel">Activo</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">URL de imagen (opcional)</label>
+        <input type="url" class="form-input" id="fImage" placeholder="https://..." oninput="previewImage(this.value)">
+        <img class="img-preview" id="imgPreview" alt="Preview">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Badge (opcional)</label>
+        <input type="text" class="form-input" id="fBadge" placeholder="Ej: NUEVO, BEST SELLER">
+      </div>
+    </form>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeProductModal()">CANCELAR</button>
+      <button class="btn-primary" onclick="saveProduct()">GUARDAR</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ TOASTS ═══════ -->
+<div id="toastContainer"></div>
+
+<script>
+/* ── CONFIG ── */
+const SUPABASE_URL = 'https://kmlobikkamhnzkmbtckg.supabase.co'
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttbG9iaWtrYW1obnprbWJ0Y2tnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MjYyOTQsImV4cCI6MjA5MjQwMjI5NH0.yeN_hygM4q9tZIq4hst6-6SzeAf5mdLnTuWG-eLatts'
+const HASH = btoa('BFC2025admin')
+
+let sb = null
+let allPhotos = []
+let allReviews = []
+let reviewFilter = 'all'
+let productsData = null
+let storeFilter = 'all'
+let editingProductId = null
+
+/* ── AUTH ── */
+function checkAuth() {
+  if (sessionStorage.getItem('bfc_admin') === 'authenticated') showDashboard()
+}
+
+function login() {
+  const val = document.getElementById('passInput').value
+  if (btoa(val) === HASH) {
+    sessionStorage.setItem('bfc_admin', 'authenticated')
+    document.getElementById('loginScreen').classList.add('fade-out')
+    setTimeout(showDashboard, 400)
+  } else {
+    const box = document.getElementById('loginBox')
+    box.classList.remove('shake')
+    void box.offsetWidth
+    box.classList.add('shake')
+    document.getElementById('loginError').classList.add('show')
+    document.getElementById('passInput').value = ''
+  }
+}
+
+function logout() {
+  sessionStorage.removeItem('bfc_admin')
+  location.reload()
+}
+
+function showDashboard() {
+  document.getElementById('loginScreen').style.display = 'none'
+  document.getElementById('dashboard').classList.add('visible')
+  sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+  loadPhotos()
+  loadReviews()
+  loadProducts()
+}
+
+/* ── TABS ── */
+function showTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'))
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'))
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active')
+  const id = 'tab' + tab.charAt(0).toUpperCase() + tab.slice(1)
+  document.getElementById(id).classList.add('active')
+}
+
+/* ── BADGES ── */
+function updateBadges() {
+  const pp = allPhotos.filter(p => !p.approved).length
+  const pr = allReviews.filter(r => !r.approved).length
+  const bp = document.getElementById('badgePhotos')
+  bp.textContent = pp
+  bp.className = `badge${pp === 0 ? ' zero' : ''}`
+  const br = document.getElementById('badgeReviews')
+  br.textContent = pr
+  br.className = `badge${pr === 0 ? ' zero' : ''}`
+}
+
+/* ══════════════════════════════════
+   FOTOS
+══════════════════════════════════ */
+async function loadPhotos() {
+  try {
+    const { data, error } = await sb
+      .from('community_photos')
+      .select('id, url, category, author, approved, created_at')
+      .order('approved', { ascending: true })
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    allPhotos = data || []
+    renderPhotos()
+    updateBadges()
+  } catch (e) {
+    document.getElementById('photosContent').innerHTML = errState(e.message)
+  }
+}
+
+function renderPhotos() {
+  const pending = allPhotos.filter(p => !p.approved)
+  const published = allPhotos.filter(p => p.approved)
+
+  document.getElementById('pendingPhotosCount').textContent = pending.length
+  const btn = document.getElementById('approveAllBtn')
+  btn.style.display = pending.length > 0 ? 'inline-flex' : 'none'
+
+  let html = ''
+
+  if (pending.length > 0) {
+    html += `<p class="photos-section-label">⏳ PENDIENTES DE REVISIÓN (${pending.length})</p>`
+    html += `<div class="photos-grid">${pending.map((p, i) => photoCard(p, i, true)).join('')}</div>`
+  } else {
+    html += `<div class="empty-state">
+      <div class="empty-icon" style="color:var(--green)">✓</div>
+      <p class="empty-title">No hay fotos pendientes</p>
+      <p class="empty-sub">¡Todo al día!</p>
+    </div>`
+  }
+
+  if (published.length > 0) {
+    html += `<p class="photos-section-label" style="margin-top:2rem">✅ FOTOS PUBLICADAS (${published.length})</p>`
+    html += `<div class="photos-grid">${published.map((p, i) => photoCard(p, i, false)).join('')}</div>`
+  }
+
+  document.getElementById('photosContent').innerHTML = html
+}
+
+function photoCard(photo, i, isPending) {
+  const cat = photo.category || 'default'
+  const catClass = ['entrenamientos','torneos','equipo'].includes(cat) ? `cat-${cat}` : 'cat-default'
+  const author = photo.author || 'Anónimo'
+  const date = fmtDate(photo.created_at)
+  const actions = isPending
+    ? `<button class="btn-approve" onclick="approvePhoto(${photo.id})">✓ APROBAR</button>
+       <button class="btn-reject" onclick="rejectPhoto(${photo.id},'${escUrl(photo.url)}')">✗ RECHAZAR</button>`
+    : `<button class="btn-delete-photo" style="flex:1" onclick="deletePublishedPhoto(${photo.id},'${escUrl(photo.url)}')">🗑 ELIMINAR</button>`
+
+  return `
+    <div class="photo-card" id="pc-${photo.id}" style="--i:${i}">
+      <img class="photo-thumb" src="${photo.url}" alt="${escHtml(author)}" loading="lazy"
+        onerror="this.style.background='var(--surface)'">
+      <div class="photo-info">
+        <span class="photo-cat ${catClass}">${cat}</span>
+        <p class="photo-author">${escHtml(author)}</p>
+        <p class="photo-date">${date}</p>
+        <div class="photo-actions">${actions}</div>
+      </div>
+    </div>`
+}
+
+async function approvePhoto(id) {
+  try {
+    const { error } = await sb.from('community_photos').update({ approved: true }).eq('id', id)
+    if (error) throw error
+    allPhotos = allPhotos.map(p => p.id === id ? { ...p, approved: true } : p)
+    renderPhotos(); updateBadges()
+    showToast('✓ Foto aprobada')
+  } catch (e) { showToast('✗ Error: ' + e.message, 'error') }
+}
+
+async function approveAllPhotos() {
+  const pending = allPhotos.filter(p => !p.approved)
+  if (!confirm(`¿Aprobar las ${pending.length} fotos pendientes?`)) return
+  try {
+    const { error } = await sb.from('community_photos').update({ approved: true }).eq('approved', false)
+    if (error) throw error
+    allPhotos = allPhotos.map(p => ({ ...p, approved: true }))
+    renderPhotos(); updateBadges()
+    showToast(`✓ ${pending.length} fotos aprobadas`)
+  } catch (e) { showToast('✗ Error: ' + e.message, 'error') }
+}
+
+async function rejectPhoto(id, url) {
+  if (!confirm('¿Rechazar y eliminar esta foto?')) return
+  try {
+    const parts = url.split('/community-photos/')
+    if (parts.length > 1) {
+      const path = parts[1].split('?')[0]
+      await sb.storage.from('community-photos').remove([path])
+    }
+    const { error } = await sb.from('community_photos').delete().eq('id', id)
+    if (error) throw error
+    allPhotos = allPhotos.filter(p => p.id !== id)
+    renderPhotos(); updateBadges()
+    showToast('✓ Foto eliminada')
+  } catch (e) { showToast('✗ Error: ' + e.message, 'error') }
+}
+
+async function deletePublishedPhoto(id, url) {
+  if (!confirm('¿Eliminar esta foto publicada?')) return
+  await rejectPhoto(id, url)
+}
+
+/* ══════════════════════════════════
+   RESEÑAS
+══════════════════════════════════ */
+async function loadReviews() {
+  try {
+    const { data, error } = await sb
+      .from('site_reviews')
+      .select('*')
+      .order('created_at', { ascending: false })
+    if (error) throw error
+    allReviews = data || []
+
+    const hasPending = allReviews.some(r => !r.approved)
+    document.getElementById('rlsNotice').style.display = hasPending ? 'none' : 'block'
+
+    renderReviews(); updateBadges()
+  } catch (e) {
+    document.getElementById('reviewsContent').innerHTML = errState(e.message)
+    document.getElementById('rlsNotice').style.display = 'block'
+  }
+}
+
+function setReviewFilter(filter, el) {
+  reviewFilter = filter
+  document.querySelectorAll('.filter-pills .pill').forEach(p => p.classList.remove('active'))
+  el.classList.add('active')
+  renderReviews()
+}
+
+function renderReviews() {
+  let reviews = allReviews
+  if (reviewFilter === 'pending') reviews = reviews.filter(r => !r.approved)
+  if (reviewFilter === 'approved') reviews = reviews.filter(r => r.approved)
+
+  const pending = allReviews.filter(r => !r.approved)
+  document.getElementById('pendingReviewsCount').textContent = pending.length
+
+  const el = document.getElementById('reviewsContent')
+  if (reviews.length === 0) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">📭</div><p class="empty-title">Sin reseñas</p><p class="empty-sub">No hay reseñas con este filtro.</p></div>`
+    return
+  }
+  el.innerHTML = `<div class="review-list">${reviews.map((r, i) => reviewCard(r, i)).join('')}</div>`
+}
+
+function reviewCard(r, i) {
+  const stars = '★'.repeat(Math.max(1, Math.min(5, r.rating || 5)))
+  const stateClass = r.approved ? 'approved' : 'pending'
+  const badge = r.approved
+    ? `<span class="review-status status-approved">✓ PUBLICADA</span>`
+    : `<span class="review-status status-pending">⏳ PENDIENTE</span>`
+  const actions = r.approved
+    ? `<button class="btn-red" onclick="deleteReview('${r.id}')">🗑 ELIMINAR</button>`
+    : `<button class="btn-green" onclick="approveReview('${r.id}')">✓ PUBLICAR</button>
+       <button class="btn-red" onclick="deleteReview('${r.id}')">✗ RECHAZAR</button>`
+
+  return `
+    <div class="review-card ${stateClass}" style="--i:${i}">
+      <div class="review-stars">${stars}</div>
+      <p class="review-text">"${escHtml(r.review_text || '')}"</p>
+      <div class="review-meta">
+        <div>
+          <div class="review-author">${escHtml(r.author_name || 'Anónimo')}</div>
+          ${r.discipline ? `<div class="review-discipline">${escHtml(r.discipline)}</div>` : ''}
+        </div>
+        <div style="text-align:right">
+          ${badge}
+          <div class="review-date">${fmtDate(r.created_at)}</div>
+        </div>
+      </div>
+      <div class="review-actions">${actions}</div>
+    </div>`
+}
+
+async function approveReview(id) {
+  try {
+    const { error } = await sb.from('site_reviews').update({ approved: true }).eq('id', id)
+    if (error) throw error
+    allReviews = allReviews.map(r => r.id === id ? { ...r, approved: true } : r)
+    renderReviews(); updateBadges()
+    showToast('✓ Reseña publicada')
+  } catch (e) { showToast('✗ Error: ' + e.message, 'error') }
+}
+
+async function deleteReview(id) {
+  if (!confirm('¿Eliminar esta reseña?')) return
+  try {
+    const { error } = await sb.from('site_reviews').delete().eq('id', id)
+    if (error) throw error
+    allReviews = allReviews.filter(r => r.id !== id)
+    renderReviews(); updateBadges()
+    showToast('✓ Reseña eliminada')
+  } catch (e) { showToast('✗ Error: ' + e.message, 'error') }
+}
+
+/* ══════════════════════════════════
+   TIENDA
+══════════════════════════════════ */
+async function loadProducts() {
+  try {
+    const resp = await fetch('./products.json')
+    if (!resp.ok) throw new Error('HTTP ' + resp.status)
+    productsData = await resp.json()
+  } catch {
+    productsData = { currency: 'ARS', whatsapp: '5492615710531', categories: [], products: [] }
+  }
+  const badge = document.getElementById('badgeStore')
+  badge.textContent = productsData.products.length
+  badge.className = `badge${productsData.products.length === 0 ? ' zero' : ''}`
+  renderCategoryPills()
+  renderProducts()
+  document.getElementById('exportHint').style.display = 'block'
+}
+
+function renderCategoryPills() {
+  const cats = productsData.categories || []
+  const all = [{ id: 'all', name: { es: 'Todos' } }, ...cats]
+  document.getElementById('categoryPills').innerHTML = all.map(c => {
+    const name = typeof c.name === 'object' ? c.name.es : c.name
+    return `<button class="pill${c.id === storeFilter ? ' active' : ''}" onclick="setStoreFilter('${c.id}',this)">${name}</button>`
+  }).join('')
+}
+
+function setStoreFilter(cat, el) {
+  storeFilter = cat
+  document.querySelectorAll('#categoryPills .pill').forEach(p => p.classList.remove('active'))
+  el.classList.add('active')
+  renderProducts()
+}
+
+function getCatName(catId) {
+  const cat = (productsData.categories || []).find(c => c.id === catId)
+  if (!cat) return catId
+  return typeof cat.name === 'object' ? cat.name.es : cat.name
+}
+
+function renderProducts() {
+  if (!productsData) return
+  let products = productsData.products || []
+  if (storeFilter !== 'all') products = products.filter(p => p.category === storeFilter)
+
+  const el = document.getElementById('storeContent')
+  if (products.length === 0) {
+    el.innerHTML = `<div class="empty-state"><div class="empty-icon">🛍️</div><p class="empty-title">No hay productos</p><p class="empty-sub">Agregá el primero o cambiá el filtro.</p></div>`
+    return
+  }
+
+  el.innerHTML = `<div class="product-list">${products.map((p, i) => productRow(p, i)).join('')}</div>`
+}
+
+function productRow(p, i) {
+  const imgUrl = p.images && p.images.length ? p.images[0] : ''
+  const thumb = imgUrl
+    ? `<img class="product-thumb" src="${escHtml(imgUrl)}" alt="${escHtml(p.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\"product-thumb-ph\\">🥊</div>'">`
+    : `<div class="product-thumb-ph">🥊</div>`
+  const price = p.price > 0 ? `$${p.price.toLocaleString('es-AR')} ARS` : 'A confirmar'
+  const avail = p.available !== false
+    ? `<span class="product-avail avail-yes">● Activo</span>`
+    : `<span class="product-avail avail-no">● Inactivo</span>`
+  const badgeHtml = p.badge ? `<span style="font-size:.65rem;background:var(--red);color:white;padding:1px 5px;border-radius:3px;margin-left:4px;vertical-align:middle">${escHtml(p.badge)}</span>` : ''
+
+  return `
+    <div class="product-row" style="--i:${i}">
+      <div class="product-thumb-wrap">${thumb}</div>
+      <div class="product-info">
+        <div class="product-name">${escHtml(p.name)}${badgeHtml}</div>
+        <div class="product-cat">${getCatName(p.category)}</div>
+      </div>
+      <div class="product-price">${price}</div>
+      ${avail}
+      <div class="prod-actions">
+        <button class="btn-ghost" onclick="openProductModal('${escHtml(p.id)}')">✏ EDITAR</button>
+        <button class="btn-red" onclick="deleteProduct('${escHtml(p.id)}')">🗑</button>
+      </div>
+    </div>`
+}
+
+function openProductModal(productId) {
+  editingProductId = productId || null
+  const modal = document.getElementById('productModal')
+  const cats = productsData.categories || []
+
+  document.getElementById('fCat').innerHTML = cats.map(c => {
+    const name = typeof c.name === 'object' ? c.name.es : c.name
+    return `<option value="${c.id}">${name}</option>`
+  }).join('')
+
+  if (productId) {
+    const p = productsData.products.find(x => x.id === productId)
+    if (!p) return
+    document.getElementById('modalTitle').textContent = 'EDITAR PRODUCTO'
+    document.getElementById('fName').value = p.name || ''
+    document.getElementById('fCat').value = p.category || ''
+    document.getElementById('fPrice').value = p.price || 0
+    document.getElementById('fDesc').value = p.description || ''
+    document.getElementById('fAvailable').checked = p.available !== false
+    document.getElementById('availLabel').textContent = p.available !== false ? 'Activo' : 'Inactivo'
+    document.getElementById('fBadge').value = p.badge || ''
+
+    const stdSizes = ['XS','S','M','L','XL','XXL']
+    const pSizes = p.sizes || []
+    stdSizes.forEach(s => { const cb = document.getElementById('s' + s); if (cb) cb.checked = pSizes.includes(s) })
+    document.getElementById('fSizesCustom').value = pSizes.filter(s => !stdSizes.includes(s)).join(', ')
+
+    const imgUrl = p.images && p.images[0] ? p.images[0] : ''
+    document.getElementById('fImage').value = imgUrl
+    previewImage(imgUrl)
+  } else {
+    document.getElementById('modalTitle').textContent = 'AGREGAR PRODUCTO'
+    document.getElementById('productForm').reset()
+    document.getElementById('fAvailable').checked = true
+    document.getElementById('availLabel').textContent = 'Activo'
+    ;['XS','S','M','L','XL','XXL'].forEach(s => { const cb = document.getElementById('s' + s); if (cb) cb.checked = false })
+    document.getElementById('imgPreview').classList.remove('show')
+  }
+
+  modal.classList.add('open')
+}
+
+function closeProductModal() {
+  document.getElementById('productModal').classList.remove('open')
+  editingProductId = null
+}
+
+async function saveProduct() {
+  const name = document.getElementById('fName').value.trim()
+  const cat = document.getElementById('fCat').value
+  if (!name) { showToast('✗ El nombre es obligatorio', 'error'); return }
+
+  const stdSizes = ['XS','S','M','L','XL','XXL']
+  const checked = stdSizes.filter(s => document.getElementById('s' + s).checked)
+  const customRaw = document.getElementById('fSizesCustom').value
+  const custom = customRaw ? customRaw.split(',').map(s => s.trim()).filter(Boolean) : []
+  const sizes = [...checked, ...custom]
+
+  const imgUrl = document.getElementById('fImage').value.trim()
+
+  const payload = {
+    name,
+    category: cat,
+    price: parseFloat(document.getElementById('fPrice').value) || 0,
+    description: document.getElementById('fDesc').value.trim(),
+    sizes: sizes.length ? sizes : ['Único'],
+    available: document.getElementById('fAvailable').checked,
+    images: imgUrl ? [imgUrl] : [],
+    badge: document.getElementById('fBadge').value.trim()
+  }
+
+  if (editingProductId) {
+    const idx = productsData.products.findIndex(p => p.id === editingProductId)
+    if (idx !== -1) productsData.products[idx] = { ...productsData.products[idx], ...payload }
+  } else {
+    payload.id = `bfc-${cat}-${Date.now()}`
+    productsData.products.push(payload)
+  }
+
+  const badge = document.getElementById('badgeStore')
+  badge.textContent = productsData.products.length
+  badge.className = `badge${productsData.products.length === 0 ? ' zero' : ''}`
+  renderCategoryPills()
+  renderProducts()
+  closeProductModal()
+  showToast('✓ Producto guardado — recordá exportar el JSON')
+}
+
+async function deleteProduct(id) {
+  if (!confirm('¿Eliminar este producto?')) return
+  productsData.products = productsData.products.filter(p => p.id !== id)
+  const badge = document.getElementById('badgeStore')
+  badge.textContent = productsData.products.length
+  badge.className = `badge${productsData.products.length === 0 ? ' zero' : ''}`
+  renderCategoryPills()
+  renderProducts()
+  showToast('✓ Producto eliminado — recordá exportar el JSON')
+}
+
+function exportJSON() {
+  const json = JSON.stringify(productsData, null, 2)
+  const blob = new Blob([json], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url; a.download = 'products.json'; a.click()
+  URL.revokeObjectURL(url)
+  showToast('✓ JSON descargado. Subilo a admin/products.json en GitHub')
+}
+
+/* ── UTILS ── */
+function fmtDate(str) {
+  if (!str) return ''
+  return new Date(str).toLocaleDateString('es-AR', {
+    day: '2-digit', month: 'short', year: 'numeric',
+    hour: '2-digit', minute: '2-digit'
+  })
+}
+
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')
+}
+
+function escUrl(s) {
+  return String(s).replace(/'/g,'%27')
+}
+
+function previewImage(url) {
+  const img = document.getElementById('imgPreview')
+  if (url && (url.startsWith('http://') || url.startsWith('https://'))) {
+    img.src = url
+    img.classList.add('show')
+    img.onerror = () => img.classList.remove('show')
+  } else {
+    img.classList.remove('show')
+  }
+}
+
+function showToast(msg, type = 'success') {
+  const t = document.createElement('div')
+  t.className = `toast toast-${type}`
+  t.textContent = msg
+  document.getElementById('toastContainer').appendChild(t)
+  setTimeout(() => { t.classList.add('removing'); setTimeout(() => t.remove(), 300) }, 3000)
+}
+
+function errState(msg) {
+  return `<div class="empty-state"><div class="empty-icon">⚠️</div><p class="empty-title">Error al cargar</p><p class="empty-sub">${escHtml(msg)}</p></div>`
+}
+
+/* ── EVENTS ── */
+document.getElementById('loginBtn').addEventListener('click', login)
+document.getElementById('passInput').addEventListener('keydown', e => { if (e.key === 'Enter') login() })
+document.getElementById('eyeBtn').addEventListener('click', () => {
+  const inp = document.getElementById('passInput')
+  inp.type = inp.type === 'password' ? 'text' : 'password'
+})
+document.getElementById('logoutBtn').addEventListener('click', logout)
+document.getElementById('fAvailable').addEventListener('change', function() {
+  document.getElementById('availLabel').textContent = this.checked ? 'Activo' : 'Inactivo'
+})
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => showTab(btn.dataset.tab))
+})
+document.getElementById('productModal').addEventListener('click', e => {
+  if (e.target === document.getElementById('productModal')) closeProductModal()
+})
+
+/* Pull to refresh */
+let touchY = 0
+document.addEventListener('touchstart', e => { touchY = e.touches[0].clientY }, { passive: true })
+document.addEventListener('touchend', e => {
+  if (window.scrollY === 0 && e.changedTouches[0].clientY - touchY > 80) {
+    const active = document.querySelector('.tab-btn.active')?.dataset.tab
+    if (active === 'photos') loadPhotos()
+    else if (active === 'reviews') loadReviews()
+    else if (active === 'store') loadProducts()
+  }
+}, { passive: true })
+
+/* ── INIT ── */
+checkAuth()
+</script>
+</body>
+</html>
