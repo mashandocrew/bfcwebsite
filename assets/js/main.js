@@ -114,16 +114,27 @@
   if (form) {
     form.addEventListener('submit', e => {
       e.preventDefault();
-      const name = form.name.value.trim();
-      const msg  = form.msg.value.trim();
-      if (!name || !msg) {
+      const name     = (form.elements.name?.value     || '').trim();
+      const age      = (form.elements.age?.value      || '').trim();
+      const modality = (form.elements.modality?.value || '').trim();
+      const timeSlot = (form.elements.timeSlot?.value || '').trim();
+
+      if (!name || !age) {
         form.querySelectorAll('[required]').forEach(f => {
           if (!f.value.trim()) f.style.borderBottomColor = 'var(--bfc-red)';
         });
+        const fb = document.getElementById('cfFeedback');
+        if (fb) { fb.textContent = 'Completá tu nombre y edad para continuar.'; fb.hidden = false; }
         return;
       }
-      const txt = `Hola! Soy ${name}. ${msg}`;
-      const url = `https://wa.me/5492615710531?text=${encodeURIComponent(txt)}`;
+
+      const parts = [`Hola! Me llamo ${name}, tengo ${age} años.`];
+      if (modality) parts.push(`Me interesa: ${modality}.`);
+      if (timeSlot) parts.push(`Prefiero horario de ${timeSlot}.`);
+      parts.push('¿Pueden darme información sobre las clases?');
+
+      const waNumber = modality === 'MMA / Wrestling' ? '5492614671743' : '5492615710531';
+      const url = `https://wa.me/${waNumber}?text=${encodeURIComponent(parts.join(' '))}`;
       window.open(url, '_blank', 'noopener');
     });
   }
