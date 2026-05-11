@@ -358,6 +358,14 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
   background: var(--grad-hero-mask);
   pointer-events: none;
 }
+.hero-fade-bottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 35%;
+  background: linear-gradient(to bottom, transparent 0%, var(--bfc-black) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
 .hero-content {
   position: relative;
   z-index: 3;
