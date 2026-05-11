@@ -1,6 +1,7 @@
 /* =====================================================
    BFC — ANIMATIONS.JS
    anime.js v4 · Hero sequence + scroll reveals
+   API v4: tl.add(targets, params, position)
    ===================================================== */
 (function () {
   'use strict';
@@ -19,92 +20,95 @@
           callback();
         }
       });
-    }, { threshold: threshold || 0.15, rootMargin: '0px 0px -40px 0px' });
+    }, { threshold: threshold || 0.12, rootMargin: '0px 0px -40px 0px' });
     io.observe(el);
   }
 
-  /* ─── HELPER: instant show (reduced-motion fallback) ── */
-  function showAll(targets) {
-    var els = typeof targets === 'string'
-      ? document.querySelectorAll(targets)
-      : targets;
+  /* ─── HELPER: show all instantly ───────────────────── */
+  function showAll(els) {
     Array.prototype.forEach.call(els, function (el) {
+      if (!el) return;
       el.style.opacity = '1';
       el.style.transform = 'none';
       el.style.filter = 'none';
     });
   }
 
-  /* ─── S1: HERO SEQUENCE ─────────────────────────────── */
+  /* ─── HELPER: hide element (initial state) ─────────── */
+  function hide(el, transform) {
+    if (!el) return;
+    el.style.opacity = '0';
+    if (transform) el.style.transform = transform;
+  }
+
+  /* ─── S1: HERO — set initial state early ───────────── */
+  function initHeroState() {
+    var a = window.anime;
+    if (!a || reducedMotion) return;
+
+    var nav    = document.getElementById('nav');
+    var line1  = document.querySelector('.hero-title .line:nth-child(1) > span');
+    var line2  = document.querySelector('.hero-title .line:nth-child(2) > span');
+    var line3  = document.querySelector('.hero-title .line:nth-child(3) > span');
+    var sub    = document.querySelector('.hero-sub');
+    var btns   = document.querySelectorAll('.hero-ctas .btn');
+    var side   = document.querySelector('.hero-side');
+
+    hide(nav,   'translateY(-100%)');
+    hide(line1, 'translateY(110%)');
+    hide(line2, 'translateY(110%)');
+    hide(line3, 'translateY(110%)');
+    if (sub)  { sub.style.opacity = '0';  sub.style.transform = 'translateY(20px)';  sub.style.filter = 'blur(8px)'; }
+    Array.prototype.forEach.call(btns, function (b) { hide(b, 'translateY(16px)'); });
+    hide(side, 'translateY(10px)');
+  }
+
+  /* ─── S1: HERO — run timeline ───────────────────────── */
   function heroSequence() {
     var a = window.anime;
     if (!a) return;
 
-    var nav        = document.getElementById('nav');
-    var line1      = document.querySelector('.hero-title .line:nth-child(1) > span');
-    var line2      = document.querySelector('.hero-title .line:nth-child(2) > span');
-    var line3      = document.querySelector('.hero-title .line:nth-child(3) > span');
-    var heroSub    = document.querySelector('.hero-sub');
-    var heroBtns   = document.querySelectorAll('.hero-ctas .btn');
-    var heroSide   = document.querySelector('.hero-side');
+    var nav    = document.getElementById('nav');
+    var line1  = document.querySelector('.hero-title .line:nth-child(1) > span');
+    var line2  = document.querySelector('.hero-title .line:nth-child(2) > span');
+    var line3  = document.querySelector('.hero-title .line:nth-child(3) > span');
+    var sub    = document.querySelector('.hero-sub');
+    var btns   = document.querySelectorAll('.hero-ctas .btn');
+    var side   = document.querySelector('.hero-side');
 
-    var els = [nav, line1, line2, line3, heroSub, heroSide];
-    Array.prototype.forEach.call(heroBtns, function (b) { els.push(b); });
+    if (reducedMotion) {
+      showAll([nav, line1, line2, line3, sub, side].concat(Array.prototype.slice.call(btns)));
+      return;
+    }
 
-    if (reducedMotion) { showAll(els); return; }
-
-    /* Set initial state */
-    if (nav)     { nav.style.opacity = '0'; nav.style.transform = 'translateY(-100%)'; }
-    if (line1)   { line1.style.transform = 'translateY(110%)'; }
-    if (line2)   { line2.style.transform = 'translateY(110%)'; }
-    if (line3)   { line3.style.transform = 'translateY(110%)'; }
-    if (heroSub) { heroSub.style.opacity = '0'; heroSub.style.transform = 'translateY(20px)'; heroSub.style.filter = 'blur(8px)'; }
-    Array.prototype.forEach.call(heroBtns, function (b) { b.style.opacity = '0'; b.style.transform = 'translateY(16px)'; });
-    if (heroSide) { heroSide.style.opacity = '0'; heroSide.style.transform = 'translateY(10px)'; }
-
-    var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
-
-    tl.add({ targets: nav, translateY: ['-100%', '0'], opacity: [0, 1], duration: 600 }, 0);
-    tl.add({ targets: line1, translateY: ['110%', '0'], duration: 900 }, 200);
-    tl.add({ targets: line2, translateY: ['110%', '0'], duration: 900 }, 400);
-    tl.add({ targets: line3, translateY: ['110%', '0'], duration: 900 }, 600);
-    tl.add({
-      targets: heroSub,
-      translateY: [20, 0],
-      opacity: [0, 1],
-      filter: ['blur(8px)', 'blur(0px)'],
-      duration: 800
-    }, 900);
-    tl.add({
-      targets: heroBtns,
-      translateY: [16, 0],
-      opacity: [0, 1],
-      duration: 700,
-      delay: a.stagger(120)
-    }, 1100);
-    tl.add({
-      targets: heroSide,
-      translateY: [10, 0],
-      opacity: [0, 1],
-      duration: 700
-    }, 1400);
-  }
-
-  /* ─── INIT ──────────────────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', function () {
-    heroSequence();
-    initScrollAnimations();
-  });
-
-  function initScrollAnimations() {
-    observeSection(document.querySelector('.disciplines'), academyTimeline, 0.15);
-    observeSection(document.querySelector('.champions'),   championsTimeline, 0.2);
-    observeSection(document.querySelector('.schedule'),    scheduleTimeline, 0.1);
-    observeSection(document.querySelector('.tapa'),        tapaTimeline, 0.15);
-    observeSection(document.querySelector('.community'),   communityTimeline, 0.1);
+    try {
+      var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
+      tl.add(nav,   { translateY: ['-100%', '0'], opacity: [0, 1], duration: 600 }, 0);
+      tl.add(line1, { translateY: ['110%', '0'], duration: 900 }, 200);
+      tl.add(line2, { translateY: ['110%', '0'], duration: 900 }, 400);
+      tl.add(line3, { translateY: ['110%', '0'], duration: 900 }, 600);
+      tl.add(sub,   { translateY: [20, 0], opacity: [0, 1], filter: ['blur(8px)', 'blur(0px)'], duration: 800 }, 900);
+      tl.add(btns,  { translateY: [16, 0], opacity: [0, 1], duration: 700, delay: a.stagger(120) }, 1100);
+      tl.add(side,  { translateY: [10, 0], opacity: [0, 1], duration: 700 }, 1400);
+    } catch (e) {
+      showAll([nav, line1, line2, line3, sub, side].concat(Array.prototype.slice.call(btns)));
+    }
   }
 
   /* ─── S3: ACADEMIA ──────────────────────────────────── */
+  function initAcademyState() {
+    var a = window.anime;
+    if (!a || reducedMotion) return;
+    var sec = document.querySelector('.disciplines');
+    if (!sec) return;
+    hide(sec.querySelector('.section-head .eyebrow'), 'translateX(-10px)');
+    hide(sec.querySelector('.section-head h2'),       'translateY(40px)');
+    hide(sec.querySelector('.section-head p'),        'translateY(20px)');
+    Array.prototype.forEach.call(sec.querySelectorAll('.disc-card'), function (c) {
+      hide(c, 'translateY(60px) scale(0.96)');
+    });
+  }
+
   function academyTimeline() {
     var a = window.anime;
     if (!a) return;
@@ -114,28 +118,37 @@
     var lead    = sec.querySelector('.section-head p');
     var cards   = sec.querySelectorAll('.disc-card');
 
-    if (reducedMotion) { showAll([eyebrow, h2, lead].concat(Array.prototype.slice.call(cards))); return; }
-
-    if (eyebrow) { eyebrow.style.opacity = '0'; eyebrow.style.transform = 'translateX(-10px)'; }
-    if (h2)      { h2.style.opacity = '0'; h2.style.transform = 'translateY(40px)'; }
-    if (lead)    { lead.style.opacity = '0'; lead.style.transform = 'translateY(20px)'; }
-    Array.prototype.forEach.call(cards, function (c) { c.style.opacity = '0'; c.style.transform = 'translateY(60px) scale(0.96)'; });
-
-    var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
-    tl.add({ targets: eyebrow, translateX: [-10, 0], opacity: [0, 1], duration: 700 }, 0);
-    tl.add({ targets: h2,      translateY: [40, 0],  opacity: [0, 1], duration: 800 }, 100);
-    tl.add({ targets: lead,    translateY: [20, 0],  opacity: [0, 1], duration: 700 }, 250);
-    tl.add({
-      targets: cards,
-      translateY: [60, 0],
-      scale: [0.96, 1],
-      opacity: [0, 1],
-      duration: 800,
-      delay: a.stagger(120)
-    }, 400);
+    if (reducedMotion) {
+      showAll([eyebrow, h2, lead].concat(Array.prototype.slice.call(cards)));
+      return;
+    }
+    try {
+      var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
+      tl.add(eyebrow, { translateX: [-10, 0], opacity: [0, 1], duration: 700 }, 0);
+      tl.add(h2,      { translateY: [40, 0],  opacity: [0, 1], duration: 800 }, 100);
+      tl.add(lead,    { translateY: [20, 0],  opacity: [0, 1], duration: 700 }, 250);
+      tl.add(cards,   { translateY: [60, 0],  scale: [0.96, 1], opacity: [0, 1], duration: 800, delay: a.stagger(120) }, 400);
+    } catch (e) {
+      showAll([eyebrow, h2, lead].concat(Array.prototype.slice.call(cards)));
+    }
   }
 
   /* ─── S4: CHAMPIONS ─────────────────────────────────── */
+  function initChampionsState() {
+    var a = window.anime;
+    if (!a || reducedMotion) return;
+    var sec = document.querySelector('.champions');
+    if (!sec) return;
+    hide(sec.querySelector('.eyebrow'), 'translateY(16px)');
+    Array.prototype.forEach.call(sec.querySelectorAll('.champions-quote .word'), function (w) {
+      w.style.opacity = '0'; w.style.transform = 'translateY(20px)'; w.style.filter = 'blur(6px)';
+    });
+    hide(sec.querySelector('.champions-name'), 'translateY(16px)');
+    Array.prototype.forEach.call(sec.querySelectorAll('.title-line'), function (t) {
+      hide(t, 'translateY(12px)');
+    });
+  }
+
   function championsTimeline() {
     var a = window.anime;
     if (!a) return;
@@ -152,35 +165,31 @@
       ));
       return;
     }
-
-    if (eyebrow) { eyebrow.style.opacity = '0'; eyebrow.style.transform = 'translateY(16px)'; }
-    Array.prototype.forEach.call(words, function (w) { w.style.opacity = '0'; w.style.transform = 'translateY(20px)'; w.style.filter = 'blur(6px)'; });
-    if (name)    { name.style.opacity = '0'; name.style.transform = 'translateY(16px)'; }
-    Array.prototype.forEach.call(titles, function (t) { t.style.opacity = '0'; t.style.transform = 'translateY(12px)'; });
-
     var wordDuration = words.length ? (words.length * 80 + 650) : 0;
-
-    var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
-    tl.add({ targets: eyebrow, translateY: [16, 0], opacity: [0, 1], duration: 600 }, 0);
-    tl.add({
-      targets: words,
-      translateY: [20, 0],
-      opacity: [0, 1],
-      filter: ['blur(6px)', 'blur(0px)'],
-      duration: 650,
-      delay: a.stagger(80)
-    }, 150);
-    tl.add({ targets: name, translateY: [16, 0], opacity: [0, 1], duration: 700 }, 150 + wordDuration);
-    tl.add({
-      targets: titles,
-      translateY: [12, 0],
-      opacity: [0, 1],
-      duration: 600,
-      delay: a.stagger(100)
-    }, 150 + wordDuration + 200);
+    try {
+      var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
+      tl.add(eyebrow, { translateY: [16, 0], opacity: [0, 1], duration: 600 }, 0);
+      tl.add(words,   { translateY: [20, 0], opacity: [0, 1], filter: ['blur(6px)', 'blur(0px)'], duration: 650, delay: a.stagger(80) }, 150);
+      tl.add(name,    { translateY: [16, 0], opacity: [0, 1], duration: 700 }, 150 + wordDuration);
+      tl.add(titles,  { translateY: [12, 0], opacity: [0, 1], duration: 600, delay: a.stagger(100) }, 150 + wordDuration + 200);
+    } catch (e) {
+      showAll([eyebrow, name].concat(Array.prototype.slice.call(words), Array.prototype.slice.call(titles)));
+    }
   }
 
   /* ─── S7: HORARIOS ──────────────────────────────────── */
+  function initScheduleState() {
+    var a = window.anime;
+    if (!a || reducedMotion) return;
+    var sec = document.querySelector('.schedule');
+    if (!sec) return;
+    Array.prototype.forEach.call(sec.querySelectorAll('.section-head > *'), function (el) { hide(el, 'translateY(20px)'); });
+    Array.prototype.forEach.call(sec.querySelectorAll('.fight-card'), function (c) { hide(c, 'translateY(50px)'); });
+    Array.prototype.forEach.call(sec.querySelectorAll('.fc-slot, .fc-slot-sep'), function (s) { hide(s, 'translateX(-8px)'); });
+    var waBtn = sec.querySelector('[href*="wa.me"]');
+    if (waBtn) hide(waBtn, 'translateY(12px)');
+  }
+
   function scheduleTimeline() {
     var a = window.anime;
     if (!a) return;
@@ -190,39 +199,39 @@
     var waBtn   = sec.querySelector('[href*="wa.me"]');
 
     if (reducedMotion) {
-      showAll(Array.prototype.slice.call(headEls)
-        .concat(Array.prototype.slice.call(cards))
-        .concat(waBtn ? [waBtn] : []));
+      showAll(Array.prototype.slice.call(headEls).concat(Array.prototype.slice.call(cards)).concat(waBtn ? [waBtn] : []));
+      Array.prototype.forEach.call(sec.querySelectorAll('.fc-slot, .fc-slot-sep'), function (s) { showAll([s]); });
       return;
     }
-
-    Array.prototype.forEach.call(headEls, function (el) { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; });
-    Array.prototype.forEach.call(cards, function (c) { c.style.opacity = '0'; c.style.transform = 'translateY(50px)'; });
-    if (waBtn) { waBtn.style.opacity = '0'; waBtn.style.transform = 'translateY(12px)'; }
-
-    var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
-    tl.add({ targets: headEls, translateY: [20, 0], opacity: [0, 1], duration: 700, delay: a.stagger(100) }, 0);
-    tl.add({ targets: cards,   translateY: [50, 0], opacity: [0, 1], duration: 800, delay: a.stagger(150) }, 300);
-
-    /* Stagger fc-slots inside each card */
-    Array.prototype.forEach.call(cards, function (card, ci) {
-      var slots = card.querySelectorAll('.fc-slot, .fc-slot-sep');
-      Array.prototype.forEach.call(slots, function (s) { s.style.opacity = '0'; s.style.transform = 'translateX(-8px)'; });
-      tl.add({
-        targets: slots,
-        translateX: [-8, 0],
-        opacity: [0, 1],
-        duration: 500,
-        delay: a.stagger(60)
-      }, 300 + 150 * (ci + 1) + 200);
-    });
-
-    if (waBtn) {
-      tl.add({ targets: waBtn, translateY: [12, 0], opacity: [0, 1], duration: 600 }, 1000);
+    try {
+      var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
+      tl.add(headEls, { translateY: [20, 0], opacity: [0, 1], duration: 700, delay: a.stagger(100) }, 0);
+      tl.add(cards,   { translateY: [50, 0], opacity: [0, 1], duration: 800, delay: a.stagger(150) }, 300);
+      Array.prototype.forEach.call(cards, function (card, ci) {
+        var slots = card.querySelectorAll('.fc-slot, .fc-slot-sep');
+        tl.add(slots, { translateX: [-8, 0], opacity: [0, 1], duration: 500, delay: a.stagger(60) }, 300 + 150 * (ci + 1) + 200);
+      });
+      if (waBtn) tl.add(waBtn, { translateY: [12, 0], opacity: [0, 1], duration: 600 }, 1000);
+    } catch (e) {
+      showAll(Array.prototype.slice.call(headEls).concat(Array.prototype.slice.call(cards)).concat(waBtn ? [waBtn] : []));
+      Array.prototype.forEach.call(sec.querySelectorAll('.fc-slot, .fc-slot-sep'), function (s) { showAll([s]); });
     }
   }
 
   /* ─── S8: TAPA TEAM ─────────────────────────────────── */
+  function initTapaState() {
+    var a = window.anime;
+    if (!a || reducedMotion) return;
+    var sec = document.querySelector('.tapa');
+    if (!sec) return;
+    hide(sec.querySelector('.eyebrow'),     'translateY(20px)');
+    hide(sec.querySelector('.tt-title'),    'translateY(50px)');
+    hide(sec.querySelector('.tapa-copy > p'), 'translateY(20px)');
+    Array.prototype.forEach.call(sec.querySelectorAll('.tt-stat'), function (s) { hide(s, 'translateY(16px)'); });
+    Array.prototype.forEach.call(sec.querySelectorAll('.tapa-ctas .btn'), function (b) { hide(b, 'translateY(12px)'); });
+    hide(sec.querySelector('.tapa-media'), 'translateX(60px)');
+  }
+
   function tapaTimeline() {
     var a = window.anime;
     if (!a) return;
@@ -234,26 +243,34 @@
     var btns    = sec.querySelectorAll('.tapa-ctas .btn');
     var media   = sec.querySelector('.tapa-media');
 
-    var copyEls = [eyebrow, title, lead].filter(Boolean);
-    var all = copyEls.concat(Array.prototype.slice.call(stats)).concat(Array.prototype.slice.call(btns)).concat(media ? [media] : []);
-
-    if (reducedMotion) { showAll(all); return; }
-
-    copyEls.forEach(function (el) { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; });
-    Array.prototype.forEach.call(stats, function (s) { s.style.opacity = '0'; s.style.transform = 'translateY(16px)'; });
-    Array.prototype.forEach.call(btns, function (b) { b.style.opacity = '0'; b.style.transform = 'translateY(12px)'; });
-    if (media) { media.style.opacity = '0'; media.style.transform = 'translateX(60px)'; }
-
-    var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
-    tl.add({ targets: eyebrow, translateY: [20, 0], opacity: [0, 1], duration: 600 }, 0);
-    tl.add({ targets: title,   translateY: [50, 0], opacity: [0, 1], duration: 800 }, 120);
-    tl.add({ targets: lead,    translateY: [20, 0], opacity: [0, 1], duration: 700 }, 260);
-    tl.add({ targets: stats,   translateY: [16, 0], opacity: [0, 1], duration: 600, delay: a.stagger(100) }, 380);
-    tl.add({ targets: btns,    translateY: [12, 0], opacity: [0, 1], duration: 600, delay: a.stagger(100) }, 600);
-    tl.add({ targets: media,   translateX: [60, 0], opacity: [0, 1], duration: 1000 }, 0);
+    if (reducedMotion) {
+      showAll([eyebrow, title, lead, media].concat(Array.prototype.slice.call(stats)).concat(Array.prototype.slice.call(btns)));
+      return;
+    }
+    try {
+      var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
+      tl.add(eyebrow, { translateY: [20, 0], opacity: [0, 1], duration: 600 }, 0);
+      tl.add(title,   { translateY: [50, 0], opacity: [0, 1], duration: 800 }, 120);
+      tl.add(lead,    { translateY: [20, 0], opacity: [0, 1], duration: 700 }, 260);
+      tl.add(stats,   { translateY: [16, 0], opacity: [0, 1], duration: 600, delay: a.stagger(100) }, 380);
+      tl.add(btns,    { translateY: [12, 0], opacity: [0, 1], duration: 600, delay: a.stagger(100) }, 600);
+      if (media) tl.add(media, { translateX: [60, 0], opacity: [0, 1], duration: 1000 }, 0);
+    } catch (e) {
+      showAll([eyebrow, title, lead, media].concat(Array.prototype.slice.call(stats)).concat(Array.prototype.slice.call(btns)));
+    }
   }
 
   /* ─── S9: COMUNIDAD ─────────────────────────────────── */
+  function initCommunityState() {
+    var a = window.anime;
+    if (!a || reducedMotion) return;
+    var sec = document.querySelector('.community');
+    if (!sec) return;
+    Array.prototype.forEach.call(sec.querySelectorAll('.section-head > *'), function (el) { hide(el, 'translateY(20px)'); });
+    var filters = sec.querySelector('.comm-filters');
+    if (filters) hide(filters, 'translateY(12px)');
+  }
+
   function communityTimeline() {
     var a = window.anime;
     if (!a) return;
@@ -266,39 +283,55 @@
       showAll(Array.prototype.slice.call(headEls).concat(filters ? [filters] : []));
       return;
     }
-
-    Array.prototype.forEach.call(headEls, function (el) { el.style.opacity = '0'; el.style.transform = 'translateY(20px)'; });
-    if (filters) { filters.style.opacity = '0'; filters.style.transform = 'translateY(12px)'; }
-
-    var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
-    tl.add({ targets: headEls, translateY: [20, 0], opacity: [0, 1], duration: 700, delay: a.stagger(100) }, 0);
-    if (filters) {
-      tl.add({ targets: filters, translateY: [12, 0], opacity: [0, 1], duration: 600 }, 300);
+    try {
+      var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
+      tl.add(headEls, { translateY: [20, 0], opacity: [0, 1], duration: 700, delay: a.stagger(100) }, 0);
+      if (filters) tl.add(filters, { translateY: [12, 0], opacity: [0, 1], duration: 600 }, 300);
+    } catch (e) {
+      showAll(Array.prototype.slice.call(headEls).concat(filters ? [filters] : []));
     }
 
-    /* MutationObserver: animate photos as Supabase inserts them */
     if (!grid) return;
     var animated = false;
     var mo = new MutationObserver(function (mutations) {
       var newItems = [];
       mutations.forEach(function (m) {
         m.addedNodes.forEach(function (node) {
-          if (node.nodeType === 1 && node.classList.contains('comm-item')) {
-            newItems.push(node);
-          }
+          if (node.nodeType === 1 && node.classList.contains('comm-item')) newItems.push(node);
         });
       });
       if (!newItems.length) return;
-      if (animated) {
-        Array.prototype.forEach.call(newItems, function (item) { item.style.opacity = '0'; item.style.transform = 'scale(0.9)'; });
-        a.animate(newItems, { opacity: [0, 1], scale: [0.9, 1], duration: 400, easing: 'easeOutExpo', delay: a.stagger(40) });
-      } else {
-        animated = true;
-        Array.prototype.forEach.call(newItems, function (item) { item.style.opacity = '0'; item.style.transform = 'scale(0.9)'; });
-        a.animate(newItems, { opacity: [0, 1], scale: [0.9, 1], duration: 500, easing: 'easeOutExpo', delay: a.stagger(50, { start: 300 }) });
+      Array.prototype.forEach.call(newItems, function (item) { item.style.opacity = '0'; item.style.transform = 'scale(0.9)'; });
+      var startDelay = animated ? 0 : 300;
+      animated = true;
+      try {
+        a.animate(newItems, { opacity: [0, 1], scale: [0.9, 1], duration: 500, easing: 'easeOutExpo', delay: a.stagger(50, { start: startDelay }) });
+      } catch (e) {
+        showAll(newItems);
       }
     });
     mo.observe(grid, { childList: true });
   }
+
+  /* ─── MAIN INIT ─────────────────────────────────────── */
+  document.addEventListener('DOMContentLoaded', function () {
+    /* 1. Set ALL initial hidden states immediately (before any observer fires) */
+    initHeroState();
+    initAcademyState();
+    initChampionsState();
+    initScheduleState();
+    initTapaState();
+    initCommunityState();
+
+    /* 2. Run hero immediately */
+    heroSequence();
+
+    /* 3. Wire up scroll observers */
+    observeSection(document.querySelector('.disciplines'), academyTimeline,  0.12);
+    observeSection(document.querySelector('.champions'),   championsTimeline, 0.15);
+    observeSection(document.querySelector('.schedule'),    scheduleTimeline,  0.10);
+    observeSection(document.querySelector('.tapa'),        tapaTimeline,      0.12);
+    observeSection(document.querySelector('.community'),   communityTimeline, 0.10);
+  });
 
 })();
