@@ -663,19 +663,10 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 .champions-quote b { color: var(--bfc-red); }
 .champions-quote .word {
   display: inline-block;
-  opacity: 0;
-  transform: translateY(30px);
-}
-.champions.in-view .champions-quote .word {
-  animation: fadeUpWord 650ms var(--ease-out-expo) forwards;
 }
 .champions-name {
   margin-top: 3rem;
   display: flex; flex-direction: column; gap: 0.25rem;
-  opacity: 0;
-}
-.champions.in-view .champions-name {
-  animation: fadeUp 800ms var(--ease-out-expo) 1.8s forwards;
 }
 .champions-name .role {
   font-size: var(--fs-xs);
@@ -702,14 +693,6 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
   transform: translateY(12px);
 }
 .title-line:last-child { border-bottom: var(--border-hair); }
-.champions.in-view .title-line {
-  animation: fadeUp 650ms var(--ease-out-expo) forwards;
-}
-.champions.in-view .title-line:nth-child(1) { animation-delay: 2.1s; }
-.champions.in-view .title-line:nth-child(2) { animation-delay: 2.3s; }
-.champions.in-view .title-line:nth-child(3) { animation-delay: 2.5s; }
-.champions.in-view .title-line:nth-child(4) { animation-delay: 2.7s; }
-.champions.in-view .title-line:nth-child(5) { animation-delay: 2.9s; }
 .title-year {
   font-family: var(--ff-mono);
   color: var(--bfc-red);
