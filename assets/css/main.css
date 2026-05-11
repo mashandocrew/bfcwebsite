@@ -384,8 +384,6 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--bfc-bone-dim);
-  opacity: 0;
-  animation: fadeUp 800ms var(--ease-out-expo) 500ms forwards;
 }
 .hero-location::before {
   content: ''; width: 40px; height: 1px; background: var(--bfc-red);
@@ -399,8 +397,6 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--bfc-bone);
-  opacity: 0;
-  animation: fadeUp 800ms var(--ease-out-expo) 1000ms forwards;
 }
 .hero-tag .dot {
   width: 6px; height: 6px; background: var(--bfc-red);
@@ -425,31 +421,21 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 }
 .hero-title .line > span {
   display: block;
-  transform: translateY(110%);
-  animation: lineReveal 1100ms var(--ease-out-expo) forwards;
 }
-.hero-title .line:nth-child(1) > span { animation-delay: 1400ms; }
-.hero-title .line:nth-child(2) > span { animation-delay: 1600ms; color: var(--bfc-red); }
-.hero-title .line:nth-child(3) > span { animation-delay: 1800ms; }
+.hero-title .line:nth-child(2) > span { color: var(--bfc-red); }
 .hero-sub {
   font-size: var(--fs-md);
   max-width: 36ch;
   margin-top: 1.5rem;
   color: var(--bfc-bone-dim);
-  opacity: 0;
-  animation: fadeUp 900ms var(--ease-out-expo) 2200ms forwards;
 }
 .hero-ctas {
   display: flex; flex-wrap: wrap; gap: 0.8rem;
   margin-top: 2rem;
-  opacity: 0;
-  animation: fadeUp 900ms var(--ease-out-expo) 2500ms forwards;
 }
 .hero-side {
   display: flex; flex-direction: column; align-items: flex-end;
   gap: 2rem;
-  opacity: 0;
-  animation: fadeUp 900ms var(--ease-out-expo) 2800ms forwards;
 }
 .hero-hashtag {
   font-family: var(--ff-display);
