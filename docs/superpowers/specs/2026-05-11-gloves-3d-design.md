@@ -33,8 +33,6 @@ Insertar **entre** `</section>` de Champions y `<section class="section history"
     <div class="gloves-grid">
       <div class="gloves-canvas-wrap reveal" data-gloves-canvas>
         <canvas class="gloves-canvas" aria-hidden="true"></canvas>
-        <img class="gloves-fallback" src="assets/images/gloves-fallback.jpg"
-             alt="Guantes de boxeo" hidden>
       </div>
       <div class="gloves-copy reveal">
         <span class="eyebrow"><span data-i18n="gloves.eyebrow">Forjados en el ring</span></span>
@@ -46,7 +44,7 @@ Insertar **entre** `</section>` de Champions y `<section class="section history"
 </section>
 ```
 
-Nota: el `<img class="gloves-fallback">` arranca con `hidden`. `gloves3d.js` lo des-oculta y oculta el canvas si WebGL o el load fallan. Si la imagen no existe (todavía), el `<img>` queda con broken-icon — para evitarlo, hasta que se genere el PNG, el JS oculta tanto el canvas como el `<img>` en caso de fallo, y la sección queda solo con el texto (criterio de "graceful degradation, no broken pixels").
+Sin fallback de imagen: si WebGL falla o el modelo no carga, `gloves3d.js` oculta el contenedor entero (`.gloves-canvas-wrap`) y el grid colapsa a una sola columna con solo el texto. Sin pixeles rotos.
 
 ---
 
@@ -81,13 +79,8 @@ Agregar al final de `assets/css/main.css` (antes del bloque `@media (prefers-red
   width: 100%;
   height: 100%;
 }
-.gloves-fallback {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.gloves-canvas-wrap.is-hidden { display: none; }
+.gloves-grid.is-text-only { grid-template-columns: 1fr; }
 .gloves-copy .eyebrow { margin-bottom: 1rem; }
 .gloves-copy .hl {
   font-family: var(--ff-display);
@@ -142,24 +135,18 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
   const wrap = document.querySelector('[data-gloves-canvas]');
   if (!wrap) return;
   const canvas = wrap.querySelector('.gloves-canvas');
-  const fallback = wrap.querySelector('.gloves-fallback');
 
-  function showFallback() {
-    if (canvas) canvas.style.display = 'none';
-    // Solo mostrar el <img> si tiene src y carga correctamente
-    if (fallback && fallback.complete && fallback.naturalWidth > 0) {
-      fallback.hidden = false;
-    } else if (fallback) {
-      fallback.addEventListener('load', () => { fallback.hidden = false; });
-      fallback.addEventListener('error', () => { /* deja todo oculto */ });
-    }
+  function hideCanvas() {
+    wrap.classList.add('is-hidden');
+    const grid = wrap.closest('.gloves-grid');
+    if (grid) grid.classList.add('is-text-only');
   }
 
   let renderer;
   try {
     renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
   } catch (e) {
-    showFallback();
+    hideCanvas();
     return;
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -205,7 +192,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
     undefined,
     (err) => {
       console.warn('Gloves model failed to load', err);
-      showFallback();
+      hideCanvas();
     }
   );
 
@@ -337,11 +324,7 @@ El canvas no se anima por anime.js — three.js arranca solo cuando el `Intersec
 
 ## Fallback
 
-1. **Sin WebGL:** `new WebGLRenderer` falla → `showFallback()` muestra `<img class="gloves-fallback">` si la imagen existe.
-2. **GLB falla:** `loader.load` error → mismo `showFallback()`.
-3. **Imagen tampoco existe:** el `<img>` queda `hidden`, el canvas también — la sección queda solo con el texto. Sin pixeles rotos.
-
-La imagen `assets/images/gloves-fallback.jpg` no se genera en este plan. Si querés, después la generamos con un screenshot del canvas en condiciones normales y la commiteamos.
+Sin fallback de imagen. Si WebGL no inicializa o el GLB no carga, el JS oculta `.gloves-canvas-wrap` (display: none) y agrega `.is-text-only` al grid para que colapse a una sola columna. La sección queda solo con el texto, sin pixeles rotos.
 
 ---
 
@@ -365,5 +348,5 @@ La imagen `assets/images/gloves-fallback.jpg` no se genera en este plan. Si quer
 - [ ] Cuando la sección no está en viewport, no se renderea (no CPU spin).
 - [ ] En móvil (<1024px) el layout es vertical: canvas arriba, texto abajo.
 - [ ] `prefers-reduced-motion`: el modelo se ve estático, sin animación.
-- [ ] Si WebGL no carga o el GLB falla, la sección no muestra pixeles rotos.
+- [ ] Si WebGL no carga o el GLB falla, el canvas-wrap se oculta y la sección queda solo con texto a una columna (sin pixeles rotos).
 - [ ] El hero, el carrusel y las otras secciones siguen funcionando igual.
