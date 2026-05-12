@@ -1623,6 +1623,65 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
   .prof-card { grid-template-rows: 260px auto; }
 }
 
+/* ---------- GLOVES 3D ---------- */
+.gloves {
+  background: var(--bfc-black);
+  position: relative;
+  overflow: hidden;
+}
+.gloves-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  min-height: 70vh;
+}
+.gloves-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  border: var(--border-hair);
+  background: radial-gradient(ellipse at center, rgba(40,0,8,0.4) 0%, rgba(10,10,10,1) 70%);
+  overflow: hidden;
+}
+.gloves-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.gloves-canvas-wrap.is-hidden { display: none; }
+.gloves-grid.is-text-only { grid-template-columns: 1fr; }
+.gloves-copy .eyebrow { margin-bottom: 1rem; }
+.gloves-copy .hl {
+  font-family: var(--ff-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  color: var(--bfc-bone);
+  text-transform: uppercase;
+}
+.gloves-copy p {
+  margin-top: 1.2rem;
+  max-width: 42ch;
+  color: var(--bfc-bone-dim);
+  font-size: var(--fs-md);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .gloves-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    min-height: 0;
+  }
+  .gloves-canvas-wrap { height: 60vh; min-height: 380px; }
+}
+
+@media (max-width: 640px) {
+  .gloves-canvas-wrap { height: 50vh; min-height: 320px; }
+  .gloves-copy .hl { font-size: clamp(2rem, 9vw, 3rem); }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
