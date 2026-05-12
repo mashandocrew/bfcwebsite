@@ -150,39 +150,48 @@
       <p data-i18n="disc.lead">Cuatro disciplinas, una sola filosofía: disciplina, respeto y voluntad para competir al más alto nivel.</p>
     </header>
 
-    <div class="disc-grid reveal">
-      <a href="#schedule" class="disc-card">
-        <div class="disc-bg" style="background-image:url('assets/images/gimnasio-1.webp');"></div>
-        <div class="disc-num">/ 01</div>
-        <div>
-          <div class="eyebrow" data-i18n="disc.k1.kicker">Stand-up striking</div>
-          <h3 class="disc-title" data-i18n="disc.k1.name">K1 Kickboxing</h3>
-          <p class="disc-desc" data-i18n="disc.k1.desc">Técnica de golpeo japonés que combina boxeo con patadas. Ritmo, explosividad y precisión.</p>
-          <span class="disc-link"><span data-i18n="disc.k1.cta">Conocer la clase</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
-        </div>
-      </a>
+    <div class="disc-carousel reveal" data-disc-carousel>
+      <div class="disc-track">
+        <article class="disc-card" data-disc-index="0">
+          <div class="disc-bg" style="background-image:url('assets/images/gimnasio-1.webp');"></div>
+          <div class="disc-num">/ 01</div>
+          <div>
+            <div class="eyebrow" data-i18n="disc.k1.kicker">Stand-up striking</div>
+            <h3 class="disc-title" data-i18n="disc.k1.name">K1 Kickboxing</h3>
+            <p class="disc-desc" data-i18n="disc.k1.desc">Técnica de golpeo japonés que combina boxeo con patadas. Ritmo, explosividad y precisión.</p>
+            <a href="#schedule" class="disc-link" tabindex="-1"><span data-i18n="disc.k1.cta">Conocer la clase</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
 
-      <a href="#schedule" class="disc-card">
-        <div class="disc-bg" style="background-image:url('assets/images/gimnasio-2.webp');"></div>
-        <div class="disc-num">/ 02</div>
-        <div>
-          <div class="eyebrow" data-i18n="disc.mt.kicker">The art of eight limbs</div>
-          <h3 class="disc-title" data-i18n="disc.mt.name">Muay Thai</h3>
-          <p class="disc-desc" data-i18n="disc.mt.desc">Boxeo tailandés: puños, codos, rodillas y patadas. La disciplina más completa de pie.</p>
-          <span class="disc-link"><span data-i18n="disc.mt.cta">Conocer la clase</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
-        </div>
-      </a>
+        <article class="disc-card" data-disc-index="1">
+          <div class="disc-bg" style="background-image:url('assets/images/gimnasio-2.webp');"></div>
+          <div class="disc-num">/ 02</div>
+          <div>
+            <div class="eyebrow" data-i18n="disc.mt.kicker">The art of eight limbs</div>
+            <h3 class="disc-title" data-i18n="disc.mt.name">Muay Thai</h3>
+            <p class="disc-desc" data-i18n="disc.mt.desc">Boxeo tailandés: puños, codos, rodillas y patadas. La disciplina más completa de pie.</p>
+            <a href="#schedule" class="disc-link" tabindex="-1"><span data-i18n="disc.mt.cta">Conocer la clase</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
 
-      <a href="#tapa" class="disc-card gold">
-        <div class="disc-bg" style="background-image:url('assets/images/tapa-team.jpg');"></div>
-        <div class="disc-num">/ 03</div>
-        <div>
-          <div class="eyebrow gold" data-i18n="disc.mma.kicker">Tapa Team</div>
-          <h3 class="disc-title" data-i18n="disc.mma.name">MMA &amp; Wrestling</h3>
-          <p class="disc-desc" data-i18n="disc.mma.desc">Artes marciales mixtas y lucha. El futuro del combate completo en Mendoza.</p>
-          <span class="disc-link"><span data-i18n="disc.mma.cta">Ver Tapa Team</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></span>
-        </div>
-      </a>
+        <article class="disc-card gold" data-disc-index="2">
+          <div class="disc-bg" style="background-image:url('assets/images/tapa-team.jpg');"></div>
+          <div class="disc-num">/ 03</div>
+          <div>
+            <div class="eyebrow gold" data-i18n="disc.mma.kicker">Tapa Team</div>
+            <h3 class="disc-title" data-i18n="disc.mma.name">MMA &amp; Wrestling</h3>
+            <p class="disc-desc" data-i18n="disc.mma.desc">Artes marciales mixtas y lucha. El futuro del combate completo en Mendoza.</p>
+            <a href="#tapa" class="disc-link" tabindex="-1"><span data-i18n="disc.mma.cta">Ver Tapa Team</span> <i class="ph ph-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </article>
+      </div>
+
+      <button class="disc-arrow disc-arrow-prev" type="button" aria-label="Modalidad anterior">
+        <i class="ph ph-caret-left" aria-hidden="true"></i>
+      </button>
+      <button class="disc-arrow disc-arrow-next" type="button" aria-label="Modalidad siguiente">
+        <i class="ph ph-caret-right" aria-hidden="true"></i>
+      </button>
     </div>
   </div>
 </section>
