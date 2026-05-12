@@ -120,6 +120,8 @@
 
     if (reducedMotion) {
       showAll([eyebrow, h2, lead].concat(Array.prototype.slice.call(cards)));
+      var rootRM = sec.querySelector('[data-disc-carousel]');
+      if (rootRM) rootRM.dispatchEvent(new CustomEvent('disc:ready'));
       return;
     }
     try {
@@ -128,6 +130,14 @@
       tl.add(h2,      { translateY: [40, 0],  opacity: [0, 1], duration: 800 }, 100);
       tl.add(lead,    { translateY: [20, 0],  opacity: [0, 1], duration: 700 }, 250);
       tl.add(cards,   { translateY: [60, 0],  scale: [0.96, 1], opacity: [0, 1], duration: 800, delay: a.stagger(120) }, 400);
+      tl.call(function () {
+        Array.prototype.forEach.call(cards, function (c) {
+          c.style.transform = '';
+          c.style.opacity = '';
+        });
+        var root = sec.querySelector('[data-disc-carousel]');
+        if (root) root.dispatchEvent(new CustomEvent('disc:ready'));
+      });
     } catch (e) {
       showAll([eyebrow, h2, lead].concat(Array.prototype.slice.call(cards)));
     }
