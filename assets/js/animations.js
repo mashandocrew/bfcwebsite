@@ -187,6 +187,36 @@
     }
   }
 
+  /* ─── S5: GLOVES ───────────────────────────────────── */
+  function initGlovesState() {
+    var a = window.anime;
+    if (!a || reducedMotion) return;
+    var sec = document.querySelector('.gloves');
+    if (!sec) return;
+    hide(sec.querySelector('.gloves-copy .eyebrow'), 'translateY(16px)');
+    hide(sec.querySelector('.gloves-copy h2'),       'translateY(40px)');
+    hide(sec.querySelector('.gloves-copy p'),        'translateY(20px)');
+  }
+
+  function glovesTimeline() {
+    var a = window.anime;
+    if (!a) return;
+    var sec     = document.querySelector('.gloves');
+    if (!sec) return;
+    var eyebrow = sec.querySelector('.gloves-copy .eyebrow');
+    var h2      = sec.querySelector('.gloves-copy h2');
+    var lead    = sec.querySelector('.gloves-copy p');
+    if (reducedMotion) { showAll([eyebrow, h2, lead]); return; }
+    try {
+      var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
+      tl.add(eyebrow, { translateY: [16, 0], opacity: [0, 1], duration: 600 }, 0);
+      tl.add(h2,      { translateY: [40, 0], opacity: [0, 1], duration: 800 }, 120);
+      tl.add(lead,    { translateY: [20, 0], opacity: [0, 1], duration: 700 }, 280);
+    } catch (e) {
+      showAll([eyebrow, h2, lead]);
+    }
+  }
+
   /* ─── S7: HORARIOS ──────────────────────────────────── */
   function initScheduleState() {
     var a = window.anime;
@@ -329,6 +359,7 @@
     initHeroState();
     initAcademyState();
     initChampionsState();
+    initGlovesState();
     initScheduleState();
     initTapaState();
     initCommunityState();
@@ -339,6 +370,7 @@
     /* 3. Wire up scroll observers */
     observeSection(document.querySelector('.disciplines'), academyTimeline,  0.12);
     observeSection(document.querySelector('.champions'),   championsTimeline, 0.15);
+    observeSection(document.querySelector('.gloves'),      glovesTimeline,    0.15);
     observeSection(document.querySelector('.schedule'),    scheduleTimeline,  0.10);
     observeSection(document.querySelector('.tapa'),        tapaTimeline,      0.12);
     observeSection(document.querySelector('.community'),   communityTimeline, 0.10);

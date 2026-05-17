@@ -75,6 +75,11 @@ const BFC_I18N = {
         { year: '2025', name: 'Distinguido por el Senado de Mendoza',   belt: 'Honor Provincial' }
       ]
     },
+    gloves: {
+      eyebrow: 'Forjados en el ring',
+      title: 'Cada golpe cuenta.',
+      desc: 'Disciplina, técnica y voluntad. Cada entrenamiento te acerca al próximo combate.'
+    },
     history: {
       eyebrow: '03 — Historia',
       title: 'Quince años <b>forjando leyendas</b> en Cuyo.',
@@ -245,6 +250,11 @@ const BFC_I18N = {
         { year: '2025', name: 'Honored by the Senate of Mendoza',  belt: 'Provincial honor' }
       ]
     },
+    gloves: {
+      eyebrow: 'Forged in the ring',
+      title: 'Every punch counts.',
+      desc: 'Discipline, technique and will. Every training session brings you closer to the next fight.'
+    },
     history: {
       eyebrow: '03 — History',
       title: 'Fifteen years <b>forging legends</b> in Cuyo.',
@@ -385,6 +395,11 @@ const BFC_I18N = {
         { year: '2025', name: 'Campeão Sul-Americano — FFG (KO vs Jonas Coelho, Brasil)', belt: 'Título Continental' },
         { year: '2025', name: 'Homenageado pelo Senado de Mendoza',   belt: 'Honra Provincial' }
       ]
+    },
+    gloves: {
+      eyebrow: 'Forjados no ringue',
+      title: 'Cada golpe conta.',
+      desc: 'Disciplina, técnica e vontade. Cada treino te aproxima do próximo combate.'
     },
     history: {
       eyebrow: '03 — História',
