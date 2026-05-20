@@ -1625,40 +1625,49 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 
 /* ---------- GLOVES 3D ---------- */
 .gloves {
-  background: var(--bfc-black);
+  background: radial-gradient(ellipse at 70% 50%, #1a0007 0%, var(--bfc-black) 60%);
   position: relative;
   overflow: hidden;
-}
-.gloves-grid {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: 3rem;
+  min-height: 92vh;
+  display: flex;
   align-items: center;
-  min-height: 70vh;
-}
-.gloves-canvas-wrap {
-  position: relative;
-  width: 100%;
-  height: 520px;
-  border: var(--border-hair);
-  background: radial-gradient(ellipse at center, rgba(40,0,8,0.4) 0%, rgba(10,10,10,1) 70%);
-  overflow: hidden;
+  padding-top: var(--section-pad-y);
+  padding-bottom: var(--section-pad-y);
 }
 .gloves-canvas {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+  display: block;
 }
-.gloves-canvas-wrap.is-hidden { display: none; }
-.gloves-grid.is-text-only { grid-template-columns: 1fr; }
+.gloves-canvas.is-hidden { display: none; }
+.gloves-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to right, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.55) 38%, rgba(10,10,10,0.08) 70%, transparent 100%),
+    linear-gradient(to top,    rgba(10,10,10,0.55) 0%, transparent 45%),
+    linear-gradient(to bottom, rgba(10,10,10,0.55) 0%, transparent 45%);
+  pointer-events: none;
+  z-index: 1;
+}
+.gloves .container {
+  position: relative;
+  z-index: 2;
+}
+.gloves-copy {
+  max-width: 540px;
+}
 .gloves-copy .eyebrow { margin-bottom: 1rem; }
 .gloves-copy .hl {
   font-family: var(--ff-display);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  line-height: 0.95;
+  font-size: clamp(3rem, 6.2vw, 6.5rem);
+  line-height: 0.92;
   letter-spacing: 0.02em;
   color: var(--bfc-bone);
   text-transform: uppercase;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.6);
 }
 .gloves-copy p {
   margin-top: 1.2rem;
@@ -1666,20 +1675,18 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
   color: var(--bfc-bone-dim);
   font-size: var(--fs-md);
   line-height: 1.6;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.55);
 }
 
-@media (max-width: 1024px) {
-  .gloves-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    min-height: 0;
+@media (max-width: 768px) {
+  .gloves {
+    min-height: 78vh;
+    align-items: flex-end;
   }
-  .gloves-canvas-wrap { height: 60vh; min-height: 380px; }
-}
-
-@media (max-width: 640px) {
-  .gloves-canvas-wrap { height: 50vh; min-height: 320px; }
-  .gloves-copy .hl { font-size: clamp(2rem, 9vw, 3rem); }
+  .gloves-overlay {
+    background: linear-gradient(to top, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.1) 100%);
+  }
+  .gloves-copy .hl { font-size: clamp(2.5rem, 10vw, 3.8rem); }
 }
 
 /* Reduced motion */
