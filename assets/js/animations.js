@@ -84,9 +84,9 @@
     try {
       var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
       tl.add(nav,   { translateY: ['-100%', '0'], opacity: [0, 1], duration: 600 }, 0);
-      tl.add(line1, { translateY: ['110%', '0'], duration: 900 }, 200);
-      tl.add(line2, { translateY: ['110%', '0'], duration: 900 }, 400);
-      tl.add(line3, { translateY: ['110%', '0'], duration: 900 }, 600);
+      tl.add(line1, { translateY: ['110%', '0'], opacity: [0, 1], duration: 900 }, 200);
+      tl.add(line2, { translateY: ['110%', '0'], opacity: [0, 1], duration: 900 }, 400);
+      tl.add(line3, { translateY: ['110%', '0'], opacity: [0, 1], duration: 900 }, 600);
       tl.add(sub,   { translateY: [20, 0], opacity: [0, 1], filter: ['blur(8px)', 'blur(0px)'], duration: 800 }, 900);
       tl.add(btns,  { translateY: [16, 0], opacity: [0, 1], duration: 700, delay: a.stagger(120) }, 1100);
       tl.add(side,  { translateY: [10, 0], opacity: [0, 1], duration: 700 }, 1400);
