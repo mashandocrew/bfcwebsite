@@ -47,17 +47,11 @@
     if (!a || reducedMotion) return;
 
     var nav    = document.getElementById('nav');
-    var line1  = document.querySelector('.hero-title .line:nth-child(1) > span');
-    var line2  = document.querySelector('.hero-title .line:nth-child(2) > span');
-    var line3  = document.querySelector('.hero-title .line:nth-child(3) > span');
     var sub    = document.querySelector('.hero-sub');
     var btns   = document.querySelectorAll('.hero-ctas .btn');
     var side   = document.querySelector('.hero-side');
 
     hide(nav,   'translateY(-100%)');
-    hide(line1, 'translateY(110%)');
-    hide(line2, 'translateY(110%)');
-    hide(line3, 'translateY(110%)');
     if (sub)  { sub.style.opacity = '0';  sub.style.transform = 'translateY(20px)';  sub.style.filter = 'blur(8px)'; }
     Array.prototype.forEach.call(btns, function (b) { hide(b, 'translateY(16px)'); });
     hide(side, 'translateY(10px)');
@@ -69,29 +63,23 @@
     if (!a) return;
 
     var nav    = document.getElementById('nav');
-    var line1  = document.querySelector('.hero-title .line:nth-child(1) > span');
-    var line2  = document.querySelector('.hero-title .line:nth-child(2) > span');
-    var line3  = document.querySelector('.hero-title .line:nth-child(3) > span');
     var sub    = document.querySelector('.hero-sub');
     var btns   = document.querySelectorAll('.hero-ctas .btn');
     var side   = document.querySelector('.hero-side');
 
     if (reducedMotion) {
-      showAll([nav, line1, line2, line3, sub, side].concat(Array.prototype.slice.call(btns)));
+      showAll([nav, sub, side].concat(Array.prototype.slice.call(btns)));
       return;
     }
 
     try {
       var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
-      tl.add(nav,   { translateY: ['-100%', '0'], opacity: [0, 1], duration: 600 }, 0);
-      tl.add(line1, { translateY: ['110%', '0'], opacity: [0, 1], duration: 900 }, 200);
-      tl.add(line2, { translateY: ['110%', '0'], opacity: [0, 1], duration: 900 }, 400);
-      tl.add(line3, { translateY: ['110%', '0'], opacity: [0, 1], duration: 900 }, 600);
-      tl.add(sub,   { translateY: [20, 0], opacity: [0, 1], filter: ['blur(8px)', 'blur(0px)'], duration: 800 }, 900);
-      tl.add(btns,  { translateY: [16, 0], opacity: [0, 1], duration: 700, delay: a.stagger(120) }, 1100);
-      tl.add(side,  { translateY: [10, 0], opacity: [0, 1], duration: 700 }, 1400);
+      tl.add(nav,  { translateY: ['-100%', '0'], opacity: [0, 1], duration: 600 }, 0);
+      tl.add(sub,  { translateY: [20, 0], opacity: [0, 1], filter: ['blur(8px)', 'blur(0px)'], duration: 800 }, 900);
+      tl.add(btns, { translateY: [16, 0], opacity: [0, 1], duration: 700, delay: a.stagger(120) }, 1100);
+      tl.add(side, { translateY: [10, 0], opacity: [0, 1], duration: 700 }, 1400);
     } catch (e) {
-      showAll([nav, line1, line2, line3, sub, side].concat(Array.prototype.slice.call(btns)));
+      showAll([nav, sub, side].concat(Array.prototype.slice.call(btns)));
     }
   }
 
