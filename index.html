@@ -52,6 +52,7 @@
       <a href="#academy"   data-i18n="nav.academy">Academia</a>
       <a href="#coaches"   data-i18n="nav.coaches">Profesores</a>
       <a href="#schedule"  data-i18n="nav.schedule">Horarios</a>
+      <a href="#galeria"   data-i18n="nav.gallery">Galería</a>
       <a href="#tapa"      data-i18n="nav.tapa">Tapa Team</a>
       <a href="store/"     data-i18n="nav.store">Tienda</a>
       <a href="#contact"   data-i18n="nav.contact">Contacto</a>
@@ -249,31 +250,16 @@
       </div>
 
       <div class="history-media reveal-x">
-        <div style="
-          width: 100%;
-          height: 100%;
-          min-height: 400px;
-          background: rgba(255,255,255,0.03);
-          border: 2px dashed rgba(200,16,46,0.3);
-          border-radius: 8px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 12px;
-          color: rgba(255,255,255,0.3);
-          font-family: Outfit, sans-serif;
-        ">
-          <span style="font-size:48px">📷</span>
-          <span style="font-size:14px">FOTO PENDIENTE DE CARGA</span>
-          <span style="font-size:12px; color:rgba(200,16,46,0.5)">
-            assets/images/historia-bfc.jpg
-          </span>
+        <div class="history-img-wrap" data-parallax-history>
+          <img
+            src="assets/images/histora-bfc.jpg"
+            alt="Historia Bonati Fight Club · Walter Bonati"
+            loading="lazy"
+            draggable="false"
+          />
+          <div class="history-media-frame"></div>
+          <div class="history-media-caption">WALTER, TAPA Y GASTÓN · ARGENTINA</div>
         </div>
-        <!-- TODO: reemplazar placeholder con la foto definitiva -->
-        <!-- <img src="assets/images/historia-bfc.jpg" alt="Walter Bonati y Gastón Silva con título" loading="lazy" /> -->
-        <div class="history-media-frame"></div>
-        <div class="history-media-caption">WALTER + GASTÓN · MENDOZA</div>
       </div>
     </div>
   </div>
@@ -431,33 +417,16 @@
 </section>
 
 <!-- =========================
-     COMUNIDAD BFC
+     GALERÍA BFC
      ========================= -->
-<section class="section community" id="community">
+<section class="section gallery-section" id="galeria">
   <div class="container">
     <header class="section-head reveal">
-      <span class="eyebrow"><span data-i18n="comm.eyebrow">07 — Comunidad</span></span>
-      <h2 class="hl" data-i18n-html="comm.title">Comunidad <b>BFC.</b></h2>
-      <p data-i18n="comm.lead">Las fotos de nuestra gente. El gimnasio visto desde adentro.</p>
+      <span class="eyebrow"><span>07 — Galería</span></span>
+      <h2 class="hl gallery-title">GALERÍA BFC</h2>
+      <p class="gallery-sub">Historia en imágenes</p>
     </header>
-
-    <div class="comm-filters" id="commFilters">
-      <button class="comm-filter is-active" data-cat="all" type="button" data-i18n="comm.filterAll">Todos</button>
-      <button class="comm-filter" data-cat="entrenamientos" type="button" data-i18n="comm.filterTraining">Entrenamientos</button>
-      <button class="comm-filter" data-cat="torneos" type="button" data-i18n="comm.filterTournaments">Torneos</button>
-      <button class="comm-filter" data-cat="equipo" type="button" data-i18n="comm.filterTeam">Equipo</button>
-    </div>
-
-    <div class="comm-grid" id="commGrid">
-      <p class="comm-empty" id="commEmpty" hidden data-i18n="comm.empty">Sé el primero en subir una foto de la comunidad.</p>
-    </div>
-
-    <div class="comm-actions">
-      <button class="btn" id="commUploadBtn" type="button">
-        <i class="ph ph-camera-plus" aria-hidden="true"></i>
-        <span data-i18n="comm.uploadBtn">Subir mi foto</span>
-      </button>
-    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
   </div>
 </section>
 
@@ -530,88 +499,86 @@
       <p data-i18n="contact.lead">Estamos en el corazón de Godoy Cruz.</p>
     </header>
 
-    <div class="contact-grid">
-      <div class="contact-info reveal">
-        <div class="address" data-i18n="contact.addr">Balcarce 230</div>
-        <div class="city" data-i18n="contact.city">Godoy Cruz, Mendoza</div>
+    <div class="contact-info reveal">
+      <div class="address" data-i18n="contact.addr">Balcarce 230</div>
+      <div class="city" data-i18n="contact.city">Godoy Cruz, Mendoza</div>
 
-        <div class="contact-channels">
-          <a class="channel" href="https://wa.me/5492615710531" target="_blank" rel="noopener">
-            <div>
-              <div class="ch-label" data-i18n="contact.walter">Walter · K1 / Muay Thai</div>
-              <div class="ch-val">+54 9 261 571-0531</div>
-            </div>
-            <span class="arrow"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i></span>
-          </a>
-          <a class="channel" href="https://wa.me/5492614671743" target="_blank" rel="noopener">
-            <div>
-              <div class="ch-label" data-i18n="contact.tapa">Tapa Team · MMA / Wrestling</div>
-              <div class="ch-val">+54 9 261 467-1743</div>
-            </div>
-            <span class="arrow"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i></span>
-          </a>
-          <a class="channel" href="https://instagram.com/bonati_fightclub" target="_blank" rel="noopener">
-            <div>
-              <div class="ch-label" data-i18n="contact.ig">Instagram oficial</div>
-              <div class="ch-val">@bonati_fightclub</div>
-            </div>
-            <span class="arrow"><i class="ph-fill ph-instagram-logo" aria-hidden="true"></i></span>
-          </a>
+      <div class="contact-channels">
+        <a class="channel" href="https://wa.me/5492615710531" target="_blank" rel="noopener">
+          <div>
+            <div class="ch-label" data-i18n="contact.walter">Walter · K1 / Muay Thai</div>
+            <div class="ch-val">+54 9 261 571-0531</div>
+          </div>
+          <span class="arrow"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i></span>
+        </a>
+        <a class="channel" href="https://wa.me/5492614671743" target="_blank" rel="noopener">
+          <div>
+            <div class="ch-label" data-i18n="contact.tapa">Tapa Team · MMA / Wrestling</div>
+            <div class="ch-val">+54 9 261 467-1743</div>
+          </div>
+          <span class="arrow"><i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i></span>
+        </a>
+        <a class="channel" href="https://instagram.com/bonati_fightclub" target="_blank" rel="noopener">
+          <div>
+            <div class="ch-label" data-i18n="contact.ig">Instagram oficial</div>
+            <div class="ch-val">@bonati_fightclub</div>
+          </div>
+          <span class="arrow"><i class="ph-fill ph-instagram-logo" aria-hidden="true"></i></span>
+        </a>
+      </div>
+
+      <form class="contact-form" id="contactForm" novalidate>
+        <div>
+          <label for="cfName" data-i18n="contact.formName">Tu nombre</label>
+          <input id="cfName" name="name" type="text" required autocomplete="given-name"
+                 data-i18n-placeholder="contact.formPlaceholderName" placeholder="Nombre y apellido" />
         </div>
-
-        <form class="contact-form" id="contactForm" novalidate>
-          <div>
-            <label for="cfName" data-i18n="contact.formName">Tu nombre</label>
-            <input id="cfName" name="name" type="text" required autocomplete="given-name"
-                   data-i18n-placeholder="contact.formPlaceholderName" placeholder="Nombre y apellido" />
+        <div>
+          <label for="cfAge" data-i18n="contact.formAge">Tu edad</label>
+          <input id="cfAge" name="age" type="number" min="5" max="80" required
+                 data-i18n-placeholder="contact.formAgePlaceholder" placeholder="Ej: 25" />
+        </div>
+        <div>
+          <span class="form-lbl" data-i18n="contact.formModality">Modalidad que te interesa</span>
+          <div class="radio-group" role="group" aria-label="Modalidad">
+            <label class="radio-opt">
+              <input type="radio" name="modality" value="K1 / Muay Thai" />
+              <span data-i18n="contact.modK1">K1 / Muay Thai</span>
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="modality" value="MMA / Wrestling" />
+              <span data-i18n="contact.modMMA">MMA / Wrestling</span>
+            </label>
           </div>
-          <div>
-            <label for="cfAge" data-i18n="contact.formAge">Tu edad</label>
-            <input id="cfAge" name="age" type="number" min="5" max="80" required
-                   data-i18n-placeholder="contact.formAgePlaceholder" placeholder="Ej: 25" />
+        </div>
+        <div>
+          <span class="form-lbl" data-i18n="contact.formTime">Franja horaria</span>
+          <div class="radio-group" role="group" aria-label="Franja horaria">
+            <label class="radio-opt">
+              <input type="radio" name="timeSlot" value="mañana" />
+              <span data-i18n="contact.timeMorning">Mañana</span>
+            </label>
+            <label class="radio-opt">
+              <input type="radio" name="timeSlot" value="tarde" />
+              <span data-i18n="contact.timeAfternoon">Tarde</span>
+            </label>
           </div>
-          <div>
-            <span class="form-lbl" data-i18n="contact.formModality">Modalidad que te interesa</span>
-            <div class="radio-group" role="group" aria-label="Modalidad">
-              <label class="radio-opt">
-                <input type="radio" name="modality" value="K1 / Muay Thai" />
-                <span data-i18n="contact.modK1">K1 / Muay Thai</span>
-              </label>
-              <label class="radio-opt">
-                <input type="radio" name="modality" value="MMA / Wrestling" />
-                <span data-i18n="contact.modMMA">MMA / Wrestling</span>
-              </label>
-            </div>
-          </div>
-          <div>
-            <span class="form-lbl" data-i18n="contact.formTime">Franja horaria</span>
-            <div class="radio-group" role="group" aria-label="Franja horaria">
-              <label class="radio-opt">
-                <input type="radio" name="timeSlot" value="mañana" />
-                <span data-i18n="contact.timeMorning">Mañana</span>
-              </label>
-              <label class="radio-opt">
-                <input type="radio" name="timeSlot" value="tarde" />
-                <span data-i18n="contact.timeAfternoon">Tarde</span>
-              </label>
-            </div>
-          </div>
-          <p class="form-msg" id="cfFeedback" aria-live="polite" hidden></p>
-          <button class="btn" type="submit" id="cfSubmit">
-            <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
-            <span data-i18n="contact.formSend">Enviar por WhatsApp</span>
-          </button>
-        </form>
-      </div>
-
-      <div class="contact-map reveal-x">
-        <iframe
-          src="https://maps.google.com/maps?q=Balcarce+230,+Godoy+Cruz,+Mendoza,+Argentina&output=embed&z=16&hl=es"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-          title="Bonati Fight Club · Godoy Cruz, Mendoza"
-          allowfullscreen></iframe>
-      </div>
+        </div>
+        <p class="form-msg" id="cfFeedback" aria-live="polite" hidden></p>
+        <button class="btn" type="submit" id="cfSubmit">
+          <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+          <span data-i18n="contact.formSend">Enviar por WhatsApp</span>
+        </button>
+      </form>
     </div>
+  </div>
+  <div class="contact-map-full">
+    <iframe
+      src="https://maps.google.com/maps?q=Balcarce+230,+Godoy+Cruz,+Mendoza,+Argentina&output=embed&z=16&hl=es"
+      width="100%" height="320" style="border:0; display:block;"
+      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Bonati Fight Club · Godoy Cruz, Mendoza">
+    </iframe>
   </div>
 </section>
 
@@ -669,69 +636,6 @@
   </div>
 </footer>
 
-<!-- ── COMUNIDAD: Upload Modal ── -->
-<div class="comm-modal-overlay" id="commModal" hidden role="dialog" aria-modal="true" aria-label="Subir foto">
-  <div class="comm-modal-box">
-    <button class="modal-close-btn" id="commModalClose" type="button" aria-label="Cerrar">
-      <i class="ph ph-x" aria-hidden="true"></i>
-    </button>
-    <h3 data-i18n="comm.modal.title">Subir mi foto</h3>
-    <div class="comm-drop-zone" id="commDropZone" tabindex="0" role="button" aria-label="Zona de carga">
-      <i class="ph ph-upload-simple" aria-hidden="true"></i>
-      <p data-i18n="comm.modal.drop">Arrastrá tu foto aquí o hacé clic para seleccionar</p>
-      <input type="file" id="commFileInput" accept="image/jpeg,image/png,image/webp" hidden />
-    </div>
-    <img id="commPreview" class="comm-preview-img" hidden alt="Vista previa" />
-    <div class="comm-modal-fields">
-      <select id="commCategory" aria-label="Categoría">
-        <option value="entrenamientos" data-i18n="comm.filterTraining">Entrenamientos</option>
-        <option value="torneos" data-i18n="comm.filterTournaments">Torneos</option>
-        <option value="equipo" data-i18n="comm.filterTeam">Equipo</option>
-      </select>
-      <input type="text" id="commAuthor" data-i18n-placeholder="comm.modal.authorPlaceholder" placeholder="Tu nombre (opcional)" maxlength="60" />
-    </div>
-    <button class="btn" id="commSubmitBtn" type="button" disabled>
-      <span data-i18n="comm.modal.submit">Enviar foto</span>
-    </button>
-    <p class="comm-modal-note" data-i18n="comm.modal.note">Tu foto será revisada antes de publicarse.</p>
-  </div>
-</div>
-
-<!-- ── COMUNIDAD: Lightbox ── -->
-<div class="comm-lightbox" id="commLightbox" hidden role="dialog" aria-modal="true" aria-label="Galería de fotos">
-  <button class="lb-close-btn" id="commLbClose" type="button" aria-label="Cerrar">
-    <i class="ph ph-x" aria-hidden="true"></i>
-  </button>
-  <button class="lb-btn lb-prev" id="commLbPrev" type="button" aria-label="Anterior">
-    <i class="ph ph-caret-left" aria-hidden="true"></i>
-  </button>
-  <div class="lb-img-wrap">
-    <img id="commLbImg" src="" alt="" />
-  </div>
-  <button class="lb-btn lb-next" id="commLbNext" type="button" aria-label="Siguiente">
-    <i class="ph ph-caret-right" aria-hidden="true"></i>
-  </button>
-  <div class="lb-caption" id="commLbCaption"></div>
-</div>
-
-<!-- ── COMUNIDAD: Admin Panel (Shift+A+D+M+I+N) ── -->
-<div class="comm-admin-overlay" id="commAdminPanel" hidden role="dialog" aria-modal="true">
-  <div class="comm-admin-box">
-    <button class="modal-close-btn" id="commAdminClose" type="button" aria-label="Cerrar">
-      <i class="ph ph-x" aria-hidden="true"></i>
-    </button>
-    <h3>Panel Admin BFC</h3>
-    <div class="comm-admin-auth" id="commAdminAuth">
-      <input type="password" id="commAdminPass" placeholder="Contraseña admin" />
-      <button class="btn" id="commAdminLogin" type="button">Ingresar</button>
-    </div>
-    <div id="commAdminContent" hidden>
-      <p style="color:var(--bfc-bone-dim);margin-bottom:1.5rem;font-size:var(--fs-sm)">Fotos pendientes de aprobación:</p>
-      <div id="commAdminPending"></div>
-    </div>
-  </div>
-</div>
-
 <!-- Google Places SDK (se activa solo cuando reviews.js tiene API key real) -->
 <script>
   function _bfcGoogleInit() {
@@ -744,12 +648,38 @@
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/animejs@4/lib/anime.iife.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="gallery-data.js"></script>
 <script src="assets/js/i18n.js?v=4"></script>
 <script src="assets/js/main.js?v=4"></script>
 <script src="assets/js/leads.js?v=4"></script>
-<script src="assets/js/community.js?v=4"></script>
 <script src="assets/js/reviews.js?v=4"></script>
 <script src="assets/js/animations.js?v=1"></script>
 <script src="assets/js/carousel.js?v=1"></script>
+<script src="assets/js/gallery.js?v=1"></script>
+<!-- =========================
+     LIGHTBOX BFC
+     ========================= -->
+<div id="bfc-lightbox" class="bfc-lightbox" role="dialog" aria-modal="true" aria-label="Galería de fotos">
+  <button class="lb-close" id="lbClose" aria-label="Cerrar">
+    <i class="ph ph-x"></i>
+  </button>
+  <button class="lb-prev" id="lbPrev" aria-label="Foto anterior">
+    <i class="ph ph-caret-left"></i>
+  </button>
+  <button class="lb-next" id="lbNext" aria-label="Foto siguiente">
+    <i class="ph ph-caret-right"></i>
+  </button>
+  <div class="lb-content">
+    <div class="lb-img-wrap">
+      <img id="lbImg" src="" alt="" />
+    </div>
+    <div class="lb-info">
+      <span class="lb-year" id="lbYear"></span>
+      <h3 class="lb-title" id="lbTitle"></h3>
+      <p class="lb-caption" id="lbCaption"></p>
+    </div>
+  </div>
+  <div class="lb-backdrop" id="lbBackdrop"></div>
+</div>
 </body>
 </html>
