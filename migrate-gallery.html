@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Migrar Galería → Supabase</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="gallery-data.js"></script>
+<style>
+  body { font-family: 'Courier New', monospace; background: #0a0a0a; color: #f0f0f0; padding: 2rem; max-width: 600px; margin: 0 auto; }
+  h1 { color: #D4A017; font-size: 1.4rem; margin-bottom: .5rem; }
+  p { color: rgba(255,255,255,0.6); font-size: .9rem; margin-bottom: 2rem; }
+  button { background: #C8102E; color: white; border: none; padding: .875rem 2rem; font-size: 1rem; border-radius: 6px; cursor: pointer; }
+  button:disabled { opacity: .4; cursor: not-allowed; }
+  #log { margin-top: 1.5rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 1rem; min-height: 200px; font-size: .85rem; line-height: 1.6; white-space: pre-wrap; }
+  .ok  { color: #4ade80; }
+  .err { color: #C8102E; }
+  .dim { color: rgba(255,255,255,0.4); }
+</style>
+</head>
+<body>
+<h1>Migrar galería placeholder → Supabase</h1>
+<p>Este script inserta los 12 registros de BFC_GALLERY en la tabla <code>community_photos</code>.<br>Ejecutalo una sola vez. No sube imágenes al storage — solo guarda las URLs de picsum como referencia.</p>
+<button id="runBtn" onclick="runMigration()">▶ Ejecutar migración</button>
+<div id="log"><span class="dim">Listo. Presioná el botón para comenzar.</span></div>
+
+<script>
+  var SUPABASE_URL = 'https://kmlobikkamhnzkmbtckg.supabase.co';
+  var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttbG9iaWtrYW1obnprbWJ0Y2tnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MjYyOTQsImV4cCI6MjA5MjQwMjI5NH0.yeN_hygM4q9tZIq4hst6-6SzeAf5mdLnTuWG-eLatts';
+
+  var logEl = document.getElementById('log');
+
+  function log(msg, cls) {
+    logEl.textContent += '\n' + msg;
+    if (cls) {
+      var span = document.createElement('span');
+      span.className = cls;
+      span.textContent = '\n' + msg;
+      logEl.innerHTML = logEl.innerHTML.replace('\n' + msg, '');
+      logEl.appendChild(span);
+    }
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+
+  async function runMigration() {
+    var btn = document.getElementById('runBtn');
+    btn.disabled = true;
+    logEl.innerHTML = '';
+
+    if (typeof BFC_GALLERY === 'undefined' || !BFC_GALLERY.length) {
+      log('❌ BFC_GALLERY no está disponible.', 'err');
+      btn.disabled = false;
+      return;
+    }
+
+    var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    var total = BFC_GALLERY.length;
+    var ok = 0;
+    var fail = 0;
+
+    log('Comenzando migración de ' + total + ' fotos...', 'dim');
+
+    for (var i = 0; i < total; i++) {
+      var photo = BFC_GALLERY[i];
+      log('Migrando foto ' + (i + 1) + ' de ' + total + ': ' + photo.alt + '...', 'dim');
+
+      var payload = {
+        photo_url:   photo.src,
+        author_name: photo.alt || '',
+        description: photo.caption || '',
+        category:    photo.year || '',
+        approved:    true
+      };
+
+      var result = await sb.from('community_photos').insert(payload);
+
+      if (result.error) {
+        log('  ❌ Error: ' + result.error.message, 'err');
+        fail++;
+      } else {
+        log('  ✅ OK', 'ok');
+        ok++;
+      }
+    }
+
+    log('');
+    if (fail === 0) {
+      log('✅ Migración completada: ' + ok + ' fotos insertadas. Ya podés eliminar gallery-data.js o dejar el fallback activo.', 'ok');
+    } else {
+      log('⚠️ Migración parcial: ' + ok + ' OK, ' + fail + ' errores.', 'err');
+    }
+
+    btn.disabled = false;
+  }
+</script>
+</body>
+</html>

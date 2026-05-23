@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../gallery-data.js"></script>
 <style>
 /* ── VARIABLES ── */
 :root {
@@ -419,6 +420,44 @@ img{max-width:100%;display:block}
 .toast-error{background:rgba(200,16,46,.15);border:1px solid rgba(200,16,46,.3);color:#ff6b6b}
 .toast.removing{animation:slideOutRight .3s ease forwards}
 
+/* ── GALLERY INFO BANNER ── */
+.gallery-info-banner {
+  background: rgba(212,160,23,0.1);
+  border-left: 3px solid #D4A017;
+  padding: 12px 16px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: rgba(212,160,23,0.9);
+  margin-bottom: 1.5rem;
+  border-radius: 0 6px 6px 0;
+  line-height: 1.5;
+}
+.gallery-info-banner code { background: rgba(0,0,0,0.3); padding: 1px 5px; border-radius: 3px; font-size: 0.8rem; }
+
+/* ── UPLOAD DROPZONE ── */
+.upload-dropzone {
+  border: 2px dashed rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 2rem 1rem;
+  text-align: center;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: pointer;
+}
+.upload-dropzone.drag-over {
+  border-color: #D4A017;
+  background: rgba(212,160,23,0.05);
+}
+.upload-dropzone.has-file {
+  border-color: rgba(212,160,23,0.4);
+}
+
+/* ── GALLERY ACTION BUTTONS ── */
+.btn-edit-gallery { background:rgba(212,160,23,0.15); color:#D4A017; border:1px solid rgba(212,160,23,0.3); border-radius:5px; padding:.3rem .6rem; font-size:.8rem; cursor:pointer; transition:background .2s; }
+.btn-edit-gallery:hover { background:rgba(212,160,23,0.3); }
+.btn-del-gallery { background:rgba(200,16,46,0.15); color:#C8102E; border:1px solid rgba(200,16,46,0.3); border-radius:5px; padding:.3rem .6rem; font-size:.8rem; cursor:pointer; transition:background .2s; }
+.btn-del-gallery:hover { background:rgba(200,16,46,0.3); }
+
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
   .photos-grid{grid-template-columns:repeat(2,1fr)}
@@ -471,8 +510,8 @@ img{max-width:100%;display:block}
   </header>
 
   <nav class="tabs-nav">
-    <button class="tab-btn active" data-tab="photos">
-      📸 FOTOS <span class="badge zero" id="badgePhotos">0</span>
+    <button class="tab-btn active" data-tab="gallery">
+      🖼 GALERÍA
     </button>
     <button class="tab-btn" data-tab="reviews">
       ⭐ RESEÑAS <span class="badge zero" id="badgeReviews">0</span>
@@ -484,13 +523,63 @@ img{max-width:100%;display:block}
 
   <main class="content-area">
 
-    <!-- FOTOS -->
-    <section class="tab-pane active" id="tabPhotos">
+    <!-- GALERÍA -->
+    <section class="tab-pane active" id="tabGallery">
       <div class="section-header">
-        <h2 class="section-title">FOTOS PENDIENTES <span class="badge zero" id="pendingPhotosCount">0</span></h2>
-        <button class="btn-green" id="approveAllBtn" style="display:none" onclick="approveAllPhotos()">✓ APROBAR TODAS</button>
+        <h2 class="section-title" style="color:var(--gold)">GESTIÓN DE GALERÍA</h2>
+        <a href="../index.html#galeria" target="_blank" class="btn-ghost">Ver galería en el sitio ↗</a>
       </div>
-      <div id="photosContent"><div class="spinner-wrap"><div class="spinner"></div></div></div>
+      <div class="gallery-info-banner" style="border-left-color:#4ade80">
+        ✅ Los cambios se guardan automáticamente en Supabase y se reflejan en el sitio al instante.
+      </div>
+
+      <div id="galleryTableWrap" style="margin-bottom:2rem;overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-size:.875rem">
+          <thead>
+            <tr style="border-bottom:1px solid var(--border);color:var(--dim);text-align:left">
+              <th style="padding:.5rem .75rem">#</th>
+              <th style="padding:.5rem .75rem">Preview</th>
+              <th style="padding:.5rem .75rem">Descripción</th>
+              <th style="padding:.5rem .75rem">Año</th>
+              <th style="padding:.5rem .75rem">Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="galleryTableBody"></tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom:.75rem;text-align:right">
+        <span id="galleryCount" style="font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--dim);letter-spacing:.05em">0 / 40 fotos</span>
+      </div>
+
+      <div style="margin-top:2rem;padding:1.5rem;background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:8px">
+        <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.08em;color:#D4A017;margin-bottom:1.25rem">AGREGAR FOTO A LA GALERÍA</h3>
+        <div class="form-group">
+          <label class="form-label">Foto</label>
+          <div class="upload-dropzone" id="uploadDropzone">
+            <i class="ph ph-upload-simple" style="font-size:2rem;color:var(--gold)"></i>
+            <p style="margin:.5rem 0 0;font-size:.9rem;color:var(--dim)">Arrastrá una foto o <span style="color:var(--gold);cursor:pointer">hacé click para seleccionar</span></p>
+            <p style="font-size:.75rem;color:var(--dim);margin-top:.25rem">JPG, WEBP, PNG — máx. 5MB</p>
+            <input type="file" id="fileInput" accept="image/jpeg,image/webp,image/png" style="display:none">
+          </div>
+          <img id="addPreview" src="" alt="" style="margin-top:.75rem;width:100%;max-height:160px;object-fit:contain;border-radius:4px;background:rgba(255,255,255,0.03);display:none">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Descripción / Alt</label>
+          <input type="text" class="form-input" id="addAlt" placeholder="Entrenamiento de K1" maxlength="120">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Caption (lightbox)</label>
+          <textarea class="form-textarea" id="addCaption" placeholder="Descripción que aparece en el lightbox" rows="2" maxlength="300"></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Año</label>
+          <input type="text" class="form-input" id="addYear" placeholder="2025" maxlength="4">
+        </div>
+        <p id="addMsg" style="min-height:1.2em;font-size:.85rem;margin-bottom:.75rem"></p>
+        <button class="btn-primary" onclick="addGalleryPhoto()" style="width:100%">+ AGREGAR FOTO</button>
+      </div>
+
     </section>
 
     <!-- RESEÑAS -->
@@ -600,6 +689,36 @@ create policy if not exists "delete_reviews" on public.site_reviews
   </div>
 </div>
 
+<!-- ═══════ MODAL GALERÍA ═══════ -->
+<div class="modal-overlay" id="galleryEditModal">
+  <div class="modal-box" style="max-width:480px">
+    <div class="modal-header">
+      <h3 class="modal-title">EDITAR FOTO</h3>
+      <button class="modal-close-btn" onclick="closeGalleryEdit()">✕</button>
+    </div>
+    <div style="margin-bottom:1rem">
+      <img id="gePreview" src="" alt="" style="width:100%;max-height:180px;object-fit:contain;border-radius:6px;background:var(--surface);display:block">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Descripción (alt)</label>
+      <input type="text" class="form-input" id="geAlt" maxlength="120">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Caption (lightbox)</label>
+      <textarea class="form-textarea" id="geCaption" rows="3" maxlength="300"></textarea>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Año</label>
+      <input type="text" class="form-input" id="geYear" maxlength="4" placeholder="2025">
+    </div>
+    <p id="geMsg" style="color:#22c55e;font-size:.85rem;min-height:1.2em;margin-top:.5rem"></p>
+    <div class="modal-footer">
+      <button class="btn-ghost" onclick="closeGalleryEdit()">CANCELAR</button>
+      <button class="btn-primary" onclick="saveGalleryEdit()">GUARDAR CAMBIOS</button>
+    </div>
+  </div>
+</div>
+
 <!-- ═══════ TOASTS ═══════ -->
 <div id="toastContainer"></div>
 
@@ -610,13 +729,15 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 const HASH = btoa('BFC2025admin')
 
 let sb = null
-let allPhotos = []
 let allReviews = []
 let reviewFilter = 'all'
 let productsData = null
 let storeFilter = 'all'
 let editingProductId = null
 let productsModified = false
+let adminGalleryData = []
+let galleryEditId = null
+let adminSelectedFile = null
 
 /* ── AUTH ── */
 function checkAuth() {
@@ -648,7 +769,8 @@ function showDashboard() {
   document.getElementById('loginScreen').style.display = 'none'
   document.getElementById('dashboard').classList.add('visible')
   sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
-  loadPhotos()
+  loadAdminGallery()
+  initDropzone()
   loadReviews()
   loadProducts()
 }
@@ -658,141 +780,234 @@ function showTab(tab) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'))
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'))
   document.querySelector(`[data-tab="${tab}"]`).classList.add('active')
-  const id = 'tab' + tab.charAt(0).toUpperCase() + tab.slice(1)
+  const idMap = { gallery: 'tabGallery', reviews: 'tabReviews', store: 'tabStore' }
+  const id = idMap[tab] || ('tab' + tab.charAt(0).toUpperCase() + tab.slice(1))
   document.getElementById(id).classList.add('active')
 }
 
 /* ── BADGES ── */
 function updateBadges() {
-  const pp = allPhotos.filter(p => !p.approved).length
   const pr = allReviews.filter(r => !r.approved).length
-  const bp = document.getElementById('badgePhotos')
-  bp.textContent = pp
-  bp.className = `badge${pp === 0 ? ' zero' : ''}`
   const br = document.getElementById('badgeReviews')
   br.textContent = pr
   br.className = `badge${pr === 0 ? ' zero' : ''}`
 }
 
 /* ══════════════════════════════════
-   FOTOS
+   GALERÍA
 ══════════════════════════════════ */
-async function loadPhotos() {
-  document.getElementById('photosContent').innerHTML = '<div class="spinner-wrap"><div class="spinner"></div></div>'
-  try {
-    const { data, error } = await sb
-      .from('community_photos')
-      .select('id, photo_url, description, author_name, category, approved, created_at')
-      .order('approved', { ascending: true })
-      .order('created_at', { ascending: false })
-    if (error) throw error
-    allPhotos = data || []
-    renderPhotos()
-    updateBadges()
-  } catch (e) {
-    document.getElementById('photosContent').innerHTML = `
-      <div class="empty-state">
-        <div class="empty-icon">⚠️</div>
-        <p class="empty-title">Error al cargar fotos</p>
-        <p class="empty-sub" style="color:var(--red);font-size:.875rem;margin-bottom:1rem">${escHtml(e.message || String(e))}</p>
-        <button class="btn-primary" onclick="loadPhotos()">↺ Reintentar</button>
-      </div>`
-  }
-}
+async function loadAdminGallery() {
+  var tbody = document.getElementById('galleryTableBody');
+  var countEl = document.getElementById('galleryCount');
+  if (!tbody) return;
 
-function renderPhotos() {
-  const pending = allPhotos.filter(p => !p.approved)
-  const published = allPhotos.filter(p => p.approved)
+  tbody.innerHTML = '<tr><td colspan="5" style="padding:1rem;color:var(--dim);text-align:center">Cargando...</td></tr>';
 
-  document.getElementById('pendingPhotosCount').textContent = pending.length
-  const btn = document.getElementById('approveAllBtn')
-  btn.style.display = pending.length > 0 ? 'inline-flex' : 'none'
+  const { data, error } = await sb
+    .from('community_photos')
+    .select('*')
+    .order('created_at', { ascending: false });
 
-  let html = ''
-
-  if (pending.length > 0) {
-    html += `<p class="photos-section-label">⏳ PENDIENTES DE REVISIÓN (${pending.length})</p>`
-    html += `<div class="photos-grid">${pending.map((p, i) => photoCard(p, i, true)).join('')}</div>`
-  } else {
-    html += `<div class="empty-state">
-      <div class="empty-icon" style="color:var(--green)">✓</div>
-      <p class="empty-title">No hay fotos pendientes</p>
-      <p class="empty-sub">¡Todo al día!</p>
-    </div>`
+  if (error) {
+    tbody.innerHTML = '<tr><td colspan="5" style="color:#C8102E;padding:1rem;text-align:center">Error cargando fotos: ' + escHtml(error.message) + '</td></tr>';
+    return;
   }
 
-  if (published.length > 0) {
-    html += `<p class="photos-section-label" style="margin-top:2rem">✅ FOTOS PUBLICADAS (${published.length})</p>`
-    html += `<div class="photos-grid">${published.map((p, i) => photoCard(p, i, false)).join('')}</div>`
+  adminGalleryData = data || [];
+
+  if (countEl) countEl.textContent = adminGalleryData.length + ' / 40 fotos';
+
+  if (!adminGalleryData.length) {
+    tbody.innerHTML = '<tr><td colspan="5" style="padding:1rem;color:var(--dim);text-align:center">No hay fotos aún.</td></tr>';
+    return;
   }
 
-  document.getElementById('photosContent').innerHTML = html
+  tbody.innerHTML = adminGalleryData.map(function(photo, i) {
+    return '<tr style="border-bottom:1px solid var(--border)">' +
+      '<td style="padding:.5rem .75rem;color:var(--dim)">' + (i+1) + '</td>' +
+      '<td style="padding:.5rem .75rem"><img src="' + escHtml(photo.photo_url) + '" alt="' + escHtml(photo.author_name || '') + '" style="width:60px;height:44px;object-fit:cover;border-radius:4px;background:var(--surface)" onerror="this.style.background=\'#222\';this.style.opacity=\'0.3\'"></td>' +
+      '<td style="padding:.5rem .75rem">' + escHtml(photo.author_name || '—') + '</td>' +
+      '<td style="padding:.5rem .75rem;color:var(--dim)">' + escHtml(photo.category || '—') + '</td>' +
+      '<td style="padding:.5rem .75rem">' +
+        '<button class="btn-edit-gallery" onclick="openGalleryEdit(\'' + escHtml(photo.id) + '\')" title="Editar" style="margin-right:6px">✏️</button>' +
+        '<button class="btn-del-gallery" onclick="deletePhoto(\'' + escHtml(photo.id) + '\',\'' + escUrl(photo.photo_url) + '\')" title="Eliminar">🗑️</button>' +
+      '</td>' +
+    '</tr>';
+  }).join('');
 }
 
-function photoCard(photo, i, isPending) {
-  const cat = photo.category || 'default'
-  const catClass = ['entrenamientos','torneos','equipo'].includes(cat) ? `cat-${cat}` : 'cat-default'
-  const author = photo.author_name || 'Anónimo'
-  const date = fmtDate(photo.created_at)
-  const actions = isPending
-    ? `<button class="btn-approve" onclick="approvePhoto(${photo.id})">✓ APROBAR</button>
-       <button class="btn-reject" onclick="rejectPhoto(${photo.id},'${escUrl(photo.photo_url)}')">✗ RECHAZAR</button>`
-    : `<button class="btn-delete-photo" style="flex:1" onclick="deletePublishedPhoto(${photo.id},'${escUrl(photo.photo_url)}')">🗑 ELIMINAR</button>`
-
-  return `
-    <div class="photo-card" id="pc-${photo.id}" style="--i:${i}">
-      <img class="photo-thumb" src="${photo.photo_url}" alt="${escHtml(author)}" loading="lazy"
-        onerror="this.style.background='var(--surface)'">
-      <div class="photo-info">
-        <span class="photo-cat ${catClass}">${cat}</span>
-        <p class="photo-author">${escHtml(author)}</p>
-        <p class="photo-date">${date}</p>
-        <div class="photo-actions">${actions}</div>
-      </div>
-    </div>`
+function openGalleryEdit(id) {
+  var photo = adminGalleryData.find(function(p) { return p.id === id; });
+  if (!photo) return;
+  galleryEditId = id;
+  document.getElementById('gePreview').src = photo.photo_url;
+  document.getElementById('geAlt').value = photo.author_name || '';
+  document.getElementById('geCaption').value = photo.description || '';
+  document.getElementById('geYear').value = photo.category || '';
+  document.getElementById('geMsg').textContent = '';
+  document.getElementById('galleryEditModal').classList.add('open');
 }
 
-async function approvePhoto(id) {
-  try {
-    const { error } = await sb.from('community_photos').update({ approved: true }).eq('id', id)
-    if (error) throw error
-    allPhotos = allPhotos.map(p => p.id === id ? { ...p, approved: true } : p)
-    renderPhotos(); updateBadges()
-    showToast('✓ Foto aprobada')
-  } catch (e) { showToast('✗ Error: ' + e.message, 'error') }
+function closeGalleryEdit() {
+  document.getElementById('galleryEditModal').classList.remove('open');
+  galleryEditId = null;
 }
 
-async function approveAllPhotos() {
-  const pending = allPhotos.filter(p => !p.approved)
-  if (!confirm(`¿Aprobar las ${pending.length} fotos pendientes?`)) return
-  try {
-    const { error } = await sb.from('community_photos').update({ approved: true }).eq('approved', false)
-    if (error) throw error
-    allPhotos = allPhotos.map(p => ({ ...p, approved: true }))
-    renderPhotos(); updateBadges()
-    showToast(`✓ ${pending.length} fotos aprobadas`)
-  } catch (e) { showToast('✗ Error: ' + e.message, 'error') }
+async function saveGalleryEdit() {
+  if (!galleryEditId) return;
+  var alt = document.getElementById('geAlt').value.trim();
+  var caption = document.getElementById('geCaption').value.trim();
+  var year = document.getElementById('geYear').value.trim();
+  var msgEl = document.getElementById('geMsg');
+
+  msgEl.style.color = 'rgba(255,255,255,0.5)';
+  msgEl.textContent = 'Guardando...';
+
+  const { error } = await sb
+    .from('community_photos')
+    .update({ author_name: alt, description: caption, category: year })
+    .eq('id', galleryEditId);
+
+  if (error) {
+    msgEl.style.color = '#C8102E';
+    msgEl.textContent = '❌ Error: ' + error.message;
+    return;
+  }
+
+  closeGalleryEdit();
+  await loadAdminGallery();
+  showToast('✅ Cambios guardados');
 }
 
-async function rejectPhoto(id, url) {
-  if (!confirm('¿Rechazar y eliminar esta foto?')) return
-  try {
-    const parts = String(url).split('/community-photos/')
-    if (parts.length > 1) {
-      const path = parts[1].split('?')[0]
-      await sb.storage.from('community-photos').remove([path])
+async function deletePhoto(id, photoUrl) {
+  if (!confirm('¿Eliminar esta foto? Se borrará del sitio permanentemente.')) return;
+
+  var fileName = decodeURIComponent(photoUrl.split('/').pop().split('?')[0]);
+  await sb.storage.from('community-photos').remove([fileName]);
+
+  const { error } = await sb.from('community_photos').delete().eq('id', id);
+  if (error) { showToast('✗ Error al eliminar: ' + error.message, 'error'); return; }
+
+  await loadAdminGallery();
+  showToast('✓ Foto eliminada');
+}
+
+function initDropzone() {
+  var dropzone = document.getElementById('uploadDropzone');
+  var fileInput = document.getElementById('fileInput');
+  var preview = document.getElementById('addPreview');
+  if (!dropzone || !fileInput) return;
+
+  dropzone.addEventListener('click', function(e) {
+    if (e.target !== fileInput) fileInput.click();
+  });
+
+  fileInput.addEventListener('change', function() {
+    handleFileSelect(this.files[0]);
+  });
+
+  dropzone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    dropzone.classList.add('drag-over');
+  });
+  dropzone.addEventListener('dragleave', function() {
+    dropzone.classList.remove('drag-over');
+  });
+  dropzone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    dropzone.classList.remove('drag-over');
+    handleFileSelect(e.dataTransfer.files[0]);
+  });
+
+  function handleFileSelect(file) {
+    if (!file) return;
+    var msgEl = document.getElementById('addMsg');
+    if (!file.type.match(/^image\/(jpeg|webp|png)$/)) {
+      msgEl.style.color = '#C8102E';
+      msgEl.textContent = 'Solo se aceptan imágenes JPG, WEBP o PNG.';
+      return;
     }
-    const { error } = await sb.from('community_photos').delete().eq('id', id)
-    if (error) throw error
-    allPhotos = allPhotos.filter(p => p.id !== id)
-    renderPhotos(); updateBadges()
-    showToast('✓ Foto eliminada')
-  } catch (e) { showToast('✗ Error: ' + e.message, 'error') }
+    if (file.size > 5 * 1024 * 1024) {
+      msgEl.style.color = '#C8102E';
+      msgEl.textContent = 'La foto supera 5MB.';
+      return;
+    }
+    adminSelectedFile = file;
+    dropzone.classList.add('has-file');
+    var reader = new FileReader();
+    reader.onload = function(ev) {
+      preview.src = ev.target.result;
+      preview.style.display = 'block';
+    };
+    reader.readAsDataURL(file);
+    msgEl.textContent = '';
+  }
 }
 
-async function deletePublishedPhoto(id, url) {
-  if (!confirm('¿Eliminar esta foto publicada?')) return
-  await rejectPhoto(id, url)
+async function addGalleryPhoto() {
+  var file = adminSelectedFile || document.getElementById('fileInput').files[0];
+  var alt = document.getElementById('addAlt').value.trim();
+  var caption = document.getElementById('addCaption').value.trim();
+  var year = document.getElementById('addYear').value.trim();
+  var msg = document.getElementById('addMsg');
+
+  if (!file) { msg.style.color='#C8102E'; msg.textContent='Seleccioná una foto primero.'; return; }
+  if (!alt)  { msg.style.color='#C8102E'; msg.textContent='La descripción es obligatoria.'; return; }
+  if (file.size > 5 * 1024 * 1024) { msg.style.color='#C8102E'; msg.textContent='La foto supera 5MB.'; return; }
+
+  var btn = document.querySelector('[onclick="addGalleryPhoto()"]');
+  btn.disabled = true;
+  btn.textContent = 'Subiendo...';
+  msg.style.color = 'rgba(255,255,255,0.5)';
+  msg.textContent = 'Subiendo foto a Supabase...';
+
+  try {
+    var ext = file.name.split('.').pop().toLowerCase();
+    var fileName = 'bfc-' + Date.now() + '.' + ext;
+
+    const { error: storageError } = await sb
+      .storage
+      .from('community-photos')
+      .upload(fileName, file, { cacheControl: '3600', upsert: false });
+
+    if (storageError) throw storageError;
+
+    const { data: urlData } = sb.storage.from('community-photos').getPublicUrl(fileName);
+    var publicUrl = urlData.publicUrl;
+
+    const { error: dbError } = await sb
+      .from('community_photos')
+      .insert({
+        photo_url: publicUrl,
+        author_name: alt,
+        description: caption,
+        category: year,
+        approved: true
+      });
+
+    if (dbError) throw dbError;
+
+    msg.style.color = '#4ade80';
+    msg.textContent = '✅ Foto subida correctamente. Ya aparece en el sitio.';
+
+    adminSelectedFile = null;
+    document.getElementById('fileInput').value = '';
+    document.getElementById('addAlt').value = '';
+    document.getElementById('addCaption').value = '';
+    document.getElementById('addYear').value = '';
+    document.getElementById('addPreview').style.display = 'none';
+    document.getElementById('uploadDropzone').classList.remove('has-file');
+
+    await loadAdminGallery();
+
+  } catch(err) {
+    msg.style.color = '#C8102E';
+    msg.textContent = '❌ Error: ' + (err.message || 'No se pudo subir la foto.');
+    console.error(err);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '+ AGREGAR FOTO';
+  }
 }
 
 /* ══════════════════════════════════
@@ -1145,6 +1360,9 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 document.getElementById('productModal').addEventListener('click', e => {
   if (e.target === document.getElementById('productModal')) closeProductModal()
 })
+document.getElementById('galleryEditModal').addEventListener('click', function(e) {
+  if (e.target === document.getElementById('galleryEditModal')) closeGalleryEdit()
+})
 
 /* Pull to refresh */
 let touchY = 0
@@ -1152,7 +1370,7 @@ document.addEventListener('touchstart', e => { touchY = e.touches[0].clientY }, 
 document.addEventListener('touchend', e => {
   if (window.scrollY === 0 && e.changedTouches[0].clientY - touchY > 80) {
     const active = document.querySelector('.tab-btn.active')?.dataset.tab
-    if (active === 'photos') loadPhotos()
+    if (active === 'gallery') loadAdminGallery()
     else if (active === 'reviews') loadReviews()
     else if (active === 'store') loadProducts()
   }
