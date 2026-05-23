@@ -175,6 +175,74 @@
     }
   }
 
+  /* ─── HISTORY ──────────────────────────────────────── */
+  function initHistoryState() {
+    var a = window.anime;
+    if (!a || reducedMotion) return;
+    var sec = document.querySelector('.history');
+    if (!sec) return;
+    hide(sec.querySelector('.history-copy .eyebrow'), 'translateX(-10px)');
+    hide(sec.querySelector('.history-copy .hl'),      'translateY(40px)');
+    Array.prototype.forEach.call(sec.querySelectorAll('.history-copy .para'), function (p) { hide(p, 'translateY(20px)'); });
+    var qb = sec.querySelector('.quote-block');
+    if (qb) hide(qb, 'translateY(16px)');
+    var tln = sec.querySelector('.timeline');
+    if (tln) hide(tln, 'translateX(-10px)');
+    var media = sec.querySelector('.history-media');
+    if (media) hide(media, 'translateX(60px)');
+  }
+
+  function historyTimeline() {
+    var a = window.anime;
+    if (!a) return;
+    var sec = document.querySelector('.history');
+    if (!sec) return;
+    var eyebrow = sec.querySelector('.history-copy .eyebrow');
+    var h2      = sec.querySelector('.history-copy .hl');
+    var paras   = sec.querySelectorAll('.history-copy .para');
+    var quote   = sec.querySelector('.quote-block');
+    var tln     = sec.querySelector('.timeline');
+    var media   = sec.querySelector('.history-media');
+
+    if (reducedMotion) {
+      showAll([eyebrow, h2, quote, tln, media].concat(Array.prototype.slice.call(paras)));
+      return;
+    }
+    try {
+      var tl = a.createTimeline({ defaults: { easing: 'easeOutExpo' } });
+      tl.add(eyebrow, { translateX: [-10, 0], opacity: [0, 1], duration: 600 }, 0);
+      tl.add(h2,      { translateY: [40, 0],  opacity: [0, 1], duration: 800 }, 100);
+      tl.add(paras,   { translateY: [20, 0],  opacity: [0, 1], duration: 700, delay: a.stagger(120) }, 280);
+      if (quote) tl.add(quote, { translateY: [16, 0], opacity: [0, 1], duration: 700 }, 500);
+      if (tln)   tl.add(tln,   { translateX: [-10, 0], opacity: [0, 1], duration: 700 }, 640);
+      if (media) tl.add(media, { translateX: [60, 0], opacity: [0, 1], duration: 1000 }, 0);
+    } catch (e) {
+      showAll([eyebrow, h2, quote, tln, media].concat(Array.prototype.slice.call(paras)));
+    }
+  }
+
+  /* ─── PARALLAX ──────────────────────────────────────── */
+  function initParallax() {
+    if (reducedMotion) return;
+    var img = document.querySelector('[data-parallax-history] img');
+    if (!img) return;
+    var ticking = false;
+    function updateParallax() {
+      var wrap = img.parentElement;
+      var rect = wrap.getBoundingClientRect();
+      var center = rect.top + rect.height / 2;
+      var viewH = window.innerHeight;
+      var progress = (center - viewH / 2) / (viewH / 2);
+      var clamped = Math.max(-1, Math.min(1, progress));
+      img.style.transform = 'translateY(' + (clamped * 32) + 'px)';
+      ticking = false;
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { requestAnimationFrame(updateParallax); ticking = true; }
+    }, { passive: true });
+    updateParallax();
+  }
+
   /* ─── S7: HORARIOS ──────────────────────────────────── */
   function initScheduleState() {
     var a = window.anime;
@@ -258,6 +326,38 @@
     }
   }
 
+  /* ─── 2A: COUNTERS ─────────────────────────────────── */
+  function initCountersState() {
+    if (reducedMotion) return;
+    var counters = document.querySelectorAll('.counters .counter');
+    Array.prototype.forEach.call(counters, function (c) {
+      c.style.opacity = '0';
+      c.style.transform = 'scale(0.8)';
+    });
+  }
+
+  function countersTimeline() {
+    var a = window.anime;
+    var counters = document.querySelectorAll('.counters .counter');
+    if (!counters.length) return;
+
+    if (reducedMotion || !a) {
+      showAll(counters);
+      return;
+    }
+    try {
+      a.animate(counters, {
+        scale:    [0.8, 1],
+        opacity:  [0, 1],
+        duration: 600,
+        easing:   'easeOutBack',
+        delay:    a.stagger(150)
+      });
+    } catch (e) {
+      showAll(counters);
+    }
+  }
+
   /* ─── S9: COMUNIDAD ─────────────────────────────────── */
   function initCommunityState() {
     var a = window.anime;
@@ -311,15 +411,100 @@
     mo.observe(grid, { childList: true });
   }
 
+  /* ─── 2C: COACHES HOVER ─────────────────────────────── */
+  function wireCoachHover() {
+    var cards = document.querySelectorAll('.prof-card');
+    cards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        window.anime && window.anime.animate(card, { translateY: -6, duration: 300, easing: 'easeOutQuad' });
+        card.style.boxShadow = '0 12px 40px rgba(200,16,46,0.35)';
+      });
+      card.addEventListener('mouseleave', function () {
+        window.anime && window.anime.animate(card, { translateY: 0, duration: 250, easing: 'easeOutQuad' });
+        card.style.boxShadow = '';
+      });
+    });
+  }
+
+  /* ─── 2D: SCHEDULE CARDS HOVER ──────────────────────── */
+  function wireScheduleHover() {
+    var fightCards = document.querySelectorAll('.fight-card');
+    fightCards.forEach(function (card) {
+      card.addEventListener('mouseenter', function () {
+        window.anime && window.anime.animate(card, { scale: 1.03, translateY: -4, duration: 280, easing: 'easeOutQuart' });
+      });
+      card.addEventListener('mouseleave', function () {
+        window.anime && window.anime.animate(card, { scale: 1, translateY: 0, duration: 220, easing: 'easeOutQuart' });
+      });
+    });
+  }
+
+  /* ─── 2F: REVIEWS HOVER ──────────────────────────────── */
+  function wireReviewHover(card) {
+    card.addEventListener('mouseenter', function () {
+      window.anime && window.anime.animate(card, { translateY: -5, duration: 280, easing: 'easeOutQuad' });
+      card.style.boxShadow = '0 8px 30px rgba(200,16,46,0.25)';
+    });
+    card.addEventListener('mouseleave', function () {
+      window.anime && window.anime.animate(card, { translateY: 0, duration: 250, easing: 'easeOutQuad' });
+      card.style.boxShadow = '';
+    });
+  }
+
+  function initReviewsHover() {
+    var grid = document.getElementById('reviews-grid');
+    if (!grid) return;
+    // Wire existing cards
+    grid.querySelectorAll('.review-card').forEach(wireReviewHover);
+    // Wire future cards
+    new MutationObserver(function (mutations) {
+      mutations.forEach(function (m) {
+        m.addedNodes.forEach(function (node) {
+          if (node.nodeType === 1 && node.classList.contains('review-card')) wireReviewHover(node);
+        });
+      });
+    }).observe(grid, { childList: true });
+  }
+
+  /* ─── 2G: GENERAL .reveal HANDLER ───────────────────── */
+  function initGeneralReveal() {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal, .reveal-x').forEach(function (el) {
+        el.classList.add('in-view');
+      });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          io.unobserve(el);
+          if (window.anime && !reducedMotion) {
+            var isX = el.classList.contains('reveal-x');
+            var props = { opacity: [0, 1], duration: 600, easing: 'easeOutCubic' };
+            if (isX) props.translateX = [40, 0]; else props.translateY = [30, 0];
+            try { window.anime.animate(el, props); } catch (e) { el.classList.add('in-view'); }
+          } else {
+            el.classList.add('in-view');
+          }
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal, .reveal-x').forEach(function (el) { io.observe(el); });
+  }
+
   /* ─── MAIN INIT ─────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', function () {
     /* 1. Set ALL initial hidden states immediately (before any observer fires) */
     initHeroState();
     initAcademyState();
     initChampionsState();
+    initHistoryState();
     initScheduleState();
     initTapaState();
     initCommunityState();
+    initCountersState();
 
     /* 2. Run hero immediately */
     heroSequence();
@@ -327,9 +512,41 @@
     /* 3. Wire up scroll observers */
     observeSection(document.querySelector('.disciplines'), academyTimeline,  0.12);
     observeSection(document.querySelector('.champions'),   championsTimeline, 0.15);
+    observeSection(document.querySelector('.history'),     historyTimeline,   0.10);
     observeSection(document.querySelector('.schedule'),    scheduleTimeline,  0.10);
     observeSection(document.querySelector('.tapa'),        tapaTimeline,      0.12);
     observeSection(document.querySelector('.community'),   communityTimeline, 0.10);
+    initParallax();
+
+    /* 4. Counters observer (threshold 0.1, rootMargin -60px) */
+    (function () {
+      var countersEl = document.querySelector('.counters');
+      if (!countersEl) return;
+      if (!('IntersectionObserver' in window)) { countersTimeline(); return; }
+      var fired = false;
+      var fallback = setTimeout(function () {
+        if (!fired) { fired = true; showAll(document.querySelectorAll('.counters .counter')); }
+      }, 2000);
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !fired) {
+            fired = true;
+            clearTimeout(fallback);
+            io.unobserve(countersEl);
+            countersTimeline();
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+      io.observe(countersEl);
+    }());
+
+    /* 5. Hover wiring (always, not observer-gated) */
+    wireCoachHover();
+    wireScheduleHover();
+    initReviewsHover();
+
+    /* 6. General .reveal handler — runs last */
+    initGeneralReveal();
   });
 
 })();
