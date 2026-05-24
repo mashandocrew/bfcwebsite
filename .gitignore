@@ -1,3 +1,22 @@
 node_modules/
 Contraseña admin.txt
 *.local
+
+# Playwright / dependencias de testing (no son parte del sitio web)
+lib/
+playwright/
+bin/
+types/
+browsers.json
+cli.js
+index.d.ts
+index.js
+index.mjs
+LICENSE
+NOTICE
+README.md
+ThirdPartyNotices.txt
+package.json
+package-lock.json
+hero-test.png
+docs/superpowers/
