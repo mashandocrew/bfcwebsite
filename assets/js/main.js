@@ -68,9 +68,9 @@
   const galleryGrid = document.getElementById('galleryGrid');
   const swipeHint = document.getElementById('gallerySwipeHint');
   if (galleryGrid && swipeHint) {
-    galleryGrid.addEventListener('scroll', function hideHint() {
+    galleryGrid.addEventListener('touchstart', function hideHint() {
       swipeHint.classList.add('hidden');
-      galleryGrid.removeEventListener('scroll', hideHint);
+      galleryGrid.removeEventListener('touchstart', hideHint);
     }, { passive: true });
   }
 
