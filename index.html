@@ -249,7 +249,7 @@
         <div class="timeline" data-i18n-list="history.tl"></div>
       </div>
 
-      <div class="history-media reveal-x">
+      <div class="history-media historia-foto-hidden">
         <div class="history-img-wrap" data-parallax-history>
           <img
             src="assets/images/historia-bfc.jpg"
@@ -499,6 +499,15 @@
       <p data-i18n="contact.lead">Estamos en el corazón de Godoy Cruz.</p>
     </header>
 
+    <div class="contact-map-full">
+      <iframe
+        src="https://maps.google.com/maps?q=-32.9275,-68.8458&center=-32.9275,-68.8458&output=embed&z=16&hl=es"
+        width="100%" style="border:0; display:block;"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Bonati Fight Club · Godoy Cruz, Mendoza">
+      </iframe>
+    </div>
+
     <div class="contact-info reveal">
       <div class="address" data-i18n="contact.addr">Balcarce 230</div>
       <div class="city" data-i18n="contact.city">Godoy Cruz, Mendoza</div>
@@ -526,59 +535,51 @@
           <span class="arrow"><i class="ph-fill ph-instagram-logo" aria-hidden="true"></i></span>
         </a>
       </div>
-
-      <form class="contact-form" id="contactForm" novalidate>
-        <div>
-          <label for="cfName" data-i18n="contact.formName">Tu nombre</label>
-          <input id="cfName" name="name" type="text" required autocomplete="given-name"
-                 data-i18n-placeholder="contact.formPlaceholderName" placeholder="Nombre y apellido" />
-        </div>
-        <div>
-          <label for="cfAge" data-i18n="contact.formAge">Tu edad</label>
-          <input id="cfAge" name="age" type="number" min="5" max="80" required
-                 data-i18n-placeholder="contact.formAgePlaceholder" placeholder="Ej: 25" />
-        </div>
-        <div>
-          <span class="form-lbl" data-i18n="contact.formModality">Modalidad que te interesa</span>
-          <div class="radio-group" role="group" aria-label="Modalidad">
-            <label class="radio-opt">
-              <input type="radio" name="modality" value="K1 / Muay Thai" />
-              <span data-i18n="contact.modK1">K1 / Muay Thai</span>
-            </label>
-            <label class="radio-opt">
-              <input type="radio" name="modality" value="MMA / Wrestling" />
-              <span data-i18n="contact.modMMA">MMA / Wrestling</span>
-            </label>
-          </div>
-        </div>
-        <div>
-          <span class="form-lbl" data-i18n="contact.formTime">Franja horaria</span>
-          <div class="radio-group" role="group" aria-label="Franja horaria">
-            <label class="radio-opt">
-              <input type="radio" name="timeSlot" value="mañana" />
-              <span data-i18n="contact.timeMorning">Mañana</span>
-            </label>
-            <label class="radio-opt">
-              <input type="radio" name="timeSlot" value="tarde" />
-              <span data-i18n="contact.timeAfternoon">Tarde</span>
-            </label>
-          </div>
-        </div>
-        <p class="form-msg" id="cfFeedback" aria-live="polite" hidden></p>
-        <button class="btn" type="submit" id="cfSubmit">
-          <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
-          <span data-i18n="contact.formSend">Enviar por WhatsApp</span>
-        </button>
-      </form>
     </div>
-  </div>
-  <div class="contact-map-full">
-    <iframe
-      src="https://maps.google.com/maps?q=Balcarce+230,+Godoy+Cruz,+Mendoza,+Argentina&output=embed&z=16&hl=es"
-      width="100%" height="320" style="border:0; display:block;"
-      allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-      title="Bonati Fight Club · Godoy Cruz, Mendoza">
-    </iframe>
+
+    <form class="contact-form" id="contactForm" novalidate>
+      <div>
+        <label for="cfName" data-i18n="contact.formName">Tu nombre</label>
+        <input id="cfName" name="name" type="text" required autocomplete="given-name"
+               data-i18n-placeholder="contact.formPlaceholderName" placeholder="Nombre y apellido" />
+      </div>
+      <div>
+        <label for="cfAge" data-i18n="contact.formAge">Tu edad</label>
+        <input id="cfAge" name="age" type="number" min="5" max="80" required
+               data-i18n-placeholder="contact.formAgePlaceholder" placeholder="Ej: 25" />
+      </div>
+      <div>
+        <span class="form-lbl" data-i18n="contact.formModality">Modalidad que te interesa</span>
+        <div class="radio-group" role="group" aria-label="Modalidad">
+          <label class="radio-opt">
+            <input type="radio" name="modality" value="K1 / Muay Thai" />
+            <span data-i18n="contact.modK1">K1 / Muay Thai</span>
+          </label>
+          <label class="radio-opt">
+            <input type="radio" name="modality" value="MMA / Wrestling" />
+            <span data-i18n="contact.modMMA">MMA / Wrestling</span>
+          </label>
+        </div>
+      </div>
+      <div>
+        <span class="form-lbl" data-i18n="contact.formTime">Franja horaria</span>
+        <div class="radio-group" role="group" aria-label="Franja horaria">
+          <label class="radio-opt">
+            <input type="radio" name="timeSlot" value="mañana" />
+            <span data-i18n="contact.timeMorning">Mañana</span>
+          </label>
+          <label class="radio-opt">
+            <input type="radio" name="timeSlot" value="tarde" />
+            <span data-i18n="contact.timeAfternoon">Tarde</span>
+          </label>
+        </div>
+      </div>
+      <p class="form-msg" id="cfFeedback" aria-live="polite" hidden></p>
+      <button class="btn" type="submit" id="cfSubmit">
+        <i class="ph-fill ph-whatsapp-logo" aria-hidden="true"></i>
+        <span data-i18n="contact.formSend">Enviar por WhatsApp</span>
+      </button>
+    </form>
   </div>
 </section>
 

@@ -47,6 +47,23 @@
     if (io) io.observe(el); else el.classList.add('in-view');
   });
 
+  // ---------- HISTORIA FOTO reveal ----------
+  const historiaFoto = document.querySelector('.historia-foto-hidden');
+  if (historiaFoto) {
+    const fotoIO = 'IntersectionObserver' in window
+      ? new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.remove('historia-foto-hidden');
+              entry.target.classList.add('historia-foto-visible');
+              fotoIO.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.2 })
+      : null;
+    if (fotoIO) fotoIO.observe(historiaFoto); else historiaFoto.classList.add('historia-foto-visible');
+  }
+
   // ---------- COUNTERS ----------
   const easeOut = t => 1 - Math.pow(1 - t, 3);
   const runCounter = (el) => {
