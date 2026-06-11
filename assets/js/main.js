@@ -64,6 +64,16 @@
     if (fotoIO) fotoIO.observe(historiaFoto); else historiaFoto.classList.add('historia-foto-visible');
   }
 
+  // ---------- GALLERY SWIPE HINT ----------
+  const galleryGrid = document.getElementById('galleryGrid');
+  const swipeHint = document.getElementById('gallerySwipeHint');
+  if (galleryGrid && swipeHint) {
+    galleryGrid.addEventListener('scroll', function hideHint() {
+      swipeHint.classList.add('hidden');
+      galleryGrid.removeEventListener('scroll', hideHint);
+    }, { passive: true });
+  }
+
   // ---------- COUNTERS ----------
   const easeOut = t => 1 - Math.pow(1 - t, 3);
   const runCounter = (el) => {
