@@ -87,7 +87,7 @@ const BFC_I18N = {
         { y: '2010', t: 'Fundación', d: 'Walter Bonati abre las puertas del gimnasio en Godoy Cruz.' },
         { y: '2019', t: 'Primer medallero sudamericano', d: 'Gastón "Tonga" Silva trae la medalla de oro WKF.' },
         { y: '2021', t: 'Se adapta y resiste', d: 'BFC reconocida por su continuidad durante la pandemia.' },
-        { y: '2023', t: 'Nace Tapa Team', d: 'Se incorpora el equipo de MMA y Wrestling dentro del gym.' },
+        { y: '2025', t: 'Nace Tapa Team', d: 'Se incorpora el equipo de MMA y Wrestling dentro del gym.' },
         { y: '2025', t: 'Campeón Sudamericano FFG', d: 'KO histórico vs Jonas Coelho en Brasil. Senado de Mendoza reconoce al atleta.' }
       ]
     },
@@ -130,7 +130,7 @@ const BFC_I18N = {
       eyebrow: '06 — Tapa Team',
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
       lead: 'El equipo de MMA y Wrestling que opera dentro de BFC. Fundado hace aproximadamente un año y ya compite en eventos locales y nacionales — el futuro de las artes marciales mixtas mendocinas.',
-      s1: 'Fundado', s1v: '2024',
+      s1: 'Fundado', s1v: '2025',
       s2: 'Eventos', s2v: 'Locales y nacionales',
       s3: 'Disciplinas', s3v: 'MMA · Wrestling · Submission',
       cta1: 'WhatsApp MMA',
@@ -273,7 +273,7 @@ const BFC_I18N = {
         { y: '2010', t: 'Founded',                       d: 'Walter Bonati opens the doors of the gym in Godoy Cruz.' },
         { y: '2019', t: 'First South American medal',    d: 'Gastón "Tonga" Silva brings home the WKF gold medal.' },
         { y: '2021', t: 'Adapting and resisting',        d: 'BFC recognized for its continuity during the pandemic.' },
-        { y: '2023', t: 'Tapa Team is born',             d: 'MMA and Wrestling team launches inside the gym.' },
+        { y: '2025', t: 'Tapa Team is born',             d: 'MMA and Wrestling team launches inside the gym.' },
         { y: '2025', t: 'FFG South American Champion',   d: 'Historic KO vs Jonas Coelho in Brazil. Mendoza Senate honors the athlete.' }
       ]
     },
@@ -297,7 +297,7 @@ const BFC_I18N = {
       eyebrow: '06 — Tapa Team',
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
       lead: 'The MMA and Wrestling team operating inside BFC. Founded roughly a year ago and already competing in local and national events — the future of mixed martial arts in Mendoza.',
-      s1: 'Founded', s1v: '2024',
+      s1: 'Founded', s1v: '2025',
       s2: 'Events', s2v: 'Local and national',
       s3: 'Disciplines', s3v: 'MMA · Wrestling · Submission',
       cta1: 'WhatsApp MMA', cta2: 'Full page'
@@ -430,7 +430,7 @@ const BFC_I18N = {
         { y: '2010', t: 'Fundação',                        d: 'Walter Bonati abre as portas da academia em Godoy Cruz.' },
         { y: '2019', t: 'Primeira medalha sul-americana', d: 'Gastón "Tonga" Silva conquista o ouro na WKF.' },
         { y: '2021', t: 'Adapta-se e resiste',             d: 'BFC reconhecida pela continuidade durante a pandemia.' },
-        { y: '2023', t: 'Nasce o Tapa Team',               d: 'Time de MMA e Wrestling entra na academia.' },
+        { y: '2025', t: 'Nasce o Tapa Team',               d: 'Time de MMA e Wrestling entra na academia.' },
         { y: '2025', t: 'Campeão Sul-Americano FFG',       d: 'KO histórico sobre Jonas Coelho no Brasil. Senado de Mendoza homenageia o atleta.' }
       ]
     },
@@ -454,7 +454,7 @@ const BFC_I18N = {
       eyebrow: '06 — Tapa Team',
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
       lead: 'Time de MMA e Wrestling que opera dentro do BFC. Fundado há cerca de um ano e já competindo em eventos locais e nacionais — o futuro do MMA mendocino.',
-      s1: 'Fundado', s1v: '2024',
+      s1: 'Fundado', s1v: '2025',
       s2: 'Eventos', s2v: 'Locais e nacionais',
       s3: 'Modalidades', s3v: 'MMA · Wrestling · Submission',
       cta1: 'WhatsApp MMA', cta2: 'Página completa'
