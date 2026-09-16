@@ -30,7 +30,8 @@ const BFC_I18N = {
     counters: {
       years: 'Años formando atletas',
       students: 'Alumnos activos',
-      champs: 'Campeones sudamericanos'
+      champsValue: 'Cuna',
+      champs: 'De campeones'
     },
     marquee: [
       'Donde se forjan campeones',
@@ -168,6 +169,21 @@ const BFC_I18N = {
       lead: 'Video en loop: un vistazo a la energía, la disciplina y el día a día del gimnasio.',
       cta: 'Conocer la academia'
     },
+    faq: {
+      eyebrow: '09 — Preguntas frecuentes',
+      title: 'Antes de tu <b>primera clase.</b>',
+      lead: 'Lo que más nos preguntan quienes están por empezar.',
+      q1: '¿Necesito experiencia previa para empezar?',
+      a1: 'No. La mayoría de nuestros alumnos empieza desde cero. Cada clase se adapta al nivel de la persona y siempre hay un profesor corrigiendo la técnica desde el primer día.',
+      q2: '¿Qué disciplinas puedo entrenar en Bonati Fight Club?',
+      a2: 'K1 Kickboxing, Muay Thai, MMA y Wrestling. El striking lo dictan Walter Bonati y Gastón «Tonga» Silva; MMA y Wrestling funcionan dentro del club a través de Tapa Team.',
+      q3: '¿Dónde están y en qué horarios entrenan?',
+      a3: 'Estamos en Balcarce 230, Godoy Cruz, Mendoza. Entrenamos de lunes a viernes con turnos de mañana (08:30 y 10:00), tarde (15:00, 16:30 y 17:30) y noche (19:00 y 20:30). El turno de las 22:00 es lunes, martes y jueves.',
+      q4: '¿Tienen clases para principiantes y para todos los niveles?',
+      a4: 'Sí. Los grupos son mixtos y el trabajo es progresivo: desde quien entrena por salud y estado físico hasta atletas que compiten a nivel nacional e internacional.',
+      q5: '¿Cómo me anoto para una clase de prueba?',
+      a5: 'Escribinos por WhatsApp al +54 9 261 571-0531 para K1 y Muay Thai, o al +54 9 261 467-1743 para MMA y Wrestling, y coordinamos el día y el horario de tu primera clase.'
+    },
     contact: {
       eyebrow: '09 — Contacto',
       title: 'Entrená con <b>nosotros.</b>',
@@ -215,7 +231,8 @@ const BFC_I18N = {
     counters: {
       years: 'Years training athletes',
       students: 'Active students',
-      champs: 'South American champions'
+      champsValue: 'Home',
+      champs: 'Of champions'
     },
     marquee: [
       'Where champions are forged',
@@ -318,6 +335,21 @@ const BFC_I18N = {
       lead: 'Looped video: a glimpse of the energy, discipline and daily life of the gym.',
       cta: 'Meet the academy'
     },
+    faq: {
+      eyebrow: '09 — FAQ',
+      title: 'Before your <b>first class.</b>',
+      lead: 'The questions we get most from people about to start.',
+      q1: 'Do I need previous experience to start?',
+      a1: 'No. Most of our students start from zero. Every class adapts to the person\u2019s level and a coach corrects your technique from day one.',
+      q2: 'Which disciplines can I train at Bonati Fight Club?',
+      a2: 'K1 Kickboxing, Muay Thai, MMA and Wrestling. Striking is taught by Walter Bonati and Gast\u00f3n \u201cTonga\u201d Silva; MMA and Wrestling run inside the club through Tapa Team.',
+      q3: 'Where are you and what are your class times?',
+      a3: 'We are at Balcarce 230, Godoy Cruz, Mendoza. We train Monday to Friday with morning slots (08:30 and 10:00), afternoon (15:00, 16:30 and 17:30) and evening (19:00 and 20:30). The 22:00 slot runs Monday, Tuesday and Thursday.',
+      q4: 'Do you have classes for beginners and all levels?',
+      a4: 'Yes. Groups are mixed and the work is progressive: from people training for health and fitness to athletes competing nationally and internationally.',
+      q5: 'How do I book a trial class?',
+      a5: 'Message us on WhatsApp at +54 9 261 571-0531 for K1 and Muay Thai, or +54 9 261 467-1743 for MMA and Wrestling, and we will set the day and time of your first class.'
+    },
     contact: {
       eyebrow: '09 — Contact',
       title: 'Train with <b>us.</b>',
@@ -356,7 +388,8 @@ const BFC_I18N = {
     counters: {
       years: 'Anos formando atletas',
       students: 'Alunos ativos',
-      champs: 'Campeões sul-americanos'
+      champsValue: 'Berço',
+      champs: 'De campeões'
     },
     marquee: [
       'Onde se forjam campeões',
@@ -458,6 +491,21 @@ const BFC_I18N = {
       title: 'A academia. <b>Sem filtros.</b>',
       lead: 'Vídeo em loop: um vislumbre da energia, disciplina e rotina da academia.',
       cta: 'Conhecer a academia'
+    },
+    faq: {
+      eyebrow: '09 — Perguntas frequentes',
+      title: 'Antes da sua <b>primeira aula.</b>',
+      lead: 'O que mais nos perguntam quem está começando.',
+      q1: 'Preciso de experiência prévia para começar?',
+      a1: 'Não. A maioria dos nossos alunos começa do zero. Cada aula se adapta ao nível da pessoa e há sempre um professor corrigindo a técnica desde o primeiro dia.',
+      q2: 'Quais modalidades posso treinar no Bonati Fight Club?',
+      a2: 'K1 Kickboxing, Muay Thai, MMA e Wrestling. O striking é ministrado por Walter Bonati e Gastón «Tonga» Silva; MMA e Wrestling funcionam dentro do clube através do Tapa Team.',
+      q3: 'Onde ficam e quais são os horários?',
+      a3: 'Estamos na Balcarce 230, Godoy Cruz, Mendoza. Treinamos de segunda a sexta com turnos de manhã (08:30 e 10:00), tarde (15:00, 16:30 e 17:30) e noite (19:00 e 20:30). O turno das 22:00 é segunda, terça e quinta.',
+      q4: 'Têm aulas para iniciantes e para todos os níveis?',
+      a4: 'Sim. As turmas são mistas e o trabalho é progressivo: de quem treina por saúde e condicionamento a atletas que competem em nível nacional e internacional.',
+      q5: 'Como marco uma aula experimental?',
+      a5: 'Fale conosco no WhatsApp pelo +54 9 261 571-0531 para K1 e Muay Thai, ou +54 9 261 467-1743 para MMA e Wrestling, e combinamos o dia e o horário da sua primeira aula.'
     },
     contact: {
       eyebrow: '09 — Contato',
