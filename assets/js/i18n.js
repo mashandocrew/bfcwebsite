@@ -6,6 +6,7 @@
 
 const BFC_I18N = {
   es: {
+    choose: { title: '¿Qué querés entrenar?', k1: 'K1 / Muay Thai', k1by: 'Con Walter Bonati y Gastón Silva', mma: 'MMA / Wrestling', mmaby: 'Con Tapa Team' },
     nav: {
       home: 'Inicio',
       academy: 'Academia',
@@ -165,7 +166,8 @@ const BFC_I18N = {
       namePlaceholder: 'Tu nombre',
       textPlaceholder: '¿Qué te pareció el gimnasio?',
       submit:     'Enviar reseña',
-      googleBtn:  'Dejar reseña en Google →'
+      googleBtn:  'Dejar reseña en Google →',
+      or:         'o dejala acá, en la web:'
     },
     spot: {
       title: 'La academia. <b>Sin filtros.</b>',
@@ -225,6 +227,7 @@ const BFC_I18N = {
   },
 
   en: {
+    choose: { title: 'What do you want to train?', k1: 'K1 / Muay Thai', k1by: 'With Walter Bonati and Gastón Silva', mma: 'MMA / Wrestling', mmaby: 'With Tapa Team' },
     nav: {
       home: 'Home', academy: 'Academy', schedule: 'Schedule', coaches: 'Coaches',
       tapa: 'Tapa Team', store: 'Store', contact: 'Contact', cta: 'Train now'
@@ -339,7 +342,8 @@ const BFC_I18N = {
       namePlaceholder: 'Your name',
       textPlaceholder: 'What did you think of the gym?',
       submit:     'Send review',
-      googleBtn:  'Leave a Google review →'
+      googleBtn:  'Leave a Google review →',
+      or:         'or leave it here, on the site:'
     },
     spot: {
       title: 'The academy. <b>No filters.</b>',
@@ -390,6 +394,7 @@ const BFC_I18N = {
   },
 
   pt: {
+    choose: { title: 'O que você quer treinar?', k1: 'K1 / Muay Thai', k1by: 'Com Walter Bonati e Gastón Silva', mma: 'MMA / Wrestling', mmaby: 'Com o Tapa Team' },
     nav: {
       home: 'Início', academy: 'Academia', schedule: 'Horários', coaches: 'Professores',
       tapa: 'Tapa Team', store: 'Loja', contact: 'Contato', cta: 'Treinar agora'
@@ -504,7 +509,8 @@ const BFC_I18N = {
       namePlaceholder: 'Seu nome',
       textPlaceholder: 'O que você achou da academia?',
       submit:     'Enviar avaliação',
-      googleBtn:  'Avaliar no Google →'
+      googleBtn:  'Avaliar no Google →',
+      or:         'ou deixe aqui, no site:'
     },
     spot: {
       title: 'A academia. <b>Sem filtros.</b>',

@@ -25,7 +25,11 @@
     var href = a.href || '';
     var label = (a.textContent || a.getAttribute('aria-label') || '').trim().replace(/\s+/g, ' ').slice(0, 80);
 
-    if (/wa\.me\/|api\.whatsapp\.com/.test(href)) {
+    var dlg = document.getElementById('waDialog');
+    if (a.hasAttribute('data-wa-choose') && dlg && typeof dlg.showModal === 'function') {
+      /* Abre el selector de línea (wa-chooser.js); el clic real a WhatsApp se mide en la opción elegida */
+      send('whatsapp_chooser_open', { link_text: label });
+    } else if (/wa\.me\/|api\.whatsapp\.com/.test(href)) {
       send('whatsapp_click', { linea: lineFor(href), link_text: label });
     } else if (/instagram\.com/.test(href)) {
       send('instagram_click', { link_url: href, link_text: label });
