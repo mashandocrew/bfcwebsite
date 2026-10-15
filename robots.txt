@@ -1,50 +1,24 @@
 # Bonati Fight Club — https://bonatifightclub.com.ar/
+#
+# Un solo grupo para todos los bots: los grupos con un User-agent propio no
+# heredan los Disallow de "User-agent: *", por eso se listan juntos.
+# Buscadores tradicionales y motores generativos / IA permitidos de forma explícita.
 
-# --- Buscadores tradicionales ---
 User-agent: Googlebot
-Allow: /
-
 User-agent: Bingbot
-Allow: /
-
-# --- Motores generativos / IA ---
 User-agent: Google-Extended
-Allow: /
-
 User-agent: GPTBot
-Allow: /
-
 User-agent: OAI-SearchBot
-Allow: /
-
 User-agent: ChatGPT-User
-Allow: /
-
 User-agent: ClaudeBot
-Allow: /
-
 User-agent: Claude-User
-Allow: /
-
 User-agent: Claude-SearchBot
-Allow: /
-
 User-agent: PerplexityBot
-Allow: /
-
 User-agent: Perplexity-User
-Allow: /
-
 User-agent: Applebot
-Allow: /
-
 User-agent: Applebot-Extended
-Allow: /
-
-# --- Regla general ---
 User-agent: *
 Allow: /
 Disallow: /admin/
-Disallow: /migrate-gallery.html
 
 Sitemap: https://bonatifightclub.com.ar/sitemap.xml

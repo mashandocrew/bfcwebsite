@@ -119,7 +119,7 @@ const BFC_I18N = {
     sch: {
       eyebrow: '05 — Horarios',
       title: 'Elegí tu <b>round.</b>',
-      lead: 'Clases de lunes a viernes para todos los niveles. Sin horario? Escribinos y armamos uno.',
+      lead: 'Clases de lunes a viernes para todos los niveles. ¿Sin horario? Escribinos y armamos uno.',
       cta: 'Consultar por clases',
       walter: { coach: 'Walter Bonati', days: 'Lun a Vie' },
       gaston: { coach: 'Gastón Silva', days1: 'LUN · MAR · MIÉ · JUE · VIE', days2: 'LUN · MAR · JUE' },
@@ -185,7 +185,7 @@ const BFC_I18N = {
       a5: 'Escribinos por WhatsApp al +54 9 261 571-0531 para K1 y Muay Thai, o al +54 9 261 467-1743 para MMA y Wrestling, y coordinamos el día y el horario de tu primera clase.'
     },
     contact: {
-      eyebrow: '09 — Contacto',
+      eyebrow: '10 — Contacto',
       title: 'Entrená con <b>nosotros.</b>',
       lead: 'Estamos en el corazón de Godoy Cruz. Reservá 2 clases de prueba gratuitas.',
       addr: 'Balcarce 230',
@@ -210,7 +210,7 @@ const BFC_I18N = {
       h1: 'Academia',
       h2: 'Info',
       h3: 'Síguenos',
-      copyright: '© 2025 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
+      copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'
     }
   },
@@ -351,7 +351,7 @@ const BFC_I18N = {
       a5: 'Message us on WhatsApp at +54 9 261 571-0531 for K1 and Muay Thai, or +54 9 261 467-1743 for MMA and Wrestling, and we will set the day and time of your first class.'
     },
     contact: {
-      eyebrow: '09 — Contact',
+      eyebrow: '10 — Contact',
       title: 'Train with <b>us.</b>',
       lead: 'We are in the heart of Godoy Cruz. Book your 2 free trial classes.',
       addr: '230 Balcarce St.', city: 'Godoy Cruz, Mendoza',
@@ -367,7 +367,7 @@ const BFC_I18N = {
     footer: {
       tag: 'Training elite athletes in the heart of Godoy Cruz, Mendoza since 2010.',
       h1: 'Academy', h2: 'Info', h3: 'Follow us',
-      copyright: '© 2025 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
+      copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'
     }
   },
@@ -508,7 +508,7 @@ const BFC_I18N = {
       a5: 'Fale conosco no WhatsApp pelo +54 9 261 571-0531 para K1 e Muay Thai, ou +54 9 261 467-1743 para MMA e Wrestling, e combinamos o dia e o horário da sua primeira aula.'
     },
     contact: {
-      eyebrow: '09 — Contato',
+      eyebrow: '10 — Contato',
       title: 'Treine com a <b>gente.</b>',
       lead: 'Estamos no coração de Godoy Cruz. Marque suas 2 aulas experimentais gratuitas.',
       addr: 'Balcarce 230', city: 'Godoy Cruz, Mendoza',
@@ -524,7 +524,7 @@ const BFC_I18N = {
     footer: {
       tag: 'Formando atletas de elite no coração de Godoy Cruz, Mendoza desde 2010.',
       h1: 'Academia', h2: 'Info', h3: 'Siga',
-      copyright: '© 2025 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
+      copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'
     }
   }

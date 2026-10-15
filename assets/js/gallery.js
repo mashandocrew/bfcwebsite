@@ -1,4 +1,4 @@
-/* BFC · GALERÍA — Supabase community_photos + BFC_GALLERY fallback */
+/* BFC · GALERÍA — Supabase community_photos (sin respaldo de relleno) */
 (function () {
   'use strict';
 
@@ -273,24 +273,16 @@
 
     var supabasePhotos = await loadFromSupabase();
 
-    var photos;
-    if (supabasePhotos && supabasePhotos.length > 0) {
-      photos = supabasePhotos.map(mapRow);
-    } else if (typeof BFC_GALLERY !== 'undefined' && BFC_GALLERY.length > 0) {
-      photos = BFC_GALLERY;
-    } else {
-      photos = [];
-    }
+    /* Solo fotos reales desde Supabase: sin fotos de relleno de respaldo */
+    var photos = (supabasePhotos && supabasePhotos.length > 0) ? supabasePhotos.map(mapRow) : [];
 
     GALLERY_DATA = photos;
     grid.innerHTML = '';
 
     if (!photos.length) {
-      if (supabasePhotos === null) {
-        grid.innerHTML = '<div style="text-align:center;padding:3rem 1rem;color:#C8102E"><i class="ph ph-warning" style="font-size:2rem;display:block;margin-bottom:.5rem"></i>Error al cargar la galería.</div>';
-      } else {
-        grid.innerHTML = '<p style="text-align:center;font-family:\'Outfit\',sans-serif;font-weight:300;color:rgba(255,255,255,0.4);padding:3rem 1rem">La galería se está preparando. Volvé pronto.</p>';
-      }
+      /* Sin fotos (o error al cargarlas): se oculta la sección en vez de mostrar un aviso */
+      var section = document.getElementById('galeria');
+      if (section) section.hidden = true;
       return;
     }
 
