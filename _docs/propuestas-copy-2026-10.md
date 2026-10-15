@@ -9,6 +9,7 @@ Fecha: 15/10/2026. Estado del sitio: rama `claude/charming-dirac-uyv86k` (PR #3,
 - **[CONFIRMAR]**: dato no verificado. Si no es cierto, se borra; no se publica tal cual.
 - **⚠️ FAQ**: si se cambia una pregunta o respuesta del FAQ, hay que cambiar también el `FAQPage` del JSON-LD en el `<head>` de `index.html`, con el texto idéntico.
 - **Ya aplicado en la Fase 1** (no repetir): title y meta description de la home y de Tapa Team; numeración de secciones (Contacto pasó a 10); © 2026; «¿Sin horario?» con signo de apertura; títulos de Tonga, línea de tiempo y bullets de profesores ahora también en el HTML.
+- **Ya aplicado el 15/10/2026** (datos confirmados por el club; no repetir): 2 clases de prueba gratis (FAQ y Tapa Team); horario de Tapa Team (lun, mié y vie de 20:00 a 21:30) en la home, en Tapa Team y en el FAQ; tres preguntas nuevas del FAQ (cuota, edad mínima, qué llevar); «4,9 ★ en Google · 112 reseñas»; el párrafo de la pandemia, reescrito con la fuente real (nota de El Sol, 16/08/2020) y su link. Las filas de este documento sobre esos puntos ya no hacen falta.
 - Trato: el sitio vosea («Elegí», «Escribinos», «Reservá»). Todas las propuestas mantienen el voseo.
 
 ---
