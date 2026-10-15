@@ -344,14 +344,12 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 .hero-video {
   position: absolute; top: 50%; left: 50%;
   width: 100vh; height: 100vw;
+  max-width: none; /* la regla global video{max-width:100%} lo achicaba en pantallas verticales y dejaba una franja negra */
   object-fit: cover;
   transform: translate3d(-50%, -50%, 0) rotate(-90deg);
   transform-origin: center;
   will-change: transform;
   backface-visibility: hidden;
-}
-@media (max-aspect-ratio: 9/16) {
-  .hero-video { transform: translate3d(-50%,-50%,0) rotate(-90deg) scale(1.4); }
 }
 .hero-mask {
   position: absolute; inset: 0; z-index: 1;
