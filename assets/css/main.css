@@ -1032,9 +1032,12 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 .schedule { background: var(--bfc-black-800); position: relative; }
 .schedule-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
+.rev-rating { margin-top: 0.75rem; }
+.history .para a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.rev-rating a { color: var(--bfc-bone); text-decoration: underline; text-underline-offset: 3px; }
 .fight-card {
   background: var(--bfc-black-700);
   border: var(--border-hair);

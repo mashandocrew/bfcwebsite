@@ -13,7 +13,7 @@
   var SUPABASE_URL        = 'https://kmlobikkamhnzkmbtckg.supabase.co';
   var SUPABASE_KEY        = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttbG9iaWtrYW1obnprbWJ0Y2tnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MjYyOTQsImV4cCI6MjA5MjQwMjI5NH0.yeN_hygM4q9tZIq4hst6-6SzeAf5mdLnTuWG-eLatts';
   var GOOGLE_PLACES_API_KEY = 'TU_API_KEY_AQUI';   /* ← pegar aquí */
-  var GOOGLE_PLACE_ID       = 'TU_PLACE_ID_AQUI';  /* ← pegar aquí */
+  var GOOGLE_PLACE_ID       = 'ChIJsTGJ7q8JfpYRN69N1LdLXHo';  /* ← pegar aquí */
 
   var GOOGLE_READY = (
     GOOGLE_PLACES_API_KEY !== 'TU_API_KEY_AQUI' &&

@@ -80,13 +80,13 @@ const BFC_I18N = {
       eyebrow: '03 — Historia',
       title: 'Quince años <b>forjando leyendas</b> en Cuyo.',
       p1: 'Walter Bonati fundó el club desde la pasión, con un objetivo claro: llevar el kickboxing mendocino al nivel profesional. Lo que empezó como un proyecto de barrio creció hasta convertirse en una de las academias más reconocidas de Argentina.',
-      p2: 'Durante la pandemia (2020–2021) fue reconocida entre las academias destacadas de Mendoza por su capacidad de adaptación y continuidad. Hoy alberga las disciplinas de K1 y Muay Thai, y a través de Tapa Team, MMA y Wrestling.',
+      p2: 'En la cuarentena de 2020 siguió entrenando con protocolo sanitario, y <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">el diario El Sol</a> la incluyó en su nota sobre las academias de artes marciales de Mendoza. Hoy alberga las disciplinas de K1 y Muay Thai, y a través de Tapa Team, MMA y Wrestling.',
       quote: 'Aquí en Bonati prevalece la decisión de hacer las cosas.',
       quoteBy: 'Walter Bonati · Head Coach',
       tl: [
         { y: '2010', t: 'Fundación', d: 'Walter Bonati abre las puertas del gimnasio en Godoy Cruz.' },
         { y: '2019', t: 'Primer medallero sudamericano', d: 'Gastón "Tonga" Silva trae la medalla de oro WKF.' },
-        { y: '2021', t: 'Se adapta y resiste', d: 'BFC reconocida por su continuidad durante la pandemia.' },
+        { y: '2020', t: 'Se adapta y resiste', d: 'BFC sigue entrenando en cuarentena, con protocolo sanitario, y aparece en el diario El Sol.' },
         { y: '2025', t: 'Nace Tapa Team', d: 'Se incorpora el equipo de MMA y Wrestling dentro del gym.' },
         { y: '2025', t: 'Campeón Sudamericano FFG', d: 'KO histórico vs Jonas Coelho en Brasil. Senado de Mendoza reconoce al atleta.' }
       ]
@@ -124,7 +124,9 @@ const BFC_I18N = {
       walter: { coach: 'Walter Bonati', days: 'Lun a Vie' },
       gaston: { coach: 'Gastón Silva', days1: 'LUN · MAR · MIÉ · JUE · VIE', days2: 'LUN · MAR · JUE' },
       disc1: 'K1 / Muay Thai',
-      disc2: 'Técnica / Sparring'
+      disc2: 'Técnica / Sparring',
+      disc3: 'MMA / Wrestling',
+      tapa: { coach: 'Tapa Team', days: 'LUN · MIÉ · VIE' }
     },
     tapa: {
       eyebrow: '06 — Tapa Team',
@@ -158,6 +160,7 @@ const BFC_I18N = {
       eyebrow:    '08 — Reseñas',
       title:      'Lo que dice <b>nuestra comunidad.</b>',
       lead:       'Opiniones reales de nuestros alumnos.',
+      rating:     '4,9 ★ en Google · 112 reseñas (octubre 2026)',
       formTitle:  'Dejá tu reseña',
       namePlaceholder: 'Tu nombre',
       textPlaceholder: '¿Qué te pareció el gimnasio?',
@@ -178,11 +181,17 @@ const BFC_I18N = {
       q2: '¿Qué disciplinas puedo entrenar en Bonati Fight Club?',
       a2: 'K1 Kickboxing, Muay Thai, MMA y Wrestling. El striking lo dictan Walter Bonati y Gastón «Tonga» Silva; MMA y Wrestling funcionan dentro del club a través de Tapa Team.',
       q3: '¿Dónde están y en qué horarios entrenan?',
-      a3: 'Estamos en Balcarce 230, Godoy Cruz, Mendoza. Entrenamos de lunes a viernes con turnos de mañana (08:30 y 10:00), tarde (15:00, 16:30 y 17:30) y noche (19:00 y 20:30). El turno de las 22:00 es lunes, martes y jueves.',
+      a3: 'Estamos en Balcarce 230, Godoy Cruz, Mendoza. Entrenamos de lunes a viernes con turnos de mañana (08:30 y 10:00), tarde (15:00, 16:30 y 17:30) y noche (19:00 y 20:30). El turno de las 22:00 es lunes, martes y jueves. MMA y Wrestling (Tapa Team): lunes, miércoles y viernes de 20:00 a 21:30.',
       q4: '¿Tienen clases para principiantes y para todos los niveles?',
       a4: 'Sí. Los grupos son mixtos y el trabajo es progresivo: desde quien entrena por salud y estado físico hasta atletas que compiten a nivel nacional e internacional.',
       q5: '¿Cómo me anoto para una clase de prueba?',
-      a5: 'Escribinos por WhatsApp al +54 9 261 571-0531 para K1 y Muay Thai, o al +54 9 261 467-1743 para MMA y Wrestling, y coordinamos el día y el horario de tu primera clase.'
+      a5: 'Escribinos por WhatsApp al +54 9 261 571-0531 para K1 y Muay Thai, o al +54 9 261 467-1743 para MMA y Wrestling, y coordinamos el día y el horario de tu primera clase. Las 2 primeras clases son gratis.',
+      q6: '¿Cuánto cuesta la cuota?',
+      a6: 'Depende de cuántos días por semana entrenes: 3, 4 o 5. Walter te confirma el valor por WhatsApp al +54 9 261 571-0531.',
+      q7: '¿Desde qué edad se puede entrenar?',
+      a7: 'Desde los 12 años, en todas las disciplinas.',
+      q8: '¿Qué tengo que llevar a la primera clase?',
+      a8: 'Nada. Para la primera clase no hace falta llevar equipo ni tener experiencia previa.'
     },
     contact: {
       eyebrow: '10 — Contacto',
@@ -266,13 +275,13 @@ const BFC_I18N = {
       eyebrow: '03 — History',
       title: 'Fifteen years <b>forging legends</b> in Cuyo.',
       p1: 'Walter Bonati founded the club out of passion, with one goal: take Mendozan kickboxing to the professional level. What started as a neighborhood project grew into one of the most respected martial arts academies in Argentina.',
-      p2: 'During the pandemic (2020–2021) it was recognized among the leading academies in Mendoza for its resilience. Today it houses K1 and Muay Thai, plus MMA and Wrestling through Tapa Team.',
+      p2: 'During the 2020 lockdown it kept training under health protocols, and <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">the newspaper El Sol</a> featured it in a story on Mendoza\'s martial arts academies. Today it houses K1 and Muay Thai, plus MMA and Wrestling through Tapa Team.',
       quote: 'At Bonati, the will to get things done prevails.',
       quoteBy: 'Walter Bonati · Head Coach',
       tl: [
         { y: '2010', t: 'Founded',                       d: 'Walter Bonati opens the doors of the gym in Godoy Cruz.' },
         { y: '2019', t: 'First South American medal',    d: 'Gastón "Tonga" Silva brings home the WKF gold medal.' },
-        { y: '2021', t: 'Adapting and resisting',        d: 'BFC recognized for its continuity during the pandemic.' },
+        { y: '2020', t: 'Adapting and resisting',        d: 'BFC keeps training through the lockdown under health protocols and is featured in El Sol.' },
         { y: '2025', t: 'Tapa Team is born',             d: 'MMA and Wrestling team launches inside the gym.' },
         { y: '2025', t: 'FFG South American Champion',   d: 'Historic KO vs Jonas Coelho in Brazil. Mendoza Senate honors the athlete.' }
       ]
@@ -291,7 +300,8 @@ const BFC_I18N = {
       cta: 'Ask about classes',
       walter: { coach: 'Walter Bonati', days: 'Mon to Fri' },
       gaston: { coach: 'Gastón Silva', days1: 'MON · TUE · WED · THU · FRI', days2: 'MON · TUE · THU' },
-      disc1: 'K1 / Muay Thai', disc2: 'Technique / Sparring'
+      disc1: 'K1 / Muay Thai', disc2: 'Technique / Sparring',
+      disc3: 'MMA / Wrestling', tapa: { coach: 'Tapa Team', days: 'MON · WED · FRI' }
     },
     tapa: {
       eyebrow: '06 — Tapa Team',
@@ -324,6 +334,7 @@ const BFC_I18N = {
       eyebrow:    '08 — Reviews',
       title:      'What our <b>community says.</b>',
       lead:       'Real opinions from our students.',
+      rating:     '4.9 ★ on Google · 112 reviews (October 2026)',
       formTitle:  'Leave a review',
       namePlaceholder: 'Your name',
       textPlaceholder: 'What did you think of the gym?',
@@ -344,11 +355,17 @@ const BFC_I18N = {
       q2: 'Which disciplines can I train at Bonati Fight Club?',
       a2: 'K1 Kickboxing, Muay Thai, MMA and Wrestling. Striking is taught by Walter Bonati and Gast\u00f3n \u201cTonga\u201d Silva; MMA and Wrestling run inside the club through Tapa Team.',
       q3: 'Where are you and what are your class times?',
-      a3: 'We are at Balcarce 230, Godoy Cruz, Mendoza. We train Monday to Friday with morning slots (08:30 and 10:00), afternoon (15:00, 16:30 and 17:30) and evening (19:00 and 20:30). The 22:00 slot runs Monday, Tuesday and Thursday.',
+      a3: 'We are at Balcarce 230, Godoy Cruz, Mendoza. We train Monday to Friday with morning slots (08:30 and 10:00), afternoon (15:00, 16:30 and 17:30) and evening (19:00 and 20:30). The 22:00 slot runs Monday, Tuesday and Thursday. MMA and Wrestling (Tapa Team): Monday, Wednesday and Friday from 20:00 to 21:30.',
       q4: 'Do you have classes for beginners and all levels?',
       a4: 'Yes. Groups are mixed and the work is progressive: from people training for health and fitness to athletes competing nationally and internationally.',
       q5: 'How do I book a trial class?',
-      a5: 'Message us on WhatsApp at +54 9 261 571-0531 for K1 and Muay Thai, or +54 9 261 467-1743 for MMA and Wrestling, and we will set the day and time of your first class.'
+      a5: 'Message us on WhatsApp at +54 9 261 571-0531 for K1 and Muay Thai, or +54 9 261 467-1743 for MMA and Wrestling, and we will set the day and time of your first class. Your first 2 classes are free.',
+      q6: 'How much is the monthly fee?',
+      a6: 'It depends on how many days a week you train: 3, 4 or 5. Walter confirms the price on WhatsApp at +54 9 261 571-0531.',
+      q7: 'From what age can I train?',
+      a7: 'From age 12, in every discipline.',
+      q8: 'What should I bring to my first class?',
+      a8: 'Nothing. You don\'t need gear or previous experience for your first class.'
     },
     contact: {
       eyebrow: '10 — Contact',
@@ -423,13 +440,13 @@ const BFC_I18N = {
       eyebrow: '03 — História',
       title: 'Quinze anos <b>forjando lendas</b> no Cuyo.',
       p1: 'Walter Bonati fundou o clube por paixão, com um objetivo: levar o kickboxing mendocino ao nível profissional. O que começou como um projeto de bairro virou uma das academias mais respeitadas da Argentina.',
-      p2: 'Durante a pandemia (2020–2021) foi reconhecida entre as principais academias de Mendoza pela capacidade de adaptação. Hoje abriga K1 e Muay Thai, e através do Tapa Team, MMA e Wrestling.',
+      p2: 'Na quarentena de 2020 continuou treinando com protocolo sanitário, e <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">o jornal El Sol</a> a incluiu em sua matéria sobre as academias de artes marciais de Mendoza. Hoje abriga K1 e Muay Thai, e através do Tapa Team, MMA e Wrestling.',
       quote: 'Aqui em Bonati prevalece a decisão de fazer as coisas.',
       quoteBy: 'Walter Bonati · Head Coach',
       tl: [
         { y: '2010', t: 'Fundação',                        d: 'Walter Bonati abre as portas da academia em Godoy Cruz.' },
         { y: '2019', t: 'Primeira medalha sul-americana', d: 'Gastón "Tonga" Silva conquista o ouro na WKF.' },
-        { y: '2021', t: 'Adapta-se e resiste',             d: 'BFC reconhecida pela continuidade durante a pandemia.' },
+        { y: '2020', t: 'Adapta-se e resiste',             d: 'BFC segue treinando na quarentena, com protocolo sanitário, e aparece no jornal El Sol.' },
         { y: '2025', t: 'Nasce o Tapa Team',               d: 'Time de MMA e Wrestling entra na academia.' },
         { y: '2025', t: 'Campeão Sul-Americano FFG',       d: 'KO histórico sobre Jonas Coelho no Brasil. Senado de Mendoza homenageia o atleta.' }
       ]
@@ -448,7 +465,8 @@ const BFC_I18N = {
       cta: 'Consultar aulas',
       walter: { coach: 'Walter Bonati', days: 'Seg a Sex' },
       gaston: { coach: 'Gastón Silva', days1: 'SEG · TER · QUA · QUI · SEX', days2: 'SEG · TER · QUI' },
-      disc1: 'K1 / Muay Thai', disc2: 'Técnica / Sparring'
+      disc1: 'K1 / Muay Thai', disc2: 'Técnica / Sparring',
+      disc3: 'MMA / Wrestling', tapa: { coach: 'Tapa Team', days: 'SEG · QUA · SEX' }
     },
     tapa: {
       eyebrow: '06 — Tapa Team',
@@ -481,6 +499,7 @@ const BFC_I18N = {
       eyebrow:    '08 — Avaliações',
       title:      'O que diz <b>nossa comunidade.</b>',
       lead:       'Opiniões reais dos nossos alunos.',
+      rating:     '4,9 ★ no Google · 112 avaliações (outubro 2026)',
       formTitle:  'Deixe sua avaliação',
       namePlaceholder: 'Seu nome',
       textPlaceholder: 'O que você achou da academia?',
@@ -501,11 +520,17 @@ const BFC_I18N = {
       q2: 'Quais modalidades posso treinar no Bonati Fight Club?',
       a2: 'K1 Kickboxing, Muay Thai, MMA e Wrestling. O striking é ministrado por Walter Bonati e Gastón «Tonga» Silva; MMA e Wrestling funcionam dentro do clube através do Tapa Team.',
       q3: 'Onde ficam e quais são os horários?',
-      a3: 'Estamos na Balcarce 230, Godoy Cruz, Mendoza. Treinamos de segunda a sexta com turnos de manhã (08:30 e 10:00), tarde (15:00, 16:30 e 17:30) e noite (19:00 e 20:30). O turno das 22:00 é segunda, terça e quinta.',
+      a3: 'Estamos na Balcarce 230, Godoy Cruz, Mendoza. Treinamos de segunda a sexta com turnos de manhã (08:30 e 10:00), tarde (15:00, 16:30 e 17:30) e noite (19:00 e 20:30). O turno das 22:00 é segunda, terça e quinta. MMA e Wrestling (Tapa Team): segunda, quarta e sexta das 20:00 às 21:30.',
       q4: 'Têm aulas para iniciantes e para todos os níveis?',
       a4: 'Sim. As turmas são mistas e o trabalho é progressivo: de quem treina por saúde e condicionamento a atletas que competem em nível nacional e internacional.',
       q5: 'Como marco uma aula experimental?',
-      a5: 'Fale conosco no WhatsApp pelo +54 9 261 571-0531 para K1 e Muay Thai, ou +54 9 261 467-1743 para MMA e Wrestling, e combinamos o dia e o horário da sua primeira aula.'
+      a5: 'Fale conosco no WhatsApp pelo +54 9 261 571-0531 para K1 e Muay Thai, ou +54 9 261 467-1743 para MMA e Wrestling, e combinamos o dia e o horário da sua primeira aula. As 2 primeiras aulas são grátis.',
+      q6: 'Quanto custa a mensalidade?',
+      a6: 'Depende de quantos dias por semana você treina: 3, 4 ou 5. O Walter confirma o valor pelo WhatsApp +54 9 261 571-0531.',
+      q7: 'A partir de que idade posso treinar?',
+      a7: 'A partir dos 12 anos, em todas as modalidades.',
+      q8: 'O que preciso levar na primeira aula?',
+      a8: 'Nada. Na primeira aula não é preciso levar equipamento nem ter experiência.'
     },
     contact: {
       eyebrow: '10 — Contato',
