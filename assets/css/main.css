@@ -2023,3 +2023,45 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
   .disc-card { transition: opacity 200ms ease; filter: none !important; }
   .disc-card.is-prev, .disc-card.is-next { filter: none !important; }
 }
+
+/* ===== Selector de línea de WhatsApp ===== */
+.wa-dialog {
+  margin: auto; /* el reset global quita el centrado nativo del <dialog> */
+  padding: 0; border: 1px solid rgba(245,240,232,0.12);
+  background: var(--bfc-black-700); color: var(--bfc-bone);
+  width: min(420px, calc(100vw - 32px)); max-width: none;
+}
+.wa-dialog::backdrop { background: rgba(0,0,0,0.72); backdrop-filter: blur(4px); }
+.wa-dialog-inner { position: relative; padding: 2rem 1.5rem 1.5rem; display: grid; gap: 0.75rem; }
+.wa-dialog-close {
+  position: absolute; top: 0.75rem; right: 0.75rem;
+  width: 36px; height: 36px; display: grid; place-items: center;
+  color: var(--bfc-bone-dim); font-size: 1.2rem;
+}
+.wa-dialog-title {
+  font-family: var(--ff-display); font-size: clamp(1.6rem, 5vw, 2rem);
+  letter-spacing: 0.02em; line-height: 1; margin: 0 2.5rem 0.5rem 0;
+}
+.wa-option {
+  display: flex; align-items: center; gap: 0.9rem;
+  padding: 1rem 1.1rem; border: 1px solid var(--bfc-red);
+  background: rgba(200,16,46,0.08); color: var(--bfc-bone); text-decoration: none;
+  transition: background var(--dur-fast);
+}
+.wa-option:hover, .wa-option:focus-visible { background: rgba(200,16,46,0.2); }
+.wa-option i { font-size: 1.6rem; color: #25D366; }
+.wa-option b { display: block; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; font-size: 0.9rem; }
+.wa-option small { display: block; color: var(--bfc-bone-dim); font-size: 0.8rem; margin-top: 0.15rem; }
+.wa-option.gold { border-color: var(--bfc-gold); background: rgba(212,160,23,0.08); }
+.wa-option.gold:hover, .wa-option.gold:focus-visible { background: rgba(212,160,23,0.18); }
+
+/* Reseñas: Google como acción principal; el formulario propio queda como alternativa */
+.review-form-container #revGoogleBtn {
+  width: 100%; margin: 0; padding: 16px;
+  background: #C8102E; border: none; color: #fff;
+  font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px;
+}
+.review-form-container #revGoogleBtn:hover { background: #a50d25; color: #fff; box-shadow: 0 6px 24px rgba(200,16,46,0.35); }
+.rev-or { font-size: 0.85rem; color: var(--bfc-bone-dim); margin: 1.25rem 0 1rem; }
+#revForm button[type="submit"] { background: transparent; border: 1px solid rgba(255,255,255,0.2); }
+#revForm button[type="submit"]:hover { background: rgba(255,255,255,0.06); box-shadow: none; }

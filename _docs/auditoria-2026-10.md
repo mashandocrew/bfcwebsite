@@ -40,6 +40,12 @@ Visto de paso, sin probarlo ni explotarlo. No se reproduce ninguna contraseña.
 
 ---
 
+## Estado al 15/10/2026
+
+- **Publicado:** Fases 1, 3 y 4, y la parte de la Fase 2 que dependía de datos del club (ver §7).
+- **Pendiente del club, en este orden:** (1) aplicar el copy con `propuestas-copy-2026-10.md`; (2) después, GA4 (marcar `whatsapp_click` como evento clave y crear la dimensión `linea`), Search Console (propiedad, sitemap, indexación) y Bing Webmaster Tools (importar desde Search Console). Pasos en §10.
+- **Decisión del club:** el panel de `/admin/` y las reglas de Supabase quedan como están (§0).
+
 ## Resumen ejecutivo
 
 1. **La base SEO ya estaba bien encaminada** (canonical de la home, JSON-LD completo, FAQ visible igual al FAQPage, robots con bots de IA). Lo que fallaba era el resto del sitio: `/tapa-team/` sin canonical, sin og:image y sin JSON-LD; favicons de Tapa Team inexistentes; tienda indexable mostrando «📷 CARGAR» en 14 productos.
@@ -56,14 +62,14 @@ Visto de paso, sin probarlo ni explotarlo. No se reproduce ninguna contraseña.
 
 | # | Hallazgo | Dónde | Fix | Esfuerzo | Estado |
 |---|---|---|---|---|---|
-| 1 | Login de admin validado en el navegador; RLS abiertas | `/admin/`, Supabase | §0 | medio | **Pendiente (usted)** |
+| 1 | Login de admin validado en el navegador; RLS abiertas | `/admin/`, Supabase | §0 | medio | **No se cambia (decisión del club, 15/10)** |
 | 2 | Títulos, línea de tiempo y datos de profesores solo en JS | home | Pasarlos al HTML estático | bajo | ✅ |
-| 3 | Video hero de 12,2 MB precargado con `fetchpriority=high` | home | 60 s, sin audio, CRF 32, póster, sin `preload` | bajo | ✅ |
+| 3 | Video hero de 12,2 MB precargado con `fetchpriority=high` | home | 60 s sin audio y sin recomprimir (MP4 4,8 MB) + AV1 3,3 MB, póster, sin `preload`; cubre la pantalla en celular | bajo | ✅ |
 | 4 | `robots.txt`: los grupos propios de Googlebot, GPTBot, ClaudeBot… no heredan `Disallow: /admin/` | robots.txt | Un solo grupo con todos los `User-agent` | bajo | ✅ |
 | 5 | Tienda indexable con «📷 CARGAR» y precios «Consultar» | `/store/` | `noindex`, fuera del menú, footer y sitemap | bajo | ✅ |
 | 6 | Herramientas internas publicadas (`migrate-gallery.html`, SQL, script) | raíz | Mover a `_tools/` | bajo | ✅ |
 | 7 | Galería con respaldo de fotos de stock (picsum) y leyendas inventadas si falla Supabase | `gallery-data.js` | Sin respaldo: si no hay fotos reales, la sección se oculta | bajo | ✅ |
-| 8 | Foto de 8,5 MB en la tarjeta de Tonga | home | WebP ~900 px, < 150 KB | bajo | Fase 3 |
+| 8 | Foto de 8,5 MB en la tarjeta de Tonga | home | JPG 1200 px, 157 KB | bajo | ✅ |
 | 9 | H1 de la home sin keyword («Bonati Fight Club») | home | Ver propuesta de copy §4 | bajo | Propuesta |
 
 ## 2. SEO
@@ -140,11 +146,11 @@ Perfil de Empresa de Google (categorías, servicios con link, horario por turno,
 
 | Fase | Qué | Prioridad | Esfuerzo | Quién | Estado |
 |---|---|---|---|---|---|
-| 0 | Seguridad del panel y RLS (§0) | 🔴 | medio | Usted / dev, con el SQL propuesto | Pendiente |
-| 1 | Críticos: contenido estático, robots, metadatos y JSON-LD de Tapa Team, video, GA4, tienda noindex, archivos internos fuera | 🔴 | bajo | Claude | ✅ en el PR |
-| 2 | Página `/muay-thai-mendoza/` (y quizás K1 / menores), horario de MMA, párrafo de entidad, FAQ ampliado | 🟢 | medio | Claude, con datos confirmados | Por aprobar |
-| 3 | Rendimiento: `gaston-solo.jpg` 8,5 MB, `historia-bfc.jpg` y `tapa-entrenamiento-01.jpg` 1,6 MB, `logo-tapa-team.png` 590 KB, favicons de 38 KB, `width`/`height` | 🟡 | bajo | Claude | Por aprobar |
-| 4 | UX: selector de línea de WhatsApp, mensajes pre-redactados, botón de reseña a Google | 🟡 | bajo | Claude | Por aprobar |
+| 0 | Seguridad del panel y RLS (§0) | 🔴 | medio | Usted / dev, con el SQL propuesto | No se cambia (decisión del club) |
+| 1 | Críticos: contenido estático, robots, metadatos y JSON-LD de Tapa Team, video, GA4, tienda noindex, archivos internos fuera | 🔴 | bajo | Claude | ✅ publicado (#3, #4) |
+| 2 | Página `/muay-thai-mendoza/` (y quizás K1 / menores), horario de MMA, párrafo de entidad, FAQ ampliado | 🟢 | medio | Claude, con datos confirmados | Parcial: horario de MMA, FAQ (8 preguntas), reseñas 4,9/112, coordenadas y fuente de la pandemia ✅ (#5). Página de Muay Thai y párrafo de entidad: después del copy |
+| 3 | Rendimiento: `gaston-solo.jpg` 8,5 MB, `historia-bfc.jpg` y `tapa-entrenamiento-01.jpg` 1,6 MB, `logo-tapa-team.png` 590 KB, favicons de 38 KB, `width`/`height` | 🟡 | bajo | Claude | ✅ publicado (#5). Falta: fotos de mejor resolución para `tapa-entrenamiento-02.jpg` (201×251) y `tapa-competencia-01.jpg` |
+| 4 | UX: selector de línea de WhatsApp, mensajes pre-redactados, botón de reseña a Google | 🟡 | bajo | Claude | ✅ publicado (#7) |
 | 5 | Copy | 🟢 | medio | Usted, con `propuestas-copy-2026-10.md` | Pendiente |
 | 6 | Perfil de Google y reseñas | 🟢 | continuo | El club, con `kit-perfil-google.md` | Pendiente |
 
