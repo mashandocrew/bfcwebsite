@@ -282,11 +282,11 @@
             review_text: texto,
             rating:      selectedRating,
             discipline:  discEl ? discEl.value : 'General',
-            approved:    true
+            approved:    false   /* queda pendiente hasta que se apruebe desde /admin/ */
           });
           if (res.error) throw res.error;
         }
-        showFeedback('¡Gracias por tu reseña!', 'success');
+        showFeedback('¡Gracias por tu reseña! La publicamos apenas la revisemos.', 'success');
         form.reset();
         selectedRating = 0;
         updateStarUI(document.querySelectorAll('#revStarPicker .rev-star-btn'), 0);
