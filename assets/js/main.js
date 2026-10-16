@@ -107,7 +107,7 @@
     if (!el) return;
     const dict = (window.BFC && window.BFC.i18n && window.BFC.i18n.dict) || null;
     const lang = (dict && (document.documentElement.dataset.lang || 'es')) || 'es';
-    const html = dict ? dict[lang].champions.quote : 'En Bonati Fight Club formamos <b>campeones para la vida.</b>';
+    const html = dict ? dict[lang].champions.quote : 'Un campeón sudamericano <b>da clases acá.</b>';
 
     // Split into tokens preserving <b>…</b>
     const wrapper = document.createElement('span');
