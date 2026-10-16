@@ -849,6 +849,7 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 .timeline {
   position: relative;
   padding-left: 2rem;
+  margin-top: 2.5rem;
 }
 .timeline::before {
   content: ''; position: absolute; left: 0; top: 0.8rem; bottom: 0.8rem;
