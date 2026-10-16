@@ -31,35 +31,34 @@ const BFC_I18N = {
     counters: {
       years: 'Año de fundación',
       students: 'Alumnos activos',
-      champsValue: 'Cuna',
-      champs: 'De campeones'
+      champsValue: '2',
+      champs: 'Clases de prueba gratis'
     },
     marquee: [
-      'Donde se forjan campeones',
       'K1 · Muay Thai · MMA · Wrestling',
-      'Godoy Cruz, Mendoza',
-      '#SiempreBFC',
-      'Walter Bonati Head Coach',
-      'Desde Cuyo para el mundo'
+      'Balcarce 230, Godoy Cruz',
+      '2 clases de prueba gratis',
+      'Campeón Sudamericano FFG 2025',
+      '#SiempreBFC'
     ],
     disc: {
       eyebrow: '01 — Disciplinas',
-      title: 'Arte marcial. <b>Mentalidad de guerra.</b>',
+      title: 'Kickboxing, Muay Thai <b>y MMA.</b>',
       lead: 'K1, Muay Thai, MMA y Wrestling. Grupos para quien empieza y para quien compite.',
       k1: {
-        kicker: 'Stand-up striking',
+        kicker: '08:30 a 23:00',
         name: 'K1 Kickboxing',
         desc: 'Golpes de puño, patadas y rodillas con reglas K1. Clases con Walter Bonati y Gastón «Tonga» Silva, de lunes a viernes.',
-        cta: 'Conocer la clase'
+        cta: 'Ver horarios'
       },
       mt: {
-        kicker: 'The art of eight limbs',
+        kicker: '08:30 a 23:00',
         name: 'Muay Thai',
         desc: 'Boxeo tailandés: puños, codos, rodillas, patadas y clinch. Mismos profesores y horarios que K1.',
-        cta: 'Conocer la clase'
+        cta: 'Ver horarios'
       },
       mma: {
-        kicker: 'Tapa Team',
+        kicker: 'Lun · Mié · Vie · 20:00',
         name: 'MMA & Wrestling',
         desc: 'Artes marciales mixtas y lucha con Tapa Team, en el club desde 2025.',
         cta: 'Ver Tapa Team'
@@ -67,8 +66,8 @@ const BFC_I18N = {
     },
     champions: {
       eyebrow: '02 — Campeones',
-      quote: 'En Bonati Fight Club formamos <b>campeones para la vida.</b>',
-      role: 'Nuestro atleta estrella',
+      quote: 'Un campeón sudamericano <b>da clases acá.</b>',
+      role: 'Atleta y profesor del club',
       titles: [
         { year: '2019', name: 'Medalla de Oro — Sudamericano WKF',     belt: 'Seleccionado' },
         { year: '2021', name: 'Campeón Argentino — FFG',                belt: 'Título Nacional' },
@@ -89,7 +88,7 @@ const BFC_I18N = {
         { y: '2019', t: 'Primer medallero sudamericano', d: 'Gastón "Tonga" Silva trae la medalla de oro WKF.' },
         { y: '2020', t: 'Se adapta y resiste', d: 'BFC sigue entrenando en cuarentena, con protocolo sanitario, y aparece en el diario El Sol.' },
         { y: '2025', t: 'Nace Tapa Team', d: 'Se incorpora el equipo de MMA y Wrestling dentro del gym.' },
-        { y: '2025', t: 'Campeón Sudamericano FFG', d: 'KO histórico vs Jonas Coelho en Brasil. Senado de Mendoza reconoce al atleta.' }
+        { y: '2025', t: 'Campeón Sudamericano FFG', d: 'Gana por KO a Jonas Coelho en Brasil. El Senado de Mendoza lo distingue.' }
       ]
     },
     prof: {
@@ -100,8 +99,7 @@ const BFC_I18N = {
         quote: 'Aquí en Bonati prevalece la decisión de hacer las cosas.',
         bullets: [
           'Especialidad: K1 y Muay Thai',
-          'Entrena peleadores desde 2010',
-          'Fundador de Bonati Fight Club'
+          'Entrena peleadores desde 2010'
         ]
       },
       gaston: {
@@ -119,7 +117,7 @@ const BFC_I18N = {
     },
     sch: {
       eyebrow: '05 — Horarios',
-      title: 'Elegí tu <b>round.</b>',
+      title: 'Horarios <b>de clases.</b>',
       lead: 'Clases de lunes a viernes para todos los niveles. ¿Sin horario? Escribinos y armamos uno.',
       cta: 'Consultar por clases',
       walter: { coach: 'Walter Bonati', days: 'Lun a Vie' },
@@ -134,7 +132,7 @@ const BFC_I18N = {
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
       lead: 'El equipo de MMA y Wrestling de Bonati Fight Club. Nació en 2025 y ya compite en eventos locales y nacionales.',
       s1: 'Fundado', s1v: '2025',
-      s2: 'Eventos', s2v: 'Locales y nacionales',
+      s2: '20:00 a 21:30', s2v: 'Lun · Mié · Vie',
       s3: 'Disciplinas', s3v: 'MMA · Wrestling · Submission',
       cta1: 'WhatsApp MMA',
       cta2: 'Ver página completa'
@@ -198,7 +196,7 @@ const BFC_I18N = {
     contact: {
       eyebrow: '10 — Contacto',
       title: 'Entrená con <b>nosotros.</b>',
-      lead: 'Balcarce 230, Godoy Cruz. Las 2 primeras clases son gratis.',
+      lead: 'Las 2 primeras clases son gratis. Escribí a la línea de tu disciplina.',
       addr: 'Balcarce 230',
       city: 'Godoy Cruz, Mendoza',
       walter: 'Walter · K1 / Muay Thai',
@@ -243,29 +241,28 @@ const BFC_I18N = {
     counters: {
       years: 'Year founded',
       students: 'Active students',
-      champsValue: 'Home',
-      champs: 'Of champions'
+      champsValue: '2',
+      champs: 'Free trial classes'
     },
     marquee: [
-      'Where champions are forged',
       'K1 · Muay Thai · MMA · Wrestling',
-      'Godoy Cruz, Mendoza',
-      '#SiempreBFC',
-      'Walter Bonati Head Coach',
-      'From Cuyo to the world'
+      'Balcarce 230, Godoy Cruz',
+      '2 free trial classes',
+      'FFG South American Champion 2025',
+      '#SiempreBFC'
     ],
     disc: {
       eyebrow: '01 — Disciplines',
-      title: 'Martial art. <b>Warrior mindset.</b>',
+      title: 'Kickboxing, Muay Thai <b>and MMA.</b>',
       lead: 'K1, Muay Thai, MMA and Wrestling. Groups for beginners and for competitors.',
-      k1: { kicker: 'Stand-up striking', name: 'K1 Kickboxing', desc: 'Punches, kicks and knees under K1 rules. Classes with Walter Bonati and Gastón "Tonga" Silva, Monday to Friday.', cta: 'Learn more' },
-      mt: { kicker: 'The art of eight limbs', name: 'Muay Thai', desc: 'Thai boxing: fists, elbows, knees, kicks and clinch. Same coaches and schedule as K1.', cta: 'Learn more' },
-      mma: { kicker: 'Tapa Team', name: 'MMA & Wrestling', desc: 'Mixed martial arts and wrestling with Tapa Team, part of the club since 2025.', cta: 'See Tapa Team' }
+      k1: { kicker: '8:30 am to 11 pm', name: 'K1 Kickboxing', desc: 'Punches, kicks and knees under K1 rules. Classes with Walter Bonati and Gastón "Tonga" Silva, Monday to Friday.', cta: 'See schedule' },
+      mt: { kicker: '8:30 am to 11 pm', name: 'Muay Thai', desc: 'Thai boxing: fists, elbows, knees, kicks and clinch. Same coaches and schedule as K1.', cta: 'See schedule' },
+      mma: { kicker: 'Mon · Wed · Fri · 8 pm', name: 'MMA & Wrestling', desc: 'Mixed martial arts and wrestling with Tapa Team, part of the club since 2025.', cta: 'See Tapa Team' }
     },
     champions: {
       eyebrow: '02 — Champions',
-      quote: 'At Bonati Fight Club we build <b>champions for life.</b>',
-      role: 'Our flagship athlete',
+      quote: 'A South American champion <b>teaches here.</b>',
+      role: 'Athlete and coach at the club',
       titles: [
         { year: '2019', name: 'Gold Medal — WKF South American', belt: 'National team' },
         { year: '2021', name: 'Argentine Champion — FFG',        belt: 'National title' },
@@ -286,19 +283,19 @@ const BFC_I18N = {
         { y: '2019', t: 'First South American medal',    d: 'Gastón "Tonga" Silva brings home the WKF gold medal.' },
         { y: '2020', t: 'Adapting and resisting',        d: 'BFC keeps training through the lockdown under health protocols and is featured in El Sol.' },
         { y: '2025', t: 'Tapa Team is born',             d: 'MMA and Wrestling team launches inside the gym.' },
-        { y: '2025', t: 'FFG South American Champion',   d: 'Historic KO vs Jonas Coelho in Brazil. Mendoza Senate honors the athlete.' }
+        { y: '2025', t: 'FFG South American Champion',   d: 'Wins by KO over Jonas Coelho in Brazil. Honored by the Mendoza Senate.' }
       ]
     },
     prof: {
       eyebrow: '04 — Coaches',
       title: 'Head coach <b>and champion.</b>',
-      walter: { role: 'Founder · Head Coach', quote: 'At Bonati, the will to get things done prevails.', bullets: ['Specialty: K1 & Muay Thai','Training fighters since 2010','Founder of Bonati Fight Club'] },
+      walter: { role: 'Founder · Head Coach', quote: 'At Bonati, the will to get things done prevails.', bullets: ['Specialty: K1 & Muay Thai','Training fighters since 2010'] },
       gaston: { role: 'Athlete · Coach',       quote: 'If you walk in, you walk in to leave something.', bullets: ['FFG South American Champion 2025','ISKA Argentine Champion 2023','FFG Argentine Champion 2021','WKF South American Gold 2019','Honored by the Senate of Mendoza'] },
       ig: 'View Instagram'
     },
     sch: {
       eyebrow: '05 — Schedule',
-      title: 'Pick your <b>round.</b>',
+      title: 'Class <b>schedule.</b>',
       lead: 'Classes Monday to Friday for all levels. No slot works? Write us and we build one.',
       cta: 'Ask about classes',
       walter: { coach: 'Walter Bonati', days: 'Mon to Fri' },
@@ -311,7 +308,7 @@ const BFC_I18N = {
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
       lead: 'Bonati Fight Club\'s MMA and Wrestling team. Founded in 2025 and already competing in local and national events.',
       s1: 'Founded', s1v: '2025',
-      s2: 'Events', s2v: 'Local and national',
+      s2: '8:00 to 9:30 pm', s2v: 'Mon · Wed · Fri',
       s3: 'Disciplines', s3v: 'MMA · Wrestling · Submission',
       cta1: 'WhatsApp MMA', cta2: 'Full page'
     },
@@ -374,7 +371,7 @@ const BFC_I18N = {
     contact: {
       eyebrow: '10 — Contact',
       title: 'Train with <b>us.</b>',
-      lead: 'Balcarce 230, Godoy Cruz. Your first 2 classes are free.',
+      lead: 'Your first 2 classes are free. Message the line for your discipline.',
       addr: '230 Balcarce St.', city: 'Godoy Cruz, Mendoza',
       walter: 'Walter · K1 / Muay Thai', tapa: 'Tapa Team · MMA / Wrestling', ig: 'Official Instagram',
       formName: 'Your name', formPlaceholderName: 'Full name',
@@ -410,29 +407,28 @@ const BFC_I18N = {
     counters: {
       years: 'Ano de fundação',
       students: 'Alunos ativos',
-      champsValue: 'Berço',
-      champs: 'De campeões'
+      champsValue: '2',
+      champs: 'Aulas experimentais grátis'
     },
     marquee: [
-      'Onde se forjam campeões',
       'K1 · Muay Thai · MMA · Wrestling',
-      'Godoy Cruz, Mendoza',
-      '#SiempreBFC',
-      'Walter Bonati Head Coach',
-      'Do Cuyo para o mundo'
+      'Balcarce 230, Godoy Cruz',
+      '2 aulas experimentais grátis',
+      'Campeão Sul-Americano FFG 2025',
+      '#SiempreBFC'
     ],
     disc: {
       eyebrow: '01 — Modalidades',
-      title: 'Arte marcial. <b>Mentalidade de guerra.</b>',
+      title: 'Kickboxing, Muay Thai <b>e MMA.</b>',
       lead: 'K1, Muay Thai, MMA e Wrestling. Turmas para quem está começando e para quem compete.',
-      k1: { kicker: 'Stand-up striking', name: 'K1 Kickboxing', desc: 'Socos, chutes e joelhadas com regras K1. Aulas com Walter Bonati e Gastón "Tonga" Silva, de segunda a sexta.', cta: 'Saiba mais' },
-      mt: { kicker: 'A arte das oito armas', name: 'Muay Thai', desc: 'Boxe tailandês: punhos, cotovelos, joelhos, chutes e clinch. Mesmos professores e horários do K1.', cta: 'Saiba mais' },
-      mma: { kicker: 'Tapa Team', name: 'MMA & Wrestling', desc: 'Artes marciais mistas e luta com o Tapa Team, no clube desde 2025.', cta: 'Ver Tapa Team' }
+      k1: { kicker: '08h30 às 23h', name: 'K1 Kickboxing', desc: 'Socos, chutes e joelhadas com regras K1. Aulas com Walter Bonati e Gastón "Tonga" Silva, de segunda a sexta.', cta: 'Ver horários' },
+      mt: { kicker: '08h30 às 23h', name: 'Muay Thai', desc: 'Boxe tailandês: punhos, cotovelos, joelhos, chutes e clinch. Mesmos professores e horários do K1.', cta: 'Ver horários' },
+      mma: { kicker: 'Seg · Qua · Sex · 20h', name: 'MMA & Wrestling', desc: 'Artes marciais mistas e luta com o Tapa Team, no clube desde 2025.', cta: 'Ver Tapa Team' }
     },
     champions: {
       eyebrow: '02 — Campeões',
-      quote: 'No Bonati Fight Club formamos <b>campeões para a vida.</b>',
-      role: 'Nosso atleta destaque',
+      quote: 'Um campeão sul-americano <b>dá aulas aqui.</b>',
+      role: 'Atleta e professor do clube',
       titles: [
         { year: '2019', name: 'Medalha de Ouro — Sul-Americano WKF',  belt: 'Seleção' },
         { year: '2021', name: 'Campeão Argentino — FFG',              belt: 'Título Nacional' },
@@ -453,19 +449,19 @@ const BFC_I18N = {
         { y: '2019', t: 'Primeira medalha sul-americana', d: 'Gastón "Tonga" Silva conquista o ouro na WKF.' },
         { y: '2020', t: 'Adapta-se e resiste',             d: 'BFC segue treinando na quarentena, com protocolo sanitário, e aparece no jornal El Sol.' },
         { y: '2025', t: 'Nasce o Tapa Team',               d: 'Time de MMA e Wrestling entra na academia.' },
-        { y: '2025', t: 'Campeão Sul-Americano FFG',       d: 'KO histórico sobre Jonas Coelho no Brasil. Senado de Mendoza homenageia o atleta.' }
+        { y: '2025', t: 'Campeão Sul-Americano FFG',       d: 'Vence Jonas Coelho por KO no Brasil. Homenageado pelo Senado de Mendoza.' }
       ]
     },
     prof: {
       eyebrow: '04 — Professores',
       title: 'Head coach <b>e campeão.</b>',
-      walter: { role: 'Fundador · Head Coach', quote: 'Aqui em Bonati prevalece a decisão de fazer as coisas.', bullets: ['Especialidade: K1 e Muay Thai','Treina lutadores desde 2010','Fundador do Bonati Fight Club'] },
+      walter: { role: 'Fundador · Head Coach', quote: 'Aqui em Bonati prevalece a decisão de fazer as coisas.', bullets: ['Especialidade: K1 e Muay Thai','Treina lutadores desde 2010'] },
       gaston: { role: 'Atleta · Professor',     quote: 'Se você entra aqui, entra para deixar algo.', bullets: ['Campeão Sul-Americano FFG 2025','Campeão Argentino ISKA 2023','Campeão Argentino FFG 2021','Medalha de Ouro Sul-Americano WKF 2019','Homenageado pelo Senado de Mendoza'] },
       ig: 'Ver Instagram'
     },
     sch: {
       eyebrow: '05 — Horários',
-      title: 'Escolha seu <b>round.</b>',
+      title: 'Horários <b>das aulas.</b>',
       lead: 'Aulas de segunda a sexta para todos os níveis. Sem horário? Escreva e a gente monta.',
       cta: 'Consultar aulas',
       walter: { coach: 'Walter Bonati', days: 'Seg a Sex' },
@@ -478,7 +474,7 @@ const BFC_I18N = {
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
       lead: 'A equipe de MMA e Wrestling do Bonati Fight Club. Nasceu em 2025 e já compete em eventos locais e nacionais.',
       s1: 'Fundado', s1v: '2025',
-      s2: 'Eventos', s2v: 'Locais e nacionais',
+      s2: '20h às 21h30', s2v: 'Seg · Qua · Sex',
       s3: 'Modalidades', s3v: 'MMA · Wrestling · Submission',
       cta1: 'WhatsApp MMA', cta2: 'Página completa'
     },
@@ -541,7 +537,7 @@ const BFC_I18N = {
     contact: {
       eyebrow: '10 — Contato',
       title: 'Treine com a <b>gente.</b>',
-      lead: 'Balcarce 230, Godoy Cruz. As 2 primeiras aulas são grátis.',
+      lead: 'As 2 primeiras aulas são grátis. Fale com a linha da sua modalidade.',
       addr: 'Balcarce 230', city: 'Godoy Cruz, Mendoza',
       walter: 'Walter · K1 / Muay Thai', tapa: 'Tapa Team · MMA / Wrestling', ig: 'Instagram oficial',
       formName: 'Seu nome', formPlaceholderName: 'Nome e sobrenome',
