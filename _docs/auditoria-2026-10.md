@@ -43,7 +43,8 @@ Visto de paso, sin probarlo ni explotarlo. No se reproduce ninguna contraseña.
 ## Estado al 15/10/2026
 
 - **Publicado:** Fases 1, 3 y 4, y la parte de la Fase 2 que dependía de datos del club (ver §7).
-- **Pendiente del club, en este orden:** (1) aplicar el copy con `propuestas-copy-2026-10.md`; (2) después, GA4 (marcar `whatsapp_click` como evento clave y crear la dimensión `linea`), Search Console (propiedad, sitemap, indexación) y Bing Webmaster Tools (importar desde Search Console). Pasos en §10.
+- **Copy:** aplicado el 16/10/2026 (PR #8).
+- **Pendiente del club:** GA4 (marcar `whatsapp_click` como evento clave y crear la dimensión `linea`), Search Console (propiedad, sitemap, indexación) y Bing Webmaster Tools (importar desde Search Console). Pasos en §10.
 - **Decisión del club:** el panel de `/admin/` y las reglas de Supabase quedan como están (§0).
 
 ## Resumen ejecutivo
@@ -151,7 +152,7 @@ Perfil de Empresa de Google (categorías, servicios con link, horario por turno,
 | 2 | Página `/muay-thai-mendoza/` (y quizás K1 / menores), horario de MMA, párrafo de entidad, FAQ ampliado | 🟢 | medio | Claude, con datos confirmados | Parcial: horario de MMA, FAQ (8 preguntas), reseñas 4,9/112, coordenadas y fuente de la pandemia ✅ (#5). Página de Muay Thai y párrafo de entidad: después del copy |
 | 3 | Rendimiento: `gaston-solo.jpg` 8,5 MB, `historia-bfc.jpg` y `tapa-entrenamiento-01.jpg` 1,6 MB, `logo-tapa-team.png` 590 KB, favicons de 38 KB, `width`/`height` | 🟡 | bajo | Claude | ✅ publicado (#5). Falta: fotos de mejor resolución para `tapa-entrenamiento-02.jpg` (201×251) y `tapa-competencia-01.jpg` |
 | 4 | UX: selector de línea de WhatsApp, mensajes pre-redactados, botón de reseña a Google | 🟡 | bajo | Claude | ✅ publicado (#7) |
-| 5 | Copy | 🟢 | medio | Usted, con `propuestas-copy-2026-10.md` | Pendiente |
+| 5 | Copy | 🟢 | medio | Claude, con aprobación del club | ✅ publicado (#8) |
 | 6 | Perfil de Google y reseñas | 🟢 | continuo | El club, con `kit-perfil-google.md` | Pendiente |
 
 ## 8. Inventario técnico: no tocar

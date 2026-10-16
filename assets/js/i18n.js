@@ -23,13 +23,13 @@ const BFC_I18N = {
       l1: 'Bonati',
       l2: 'Fight',
       l3: 'Club',
-      sub: 'Donde se forjan los campeones del kickboxing sudamericano.',
+      sub: 'Kickboxing K1, Muay Thai y MMA en Godoy Cruz, Mendoza. Desde 2010.',
       cta1: 'Comenzar a entrenar',
       cta2: 'Ver la academia',
-      scroll: 'Desliza para descubrir'
+      scroll: 'Deslizá para ver más'
     },
     counters: {
-      years: 'Años formando atletas',
+      years: 'Año de fundación',
       students: 'Alumnos activos',
       champsValue: 'Cuna',
       champs: 'De campeones'
@@ -45,23 +45,23 @@ const BFC_I18N = {
     disc: {
       eyebrow: '01 — Disciplinas',
       title: 'Arte marcial. <b>Mentalidad de guerra.</b>',
-      lead: 'Cuatro disciplinas, una sola filosofía: disciplina, respeto y voluntad para competir al más alto nivel.',
+      lead: 'K1, Muay Thai, MMA y Wrestling. Grupos para quien empieza y para quien compite.',
       k1: {
         kicker: 'Stand-up striking',
         name: 'K1 Kickboxing',
-        desc: 'Técnica de golpeo japonés que combina boxeo con patadas. Ritmo, explosividad y precisión.',
+        desc: 'Golpes de puño, patadas y rodillas con reglas K1. Clases con Walter Bonati y Gastón «Tonga» Silva, de lunes a viernes.',
         cta: 'Conocer la clase'
       },
       mt: {
         kicker: 'The art of eight limbs',
         name: 'Muay Thai',
-        desc: 'Boxeo tailandés: puños, codos, rodillas y patadas. La disciplina más completa de pie.',
+        desc: 'Boxeo tailandés: puños, codos, rodillas, patadas y clinch. Mismos profesores y horarios que K1.',
         cta: 'Conocer la clase'
       },
       mma: {
         kicker: 'Tapa Team',
         name: 'MMA & Wrestling',
-        desc: 'Artes marciales mixtas y lucha. El futuro del combate completo en Mendoza.',
+        desc: 'Artes marciales mixtas y lucha con Tapa Team, en el club desde 2025.',
         cta: 'Ver Tapa Team'
       }
     },
@@ -79,9 +79,9 @@ const BFC_I18N = {
     },
     history: {
       eyebrow: '03 — Historia',
-      title: 'Quince años <b>forjando leyendas</b> en Cuyo.',
-      p1: 'Walter Bonati fundó el club desde la pasión, con un objetivo claro: llevar el kickboxing mendocino al nivel profesional. Lo que empezó como un proyecto de barrio creció hasta convertirse en una de las academias más reconocidas de Argentina.',
-      p2: 'En la cuarentena de 2020 siguió entrenando con protocolo sanitario, y <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">el diario El Sol</a> la incluyó en su nota sobre las academias de artes marciales de Mendoza. Hoy alberga las disciplinas de K1 y Muay Thai, y a través de Tapa Team, MMA y Wrestling.',
+      title: 'Desde 2010 <b>en Godoy Cruz.</b>',
+      p1: 'Bonati Fight Club es una academia de deportes de combate en Godoy Cruz, Mendoza, fundada en 2010 por Walter Bonati. Está en Balcarce 230 y da clases de lunes a viernes, con turnos de mañana, tarde y noche. Enseña K1 Kickboxing y Muay Thai con Walter Bonati y Gastón «Tonga» Silva, campeón sudamericano FFG en 2025, y MMA y Wrestling con Tapa Team, el equipo que funciona en el club desde 2025. Recibe desde principiantes hasta competidores, y las 2 primeras clases son gratis.',
+      p2: 'En la cuarentena de 2020 siguió entrenando con protocolo sanitario, y <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">el diario El Sol</a> la incluyó en su nota sobre las academias de artes marciales de Mendoza.',
       quote: 'Aquí en Bonati prevalece la decisión de hacer las cosas.',
       quoteBy: 'Walter Bonati · Head Coach',
       tl: [
@@ -100,7 +100,7 @@ const BFC_I18N = {
         quote: 'Aquí en Bonati prevalece la decisión de hacer las cosas.',
         bullets: [
           'Especialidad: K1 y Muay Thai',
-          'Más de 15 años de coaching profesional',
+          'Entrena peleadores desde 2010',
           'Fundador de Bonati Fight Club'
         ]
       },
@@ -132,7 +132,7 @@ const BFC_I18N = {
     tapa: {
       eyebrow: '06 — Tapa Team',
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
-      lead: 'El equipo de MMA y Wrestling que opera dentro de BFC. Fundado hace aproximadamente un año y ya compite en eventos locales y nacionales — el futuro de las artes marciales mixtas mendocinas.',
+      lead: 'El equipo de MMA y Wrestling de Bonati Fight Club. Nació en 2025 y ya compite en eventos locales y nacionales.',
       s1: 'Fundado', s1v: '2025',
       s2: 'Eventos', s2v: 'Locales y nacionales',
       s3: 'Disciplinas', s3v: 'MMA · Wrestling · Submission',
@@ -147,7 +147,7 @@ const BFC_I18N = {
       filterTraining:  'Entrenamientos',
       filterTournaments: 'Torneos',
       filterTeam:      'Equipo',
-      empty:           'Sé el primero en subir una foto de la comunidad.',
+      empty:           'Subí la primera foto de la comunidad.',
       uploadBtn:       'Subir mi foto',
       modal: {
         title:            'Subir mi foto',
@@ -159,7 +159,7 @@ const BFC_I18N = {
     },
     rev: {
       eyebrow:    '08 — Reseñas',
-      title:      'Lo que dice <b>nuestra comunidad.</b>',
+      title:      'Reseñas de <b>alumnos.</b>',
       lead:       'Opiniones reales de nuestros alumnos.',
       rating:     '4,9 ★ en Google · 112 reseñas (octubre 2026)',
       formTitle:  'Dejá tu reseña',
@@ -198,7 +198,7 @@ const BFC_I18N = {
     contact: {
       eyebrow: '10 — Contacto',
       title: 'Entrená con <b>nosotros.</b>',
-      lead: 'Estamos en el corazón de Godoy Cruz. Reservá 2 clases de prueba gratuitas.',
+      lead: 'Balcarce 230, Godoy Cruz. Las 2 primeras clases son gratis.',
       addr: 'Balcarce 230',
       city: 'Godoy Cruz, Mendoza',
       walter: 'Walter · K1 / Muay Thai',
@@ -217,10 +217,10 @@ const BFC_I18N = {
       formSend: 'Enviar por WhatsApp'
     },
     footer: {
-      tag: 'Desde 2010 formando atletas de élite en el corazón de Godoy Cruz, Mendoza.',
+      tag: 'Academia de K1, Muay Thai, MMA y Wrestling en Balcarce 230, Godoy Cruz, Mendoza. Desde 2010.',
       h1: 'Academia',
       h2: 'Info',
-      h3: 'Síguenos',
+      h3: 'Seguinos',
       copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'
     }
@@ -236,12 +236,12 @@ const BFC_I18N = {
       location: 'Godoy Cruz · Mendoza · Argentina',
       tag: 'K1 · Muay Thai · MMA · Wrestling',
       l1: 'Bonati', l2: 'Fight', l3: 'Club',
-      sub: 'Where South American kickboxing champions are forged.',
+      sub: 'K1 kickboxing, Muay Thai and MMA in Godoy Cruz, Mendoza. Since 2010.',
       cta1: 'Start training', cta2: 'Explore the gym',
       scroll: 'Scroll to discover'
     },
     counters: {
-      years: 'Years training athletes',
+      years: 'Year founded',
       students: 'Active students',
       champsValue: 'Home',
       champs: 'Of champions'
@@ -257,10 +257,10 @@ const BFC_I18N = {
     disc: {
       eyebrow: '01 — Disciplines',
       title: 'Martial art. <b>Warrior mindset.</b>',
-      lead: 'Four disciplines, one philosophy: discipline, respect and the will to compete at the highest level.',
-      k1: { kicker: 'Stand-up striking', name: 'K1 Kickboxing', desc: 'Japanese striking that blends boxing with kicks. Rhythm, explosiveness, precision.', cta: 'Learn more' },
-      mt: { kicker: 'The art of eight limbs', name: 'Muay Thai', desc: 'Thai boxing: fists, elbows, knees and kicks. The most complete stand-up discipline.', cta: 'Learn more' },
-      mma: { kicker: 'Tapa Team', name: 'MMA & Wrestling', desc: 'Mixed martial arts and wrestling. The future of complete combat in Mendoza.', cta: 'See Tapa Team' }
+      lead: 'K1, Muay Thai, MMA and Wrestling. Groups for beginners and for competitors.',
+      k1: { kicker: 'Stand-up striking', name: 'K1 Kickboxing', desc: 'Punches, kicks and knees under K1 rules. Classes with Walter Bonati and Gastón "Tonga" Silva, Monday to Friday.', cta: 'Learn more' },
+      mt: { kicker: 'The art of eight limbs', name: 'Muay Thai', desc: 'Thai boxing: fists, elbows, knees, kicks and clinch. Same coaches and schedule as K1.', cta: 'Learn more' },
+      mma: { kicker: 'Tapa Team', name: 'MMA & Wrestling', desc: 'Mixed martial arts and wrestling with Tapa Team, part of the club since 2025.', cta: 'See Tapa Team' }
     },
     champions: {
       eyebrow: '02 — Champions',
@@ -276,9 +276,9 @@ const BFC_I18N = {
     },
     history: {
       eyebrow: '03 — History',
-      title: 'Fifteen years <b>forging legends</b> in Cuyo.',
-      p1: 'Walter Bonati founded the club out of passion, with one goal: take Mendozan kickboxing to the professional level. What started as a neighborhood project grew into one of the most respected martial arts academies in Argentina.',
-      p2: 'During the 2020 lockdown it kept training under health protocols, and <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">the newspaper El Sol</a> featured it in a story on Mendoza\'s martial arts academies. Today it houses K1 and Muay Thai, plus MMA and Wrestling through Tapa Team.',
+      title: 'Since 2010 <b>in Godoy Cruz.</b>',
+      p1: 'Bonati Fight Club is a combat sports academy in Godoy Cruz, Mendoza, founded in 2010 by Walter Bonati. It is at Balcarce 230 and holds classes Monday to Friday, with morning, afternoon and evening slots. It teaches K1 Kickboxing and Muay Thai with Walter Bonati and Gastón "Tonga" Silva, 2025 FFG South American champion, and MMA and Wrestling with Tapa Team, the team based at the club since 2025. It welcomes everyone from beginners to competitors, and the first 2 classes are free.',
+      p2: 'During the 2020 lockdown it kept training under health protocols, and <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">the newspaper El Sol</a> featured it in a story on Mendoza\'s martial arts academies.',
       quote: 'At Bonati, the will to get things done prevails.',
       quoteBy: 'Walter Bonati · Head Coach',
       tl: [
@@ -292,7 +292,7 @@ const BFC_I18N = {
     prof: {
       eyebrow: '04 — Coaches',
       title: 'Head coach <b>and champion.</b>',
-      walter: { role: 'Founder · Head Coach', quote: 'At Bonati, the will to get things done prevails.', bullets: ['Specialty: K1 & Muay Thai','15+ years of professional coaching','Founder of Bonati Fight Club'] },
+      walter: { role: 'Founder · Head Coach', quote: 'At Bonati, the will to get things done prevails.', bullets: ['Specialty: K1 & Muay Thai','Training fighters since 2010','Founder of Bonati Fight Club'] },
       gaston: { role: 'Athlete · Coach',       quote: 'If you walk in, you walk in to leave something.', bullets: ['FFG South American Champion 2025','ISKA Argentine Champion 2023','FFG Argentine Champion 2021','WKF South American Gold 2019','Honored by the Senate of Mendoza'] },
       ig: 'View Instagram'
     },
@@ -309,7 +309,7 @@ const BFC_I18N = {
     tapa: {
       eyebrow: '06 — Tapa Team',
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
-      lead: 'The MMA and Wrestling team operating inside BFC. Founded roughly a year ago and already competing in local and national events — the future of mixed martial arts in Mendoza.',
+      lead: 'Bonati Fight Club\'s MMA and Wrestling team. Founded in 2025 and already competing in local and national events.',
       s1: 'Founded', s1v: '2025',
       s2: 'Events', s2v: 'Local and national',
       s3: 'Disciplines', s3v: 'MMA · Wrestling · Submission',
@@ -335,7 +335,7 @@ const BFC_I18N = {
     },
     rev: {
       eyebrow:    '08 — Reviews',
-      title:      'What our <b>community says.</b>',
+      title:      'Student <b>reviews.</b>',
       lead:       'Real opinions from our students.',
       rating:     '4.9 ★ on Google · 112 reviews (October 2026)',
       formTitle:  'Leave a review',
@@ -374,7 +374,7 @@ const BFC_I18N = {
     contact: {
       eyebrow: '10 — Contact',
       title: 'Train with <b>us.</b>',
-      lead: 'We are in the heart of Godoy Cruz. Book your 2 free trial classes.',
+      lead: 'Balcarce 230, Godoy Cruz. Your first 2 classes are free.',
       addr: '230 Balcarce St.', city: 'Godoy Cruz, Mendoza',
       walter: 'Walter · K1 / Muay Thai', tapa: 'Tapa Team · MMA / Wrestling', ig: 'Official Instagram',
       formName: 'Your name', formPlaceholderName: 'Full name',
@@ -386,7 +386,7 @@ const BFC_I18N = {
       formSend: 'Send via WhatsApp'
     },
     footer: {
-      tag: 'Training elite athletes in the heart of Godoy Cruz, Mendoza since 2010.',
+      tag: 'K1, Muay Thai, MMA and Wrestling academy at Balcarce 230, Godoy Cruz, Mendoza. Since 2010.',
       h1: 'Academy', h2: 'Info', h3: 'Follow us',
       copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'
@@ -403,12 +403,12 @@ const BFC_I18N = {
       location: 'Godoy Cruz · Mendoza · Argentina',
       tag: 'K1 · Muay Thai · MMA · Wrestling',
       l1: 'Bonati', l2: 'Fight', l3: 'Club',
-      sub: 'Onde se forjam os campeões do kickboxing sul-americano.',
+      sub: 'Kickboxing K1, Muay Thai e MMA em Godoy Cruz, Mendoza. Desde 2010.',
       cta1: 'Começar a treinar', cta2: 'Conhecer a academia',
       scroll: 'Deslize para descobrir'
     },
     counters: {
-      years: 'Anos formando atletas',
+      years: 'Ano de fundação',
       students: 'Alunos ativos',
       champsValue: 'Berço',
       champs: 'De campeões'
@@ -424,10 +424,10 @@ const BFC_I18N = {
     disc: {
       eyebrow: '01 — Modalidades',
       title: 'Arte marcial. <b>Mentalidade de guerra.</b>',
-      lead: 'Quatro modalidades, uma filosofia: disciplina, respeito e vontade de competir no mais alto nível.',
-      k1: { kicker: 'Stand-up striking', name: 'K1 Kickboxing', desc: 'Golpeio japonês que mistura boxe e chutes. Ritmo, explosão e precisão.', cta: 'Saiba mais' },
-      mt: { kicker: 'A arte das oito armas', name: 'Muay Thai', desc: 'Boxe tailandês: punhos, cotovelos, joelhos e chutes. A modalidade em pé mais completa.', cta: 'Saiba mais' },
-      mma: { kicker: 'Tapa Team', name: 'MMA & Wrestling', desc: 'Artes marciais mistas e luta olímpica. O futuro do combate completo em Mendoza.', cta: 'Ver Tapa Team' }
+      lead: 'K1, Muay Thai, MMA e Wrestling. Turmas para quem está começando e para quem compete.',
+      k1: { kicker: 'Stand-up striking', name: 'K1 Kickboxing', desc: 'Socos, chutes e joelhadas com regras K1. Aulas com Walter Bonati e Gastón "Tonga" Silva, de segunda a sexta.', cta: 'Saiba mais' },
+      mt: { kicker: 'A arte das oito armas', name: 'Muay Thai', desc: 'Boxe tailandês: punhos, cotovelos, joelhos, chutes e clinch. Mesmos professores e horários do K1.', cta: 'Saiba mais' },
+      mma: { kicker: 'Tapa Team', name: 'MMA & Wrestling', desc: 'Artes marciais mistas e luta com o Tapa Team, no clube desde 2025.', cta: 'Ver Tapa Team' }
     },
     champions: {
       eyebrow: '02 — Campeões',
@@ -443,9 +443,9 @@ const BFC_I18N = {
     },
     history: {
       eyebrow: '03 — História',
-      title: 'Quinze anos <b>forjando lendas</b> no Cuyo.',
-      p1: 'Walter Bonati fundou o clube por paixão, com um objetivo: levar o kickboxing mendocino ao nível profissional. O que começou como um projeto de bairro virou uma das academias mais respeitadas da Argentina.',
-      p2: 'Na quarentena de 2020 continuou treinando com protocolo sanitário, e <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">o jornal El Sol</a> a incluiu em sua matéria sobre as academias de artes marciais de Mendoza. Hoje abriga K1 e Muay Thai, e através do Tapa Team, MMA e Wrestling.',
+      title: 'Desde 2010 <b>em Godoy Cruz.</b>',
+      p1: 'Bonati Fight Club é uma academia de esportes de combate em Godoy Cruz, Mendoza, fundada em 2010 por Walter Bonati. Fica na Balcarce 230 e tem aulas de segunda a sexta, com turnos de manhã, tarde e noite. Ensina K1 Kickboxing e Muay Thai com Walter Bonati e Gastón "Tonga" Silva, campeão sul-americano FFG em 2025, e MMA e Wrestling com o Tapa Team, a equipe que funciona no clube desde 2025. Recebe de iniciantes a competidores, e as 2 primeiras aulas são grátis.',
+      p2: 'Na quarentena de 2020 continuou treinando com protocolo sanitário, e <a href="https://www.elsol.com.ar/el-sol/las-artes-marciales-vuelven-a-las-raices-durante-la-cuarentena/" target="_blank" rel="noopener">o jornal El Sol</a> a incluiu em sua matéria sobre as academias de artes marciais de Mendoza.',
       quote: 'Aqui em Bonati prevalece a decisão de fazer as coisas.',
       quoteBy: 'Walter Bonati · Head Coach',
       tl: [
@@ -459,7 +459,7 @@ const BFC_I18N = {
     prof: {
       eyebrow: '04 — Professores',
       title: 'Head coach <b>e campeão.</b>',
-      walter: { role: 'Fundador · Head Coach', quote: 'Aqui em Bonati prevalece a decisão de fazer as coisas.', bullets: ['Especialidade: K1 e Muay Thai','Mais de 15 anos de coaching profissional','Fundador do Bonati Fight Club'] },
+      walter: { role: 'Fundador · Head Coach', quote: 'Aqui em Bonati prevalece a decisão de fazer as coisas.', bullets: ['Especialidade: K1 e Muay Thai','Treina lutadores desde 2010','Fundador do Bonati Fight Club'] },
       gaston: { role: 'Atleta · Professor',     quote: 'Se você entra aqui, entra para deixar algo.', bullets: ['Campeão Sul-Americano FFG 2025','Campeão Argentino ISKA 2023','Campeão Argentino FFG 2021','Medalha de Ouro Sul-Americano WKF 2019','Homenageado pelo Senado de Mendoza'] },
       ig: 'Ver Instagram'
     },
@@ -476,7 +476,7 @@ const BFC_I18N = {
     tapa: {
       eyebrow: '06 — Tapa Team',
       title: 'Tapa Team. <b>MMA & Wrestling.</b>',
-      lead: 'Time de MMA e Wrestling que opera dentro do BFC. Fundado há cerca de um ano e já competindo em eventos locais e nacionais — o futuro do MMA mendocino.',
+      lead: 'A equipe de MMA e Wrestling do Bonati Fight Club. Nasceu em 2025 e já compete em eventos locais e nacionais.',
       s1: 'Fundado', s1v: '2025',
       s2: 'Eventos', s2v: 'Locais e nacionais',
       s3: 'Modalidades', s3v: 'MMA · Wrestling · Submission',
@@ -502,7 +502,7 @@ const BFC_I18N = {
     },
     rev: {
       eyebrow:    '08 — Avaliações',
-      title:      'O que diz <b>nossa comunidade.</b>',
+      title:      'Avaliações de <b>alunos.</b>',
       lead:       'Opiniões reais dos nossos alunos.',
       rating:     '4,9 ★ no Google · 112 avaliações (outubro 2026)',
       formTitle:  'Deixe sua avaliação',
@@ -541,7 +541,7 @@ const BFC_I18N = {
     contact: {
       eyebrow: '10 — Contato',
       title: 'Treine com a <b>gente.</b>',
-      lead: 'Estamos no coração de Godoy Cruz. Marque suas 2 aulas experimentais gratuitas.',
+      lead: 'Balcarce 230, Godoy Cruz. As 2 primeiras aulas são grátis.',
       addr: 'Balcarce 230', city: 'Godoy Cruz, Mendoza',
       walter: 'Walter · K1 / Muay Thai', tapa: 'Tapa Team · MMA / Wrestling', ig: 'Instagram oficial',
       formName: 'Seu nome', formPlaceholderName: 'Nome e sobrenome',
@@ -553,7 +553,7 @@ const BFC_I18N = {
       formSend: 'Enviar pelo WhatsApp'
     },
     footer: {
-      tag: 'Formando atletas de elite no coração de Godoy Cruz, Mendoza desde 2010.',
+      tag: 'Academia de K1, Muay Thai, MMA e Wrestling na Balcarce 230, Godoy Cruz, Mendoza. Desde 2010.',
       h1: 'Academia', h2: 'Info', h3: 'Siga',
       copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
       hash: '#SiempreBFC'

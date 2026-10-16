@@ -2,6 +2,9 @@
 
 Fecha: 15/10/2026. Estado del sitio: rama `claude/charming-dirac-uyv86k` (PR #3, Fase 1 de la auditoría).
 
+> **Aplicado el 16/10/2026** con la aprobación del club (PR #8): hero, contador «2010 · Año de fundación», disciplinas, título y párrafo de entidad de Historia, cita duplicada quitada, bullet de Walter, Tapa Team (home y página), título de Reseñas, contacto, footer y «Seguinos», en HTML e i18n (ES/EN/PT).
+> **No aplicado, por falta de datos:** referencia conocida cerca de Balcarce 230, nombres de los eventos de Tapa Team y una promesa de tiempo de respuesta. «¿Sin horario? Escribinos y armamos uno» y «300+ alumnos» quedan como están, confirmados por el club. El H1 de la home sigue siendo la marca: la keyword ahora está en el subtítulo.
+
 ## Cómo usar este documento
 
 - Cada fila trae el texto **tal como está hoy**. Se busca con Ctrl+F en el archivo de cada página. No hay números de línea porque cambian.
