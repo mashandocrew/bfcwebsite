@@ -220,6 +220,8 @@ const BFC_I18N = {
       h2: 'Info',
       h3: 'Seguinos',
       copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
+      legal: 'Aviso legal', privacy: 'Privacidad', cookies: 'Cookies', withdraw: 'Botón de arrepentimiento',
+      credit: 'Sitio desarrollado por <b>MTSolutions</b>, by JP',
       hash: '#SiempreBFC'
     }
   },
@@ -386,6 +388,8 @@ const BFC_I18N = {
       tag: 'K1, Muay Thai, MMA and Wrestling academy at Balcarce 230, Godoy Cruz, Mendoza. Since 2010.',
       h1: 'Academy', h2: 'Info', h3: 'Follow us',
       copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
+      legal: 'Legal notice', privacy: 'Privacy', cookies: 'Cookies', withdraw: 'Cancel a purchase',
+      credit: 'Website by <b>MTSolutions</b>, by JP',
       hash: '#SiempreBFC'
     }
   },
@@ -552,6 +556,8 @@ const BFC_I18N = {
       tag: 'Academia de K1, Muay Thai, MMA e Wrestling na Balcarce 230, Godoy Cruz, Mendoza. Desde 2010.',
       h1: 'Academia', h2: 'Info', h3: 'Siga',
       copyright: '© 2026 Bonati Fight Club · Godoy Cruz, Mendoza, Argentina',
+      legal: 'Aviso legal', privacy: 'Privacidade', cookies: 'Cookies', withdraw: 'Botão de arrependimento',
+      credit: 'Site desenvolvido por <b>MTSolutions</b>, by JP',
       hash: '#SiempreBFC'
     }
   }

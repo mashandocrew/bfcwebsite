@@ -23,7 +23,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/main.css" />
+<link rel="stylesheet" href="../assets/css/main.css?v=10" />
 <link rel="stylesheet" href="../assets/css/animations.css" />
 <link rel="stylesheet" href="../assets/css/store.css" />
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
@@ -109,12 +109,19 @@
     </div>
     <div class="footer-bottom">
       <div data-i18n="footer.copyright">© 2026 Bonati Fight Club</div>
+      <nav class="footer-legal" aria-label="Información legal">
+        <a href="../legal/" data-i18n="footer.legal">Aviso legal</a>
+        <a href="../legal/#privacidad" data-i18n="footer.privacy">Privacidad</a>
+        <a href="../legal/#cookies" data-i18n="footer.cookies">Cookies</a>
+        <a href="../legal/#arrepentimiento" class="footer-legal__withdraw" data-i18n="footer.withdraw">Botón de arrepentimiento</a>
+      </nav>
+      <div class="footer-credit" data-i18n-html="footer.credit">Sitio desarrollado por <b>MTSolutions</b>, by JP</div>
       <div class="hash" data-i18n-html="footer.hash">#Siempre<b>BFC</b></div>
     </div>
   </div>
 </footer>
 
-<script src="../assets/js/i18n.js?v=10"></script>
+<script src="../assets/js/i18n.js?v=11"></script>
 <script src="../assets/js/main.js"></script>
 <script src="../assets/js/store.js"></script>
 <script src="../assets/js/tracking.js?v=2"></script>

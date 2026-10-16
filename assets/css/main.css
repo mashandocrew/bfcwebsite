@@ -1483,6 +1483,17 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
   color: var(--bfc-bone-faint);
 }
 .footer-bottom .hash b { color: var(--bfc-red); }
+.footer-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 0 1.25rem; }
+.footer-legal a { display: inline-flex; align-items: center; min-height: 44px; color: var(--bfc-bone-dim); }
+.footer-legal a:hover { color: var(--bfc-red); }
+.footer-legal .footer-legal__withdraw { padding: 0 0.85rem; border: 1px solid var(--bfc-red); color: var(--bfc-bone); }
+.footer-legal .footer-legal__withdraw:hover { background: var(--bfc-red); color: var(--bfc-bone); }
+.footer-credit { letter-spacing: 0.12em; }
+.footer-credit b { color: var(--bfc-bone-dim); font-weight: 600; }
+@media (min-width: 900px) {
+  .footer-bottom { display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 2rem; row-gap: 0.75rem; }
+  .footer-bottom > :nth-child(even) { justify-self: end; }
+}
 
 /* Social icons */
 .socials { display: flex; gap: 0.5rem; }
