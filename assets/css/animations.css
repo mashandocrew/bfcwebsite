@@ -64,6 +64,8 @@
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }
+/* Con JS activo, main.js mueve la banda; se anula la animación CSS */
+.marquee-track.is-js { animation: none !important; }
 .marquee-item {
   display: inline-flex; align-items: center; gap: 1.5rem;
   font-family: var(--ff-display);

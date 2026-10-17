@@ -191,6 +191,39 @@
     document.addEventListener('touchstart', tryPlay, { once: true, passive: true });
   }
 
+  // ---------- Marquee (banda roja) ----------
+  // Se mueve por JS (requestAnimationFrame) y no por animación CSS: en algunos
+  // iPhone la animación CSS quedaba congelada. Mitad de velocidad con reduced-motion.
+  const marqueeTrack = document.querySelector('.marquee-track');
+  if (marqueeTrack && window.requestAnimationFrame) {
+    marqueeTrack.classList.add('is-js');
+    const slow = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const period = slow ? 90 : 45; // segundos por ciclo completo
+    let loopW = 0, x = 0, last = 0, visible = true;
+    const measure = () => {
+      const items = marqueeTrack.children;
+      // El contenido está duplicado: el ciclo termina donde empieza la segunda mitad
+      loopW = items.length >= 2 ? items[items.length / 2 | 0].offsetLeft - items[0].offsetLeft : 0;
+    };
+    const tick = (t) => {
+      if (!loopW) measure();
+      if (last && visible && loopW) {
+        x -= (Math.min(t - last, 100) / 1000) * (loopW / period);
+        if (x <= -loopW) x += loopW;
+        marqueeTrack.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+      }
+      last = t;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+    window.addEventListener('resize', () => { loopW = 0; }, { passive: true });
+    document.addEventListener('bfc:lang', () => { loopW = 0; x = 0; });
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(es => { visible = es[0].isIntersecting; })
+        .observe(marqueeTrack.parentElement);
+    }
+  }
+
   // ---------- Respect prefers-reduced-motion ----------
   if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.querySelectorAll('video').forEach(v => v.pause());
