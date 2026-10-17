@@ -19,8 +19,8 @@
   50%      { transform: scale(1.6); opacity: 0.25; }
 }
 @keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 @keyframes shake {
   0%, 100% { transform: translateX(0); }
@@ -60,7 +60,9 @@
   display: flex; gap: 3rem;
   width: max-content;
   animation: marquee 45s linear infinite;
-  will-change: transform;
+  /* Sin will-change: en iOS Safari una capa tan ancha puede quedar sin pintar (banda vacía) */
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 .marquee-item {
   display: inline-flex; align-items: center; gap: 1.5rem;
