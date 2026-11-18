@@ -13,6 +13,7 @@ const BFC_I18N = {
       schedule: 'Horarios',
       coaches: 'Profesores',
       tapa: 'Tapa Team',
+      teens: 'Adolescentes',
       store: 'Tienda',
       contact: 'Contacto',
       cta: 'Entrenar ahora'
@@ -55,7 +56,7 @@ const BFC_I18N = {
         kicker: '08:30 a 23:00',
         name: 'Muay Thai',
         desc: 'Boxeo tailandés: puños, codos, rodillas, patadas y clinch. Mismos profesores y horarios que K1.',
-        cta: 'Ver horarios'
+        cta: 'Clases de Muay Thai'
       },
       mma: {
         kicker: 'Lun · Mié · Vie · 20:00',
@@ -230,7 +231,7 @@ const BFC_I18N = {
     choose: { title: 'What do you want to train?', k1: 'K1 / Muay Thai', k1by: 'With Walter Bonati and Gastón Silva', mma: 'MMA / Wrestling', mmaby: 'With Tapa Team' },
     nav: {
       home: 'Home', academy: 'Academy', schedule: 'Schedule', coaches: 'Coaches',
-      tapa: 'Tapa Team', store: 'Store', contact: 'Contact', cta: 'Train now'
+      tapa: 'Tapa Team', teens: 'Teens', store: 'Store', contact: 'Contact', cta: 'Train now'
     },
     hero: {
       location: 'Godoy Cruz · Mendoza · Argentina',
@@ -258,7 +259,7 @@ const BFC_I18N = {
       title: 'Kickboxing, Muay Thai <b>and MMA.</b>',
       lead: 'K1, Muay Thai, MMA and Wrestling. Groups for beginners and for competitors.',
       k1: { kicker: '8:30 am to 11 pm', name: 'K1 Kickboxing', desc: 'Punches, kicks and knees under K1 rules. Classes with Walter Bonati and Gastón "Tonga" Silva, Monday to Friday.', cta: 'See schedule' },
-      mt: { kicker: '8:30 am to 11 pm', name: 'Muay Thai', desc: 'Thai boxing: fists, elbows, knees, kicks and clinch. Same coaches and schedule as K1.', cta: 'See schedule' },
+      mt: { kicker: '8:30 am to 11 pm', name: 'Muay Thai', desc: 'Thai boxing: fists, elbows, knees, kicks and clinch. Same coaches and schedule as K1.', cta: 'Muay Thai classes' },
       mma: { kicker: 'Mon · Wed · Fri · 8 pm', name: 'MMA & Wrestling', desc: 'Mixed martial arts and wrestling with Tapa Team, part of the club since 2025.', cta: 'See Tapa Team' }
     },
     champions: {
@@ -398,7 +399,7 @@ const BFC_I18N = {
     choose: { title: 'O que você quer treinar?', k1: 'K1 / Muay Thai', k1by: 'Com Walter Bonati e Gastón Silva', mma: 'MMA / Wrestling', mmaby: 'Com o Tapa Team' },
     nav: {
       home: 'Início', academy: 'Academia', schedule: 'Horários', coaches: 'Professores',
-      tapa: 'Tapa Team', store: 'Loja', contact: 'Contato', cta: 'Treinar agora'
+      tapa: 'Tapa Team', teens: 'Adolescentes', store: 'Loja', contact: 'Contato', cta: 'Treinar agora'
     },
     hero: {
       location: 'Godoy Cruz · Mendoza · Argentina',
@@ -426,7 +427,7 @@ const BFC_I18N = {
       title: 'Kickboxing, Muay Thai <b>e MMA.</b>',
       lead: 'K1, Muay Thai, MMA e Wrestling. Turmas para quem está começando e para quem compete.',
       k1: { kicker: '08h30 às 23h', name: 'K1 Kickboxing', desc: 'Socos, chutes e joelhadas com regras K1. Aulas com Walter Bonati e Gastón "Tonga" Silva, de segunda a sexta.', cta: 'Ver horários' },
-      mt: { kicker: '08h30 às 23h', name: 'Muay Thai', desc: 'Boxe tailandês: punhos, cotovelos, joelhos, chutes e clinch. Mesmos professores e horários do K1.', cta: 'Ver horários' },
+      mt: { kicker: '08h30 às 23h', name: 'Muay Thai', desc: 'Boxe tailandês: punhos, cotovelos, joelhos, chutes e clinch. Mesmos professores e horários do K1.', cta: 'Aulas de Muay Thai' },
       mma: { kicker: 'Seg · Qua · Sex · 20h', name: 'MMA & Wrestling', desc: 'Artes marciais mistas e luta com o Tapa Team, no clube desde 2025.', cta: 'Ver Tapa Team' }
     },
     champions: {
