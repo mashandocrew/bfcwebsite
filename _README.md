@@ -66,7 +66,7 @@ Para regenerarlo desde el original (`_fuentes/video-Hero-original.mp4`):
 ```bash
 ./_tools/encode-hero.sh
 ```
-Genera `video-Hero.mp4` (720×1280, ~1 MB) y `video-Hero-lite.mp4` (480×854, ~0,5 MB): H.264 8-bit sin audio, loop que termina en un corte de escena. Si los reemplazás, subí el `?v=` en `index.html`.
+Genera `video-Hero.mp4` (720×1280, ~1,4 MB) y `video-Hero-lite.mp4` (480×854, ~0,5 MB): H.264 8-bit sin audio, loop que termina en un corte de escena. Si los reemplazás, subí el `?v=` en `index.html`.
 El script de `index.html` elige la variante: con ahorro de datos, 2G o movimiento reducido no descarga el video y deja solo el póster; con 3G, poca RAM o conexión lenta usa la variante lite.
 
 ### 3. Fotos
