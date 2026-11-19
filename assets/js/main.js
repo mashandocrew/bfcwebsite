@@ -15,22 +15,48 @@
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 
-  // ---------- Mobile menu ----------
+  // ---------- Menu (hamburger + Clases dropdown) ----------
   const toggle = document.getElementById('navToggle');
-  const links  = document.getElementById('navLinks');
-  if (toggle && links) {
-    toggle.addEventListener('click', () => {
-      const open = links.classList.toggle('open');
+  const menu   = document.getElementById('navMenu');
+  if (nav && toggle && menu) {
+    const setMenu = (open) => {
+      nav.classList.toggle('menu-open', open);
       toggle.classList.toggle('open', open);
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    toggle.addEventListener('click', () => setMenu(!nav.classList.contains('menu-open')));
+
+    menu.querySelectorAll('.nav-group-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const list = document.getElementById(btn.getAttribute('aria-controls'));
+        const open = btn.getAttribute('aria-expanded') !== 'true';
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        if (list) list.hidden = !open;
+      });
     });
-    links.addEventListener('click', e => {
-      if (e.target.tagName === 'A' && links.classList.contains('open')) {
-        links.classList.remove('open');
-        toggle.classList.remove('open');
-      }
+
+    menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+    document.addEventListener('click', e => {
+      if (nav.classList.contains('menu-open') && !menu.contains(e.target) && !toggle.contains(e.target)) setMenu(false);
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('menu-open')) { setMenu(false); toggle.focus(); }
     });
   }
+
+  document.querySelectorAll('.nav-dd').forEach(dd => {
+    const btn = dd.querySelector('.nav-dd-btn');
+    if (!btn) return;
+    const setDd = (open) => {
+      dd.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    };
+    btn.addEventListener('click', () => setDd(!dd.classList.contains('open')));
+    dd.addEventListener('focusout', e => { if (!dd.contains(e.relatedTarget)) setDd(false); });
+    dd.addEventListener('keydown', e => { if (e.key === 'Escape') { setDd(false); btn.focus(); } });
+    document.addEventListener('click', e => { if (!dd.contains(e.target)) setDd(false); });
+    dd.addEventListener('click', e => { if (e.target.closest('a')) setDd(false); });
+  });
 
   // ---------- REVEAL on scroll ----------
   const io = 'IntersectionObserver' in window

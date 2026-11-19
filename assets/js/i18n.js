@@ -14,6 +14,9 @@ const BFC_I18N = {
       coaches: 'Profesores',
       tapa: 'Tapa Team',
       teens: 'Adolescentes',
+      classes: 'Clases', club: 'El club', k1: 'K1 Kickboxing', mt: 'Muay Thai', mma: 'MMA y Wrestling',
+      history: 'Historia', champions: 'Campeones', gallery: 'Galería', reviews: 'Reseñas',
+      faq: 'Preguntas frecuentes', contactFull: 'Contacto y ubicación',
       store: 'Tienda',
       contact: 'Contacto',
       cta: 'Entrenar ahora'
@@ -231,7 +234,10 @@ const BFC_I18N = {
     choose: { title: 'What do you want to train?', k1: 'K1 / Muay Thai', k1by: 'With Walter Bonati and Gastón Silva', mma: 'MMA / Wrestling', mmaby: 'With Tapa Team' },
     nav: {
       home: 'Home', academy: 'Academy', schedule: 'Schedule', coaches: 'Coaches',
-      tapa: 'Tapa Team', teens: 'Teens', store: 'Store', contact: 'Contact', cta: 'Train now'
+      tapa: 'Tapa Team', teens: 'Teens', store: 'Store', contact: 'Contact', cta: 'Train now',
+      classes: 'Classes', club: 'The club', k1: 'K1 Kickboxing', mt: 'Muay Thai', mma: 'MMA & Wrestling',
+      history: 'History', champions: 'Champions', gallery: 'Gallery', reviews: 'Reviews',
+      faq: 'FAQ', contactFull: 'Contact & location'
     },
     hero: {
       location: 'Godoy Cruz · Mendoza · Argentina',
@@ -399,7 +405,10 @@ const BFC_I18N = {
     choose: { title: 'O que você quer treinar?', k1: 'K1 / Muay Thai', k1by: 'Com Walter Bonati e Gastón Silva', mma: 'MMA / Wrestling', mmaby: 'Com o Tapa Team' },
     nav: {
       home: 'Início', academy: 'Academia', schedule: 'Horários', coaches: 'Professores',
-      tapa: 'Tapa Team', teens: 'Adolescentes', store: 'Loja', contact: 'Contato', cta: 'Treinar agora'
+      tapa: 'Tapa Team', teens: 'Adolescentes', store: 'Loja', contact: 'Contato', cta: 'Treinar agora',
+      classes: 'Aulas', club: 'O clube', k1: 'K1 Kickboxing', mt: 'Muay Thai', mma: 'MMA e Wrestling',
+      history: 'História', champions: 'Campeões', gallery: 'Galeria', reviews: 'Avaliações',
+      faq: 'Perguntas frequentes', contactFull: 'Contato e localização'
     },
     hero: {
       location: 'Godoy Cruz · Mendoza · Argentina',
