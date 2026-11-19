@@ -207,8 +207,10 @@
 
   // ---------- Hero video robustness ----------
   // Some browsers block autoplay on hidden tabs; ensure it plays when visible.
+  // El src lo asigna el script de index.html; sin src (ahorro de datos, 2G,
+  // movimiento reducido) queda el póster y no hay nada que reproducir.
   const heroVideo = document.querySelector('.hero-video');
-  if (heroVideo) {
+  if (heroVideo && heroVideo.getAttribute('src')) {
     const tryPlay = () => { const p = heroVideo.play(); if (p && p.catch) p.catch(() => {}); };
     tryPlay();
     document.addEventListener('visibilitychange', () => { if (!document.hidden) tryPlay(); });
