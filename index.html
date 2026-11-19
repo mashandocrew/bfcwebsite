@@ -454,13 +454,28 @@
      ========================= -->
 <section class="hero" id="home">
   <div class="hero-video-wrap" aria-hidden="true">
+    <!-- Sin <source>: el script de abajo elige la variante según red y equipo.
+         Con ahorro de datos, 2G o movimiento reducido no se descarga el video y queda el póster. -->
     <video class="hero-video"
            autoplay muted loop playsinline preload="auto"
            poster="assets/videos/video-Hero-poster.jpg"
+           data-src="assets/videos/video-Hero.mp4?v=4"
+           data-src-lite="assets/videos/video-Hero-lite.mp4?v=1"
            disablepictureinpicture disableremoteplayback>
-      <source src="assets/videos/video-Hero.webm?v=2" type='video/webm; codecs="av01.0.05M.10"' />
-      <source src="assets/videos/video-Hero.mp4?v=3" type='video/mp4; codecs="avc1.64001F"' />
     </video>
+    <script>
+    (function () {
+      var v = document.querySelector('.hero-video');
+      if (!v) return;
+      var c = navigator.connection || {};
+      var still = (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) ||
+                  c.saveData || /2g$/.test(c.effectiveType || '');
+      if (still) return;
+      var lite = c.effectiveType === '3g' || (c.downlink && c.downlink < 2) ||
+                 (navigator.deviceMemory && navigator.deviceMemory <= 2);
+      v.src = v.getAttribute(lite ? 'data-src-lite' : 'data-src');
+    })();
+    </script>
   </div>
   <div class="hero-mask" aria-hidden="true"></div>
   <div class="hero-fade-bottom" aria-hidden="true"></div>
@@ -1183,7 +1198,7 @@
 <script src="https://cdn.jsdelivr.net/npm/animejs@4/lib/anime.iife.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/js/i18n.js?v=14"></script>
-<script src="assets/js/main.js?v=5"></script>
+<script src="assets/js/main.js?v=6"></script>
 <script src="assets/js/leads.js?v=4"></script>
 <script src="assets/js/reviews.js?v=6"></script>
 <script src="assets/js/animations.js?v=1"></script>

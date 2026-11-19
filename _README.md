@@ -25,7 +25,9 @@ bfc-website/
     │   ├── merch/        ← Fotos de productos
     │   └── gallery/      ← Torneos y fotos extra
     └── videos/
-        └── video-Hero.mp4  ← Video del hero (loop, rotado 90°)
+        ├── video-Hero.mp4       ← Video del hero (loop de ~19 s, rotado 90°)
+        ├── video-Hero-lite.mp4  ← Misma pieza en 480p para 3G / poca RAM
+        └── video-Hero-poster.jpg
 ```
 
 ---
@@ -60,11 +62,12 @@ Para convertir el JPG a SVG:
 Ya está cargado en `assets/videos/video-Hero.mp4`.
 El video se **rota 90°** automáticamente via CSS (`transform: rotate(-90deg)`). Si se ve al revés, cambiá `-90deg` por `90deg` en [main.css#hero-video](assets/css/main.css).
 
-Para reemplazarlo:
+Para regenerarlo desde el original (`_fuentes/video-Hero-original.mp4`):
 ```bash
-cp /ruta/al/nuevo-video.mp4 assets/videos/video-Hero.mp4
+./_tools/encode-hero.sh
 ```
-Sugerido: H.264 MP4, máx. 5 MB, 720p o 1080p, duración 10–30 seg.
+Genera `video-Hero.mp4` (720×1280, ~1 MB) y `video-Hero-lite.mp4` (480×854, ~0,5 MB): H.264 8-bit sin audio, loop que termina en un corte de escena. Si los reemplazás, subí el `?v=` en `index.html`.
+El script de `index.html` elige la variante: con ahorro de datos, 2G o movimiento reducido no descarga el video y deja solo el póster; con 3G, poca RAM o conexión lenta usa la variante lite.
 
 ### 3. Fotos
 ```bash
