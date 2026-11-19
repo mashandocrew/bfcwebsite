@@ -42,7 +42,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="assets/css/main.css?v=12" />
+<link rel="stylesheet" href="assets/css/main.css?v=13" />
 <link rel="stylesheet" href="assets/css/animations.css?v=6" />
 
 <!-- Phosphor icons via CDN -->
@@ -424,14 +424,45 @@
       <span class="brand-text">Bonati Fight Club</span>
     </a>
 
-    <nav class="nav-links" id="navLinks">
-      <a href="#home"      data-i18n="nav.home">Inicio</a>
-      <a href="#academy"   data-i18n="nav.academy">Academia</a>
-      <a href="#coaches"   data-i18n="nav.coaches">Profesores</a>
-      <a href="#schedule"  data-i18n="nav.schedule">Horarios</a>
-      <a href="#galeria"   data-i18n="nav.gallery">Galería</a>
-      <a href="#tapa"      data-i18n="nav.tapa">Tapa Team</a>
-      <a href="#contact"   data-i18n="nav.contact">Contacto</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Menú" aria-expanded="false" aria-controls="navMenu"><span></span></button>
+
+    <nav class="nav-quick" aria-label="Accesos rápidos">
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button" aria-expanded="false" aria-controls="navDdClases"><span data-i18n="nav.classes">Clases</span> <span class="nav-chev" aria-hidden="true"></span></button>
+        <div class="nav-dd-menu" id="navDdClases">
+          <a href="#academy" data-i18n="nav.k1">K1 Kickboxing</a>
+          <a href="muay-thai-mendoza/" data-i18n="nav.mt">Muay Thai</a>
+          <a href="tapa-team/" data-i18n="nav.mma">MMA y Wrestling</a>
+          <a href="adolescentes/" data-i18n="nav.teens">Adolescentes</a>
+        </div>
+      </div>
+      <a href="#schedule" data-i18n="nav.schedule">Horarios</a>
+      <a href="#contact" data-i18n="nav.contact">Contacto</a>
+    </nav>
+
+    <nav class="nav-menu" id="navMenu" aria-label="Menú principal">
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="true" aria-controls="navGrpClases"><span data-i18n="nav.classes">Clases</span><span class="nav-plus" aria-hidden="true"></span></button>
+        <div class="nav-group-list" id="navGrpClases">
+          <a href="#academy" data-i18n="nav.k1">K1 Kickboxing</a>
+          <a href="muay-thai-mendoza/" data-i18n="nav.mt">Muay Thai</a>
+          <a href="tapa-team/" data-i18n="nav.mma">MMA y Wrestling</a>
+          <a href="adolescentes/" data-i18n="nav.teens">Adolescentes</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="navGrpClub"><span data-i18n="nav.club">El club</span><span class="nav-plus" aria-hidden="true"></span></button>
+        <div class="nav-group-list" id="navGrpClub" hidden>
+          <a href="#history" data-i18n="nav.history">Historia</a>
+          <a href="#coaches" data-i18n="nav.coaches">Profesores</a>
+          <a href="#champions" data-i18n="nav.champions">Campeones</a>
+          <a href="#galeria" data-i18n="nav.gallery">Galería</a>
+          <a href="#reviews" data-i18n="nav.reviews">Reseñas</a>
+        </div>
+      </div>
+      <a class="nav-menu-link" href="#schedule" data-i18n="nav.schedule">Horarios</a>
+      <a class="nav-menu-link" href="#faq" data-i18n="nav.faq">Preguntas frecuentes</a>
+      <a class="nav-menu-link" href="#contact" data-i18n="nav.contactFull">Contacto y ubicación</a>
     </nav>
 
     <div class="nav-right">
@@ -440,11 +471,9 @@
         <button class="lang-btn"           data-lang="en" type="button">EN</button>
         <button class="lang-btn"           data-lang="pt" type="button">PT</button>
       </div>
-      <a href="https://wa.me/5492615710531?text=%C2%A1Hola%21%20Quiero%20coordinar%20mis%202%20clases%20de%20prueba%20de%20K1%20/%20Muay%20Thai." target="_blank" rel="noopener" class="btn nav-cta" data-i18n="nav.cta" data-wa-choose>
-        Entrenar ahora
+      <a href="https://wa.me/5492615710531?text=%C2%A1Hola%21%20Quiero%20coordinar%20mis%202%20clases%20de%20prueba%20de%20K1%20/%20Muay%20Thai." target="_blank" rel="noopener" class="btn nav-cta" data-wa-choose><span data-i18n="nav.cta">Entrenar ahora</span>
         <i class="ph ph-arrow-up-right btn-arrow" aria-hidden="true"></i>
       </a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menú" type="button"><span></span></button>
     </div>
   </div>
 </header>
@@ -1197,8 +1226,8 @@
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/animejs@4/lib/anime.iife.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="assets/js/i18n.js?v=14"></script>
-<script src="assets/js/main.js?v=6"></script>
+<script src="assets/js/i18n.js?v=15"></script>
+<script src="assets/js/main.js?v=7"></script>
 <script src="assets/js/leads.js?v=4"></script>
 <script src="assets/js/reviews.js?v=6"></script>
 <script src="assets/js/animations.js?v=1"></script>

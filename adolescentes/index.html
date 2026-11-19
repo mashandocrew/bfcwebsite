@@ -146,7 +146,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/main.css?v=12" />
+<link rel="stylesheet" href="../assets/css/main.css?v=13" />
 <script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
 <style>
   .lp-hero { padding: calc(var(--nav-h) + 4rem) 0 3rem; background: linear-gradient(180deg, #0A0A0A 0%, #121212 100%); }
@@ -189,17 +189,48 @@
       <img src="../assets/images/logo-original.png" class="logo" alt="Bonati Fight Club" width="150" height="150" />
       <span class="brand-text">Bonati Fight Club</span>
     </a>
-    <nav class="nav-links" id="navLinks">
-      <a href="../#home">Inicio</a>
-      <a href="../#academy">Academia</a>
-      <a href="../#schedule">Horarios</a>
-      <a href="../#coaches">Profesores</a>
-      <a href="../tapa-team/">Tapa Team</a>
-      <a href="../#contact">Contacto</a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Menú" aria-expanded="false" aria-controls="navMenu"><span></span></button>
+
+    <nav class="nav-quick" aria-label="Accesos rápidos">
+      <div class="nav-dd">
+        <button class="nav-dd-btn" type="button" aria-expanded="false" aria-controls="navDdClases"><span data-i18n="nav.classes">Clases</span> <span class="nav-chev" aria-hidden="true"></span></button>
+        <div class="nav-dd-menu" id="navDdClases">
+          <a href="../#academy" data-i18n="nav.k1">K1 Kickboxing</a>
+          <a href="../muay-thai-mendoza/" data-i18n="nav.mt">Muay Thai</a>
+          <a href="../tapa-team/" data-i18n="nav.mma">MMA y Wrestling</a>
+          <a href="../adolescentes/" aria-current="page" data-i18n="nav.teens">Adolescentes</a>
+        </div>
+      </div>
+      <a href="../#schedule" data-i18n="nav.schedule">Horarios</a>
+      <a href="../#contact" data-i18n="nav.contact">Contacto</a>
+    </nav>
+
+    <nav class="nav-menu" id="navMenu" aria-label="Menú principal">
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="true" aria-controls="navGrpClases"><span data-i18n="nav.classes">Clases</span><span class="nav-plus" aria-hidden="true"></span></button>
+        <div class="nav-group-list" id="navGrpClases">
+          <a href="../#academy" data-i18n="nav.k1">K1 Kickboxing</a>
+          <a href="../muay-thai-mendoza/" data-i18n="nav.mt">Muay Thai</a>
+          <a href="../tapa-team/" data-i18n="nav.mma">MMA y Wrestling</a>
+          <a href="../adolescentes/" aria-current="page" data-i18n="nav.teens">Adolescentes</a>
+        </div>
+      </div>
+      <div class="nav-group">
+        <button class="nav-group-btn" type="button" aria-expanded="false" aria-controls="navGrpClub"><span data-i18n="nav.club">El club</span><span class="nav-plus" aria-hidden="true"></span></button>
+        <div class="nav-group-list" id="navGrpClub" hidden>
+          <a href="../#history" data-i18n="nav.history">Historia</a>
+          <a href="../#coaches" data-i18n="nav.coaches">Profesores</a>
+          <a href="../#champions" data-i18n="nav.champions">Campeones</a>
+          <a href="../#galeria" data-i18n="nav.gallery">Galería</a>
+          <a href="../#reviews" data-i18n="nav.reviews">Reseñas</a>
+        </div>
+      </div>
+      <a class="nav-menu-link" href="../#schedule" data-i18n="nav.schedule">Horarios</a>
+      <a class="nav-menu-link" href="../#faq" data-i18n="nav.faq">Preguntas frecuentes</a>
+      <a class="nav-menu-link" href="../#contact" data-i18n="nav.contactFull">Contacto y ubicación</a>
     </nav>
     <div class="nav-right">
       <a href="https://wa.me/5492615710531?text=%C2%A1Hola%21%20Quiero%20consultar%20por%20clases%20de%20K1%20%2F%20Muay%20Thai%20para%20un%20adolescente." target="_blank" rel="noopener" class="btn nav-cta">Entrenar ahora</a>
-      <button class="nav-toggle" id="navToggle" aria-label="Menú" type="button"><span></span></button>
     </div>
   </div>
 </header>
@@ -353,7 +384,7 @@
   </div>
 </footer>
 
-<script src="../assets/js/main.js"></script>
+<script src="../assets/js/main.js?v=7"></script>
 <script src="../assets/js/tracking.js?v=2"></script>
 </body>
 </html>
