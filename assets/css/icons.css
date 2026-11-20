@@ -1,0 +1,68 @@
+/* Phosphor Icons 2.1.1 (MIT) — subconjunto con los 14 íconos que usa el sitio.
+   Generado desde @phosphor-icons/web; para sumar un ícono hay que regenerar las fuentes. */
+@font-face {
+  font-family: "Phosphor";
+  src: url("../fonts/phosphor-regular.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+.ph {
+  font-family: "Phosphor" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ph.ph-arrow-down:before { content: "\e03e"; }
+.ph.ph-arrow-left:before { content: "\e058"; }
+.ph.ph-arrow-right:before { content: "\e06c"; }
+.ph.ph-arrow-up-right:before { content: "\e092"; }
+.ph.ph-at:before { content: "\e0ac"; }
+.ph.ph-caret-left:before { content: "\e138"; }
+.ph.ph-caret-right:before { content: "\e13a"; }
+.ph.ph-google-logo:before { content: "\e292"; }
+.ph.ph-hand-swipe-right:before { content: "\ec92"; }
+.ph.ph-instagram-logo:before { content: "\e2d0"; }
+.ph.ph-map-pin:before { content: "\e316"; }
+.ph.ph-star:before { content: "\e46a"; }
+.ph.ph-whatsapp-logo:before { content: "\e5d0"; }
+.ph.ph-x:before { content: "\e4f6"; }
+@font-face {
+  font-family: "Phosphor-Fill";
+  src: url("../fonts/phosphor-fill.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+.ph-fill {
+  font-family: "Phosphor-Fill" !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  letter-spacing: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.ph-fill.ph-arrow-down:before { content: "\e03e"; }
+.ph-fill.ph-arrow-left:before { content: "\e058"; }
+.ph-fill.ph-arrow-right:before { content: "\e06c"; }
+.ph-fill.ph-arrow-up-right:before { content: "\e092"; }
+.ph-fill.ph-at:before { content: "\e0ac"; }
+.ph-fill.ph-caret-left:before { content: "\e138"; }
+.ph-fill.ph-caret-right:before { content: "\e13a"; }
+.ph-fill.ph-google-logo:before { content: "\e292"; }
+.ph-fill.ph-hand-swipe-right:before { content: "\ec92"; }
+.ph-fill.ph-instagram-logo:before { content: "\e2d0"; }
+.ph-fill.ph-map-pin:before { content: "\e316"; }
+.ph-fill.ph-star:before { content: "\e46a"; }
+.ph-fill.ph-whatsapp-logo:before { content: "\e5d0"; }
+.ph-fill.ph-x:before { content: "\e4f6"; }

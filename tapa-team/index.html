@@ -95,9 +95,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/main.css?v=13" />
+<link rel="stylesheet" href="../assets/css/main.css?v=14" />
 <link rel="stylesheet" href="../assets/css/animations.css" />
-<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<link rel="stylesheet" href="../assets/css/icons.css?v=1" />
 
 <style>
   /* Page-scoped overrides: gold accents dominate Tapa Team */
@@ -112,6 +112,7 @@
   .tt-hero-bg {
     position: absolute; inset: 0; z-index: -2;
     background-image: url('../assets/images/tapa-team-squad.jpg');
+    background-image: image-set(url('../assets/images/tapa-team-squad.avif') type('image/avif'), url('../assets/images/tapa-team-squad.webp') type('image/webp'), url('../assets/images/tapa-team-squad.jpg') type('image/jpeg'));
     background-size: cover;
     background-position: center;
     filter: grayscale(15%) contrast(1.15) brightness(0.55);
@@ -233,6 +234,7 @@
   .tt-squad-bg {
     position: absolute; inset: 0; z-index: -2;
     background-image: url('../assets/images/tapa-team-squad.jpg');
+    background-image: image-set(url('../assets/images/tapa-team-squad.avif') type('image/avif'), url('../assets/images/tapa-team-squad.webp') type('image/webp'), url('../assets/images/tapa-team-squad.jpg') type('image/jpeg'));
     background-size: cover;
     background-position: center top;
     filter: brightness(0.4) contrast(1.1);
@@ -324,6 +326,7 @@
     .pillar { border-right: 0; border-bottom: var(--border-hair); }
     .pillar:last-child { border-bottom: 0; }
   }
+  @media (max-width: 768px) { .tt-hero-bg, .tt-squad-bg { background-image: image-set(url('../assets/images/tapa-team-squad-640.avif') type('image/avif'), url('../assets/images/tapa-team-squad-640.webp') type('image/webp'), url('../assets/images/tapa-team-squad.jpg') type('image/jpeg')); } }
 </style>
 </head>
 <body>
@@ -331,9 +334,9 @@
 <header class="nav scrolled" id="nav">
   <div class="nav-inner">
     <a href="../" class="nav-brand" aria-label="Tapa Team — Bonati Fight Club">
-      <img src="../assets/images/logo-tapa-team.png?v=2" alt="Tapa Team"
+      <picture><source type="image/avif" srcset="../assets/images/logo-tapa-team.avif" /><source type="image/webp" srcset="../assets/images/logo-tapa-team.webp" /><img src="../assets/images/logo-tapa-team.png?v=2" alt="Tapa Team"
            class="navbar-tapa-logo"
-           onerror="this.style.display='none'" width="512" height="512" />
+           onerror="this.style.display='none'" width="512" height="512" /></picture>
     </a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Menú" aria-expanded="false" aria-controls="navMenu"><span></span></button>
 
@@ -459,7 +462,7 @@
       </div>
 
       <div class="tapa-media">
-        <img src="../assets/images/tapa-entrenamiento-prueba.jpeg" alt="Entrenamiento Tapa Team" loading="eager" width="1200" height="1600" />
+        <picture><source type="image/avif" srcset="../assets/images/tapa-entrenamiento-prueba-640.avif 640w, ../assets/images/tapa-entrenamiento-prueba.avif 1200w" sizes="(max-width: 768px) 100vw, 50vw" /><source type="image/webp" srcset="../assets/images/tapa-entrenamiento-prueba-640.webp 640w, ../assets/images/tapa-entrenamiento-prueba.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" /><img src="../assets/images/tapa-entrenamiento-prueba.jpeg" alt="Entrenamiento Tapa Team" loading="lazy" decoding="async" width="1200" height="1600" /></picture>
         <div class="tapa-media-label">EL GYM · 2026</div>
       </div>
     </div>
@@ -484,7 +487,7 @@
     </header>
     <div class="tt-gallery-grid" id="ttGalleryGrid">
       <div class="tt-gallery-item">
-        <img src="../assets/images/tapa-entrenamiento-01.jpg" alt="Entrenamiento Tapa Team" loading="lazy" width="1000" height="750" />
+        <picture><source type="image/avif" srcset="../assets/images/tapa-entrenamiento-01-640.avif 640w, ../assets/images/tapa-entrenamiento-01.avif 1000w" sizes="(max-width: 768px) 100vw, 33vw" /><source type="image/webp" srcset="../assets/images/tapa-entrenamiento-01-640.webp 640w, ../assets/images/tapa-entrenamiento-01.webp 1000w" sizes="(max-width: 768px) 100vw, 33vw" /><img src="../assets/images/tapa-entrenamiento-01.jpg" alt="Entrenamiento Tapa Team" loading="lazy" decoding="async" width="1000" height="750" /></picture>
         <div class="tt-gi-overlay">
           <div class="tt-gi-text">
             <span class="tt-gi-title">ENTRENAMIENTO</span>
@@ -493,7 +496,7 @@
         </div>
       </div>
       <div class="tt-gallery-item">
-        <img src="../assets/images/tapa-entrenamiento-02.jpg" alt="Preparación Tapa Team" loading="lazy" width="201" height="251" />
+        <picture><source type="image/avif" srcset="../assets/images/tapa-entrenamiento-02.avif" /><img src="../assets/images/tapa-entrenamiento-02.jpg" alt="Preparación Tapa Team" loading="lazy" decoding="async" width="201" height="251" /></picture>
         <div class="tt-gi-overlay">
           <div class="tt-gi-text">
             <span class="tt-gi-title">PREPARACIÓN</span>
@@ -502,7 +505,7 @@
         </div>
       </div>
       <div class="tt-gallery-item">
-        <img src="../assets/images/tapa-competencia-01.jpg" alt="Tapa Team en competencia" loading="lazy" width="562" height="1280" />
+        <picture><source type="image/avif" srcset="../assets/images/tapa-competencia-01.avif" /><source type="image/webp" srcset="../assets/images/tapa-competencia-01.webp" /><img src="../assets/images/tapa-competencia-01.jpg" alt="Tapa Team en competencia" loading="lazy" decoding="async" width="562" height="1280" /></picture>
         <div class="tt-gi-overlay">
           <div class="tt-gi-text">
             <span class="tt-gi-title">EN COMPETENCIA</span>
@@ -578,7 +581,7 @@
 </footer>
 
 <script src="../assets/js/i18n.js?v=15"></script>
-<script src="../assets/js/main.js?v=7"></script>
+<script src="../assets/js/main.js?v=8"></script>
 <script src="../assets/js/tracking.js?v=2"></script>
 <script>
 (function () {
