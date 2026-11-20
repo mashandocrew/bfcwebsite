@@ -44,7 +44,7 @@
 
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
 <link rel="dns-prefetch" href="https://kmlobikkamhnzkmbtckg.supabase.co" />
-<link rel="stylesheet" href="assets/css/main.css?v=14" />
+<link rel="stylesheet" href="assets/css/main.css?v=15" />
 <link rel="stylesheet" href="assets/css/animations.css?v=6" />
 
 <!-- Phosphor icons: subconjunto local (14 íconos, ~7 KB) en lugar del CDN completo -->
@@ -1077,13 +1077,30 @@
       <p data-i18n="contact.lead">Las 2 primeras clases son gratis. Escribí a la línea de tu disciplina.</p>
     </header>
 
-    <div class="contact-map-full">
-      <iframe
-        src="https://maps.google.com/maps?q=-32.92239053023553,-68.84214251689912&center=-32.92239053023553,-68.84214251689912&output=embed&z=16&hl=es"
-        width="100%" style="border:0; display:block;"
-        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        title="Bonati Fight Club · Godoy Cruz, Mendoza">
-      </iframe>
+    <!-- Mapa con fachada: se muestra una imagen estática (~22-44 KB) y el mapa de Google
+         (~690 KB entre scripts, teselas y fuentes) se carga solo si el visitante lo pide.
+         Imagen: _tools/mapa-estatico.py · © OpenStreetMap contributors -->
+    <div class="contact-map-full map-facade" id="bfcMap"
+         data-map-src="https://maps.google.com/maps?q=-32.92239053023553,-68.84214251689912&amp;center=-32.92239053023553,-68.84214251689912&amp;output=embed&amp;z=16&amp;hl=es"
+         data-map-title="Bonati Fight Club · Godoy Cruz, Mendoza">
+      <picture>
+        <source media="(max-width: 768px)" type="image/avif" srcset="assets/images/mapa/mapa-bfc-640.avif" />
+        <source media="(max-width: 768px)" type="image/webp" srcset="assets/images/mapa/mapa-bfc-640.webp" />
+        <source type="image/avif" srcset="assets/images/mapa/mapa-bfc.avif" />
+        <source type="image/webp" srcset="assets/images/mapa/mapa-bfc.webp" />
+        <img class="map-preview" src="assets/images/mapa/mapa-bfc.jpg" alt="Mapa de la ubicación de Bonati Fight Club en Balcarce 230, Godoy Cruz" width="1280" height="560" loading="lazy" decoding="async" />
+      </picture>
+      <span class="map-pin" aria-hidden="true"><i class="ph-fill ph-map-pin"></i></span>
+      <div class="map-actions">
+        <a class="btn" href="https://www.google.com/maps/place/?q=place_id:ChIJsTGJ7q8JfpYRN69N1LdLXHo" target="_blank" rel="noopener" data-map-load>
+          <span data-i18n="contact.mapLoad">Ver mapa interactivo</span>
+        </a>
+        <a class="btn ghost" href="https://www.google.com/maps/dir/?api=1&amp;destination=-32.92239053023553,-68.84214251689912&amp;destination_place_id=ChIJsTGJ7q8JfpYRN69N1LdLXHo" target="_blank" rel="noopener">
+          <span data-i18n="contact.mapDir">Cómo llegar</span>
+          <i class="ph ph-arrow-up-right btn-arrow" aria-hidden="true"></i>
+        </a>
+      </div>
+      <small class="map-attrib">© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a></small>
     </div>
 
     <div class="contact-info reveal">
@@ -1229,8 +1246,8 @@
 <!-- Versión fija: el CDN la sirve con caché larga y sin redirecciones -->
 <script src="https://cdn.jsdelivr.net/npm/animejs@4.1.4/lib/anime.iife.min.js"></script>
 <script src="assets/js/bfc-api.js?v=1"></script>
-<script src="assets/js/i18n.js?v=15"></script>
-<script src="assets/js/main.js?v=8"></script>
+<script src="assets/js/i18n.js?v=16"></script>
+<script src="assets/js/main.js?v=9"></script>
 <script src="assets/js/leads.js?v=4"></script>
 <script src="assets/js/reviews.js?v=7"></script>
 <script src="assets/js/animations.js?v=1"></script>

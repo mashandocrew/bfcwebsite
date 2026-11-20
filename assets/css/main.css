@@ -2194,3 +2194,42 @@ picture { display: contents; }
   border: 1px solid currentColor; border-radius: 999px;
   padding: 2px 10px; margin-bottom: 4px;
 }
+
+/* ===== Mapa con fachada (2026-11) ===== */
+.map-facade { position: relative; overflow: hidden; background: #1c1c1c; }
+.map-facade .map-preview {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+.map-pin {
+  position: absolute; left: 50%; top: 50%; z-index: 1;
+  transform: translate(-50%, -100%);
+  font-size: 2.75rem; line-height: 1; color: var(--bfc-red);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+  pointer-events: none;
+}
+.map-actions {
+  position: absolute; left: 0; right: 0; bottom: 1.25rem; z-index: 2;
+  display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
+  padding: 0 1rem;
+}
+.map-attrib {
+  position: absolute; right: 0; top: 0; z-index: 2;
+  font-size: 10px; line-height: 1.4; padding: 2px 6px;
+  background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.65);
+}
+.map-attrib a { color: inherit; }
+.map-facade iframe {
+  position: absolute; inset: 0; z-index: 3;
+  opacity: 0; transition: opacity 0.4s ease;
+}
+.map-facade.is-loading [data-map-load] { opacity: 0.6; cursor: progress; }
+.map-facade.is-live iframe { opacity: 1; }
+.map-facade.is-live .map-pin,
+.map-facade.is-live .map-actions,
+.map-facade.is-live .map-attrib { display: none; }
+@media (max-width: 768px) {
+  .map-pin { font-size: 2.25rem; }
+  .map-actions { bottom: 0.9rem; gap: 0.5rem; }
+  .map-actions .btn { padding: 0.75rem 1rem; font-size: 0.7rem; }
+}
