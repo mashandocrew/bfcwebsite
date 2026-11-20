@@ -257,3 +257,37 @@
     document.querySelectorAll('video').forEach(v => v.pause());
   }
 })();
+
+/* ---------- Fondos diferidos [data-bg] ----------
+   <div data-bg="assets/images/foto" data-bg-ext="jpg">: el fondo se descarga recién cuando
+   el bloque se acerca a la pantalla, en AVIF o WebP si el navegador los soporta
+   y en la variante de 640 px en pantallas chicas. */
+(function () {
+  'use strict';
+  var els = document.querySelectorAll('[data-bg]');
+  if (!els.length) return;
+
+  var small = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+  var imageSetOk = window.CSS && CSS.supports &&
+    CSS.supports('background-image', 'image-set(url("a.avif") type("image/avif"))');
+
+  function apply(el) {
+    var base = el.getAttribute('data-bg') + (small ? '-640' : '');
+    var ext  = el.getAttribute('data-bg-ext') || 'jpg';
+    var fallback = el.getAttribute('data-bg') + '.' + ext;   /* original, siempre existe */
+    el.style.backgroundImage = "url('" + fallback + "')";
+    if (imageSetOk) {
+      el.style.backgroundImage =
+        "image-set(url('" + base + ".avif') type('image/avif'), url('" + base + ".webp') type('image/webp'), url('" + fallback + "') type('image/" + (ext === 'jpg' ? 'jpeg' : ext) + "'))";
+    }
+    el.removeAttribute('data-bg');
+  }
+
+  if (!('IntersectionObserver' in window)) { els.forEach(apply); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { apply(e.target); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '300px 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();

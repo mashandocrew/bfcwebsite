@@ -1,8 +1,14 @@
 /* BFC · MÓDULO 2 — Reseñas
    Fuentes en orden de prioridad:
    1. Google Places API  (cuando esté configurada)
-   2. Supabase site_reviews
-   3. Reseñas estáticas reales (siempre como respaldo)
+   2. Supabase site_reviews (vía el cliente compartido BFC_API, paginado de a PAGE_SIZE)
+   3. Reseñas estáticas reales (ya vienen en el HTML; quedan si la API falla)
+
+   Rendimiento:
+   - La consulta sale recién cuando la sección está cerca de la pantalla.
+   - Sin "semilla" desde el navegador: las reseñas fundacionales se cargan una sola vez
+     con _tools/supabase-setup.sql (antes eran 4 consultas extra en cada visita).
+   - Al enviar una reseña la interfaz responde al instante (optimistic UI) y se revierte si falla.
 */
 (function () {
   'use strict';
@@ -10,8 +16,6 @@
   /* ─── CONFIG ────────────────────────────────────
      Completar cuando tengas las credenciales.
      Mientras estén como 'TU_..._AQUI' esas fuentes se ignoran. */
-  var SUPABASE_URL        = 'https://kmlobikkamhnzkmbtckg.supabase.co';
-  var SUPABASE_KEY        = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImttbG9iaWtrYW1obnprbWJ0Y2tnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY4MjYyOTQsImV4cCI6MjA5MjQwMjI5NH0.yeN_hygM4q9tZIq4hst6-6SzeAf5mdLnTuWG-eLatts';
   var GOOGLE_PLACES_API_KEY = 'TU_API_KEY_AQUI';   /* ← pegar aquí */
   var GOOGLE_PLACE_ID       = 'ChIJsTGJ7q8JfpYRN69N1LdLXHo';  /* ← pegar aquí */
 
@@ -46,83 +50,82 @@
     }
   ];
 
-  var sb            = null;
+  var api            = window.BFC_API || null;
   var selectedRating = 0;
-
-  /* ─── SEED REVIEWS ─────────────────────────────────
-     Inserta las reseñas fundacionales si aún no existen. */
-  var SEED_REVIEWS = [
-    { author_name: 'Francisco Farjo',    discipline: 'General', rating: 5, review_text: 'Excelente academia, muy buena ubicación y un espacio amplio como pocas academias, además de muy buena predisposición del profesor y un ambiente de compañerismo muy presente la verdad que 10/10.', approved: true },
-    { author_name: 'Pablo Badui',        discipline: 'General', rating: 5, review_text: 'Más que una academia una familia de luchadores, desde los nuevos hasta los profesionales entrenando a la par en el mismo tatami. El verdadero espíritu del guerrero.',                         approved: true },
-    { author_name: 'Fernando Tabarelli', discipline: 'General', rating: 5, review_text: 'Muy profesionales, se preocupan que cada alumno logre lo que se propuso al ingresar. Muy buen ambiente.',                                                                                     approved: true },
-    { author_name: 'Fernando Vater',     discipline: 'General', rating: 5, review_text: 'Excelente atención, totalmente limpio y con constantes innovaciones y mejoras, clases personalizadas de alto nivel, el profe Walter Bonati un apasionado y 100% dedicado a sus alumnos.',     approved: true }
-  ];
-
-  async function seedInitialReviews() {
-    if (!sb) return;
-    for (var i = 0; i < SEED_REVIEWS.length; i++) {
-      var review = SEED_REVIEWS[i];
-      try {
-        var check = await sb.from('site_reviews').select('id').eq('author_name', review.author_name).limit(1);
-        if (!check.data || check.data.length === 0) {
-          await sb.from('site_reviews').insert(review);
-        }
-      } catch (e) {
-        console.warn('[BFC:reviews] seed error', e.message);
-      }
-    }
-  }
+  var PAGE_SIZE      = 6;
+  var loaded         = [];     /* reseñas de Supabase ya cargadas */
+  var nextOffset     = 0;
+  var hasMore        = false;
+  var loadingMore    = false;
 
   /* ─── INIT ──────────────────────────────────────── */
-  document.addEventListener('DOMContentLoaded', async function () {
-    renderReviews(STATIC_REVIEWS);   /* visible de inmediato */
+  /* Las reseñas estáticas ya están en el HTML (rastreables): no se vuelven a pintar. */
+  document.addEventListener('DOMContentLoaded', function () {
     initStars();
-
-    if (window.supabase) {
-      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    }
     initForm();
+    whenNear(document.getElementById('reviews'), loadInitial);
+  });
 
-    await seedInitialReviews();
+  function whenNear(el, cb) {
+    if (!el || !('IntersectionObserver' in window)) { cb(); return; }
+    var io = new IntersectionObserver(function (entries) {
+      if (entries.some(function (e) { return e.isIntersecting; })) { io.disconnect(); cb(); }
+    }, { rootMargin: '600px 0px' });
+    io.observe(el);
+  }
 
-    /* Cargar fuentes dinámicas y actualizar la grilla */
-    var reviews = await fetchAllReviews();
-    if (reviews.length) renderReviews(reviews);
+  async function loadInitial() {
+    var page = await fetchSupabasePage(0);
+    if (page.rows.length) {
+      loaded = page.rows;
+      nextOffset = page.rows.length;
+      hasMore = page.hasMore;
+      renderReviews(loaded);
+    }
 
-    /* Si Google está configurado, esperar que cargue el SDK */
+    /* Si Google está configurado, esperar que cargue el SDK (reusa lo ya cargado: sin consultas repetidas) */
     if (GOOGLE_READY) {
       if (window.google && window.google.maps) {
         var gReviews = await fetchGoogleReviews();
-        if (gReviews.length) renderReviews(mergeReviews(await fetchSupabaseReviews(), gReviews));
+        if (gReviews.length) renderReviews(mergeReviews(loaded, gReviews));
       } else {
         document.addEventListener('bfc:google-ready', async function () {
           var gReviews = await fetchGoogleReviews();
-          if (gReviews.length) renderReviews(mergeReviews(await fetchSupabaseReviews(), gReviews));
+          if (gReviews.length) renderReviews(mergeReviews(loaded, gReviews));
         }, { once: true });
       }
     }
-  });
+  }
 
-  /* ─── FETCH COORDINADO ──────────────────────────── */
-  async function fetchAllReviews() {
-    var sbReviews = await fetchSupabaseReviews();
-    return sbReviews.length ? sbReviews : [];
+  async function loadMore() {
+    if (loadingMore || !hasMore) return;
+    loadingMore = true;
+    var btn = document.getElementById('reviewsMore');
+    if (btn) { btn.disabled = true; btn.querySelector('span').textContent = 'Cargando…'; }
+    var page = await fetchSupabasePage(nextOffset);
+    loadingMore = false;
+    if (btn) { btn.disabled = false; btn.querySelector('span').textContent = 'Ver más reseñas'; }
+    loaded = loaded.concat(page.rows);
+    nextOffset += page.rows.length;
+    hasMore = page.hasMore;
+    renderReviews(loaded);
   }
 
   /* ─── SUPABASE ──────────────────────────────────── */
-  async function fetchSupabaseReviews() {
-    if (!sb) return [];
+  async function fetchSupabasePage(offset) {
+    if (!api) return { rows: [], hasMore: false };
     try {
-      var res = await sb.from('site_reviews')
-        .select('*')
-        .eq('approved', true)
-        .order('created_at', { ascending: false })
-        .limit(20);
-      if (res.error) throw res.error;
-      return (res.data || []).map(normalizeRow);
+      var res = await api.select('site_reviews', {
+        select:  'author_name,review_text,rating,discipline,created_at',
+        filters: { approved: 'eq.true' },
+        order:   'created_at.desc',
+        limit:   PAGE_SIZE,
+        offset:  offset
+      });
+      return { rows: res.data.map(normalizeRow), hasMore: res.hasMore };
     } catch (e) {
       console.warn('[BFC:reviews] Supabase:', e.message);
-      return [];
+      return { rows: [], hasMore: false };
     }
   }
 
@@ -190,6 +193,9 @@
       return;
     }
     grid.innerHTML = reviews.map(function (r, idx) {
+      var pending = r.source === 'pending'
+        ? '<span class="review-pending">En revisión</span>'
+        : '';
       var initial  = r.nombre ? r.nombre.charAt(0).toUpperCase() : '?';
       var googleBadge = r.source === 'google'
         ? '<div class="review-source-badge"><svg viewBox="0 0 24 24" width="14" height="14" fill="none">' +
@@ -204,7 +210,8 @@
         : '';
       var stars = Array.from({length: r.rating || 5}, function () { return '<span>★</span>'; }).join('') +
         Array.from({length: 5 - (r.rating || 5)}, function () { return '<span style="color:rgba(255,255,255,0.15)">★</span>'; }).join('');
-      return '<div class="review-card" style="animation:fadeInUp 0.5s ease both;animation-delay:' + (idx * 0.08) + 's">' +
+      return '<div class="review-card' + (r.source === 'pending' ? ' is-pending' : '') + '" style="animation:fadeInUp 0.5s ease both;animation-delay:' + (Math.min(idx, 5) * 0.08) + 's">' +
+        pending +
         '<div class="review-stars">' + stars + '</div>' +
         '<p class="review-text">' + esc(r.texto) + '</p>' +
         '<div class="review-footer">' +
@@ -216,6 +223,24 @@
         googleBadge +
         '</div></div>';
     }).join('');
+    setMoreButton(grid);
+  }
+
+  function setMoreButton(grid) {
+    var btn = document.getElementById('reviewsMore');
+    if (!btn) {
+      var wrap = document.createElement('div');
+      wrap.className = 'reviews-more';
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.id = 'reviewsMore';
+      btn.className = 'btn';
+      btn.innerHTML = '<span>Ver más reseñas</span>';
+      btn.addEventListener('click', loadMore);
+      wrap.appendChild(btn);
+      grid.parentNode.insertBefore(wrap, grid.nextSibling);
+    }
+    btn.parentNode.hidden = !hasMore;
   }
 
   function starsHtml(n) {
@@ -270,47 +295,65 @@
       if (!nombre || !texto) { showFeedback('Completá tu nombre y reseña.', 'error'); return; }
       if (!selectedRating)   { showFeedback('Elegí una calificación con las estrellas.', 'error'); return; }
 
-      var span = submitB.querySelector('span');
+      var discEl = document.querySelector('input[name="revDiscipline"]:checked');
+      var row = {
+        author_name: nombre,
+        review_text: texto,
+        rating:      selectedRating,
+        discipline:  discEl ? discEl.value : 'General',
+        approved:    false   /* queda pendiente hasta que se apruebe desde /admin/ */
+      };
+      var rating = selectedRating;
+      var discValue = discEl ? discEl.value : null;
+
+      /* Optimistic UI: se muestra el resultado sin esperar al servidor.
+         La reseña aparece solo para quien la escribió, marcada "En revisión". */
+      var mine = { nombre: nombre, texto: texto, rating: rating, created_at: null, source: 'pending', disciplina: row.discipline };
+      var before = currentList();
+      renderReviews([mine].concat(before));
+      showFeedback('¡Gracias por tu reseña! La publicamos apenas la revisemos.', 'success');
+      form.reset();
+      selectedRating = 0;
+      updateStarUI(document.querySelectorAll('#revStarPicker .rev-star-btn'), 0);
       submitB.disabled = true;
-      if (span) span.textContent = 'Enviando…';
+
+      /* Botón Google */
+      if (gBtn) {
+        var googleUrl = window._bfcGoogleUrl
+          || ('https://search.google.com/local/writereview?placeid=' + GOOGLE_PLACE_ID);
+        if (GOOGLE_PLACE_ID !== 'TU_PLACE_ID_AQUI') {
+          gBtn.href = googleUrl;
+          gBtn.hidden = false;
+        }
+      }
 
       try {
-        if (sb) {
-          var discEl = document.querySelector('input[name="revDiscipline"]:checked');
-          var res = await sb.from('site_reviews').insert({
-            author_name: nombre,
-            review_text: texto,
-            rating:      selectedRating,
-            discipline:  discEl ? discEl.value : 'General',
-            approved:    false   /* queda pendiente hasta que se apruebe desde /admin/ */
-          });
-          if (res.error) throw res.error;
-        }
-        showFeedback('¡Gracias por tu reseña! La publicamos apenas la revisemos.', 'success');
-        form.reset();
-        selectedRating = 0;
-        updateStarUI(document.querySelectorAll('#revStarPicker .rev-star-btn'), 0);
-
-        /* Botón Google */
-        if (gBtn) {
-          var googleUrl = window._bfcGoogleUrl
-            || ('https://search.google.com/local/writereview?placeid=' + GOOGLE_PLACE_ID);
-          if (GOOGLE_PLACE_ID !== 'TU_PLACE_ID_AQUI') {
-            gBtn.href = googleUrl;
-            gBtn.hidden = false;
-          }
-        }
-
-        var fresh = await fetchAllReviews();
-        if (fresh.length) renderReviews(fresh);
+        if (!api) throw new Error('API no disponible');
+        await api.insert('site_reviews', row);
+        /* La reseña nueva no es pública hasta aprobarla: no hace falta volver a consultar la lista. */
       } catch (err) {
         console.warn('[BFC:reviews] insert failed', err);
-        showFeedback('Error al enviar. Intentá de nuevo.', 'error');
+        /* Revertir: sacar la tarjeta y devolver lo escrito al formulario */
+        renderReviews(before);
+        document.getElementById('revName').value = nombre;
+        document.getElementById('revText').value = texto;
+        if (discValue) {
+          var d = form.querySelector('input[name="revDiscipline"][value="' + discValue + '"]');
+          if (d) d.checked = true;
+        }
+        selectedRating = rating;
+        updateStarUI(document.querySelectorAll('#revStarPicker .rev-star-btn'), rating);
+        if (gBtn) gBtn.hidden = true;
+        showFeedback('No se pudo enviar. Revisá tu conexión e intentá de nuevo.', 'error');
       } finally {
         submitB.disabled = false;
-        if (span) span.textContent = 'Enviar reseña';
       }
     });
+  }
+
+  /* Lista visible actual: lo cargado de Supabase o, si no hay, las estáticas */
+  function currentList() {
+    return loaded.length ? loaded.slice() : STATIC_REVIEWS.slice();
   }
 
   function showFeedback(msg, type) {

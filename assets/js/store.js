@@ -28,11 +28,21 @@
     return { text: 'AR$ ' + Number(p).toLocaleString('es-AR'), tbd: false };
   };
 
+  function showSkeleton() {
+    const card = '<div class="product-skeleton" aria-hidden="true"><div class="sk-img"></div>' +
+      '<div class="sk-body"><div class="sk-line short"></div><div class="sk-line"></div><div class="sk-line short"></div></div></div>';
+    grid.setAttribute('aria-busy', 'true');
+    grid.innerHTML = card.repeat(8);
+  }
+
   async function load() {
+    showSkeleton();
     try {
-      const res = await fetch(DATA_URL, { cache: 'no-store' });
+      /* 'no-cache' revalida con el servidor (304 si no cambió) en vez de bajar el JSON entero cada vez */
+      const res = await fetch(DATA_URL, { cache: 'no-cache' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       state.data = await res.json();
+      grid.removeAttribute('aria-busy');
       mountFilters();
       render();
     } catch (e) {
@@ -69,7 +79,7 @@
       const img = p.images && p.images[0];
       const imgExists = img && !img.includes('merch/');  // heuristic; merch paths are placeholders
       const imgHtml = img && !imgIsPlaceholder(img)
-        ? `<img src="${img}" alt="${p.name}" loading="lazy" onerror="this.parentElement.classList.add('placeholder');this.remove();document.getElementById('ph-${p.id}').style.display='flex';">`
+        ? `<img src="${img}" alt="${p.name}" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('placeholder');this.remove();document.getElementById('ph-${p.id}').style.display='flex';">`
         : '';
       return `
         <article class="product" data-id="${p.id}">

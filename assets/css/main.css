@@ -820,6 +820,7 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 .champions-bg {
   position: absolute; inset: 0; z-index: -2;
   background-image: url('../images/gaston-hero.jpg');
+  background-image: image-set(url('../images/gaston-hero.avif') type('image/avif'), url('../images/gaston-hero.webp') type('image/webp'), url('../images/gaston-hero.jpg') type('image/jpeg'));
   background-size: cover;
   background-position: center 20%;
   filter: grayscale(100%) contrast(1.2) brightness(0.55);
@@ -2166,3 +2167,30 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 .rev-or { font-size: 0.85rem; color: var(--bfc-bone-dim); margin: 1.25rem 0 1rem; }
 #revForm button[type="submit"] { background: transparent; border: 1px solid rgba(255,255,255,0.2); }
 #revForm button[type="submit"]:hover { background: rgba(255,255,255,0.06); box-shadow: none; }
+
+/* ===== Rendimiento de carga (2026-11) ===== */
+@media (max-width: 768px) {
+  .champions-bg { background-image: image-set(url('../images/gaston-hero-640.avif') type('image/avif'), url('../images/gaston-hero-640.webp') type('image/webp'), url('../images/gaston-hero.jpg') type('image/jpeg')); }
+}
+/* <picture> no altera el layout: la <img> se comporta como hija directa del contenedor */
+picture { display: contents; }
+
+.gallery-more,
+.reviews-more {
+  display: flex; justify-content: center;
+  margin-top: 2rem;
+}
+.gallery-more[hidden],
+.reviews-more[hidden] { display: none; }
+.gallery-more .btn[disabled],
+.reviews-more .btn[disabled] { opacity: 0.6; cursor: progress; }
+
+/* Reseña recién enviada (solo la ve quien la escribió) */
+.review-card.is-pending { border-style: dashed; opacity: 0.85; }
+.review-pending {
+  align-self: flex-start;
+  font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--bfc-gold, #d4a017);
+  border: 1px solid currentColor; border-radius: 999px;
+  padding: 2px 10px; margin-bottom: 4px;
+}

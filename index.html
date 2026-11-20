@@ -42,11 +42,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-<link rel="stylesheet" href="assets/css/main.css?v=13" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+<link rel="dns-prefetch" href="https://kmlobikkamhnzkmbtckg.supabase.co" />
+<link rel="stylesheet" href="assets/css/main.css?v=14" />
 <link rel="stylesheet" href="assets/css/animations.css?v=6" />
 
-<!-- Phosphor icons via CDN -->
-<script src="https://unpkg.com/@phosphor-icons/web@2.1.1"></script>
+<!-- Phosphor icons: subconjunto local (14 íconos, ~7 KB) en lugar del CDN completo -->
+<link rel="stylesheet" href="assets/css/icons.css?v=1" />
 
 <!-- JSON-LD · SEO/GEO -->
 <script type="application/ld+json">
@@ -420,7 +422,7 @@
 <header class="nav" id="nav">
   <div class="nav-inner">
     <a href="#home" class="nav-brand" aria-label="Bonati Fight Club">
-      <img src="assets/images/logo-original.png" alt="Bonati Fight Club" class="logo" width="150" height="150" />
+      <picture><source type="image/avif" srcset="assets/images/logo-original.avif" /><source type="image/webp" srcset="assets/images/logo-original.webp" /><img src="assets/images/logo-original.png" alt="Bonati Fight Club" class="logo" width="150" height="150" fetchpriority="high" /></picture>
       <span class="brand-text">Bonati Fight Club</span>
     </a>
 
@@ -487,7 +489,7 @@
          Con ahorro de datos, 2G o movimiento reducido no se descarga el video y queda el póster. -->
     <video class="hero-video"
            autoplay muted loop playsinline preload="auto"
-           poster="assets/videos/video-Hero-poster.jpg"
+           poster="assets/videos/video-Hero-poster.webp"
            data-src="assets/videos/video-Hero.mp4?v=4"
            data-src-lite="assets/videos/video-Hero-lite.mp4?v=1"
            disablepictureinpicture disableremoteplayback>
@@ -584,7 +586,7 @@
     <div class="disc-carousel reveal" data-disc-carousel>
       <div class="disc-track">
         <article class="disc-card" data-disc-index="0">
-          <div class="disc-bg" style="background-image:url('assets/images/gimnasio-1.webp');"></div>
+          <div class="disc-bg" data-bg="assets/images/gimnasio-1" data-bg-ext="webp"></div>
           <div class="disc-num">/ 01</div>
           <div>
             <div class="eyebrow" data-i18n="disc.k1.kicker">08:30 a 23:00</div>
@@ -595,7 +597,7 @@
         </article>
 
         <article class="disc-card" data-disc-index="1">
-          <div class="disc-bg" style="background-image:url('assets/images/gimnasio-2.webp');"></div>
+          <div class="disc-bg" data-bg="assets/images/gimnasio-2" data-bg-ext="webp"></div>
           <div class="disc-num">/ 02</div>
           <div>
             <div class="eyebrow" data-i18n="disc.mt.kicker">08:30 a 23:00</div>
@@ -606,7 +608,7 @@
         </article>
 
         <article class="disc-card gold" data-disc-index="2">
-          <div class="disc-bg" style="background-image:url('assets/images/tapa-team.jpg');"></div>
+          <div class="disc-bg" data-bg="assets/images/tapa-team" data-bg-ext="jpg"></div>
           <div class="disc-num">/ 03</div>
           <div>
             <div class="eyebrow gold" data-i18n="disc.mma.kicker">Lun · Mié · Vie · 20:00</div>
@@ -719,11 +721,11 @@
 
       <div class="history-media historia-foto-hidden">
         <div class="history-img-wrap" data-parallax-history>
-          <img
+          <picture><source type="image/avif" srcset="assets/images/historia-bfc-640.avif 640w, assets/images/historia-bfc.avif 1200w" sizes="(max-width: 768px) 100vw, 50vw" /><source type="image/webp" srcset="assets/images/historia-bfc-640.webp 640w, assets/images/historia-bfc.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" /><img
             src="assets/images/historia-bfc.jpg"
             alt="Historia Bonati Fight Club · Walter Bonati"
             loading="lazy"
-            draggable="false" width="1200" height="1047" />
+            draggable="false" width="1200" height="1047" decoding="async" /></picture>
           <div class="history-media-frame"></div>
           <div class="history-media-caption">WALTER, TAPA Y GASTÓN · ARGENTINA</div>
         </div>
@@ -745,7 +747,7 @@
     <div class="prof-grid">
       <article class="prof-card reveal">
         <div class="prof-photo">
-          <img src="assets/images/walter.jpg?v=2" alt="Walter Bonati - Head Coach BFC" loading="eager" width="1080" height="1350" />
+          <picture><source type="image/avif" srcset="assets/images/walter-640.avif 640w, assets/images/walter.avif 1080w" sizes="(max-width: 768px) 100vw, 50vw" /><source type="image/webp" srcset="assets/images/walter-640.webp 640w, assets/images/walter.webp 1080w" sizes="(max-width: 768px) 100vw, 50vw" /><img src="assets/images/walter.jpg?v=2" alt="Walter Bonati - Head Coach BFC" loading="lazy" decoding="async" width="1080" height="1350" /></picture>
           <div class="prof-name-overlay">
             <div class="role" data-i18n="prof.walter.role">Fundador · Head Coach</div>
             <h3>Walter Bonati</h3>
@@ -765,7 +767,7 @@
 
       <article class="prof-card reveal">
         <div class="prof-photo">
-          <img src="assets/images/gaston-solo.jpg?v=3" alt="Gastón Tonga Silva" loading="lazy" width="1200" height="1800" />
+          <picture><source type="image/avif" srcset="assets/images/gaston-solo-640.avif 640w, assets/images/gaston-solo.avif 1200w" sizes="(max-width: 768px) 100vw, 50vw" /><source type="image/webp" srcset="assets/images/gaston-solo-640.webp 640w, assets/images/gaston-solo.webp 1200w" sizes="(max-width: 768px) 100vw, 50vw" /><img src="assets/images/gaston-solo.jpg?v=3" alt="Gastón Tonga Silva" loading="lazy" decoding="async" width="1200" height="1800" /></picture>
           <div class="prof-name-overlay">
             <div class="role" data-i18n="prof.gaston.role">Atleta · Profesor</div>
             <h3>Gastón &ldquo;Tonga&rdquo; Silva</h3>
@@ -884,7 +886,7 @@
       </div>
 
       <div class="tapa-media reveal-x">
-        <img src="assets/images/tapa-team-squad.jpg" alt="Tapa Team MMA" loading="lazy" style="object-position: center top;" width="1400" height="924" />
+        <picture><source type="image/avif" srcset="assets/images/tapa-team-squad-640.avif 640w, assets/images/tapa-team-squad.avif 1400w" sizes="(max-width: 768px) 100vw, 50vw" /><source type="image/webp" srcset="assets/images/tapa-team-squad-640.webp 640w, assets/images/tapa-team-squad.webp 1400w" sizes="(max-width: 768px) 100vw, 50vw" /><img src="assets/images/tapa-team-squad.jpg" alt="Tapa Team MMA" loading="lazy" decoding="async" style="object-position: center top;" width="1400" height="924" /></picture>
         <div class="tapa-media-label">MMA · WRESTLING</div>
       </div>
     </div>
@@ -1224,15 +1226,16 @@
 <!-- <script src="https://maps.googleapis.com/maps/api/js?key=TU_API_KEY_AQUI&libraries=places&callback=_bfcGoogleInit" async defer></script> -->
 
 <!-- Scripts -->
-<script src="https://cdn.jsdelivr.net/npm/animejs@4/lib/anime.iife.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<!-- Versión fija: el CDN la sirve con caché larga y sin redirecciones -->
+<script src="https://cdn.jsdelivr.net/npm/animejs@4.1.4/lib/anime.iife.min.js"></script>
+<script src="assets/js/bfc-api.js?v=1"></script>
 <script src="assets/js/i18n.js?v=15"></script>
-<script src="assets/js/main.js?v=7"></script>
+<script src="assets/js/main.js?v=8"></script>
 <script src="assets/js/leads.js?v=4"></script>
-<script src="assets/js/reviews.js?v=6"></script>
+<script src="assets/js/reviews.js?v=7"></script>
 <script src="assets/js/animations.js?v=1"></script>
 <script src="assets/js/carousel.js?v=1"></script>
-<script src="assets/js/gallery.js?v=2"></script>
+<script src="assets/js/gallery.js?v=3"></script>
 <!-- Selector de línea de WhatsApp (wa-chooser.js). Sin JS, los botones van directo a la línea de K1. -->
 <dialog class="wa-dialog" id="waDialog" aria-labelledby="waDialogTitle">
   <div class="wa-dialog-inner">
