@@ -820,6 +820,7 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 .champions-bg {
   position: absolute; inset: 0; z-index: -2;
   background-image: url('../images/gaston-hero.jpg');
+  background-image: image-set(url('../images/gaston-hero.avif') type('image/avif'), url('../images/gaston-hero.webp') type('image/webp'), url('../images/gaston-hero.jpg') type('image/jpeg'));
   background-size: cover;
   background-position: center 20%;
   filter: grayscale(100%) contrast(1.2) brightness(0.55);
@@ -2166,3 +2167,69 @@ h1, h2, h3, h4, h5 { font-family: var(--ff-display); line-height: 1; letter-spac
 .rev-or { font-size: 0.85rem; color: var(--bfc-bone-dim); margin: 1.25rem 0 1rem; }
 #revForm button[type="submit"] { background: transparent; border: 1px solid rgba(255,255,255,0.2); }
 #revForm button[type="submit"]:hover { background: rgba(255,255,255,0.06); box-shadow: none; }
+
+/* ===== Rendimiento de carga (2026-11) ===== */
+@media (max-width: 768px) {
+  .champions-bg { background-image: image-set(url('../images/gaston-hero-640.avif') type('image/avif'), url('../images/gaston-hero-640.webp') type('image/webp'), url('../images/gaston-hero.jpg') type('image/jpeg')); }
+}
+/* <picture> no altera el layout: la <img> se comporta como hija directa del contenedor */
+picture { display: contents; }
+
+.gallery-more,
+.reviews-more {
+  display: flex; justify-content: center;
+  margin-top: 2rem;
+}
+.gallery-more[hidden],
+.reviews-more[hidden] { display: none; }
+.gallery-more .btn[disabled],
+.reviews-more .btn[disabled] { opacity: 0.6; cursor: progress; }
+
+/* Reseña recién enviada (solo la ve quien la escribió) */
+.review-card.is-pending { border-style: dashed; opacity: 0.85; }
+.review-pending {
+  align-self: flex-start;
+  font-family: 'Outfit', sans-serif; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--bfc-gold, #d4a017);
+  border: 1px solid currentColor; border-radius: 999px;
+  padding: 2px 10px; margin-bottom: 4px;
+}
+
+/* ===== Mapa con fachada (2026-11) ===== */
+.map-facade { position: relative; overflow: hidden; background: #1c1c1c; }
+.map-facade .map-preview {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+}
+.map-pin {
+  position: absolute; left: 50%; top: 50%; z-index: 1;
+  transform: translate(-50%, -100%);
+  font-size: 2.75rem; line-height: 1; color: var(--bfc-red);
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.6));
+  pointer-events: none;
+}
+.map-actions {
+  position: absolute; left: 0; right: 0; bottom: 1.25rem; z-index: 2;
+  display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center;
+  padding: 0 1rem;
+}
+.map-attrib {
+  position: absolute; right: 0; top: 0; z-index: 2;
+  font-size: 10px; line-height: 1.4; padding: 2px 6px;
+  background: rgba(0,0,0,0.55); color: rgba(255,255,255,0.65);
+}
+.map-attrib a { color: inherit; }
+.map-facade iframe {
+  position: absolute; inset: 0; z-index: 3;
+  opacity: 0; transition: opacity 0.4s ease;
+}
+.map-facade.is-loading [data-map-load] { opacity: 0.6; cursor: progress; }
+.map-facade.is-live iframe { opacity: 1; }
+.map-facade.is-live .map-pin,
+.map-facade.is-live .map-actions,
+.map-facade.is-live .map-attrib { display: none; }
+@media (max-width: 768px) {
+  .map-pin { font-size: 2.25rem; }
+  .map-actions { bottom: 0.9rem; gap: 0.5rem; }
+  .map-actions .btn { padding: 0.75rem 1rem; font-size: 0.7rem; }
+}

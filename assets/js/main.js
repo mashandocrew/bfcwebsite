@@ -257,3 +257,90 @@
     document.querySelectorAll('video').forEach(v => v.pause());
   }
 })();
+
+/* ---------- Fondos diferidos [data-bg] ----------
+   <div data-bg="assets/images/foto" data-bg-ext="jpg">: el fondo se descarga recién cuando
+   el bloque se acerca a la pantalla, en AVIF o WebP si el navegador los soporta
+   y en la variante de 640 px en pantallas chicas. */
+(function () {
+  'use strict';
+  var els = document.querySelectorAll('[data-bg]');
+  if (!els.length) return;
+
+  var small = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
+  var imageSetOk = window.CSS && CSS.supports &&
+    CSS.supports('background-image', 'image-set(url("a.avif") type("image/avif"))');
+
+  function apply(el) {
+    var base = el.getAttribute('data-bg') + (small ? '-640' : '');
+    var ext  = el.getAttribute('data-bg-ext') || 'jpg';
+    var fallback = el.getAttribute('data-bg') + '.' + ext;   /* original, siempre existe */
+    el.style.backgroundImage = "url('" + fallback + "')";
+    if (imageSetOk) {
+      el.style.backgroundImage =
+        "image-set(url('" + base + ".avif') type('image/avif'), url('" + base + ".webp') type('image/webp'), url('" + fallback + "') type('image/" + (ext === 'jpg' ? 'jpeg' : ext) + "'))";
+    }
+    el.removeAttribute('data-bg');
+  }
+
+  if (!('IntersectionObserver' in window)) { els.forEach(apply); return; }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { apply(e.target); io.unobserve(e.target); }
+    });
+  }, { rootMargin: '300px 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();
+
+/* ---------- Mapa con fachada ----------
+   El iframe de Google Maps (~690 KB) se inserta recién cuando el visitante toca
+   "Ver mapa interactivo". Al pasar el cursor o tocar el botón se precalientan las
+   conexiones; la imagen estática queda visible hasta que el mapa termina de cargar.
+   Sin JavaScript, el botón abre Google Maps en otra pestaña. */
+(function () {
+  'use strict';
+  var box = document.getElementById('bfcMap');
+  if (!box) return;
+  var trigger = box.querySelector('[data-map-load]');
+  if (!trigger) return;
+
+  var warmed = false;
+  function warm() {
+    if (warmed) return;
+    warmed = true;
+    ['https://maps.google.com', 'https://maps.googleapis.com', 'https://maps.gstatic.com'].forEach(function (h) {
+      var l = document.createElement('link');
+      l.rel = 'preconnect';
+      l.href = h;
+      document.head.appendChild(l);
+    });
+  }
+  trigger.addEventListener('pointerenter', warm);
+  trigger.addEventListener('focus', warm);
+  trigger.addEventListener('touchstart', warm, { passive: true });
+
+  trigger.addEventListener('click', function (e) {
+    e.preventDefault();
+    if (box.classList.contains('is-loading') || box.classList.contains('is-live')) return;
+    box.classList.add('is-loading');
+    trigger.setAttribute('aria-busy', 'true');
+
+    var frame = document.createElement('iframe');
+    frame.src = box.getAttribute('data-map-src');
+    frame.title = box.getAttribute('data-map-title') || 'Mapa';
+    frame.setAttribute('allowfullscreen', '');
+    frame.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
+
+    var shown = false;
+    function show() {
+      if (shown) return;
+      shown = true;
+      box.classList.remove('is-loading');
+      box.classList.add('is-live');
+      trigger.removeAttribute('aria-busy');
+    }
+    frame.addEventListener('load', show);
+    setTimeout(show, 8000);   /* por si el evento load no llega */
+    box.appendChild(frame);
+  });
+})();
